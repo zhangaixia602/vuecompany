@@ -6,6 +6,76 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "8039211",
+      "name": "查看详情",
+      "font_class": "chakanxiangqing",
+      "unicode": "e65a",
+      "unicode_decimal": 58970
+    },
+    {
+      "icon_id": "6171388",
+      "name": "更多",
+      "font_class": "gengduo",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    },
+    {
+      "icon_id": "2116684",
+      "name": "水利企业",
+      "font_class": "shuiliqiye",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "3899323",
+      "name": "系统升级",
+      "font_class": "xitongshengji",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "9833323",
+      "name": "智慧能源",
+      "font_class": "zhihuinengyuan",
+      "unicode": "e919",
+      "unicode_decimal": 59673
+    },
+    {
+      "icon_id": "14004111",
+      "name": "电力",
+      "font_class": "dianli",
+      "unicode": "e699",
+      "unicode_decimal": 59033
+    },
+    {
+      "icon_id": "14004123",
+      "name": "智慧园区",
+      "font_class": "zhihuiyuanqu",
+      "unicode": "e69d",
+      "unicode_decimal": 59037
+    },
+    {
+      "icon_id": "17654822",
+      "name": "环境监控",
+      "font_class": "huanjingjiankong",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "5387588",
+      "name": "箭头_向下",
+      "font_class": "jiantou_xiangxia",
+      "unicode": "eb0a",
+      "unicode_decimal": 60170
+    },
+    {
+      "icon_id": "5387589",
+      "name": "箭头_向上",
+      "font_class": "jiantou_xiangshang",
+      "unicode": "eb0b",
+      "unicode_decimal": 60171
+    },
+    {
       "icon_id": "11494075",
       "name": "向右",
       "font_class": "xiangyou",

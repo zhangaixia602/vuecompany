@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3182713 */
-  src: url('iconfont.woff2?t=1644995122930') format('woff2'),
-       url('iconfont.woff?t=1644995122930') format('woff'),
-       url('iconfont.ttf?t=1644995122930') format('truetype');
+  src: url('iconfont.woff2?t=1646819185420') format('woff2'),
+       url('iconfont.woff?t=1646819185420') format('woff'),
+       url('iconfont.ttf?t=1646819185420') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,46 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-chakanxiangqing:before {
+  content: "\e65a";
+}
+
+.icon-gengduo:before {
+  content: "\e63f";
+}
+
+.icon-shuiliqiye:before {
+  content: "\e62b";
+}
+
+.icon-xitongshengji:before {
+  content: "\e60c";
+}
+
+.icon-zhihuinengyuan:before {
+  content: "\e919";
+}
+
+.icon-dianli:before {
+  content: "\e699";
+}
+
+.icon-zhihuiyuanqu:before {
+  content: "\e69d";
+}
+
+.icon-huanjingjiankong:before {
+  content: "\e635";
+}
+
+.icon-jiantou_xiangxia:before {
+  content: "\eb0a";
+}
+
+.icon-jiantou_xiangshang:before {
+  content: "\eb0b";
 }
 
 .icon-xiangyou:before {
