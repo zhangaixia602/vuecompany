@@ -20,12 +20,16 @@ export default {
           name: '首页'
         },
         {
-          path: '/about',
-          name: '关于我们'
+          path: '/business',
+          name: '业务领域'
         },
         {
           path: '/case',
           name: '案例演示'
+        },
+        {
+          path: '/about',
+          name: '关于我们'
         }
       ]
     }
