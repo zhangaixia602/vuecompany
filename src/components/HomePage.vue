@@ -1,10 +1,15 @@
 <template>
-  <a-carousel>
-    <div><h3><img src="../assets//banner.png" alt="智慧园区" /></h3></div>
-    <div><h3>2</h3></div>
-    <div><h3>3</h3></div>
-    <div><h3>4</h3></div>
+  <a-carousel autoplay>
+    <div><img src="../assets//banner.png" alt="智慧园区" /></div>
+    <div><img src="../assets//banner01.png" alt="智慧园区" /></div>
+    <div><img src="../assets//banner02.png" alt="智慧园区" /></div>
+    <div><img src="../assets//banner03.png" alt="智慧园区" /></div>
   </a-carousel>
+   <a-tabs v-model:activeKey="activeKey" centered>
+    <a-tab-pane key="1" tab="Tab 1">Content of Tab Pane 1</a-tab-pane>
+    <a-tab-pane key="2" tab="Tab 2" force-render>Content of Tab Pane 2</a-tab-pane>
+    <a-tab-pane key="3" tab="Tab 3">Content of Tab Pane 3</a-tab-pane>
+  </a-tabs>
 </template>
 <script>
 import { defineComponent } from 'vue';
@@ -16,12 +21,9 @@ export default defineComponent({
 <style scoped>
 .ant-carousel :deep(.slick-slide) {
   text-align: center;
-  height:15rem;
-  line-height:15rem;
+  height:28rem;
+  line-height:28rem;
   background: #364d79;
   overflow: hidden;
-}
-.ant-carousel :deep(.slick-slide h3) {
-  color: #fff;
 }
 </style>
