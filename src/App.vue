@@ -1,26 +1,35 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <HeaderPage :scrollTop="this.scrollTop"/>
+    <router-view/>
+    <FooterPage/>
+    <ToTop/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import HeaderPage from '@/components/HeaderPage'
+import FooterPage from '@/components/FooterPage'
+import ToTop from '@/components/ToTop'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    'HeaderPage': HeaderPage,
+    'FooterPage': FooterPage,
+    'ToTop': ToTop
+  },
+  data () {
+    return {
+      scrollTop: 0
+    }
+  },
+  methods: {
+    handleScroll () {
+      this.scrollTop = document.body.scrollTop || document.documentElement.scrollTop
+    }
+  },
+  mounted () {
+    window.addEventListener('scroll', this.handleScroll)
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
