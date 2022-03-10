@@ -11,9 +11,9 @@
 <script>
 export default {
   name: 'HeaderPage',
+  props: ['scrollTop'],
   data () {
     return {
-      scrollTop: 0,
       routes: [
         {
           path: '/',
@@ -33,14 +33,6 @@ export default {
         }
       ]
     }
-  },
-  methods: {
-    handleScroll () {
-      this.scrollTop = document.body.scrollTop || document.documentElement.scrollTop
-    }
-  },
-  mounted () {
-    window.addEventListener('scroll', this.handleScroll)
   }
 }
 </script>

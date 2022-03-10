@@ -1,5 +1,5 @@
 <template>
-  <HeaderPage/>
+  <HeaderPage />
   <a-carousel autoplay>
     <div v-for='(banner,index) in banners' :key="index">
       <img :src="require('../' + banner)" />
