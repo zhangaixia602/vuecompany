@@ -14,7 +14,7 @@
     </div>
     <div class='product'>
       <div class='wrapper'>
-        <router-link  v-for='(product,index) in products' :to="product.path" :key='index' class='productItem' :class="{isShow: this.currentgroup===product.group || this.currentgroup===''}">
+        <router-link  v-for='(product,index) in products' :to="product.path" target="_blank" :key='index' class='productItem' :class="{isShow: this.currentgroup===product.group || this.currentgroup===''}">
           <img :src="require('../' + product.src)" />
           <h3>{{product.title}}</h3>
           <i class="icon iconfont icon-lianjie"></i>
