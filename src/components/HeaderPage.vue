@@ -1,5 +1,5 @@
 <template>
-  <header :class="{shadow: this.scrollTop > 70}">
+  <header :class="{shadow: this.scrollTop > 560}">
     <div class='wrapper'>
       <img  class="logo" src="../assets/logo.png">
       <nav>
@@ -13,7 +13,6 @@ export default {
   name: 'HeaderPage',
   data () {
     return {
-      scrollTop: 0,
       routes: [
         {
           path: '/',

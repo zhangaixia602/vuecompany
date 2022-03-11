@@ -1,4 +1,5 @@
 <template>
+  <HeaderPage />
   <a-carousel autoplay>
     <div v-for="(banner, index) in banners" :key="index">
       <img :src="require('../' + banner)" />
@@ -52,12 +53,21 @@
       </div>
     </div>
   </div>
+  <FooterPage/>
+  <ToTop/>
 </template>
 <script>
 import { defineComponent } from "vue";
-
+import HeaderPage from '@/components/HeaderPage'
+import FooterPage from '@/components/FooterPage'
+import ToTop from '@/components/ToTop'
 export default defineComponent({
   name: "BusinessScope",
+  components: {
+    'HeaderPage': HeaderPage,
+    'FooterPage': FooterPage,
+    'ToTop': ToTop
+  },
   data() {
     return {
       banners: [
