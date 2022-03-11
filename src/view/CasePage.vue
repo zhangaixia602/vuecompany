@@ -86,7 +86,7 @@ export default {
           title: '智慧能源',
           src: 'assets/power.png',
           id: '03',
-          path: '/model/head' 
+          path: '/model/factory' 
         }
       ]
     }

@@ -15,8 +15,8 @@ export default {
     },
     initThree () {
       let threeLoader = document.getElementById('threeLoader')
-      let width = 1349
-      let height = 600
+      let width = window.innerWidth
+      let height = window.innerHeight
       this.renderer = new Three.WebGL1Renderer({antialias: true})
       this.renderer.setSize(width, height)
       threeLoader.appendChild(this.renderer.domElement)

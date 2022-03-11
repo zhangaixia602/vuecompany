@@ -3,18 +3,24 @@
 </template>
 <script>
 import InsectPage from '@/view/InsectPage'
+import FactoryPage from '@/view/FactoryPage'
 export default {
   name: 'ModelPage',
   components: {
-    'InsectPage': InsectPage
+    'InsectPage': InsectPage,
+    'FactoryPage': FactoryPage
   },
   data () {
     return {
       currentComponent:'',
       Allcomps: [
         {
-          id:'insect',
-          component:'InsectPage'
+          id: 'insect',
+          component: 'InsectPage'
+        },
+        {
+          id: 'factory',
+          component: 'FactoryPage'
         }
       ]
     }
