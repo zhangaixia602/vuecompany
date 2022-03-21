@@ -151,8 +151,8 @@ export default defineComponent({
 <style scoped>
 .ant-carousel :deep(.slick-slide) {
   text-align: center;
-  height: 28rem;
-  line-height: 28rem;
+  height:100vh;
+  line-height:100vh;
   background: #364d79;
   overflow: hidden;
 }
