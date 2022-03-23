@@ -1,0 +1,52 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl FrontColor
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+
+newmtl Cinder_Block
+Ka 0.000000 0.000000 0.000000
+Kd 0.749020 0.721569 0.670588
+Ks 0.330000 0.330000 0.330000
+map_Kd ./工厂/Cinder_Block.jpg
+
+newmtl Vegetation_Grass_Artificial
+Ka 0.000000 0.000000 0.000000
+Kd 0.384314 0.549020 0.290196
+Ks 0.330000 0.330000 0.330000
+map_Kd ./工厂/Vegetation_Grass_Artificial.jpg
+
+newmtl Tile_Limestone_Multi
+Ka 0.000000 0.000000 0.000000
+Kd 0.780392 0.678431 0.462745
+Ks 0.330000 0.330000 0.330000
+map_Kd ./工厂/Tile_Limestone_Multi.jpg
+
+newmtl Translucent_Glass_Sky_Reflection
+Ka 0.000000 0.000000 0.000000
+Kd 0.494118 0.541176 0.717647
+Ks 0.330000 0.330000 0.330000
+d 0.520000
+map_Kd ./工厂/Translucent_Glass_Sky_Reflection.jpg
+
+newmtl Mirror_01
+Ka 0.000000 0.000000 0.000000
+Kd 0.725490 0.725490 0.725490
+Ks 0.330000 0.330000 0.330000
+map_Kd ./工厂/Mirror_01.jpg
+
+newmtl Siding_Rusty_Metal
+Ka 0.000000 0.000000 0.000000
+Kd 0.807843 0.764706 0.682353
+Ks 0.330000 0.330000 0.330000
+map_Kd ./工厂/Siding_Rusty_Metal.jpg
+
+newmtl Stone_Sandstone_Ashlar_Light
+Ka 0.000000 0.000000 0.000000
+Kd 0.807843 0.698039 0.501961
+Ks 0.330000 0.330000 0.330000
+map_Kd ./工厂/Stone_Sandstone_Ashlar_Light.jpg
+

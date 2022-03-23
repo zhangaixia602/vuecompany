@@ -86,7 +86,7 @@ export default {
           title: '智慧能源',
           src: 'assets/power.png',
           id: '03',
-          path: '/model/head' 
+          path: '/model/factory' 
         }
       ]
     }
@@ -102,7 +102,7 @@ export default {
 <style>
 .caseHeader{
   width:100%;
-  height:28rem;
+  height:100vh;
   background:url(../assets/casebg.jpg) no-repeat center center;
   background-size: cover;
   padding:9rem 12rem;
