@@ -3,8 +3,9 @@
 </template>
 <script>
 import * as THREE from 'three'
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader'
+import { STLLoader } from 'three/examples/jsm/loaders/STLLoader'
+// import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
+// import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 let scene=null;
 export default {
@@ -25,20 +26,29 @@ export default {
       scene.background = new THREE.Color(0xeeeeee)
 
       let light = new THREE.HemisphereLight(0xbbbbff, 0x444422, 1.5)
-      light.position.set(0, 1, 0)
+      light.position.set(0,1, 0)
       scene.add(light)
       this.camera = new THREE.PerspectiveCamera(50, width / height, 1, 10000)
       this.camera.position.set(0, 0, 400)
       this.camera.lookAt(scene.position)
       this.controls = new OrbitControls(this.camera, this.renderer.domElement)
-      let objLoader = new OBJLoader()
-      let mtlLoader = new MTLLoader()
-      mtlLoader.load('/static/models/factory.mtl', function(materials) {
-        objLoader.setMaterials(materials);
-        objLoader.load('/static/models/factory.obj', function(obj) {
-            scene.add(obj);
-        })
-      })
+      let loader = new STLLoader();
+          loader.load('/static/models/lc.stl',function (geometry) {
+             let material = new THREE.MeshLambertMaterial({
+             color: 0xbbbbff,
+            }); //材质对象Material
+            let mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
+  scene.add(mesh); //网格模型添加到场景中
+ 
+})
+      // let objLoader = new OBJLoader()
+      // let mtlLoader = new MTLLoader()
+      // mtlLoader.load('/static/models/lc.mtl', function(materials) {
+      //   objLoader.setMaterials(materials);
+      //   objLoader.load('/static/models/lc.obj', function(obj) {
+      //       scene.add(obj);
+      //   })
+      // })
     },
     animate () {
       requestAnimationFrame(this.animate)
