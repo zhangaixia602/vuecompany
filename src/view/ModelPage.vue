@@ -4,11 +4,13 @@
 <script>
 import InsectPage from '@/view/InsectPage'
 import FactoryPage from '@/view/FactoryPage'
+import TopPage from '@/view/TopPage'
 export default {
   name: 'ModelPage',
   components: {
     'InsectPage': InsectPage,
-    'FactoryPage': FactoryPage
+    'FactoryPage': FactoryPage,
+    'TopPage': TopPage
   },
   data () {
     return {
@@ -21,7 +23,11 @@ export default {
         {
           id: 'factory',
           component: 'FactoryPage'
-        }
+        },
+         {
+          id: 'top',
+          component: 'TopPage'
+        },
       ]
     }
   },
