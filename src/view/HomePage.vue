@@ -1,6 +1,6 @@
 <template>
   <HeaderPage />
-  <a-carousel autoplay>
+  <a-carousel autoplay="true">
     <div v-for="(banner, index) in banners" :key="index">
       <video style="width:100%" controls autoplay loop>
         <source :src="require('../' + banner)" type="video/mp4" />
