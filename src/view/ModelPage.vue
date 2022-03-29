@@ -5,12 +5,14 @@
 import InsectPage from '@/view/InsectPage'
 import FactoryPage from '@/view/FactoryPage'
 import TopPage from '@/view/TopPage'
+import GranaryPage from '@/view/GranaryPage'
 export default {
   name: 'ModelPage',
   components: {
     'InsectPage': InsectPage,
     'FactoryPage': FactoryPage,
-    'TopPage': TopPage
+    'TopPage': TopPage,
+    'GranaryPage': GranaryPage
   },
   data () {
     return {
@@ -24,10 +26,14 @@ export default {
           id: 'factory',
           component: 'FactoryPage'
         },
-         {
+        {
           id: 'top',
           component: 'TopPage'
         },
+        {
+          id:'granary',
+          component: 'GranaryPage'
+        }
       ]
     }
   },

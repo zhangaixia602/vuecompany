@@ -1,5 +1,5 @@
 <template>
-  <header :class="{shadow: this.scrollTop > 560}">
+  <header :class="{shadow: this.scrollTop > this.currentHeight}">
     <div class='wrapper'>
       <img  class="logo" src="../assets/logo.png">
       <nav>
@@ -13,6 +13,8 @@ export default {
   name: 'HeaderPage',
   data () {
     return {
+      scrollTop: 0,
+      currentHeight: window.innerHeight,
       routes: [
         {
           path: '/',
