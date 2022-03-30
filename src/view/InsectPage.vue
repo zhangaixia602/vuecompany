@@ -23,7 +23,7 @@ export default {
       threeLoader.appendChild(this.renderer.domElement)      
    
       this.scene = new Three.Scene()
-      this.setEnvMap("000");
+      this.setEnvMap("004");
       this.scene.background = new Three.Color(0xeeeeee)
 
       let light = new Three.HemisphereLight(0xbbbbff, 0x444422, 1.5)
@@ -34,7 +34,7 @@ export default {
       this.camera.lookAt(this.scene.position)
       this.controls = new OrbitControls(this.camera, this.renderer.domElement)
       let loader = new GLTFLoader()
-      loader.load('../../../static/models/cb.gltf', (gltf) => {
+      loader.load('../../../static/models/lc.gltf', (gltf) => {
         this.scene.add(gltf.scene)
         this.scene.scale.set(15, 15, 15)
         mixer = new Three.AnimationMixer(gltf.scene)
