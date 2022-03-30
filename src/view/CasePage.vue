@@ -79,7 +79,7 @@ export default {
           title: '升降梯改造',
           src: 'assets/c02.png',
           id: '02',
-          path: '/model/top' 
+          path: '/model/granary' 
         },
         {
           group:'energy',
