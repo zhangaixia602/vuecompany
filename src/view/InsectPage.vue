@@ -34,7 +34,7 @@ export default {
       this.camera.lookAt(this.scene.position)
       this.controls = new OrbitControls(this.camera, this.renderer.domElement)
       let loader = new GLTFLoader()
-      loader.load('../../../static/models/lc.gltf', (gltf) => {
+      loader.load('../../../static/models/cb.gltf', (gltf) => {
         this.scene.add(gltf.scene)
         this.scene.scale.set(15, 15, 15)
         mixer = new Three.AnimationMixer(gltf.scene)
