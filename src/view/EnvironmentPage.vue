@@ -25,20 +25,39 @@ export default {
           position:[210, 0,-144]
         },
         {
-          name:'楼层',
+          name:'楼层1',
           src:'/static/models/model1.gltf',
           position:[210, 0, -144],
         },
         {
-          name:'楼层1',
-          src:'/static/models/model1.gltf',
-          leve:2
-        },
-        {
           name:'楼层2',
           src:'/static/models/model1.gltf',
-          position:5,
-          leve:2
+          position:[210, 3, -144],
+        },
+        {
+          name:'楼层3',
+          src:'/static/models/model1.gltf',
+         position:[210, 6, -144],
+        },
+        {
+          name:'楼层4',
+          src:'/static/models/model1.gltf',
+          position:[210, 9, -144],
+        },
+         {
+          name:'楼层5',
+          src:'/static/models/model1.gltf',
+          position:[210, 12, -144],
+        },
+        {
+          name:'楼层6',
+          src:'/static/models/model1.gltf',
+          position:[210, 15, -144],
+        },
+        {
+          name:'楼层7',
+          src:'/static/models/model1.gltf',
+          position:[210,18, -144],
         },
         {
           name:'楼顶',
