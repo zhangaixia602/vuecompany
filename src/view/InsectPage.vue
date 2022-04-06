@@ -54,7 +54,7 @@ export default {
       this.camera.lookAt(this.scene.position)
       this.controls = new OrbitControls(this.camera, this.renderer.domElement)
       let loader = new GLTFLoader()
-      loader.load('../../../static/models/cb.gltf', (gltf) => {
+      loader.load('../../../static/models/lc.gltf', (gltf) => {
         this.scene.add(gltf.scene)
         mixer = new Three.AnimationMixer(gltf.scene)
         var AnimationAction = mixer.clipAction(gltf.animations[0])
@@ -104,7 +104,7 @@ export default {
 }
 #plant{
   display:none;
-  font-size:2rem;
+  font-size:0.5rem;
   color:red;
   position: absolute;
   pointer-events: auto;

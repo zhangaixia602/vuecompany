@@ -4,6 +4,7 @@
 <script>
 import * as THREE from 'three'
 // import { STLLoader } from 'three/examples/jsm/loaders/STLLoader'
+import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
@@ -32,6 +33,8 @@ export default {
       this.camera.position.set(0, 0, 400)
       this.camera.lookAt(scene.position)
       this.controls = new OrbitControls(this.camera, this.renderer.domElement)
+      this.setEnvMap("002");
+
 //    let loader = new STLLoader();
 //           loader.load('/static/models/lc.stl',function (geometry) {
 //              let material = new THREE.MeshLambertMaterial({
@@ -49,6 +52,13 @@ export default {
         })
       })
     },
+      setEnvMap(hdr) {
+    new RGBELoader().setPath("../../../static/gltf/").load(hdr + ".hdr", (texture) => {
+      texture.mapping = THREE.EquirectangularReflectionMapping;
+      this.scene.background = texture;
+      this.scene.environment = texture;
+    });
+  },
     animate () {
       requestAnimationFrame(this.animate)
       this.renderer.render(scene, this.camera)
