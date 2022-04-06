@@ -6,13 +6,15 @@ import InsectPage from '@/view/InsectPage'
 import FactoryPage from '@/view/FactoryPage'
 import TopPage from '@/view/TopPage'
 import GranaryPage from '@/view/GranaryPage'
+import EnvironmentPage from '@/view/EnvironmentPage'
 export default {
   name: 'ModelPage',
   components: {
     'InsectPage': InsectPage,
     'FactoryPage': FactoryPage,
     'TopPage': TopPage,
-    'GranaryPage': GranaryPage
+    'GranaryPage': GranaryPage,
+    'EnvironmentPage': EnvironmentPage
   },
   data () {
     return {
@@ -31,8 +33,12 @@ export default {
           component: 'TopPage'
         },
         {
-          id:'granary',
+          id: 'granary',
           component: 'GranaryPage'
+        },
+        {
+          id: 'environ',
+          component: 'EnvironmentPage'
         }
       ]
     }

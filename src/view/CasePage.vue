@@ -87,6 +87,13 @@ export default {
           src: 'assets/power.png',
           id: '03',
           path: '/model/factory' 
+        },
+        {
+          group:'envir',
+          title: '环境监控',
+          src: 'assets/hj.jpg',
+          id: '03',
+          path: '/model/environ' 
         }
       ]
     }
