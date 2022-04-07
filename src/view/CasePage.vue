@@ -92,8 +92,15 @@ export default {
           group:'envir',
           title: '环境监控',
           src: 'assets/hj.jpg',
-          id: '03',
+          id: '04',
           path: '/model/environ' 
+        },
+              {
+          group:'old',
+          title: '水利自动化',
+          src: 'assets/c01.png',
+          id: '05',
+          path: '/model/water' 
         }
       ]
     }
