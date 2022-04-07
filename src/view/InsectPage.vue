@@ -18,9 +18,6 @@ export default {
     }
   },
   methods: {
-    handleScroll () {
-      this.scrollTop = document.body.scrollTop || document.documentElement.scrollTop
-    },
     initThree () {
       let threeLoader = document.getElementById('threeLoader')
       let width = window.innerWidth

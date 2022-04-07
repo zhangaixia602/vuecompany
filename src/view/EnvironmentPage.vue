@@ -4,141 +4,106 @@
 </template>
 <script>
 import * as Three from 'three'
-import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-let mixer = null
-let clock = new Three.Clock()
 let scene = null
 export default {
   name: 'EnvironmentPage',
-  data () {
-    return {
-      menuData: [
-        {
-          name:'左侧楼',
-          src:'/static/models/model3.gltf'
-        },
-        {
-          name:'楼底',
-          src:'/static/models/model.gltf',
-          position:[210, 0,-144]
-        },
-        {
-          name:'楼层1',
-          src:'/static/models/model1.gltf',
-          position:[210, 0, -144],
-        },
-        {
-          name:'楼层2',
-          src:'/static/models/model1.gltf',
-          position:[210, 3, -144],
-        },
-        {
-          name:'楼层3',
-          src:'/static/models/model1.gltf',
-         position:[210, 6, -144],
-        },
-        {
-          name:'楼层4',
-          src:'/static/models/model1.gltf',
-          position:[210, 9, -144],
-        },
-         {
-          name:'楼层5',
-          src:'/static/models/model1.gltf',
-          position:[210, 12, -144],
-        },
-        {
-          name:'楼层6',
-          src:'/static/models/model1.gltf',
-          position:[210, 15, -144],
-        },
-        {
-          name:'楼层7',
-          src:'/static/models/model1.gltf',
-          position:[210,18, -144],
-        },
-        {
-          name:'楼顶',
-          src:'/static/models/model2.gltf',
-          position:[210, 0, -144]
-        }
-      ]
-    }
-  },
   methods: {
-    handleScroll () {
-      this.scrollTop = document.body.scrollTop || document.documentElement.scrollTop
-    },
     initThree () {
       let threeLoader = document.getElementById('threeLoader')
       let width = window.innerWidth
       let height = window.innerHeight
       this.renderer = new Three.WebGL1Renderer({antialias: true})
       this.renderer.setSize(width, height)
+      this.renderer.setPixelRatio(window.devicePixelRatio);
       threeLoader.appendChild(this.renderer.domElement)      
    
       scene = new Three.Scene()
-      this.setEnvMap("004");
-      let light = new Three.HemisphereLight(0xbbbbff, 0x444422, 1.5)
-      light.position.set(0, 1, 0)
-      scene.add(light)
-      this.camera = new Three.PerspectiveCamera(50, width / height, 1, 10000)
-      this.camera.position.set(0, 0, 400)
-      this.camera.lookAt(scene.position)
+
+      let materials=[];
+      let texturepx=new Three.TextureLoader().load('/static/models/lc/px.jpg');
+      let meshBaeicMaterialPx=new Three.MeshBasicMaterial({map:texturepx});
+      let texturenx=new Three.TextureLoader().load('/static/models/lc/nx.jpg');
+      let meshBaeicMaterialNx=new Three.MeshBasicMaterial({map:texturenx});
+      let texturepy=new Three.TextureLoader().load('/static/models/lc/py.jpg');
+      let meshBaeicMaterialPy=new Three.MeshBasicMaterial({map:texturepy});
+      let textureny=new Three.TextureLoader().load('/static/models/lc/ny.jpg');
+      let meshBaeicMaterialNy=new Three.MeshBasicMaterial({map:textureny});
+      let texturepz=new Three.TextureLoader().load('/static/models/lc/pz.jpg');
+      let meshBaeicMaterialPz=new Three.MeshBasicMaterial({map:texturepz});
+      let texturenz=new Three.TextureLoader().load('/static/models/lc/nz.jpg');
+      let meshBaeicMaterialNz=new Three.MeshBasicMaterial({map:texturenz});
+      materials.push(meshBaeicMaterialPx);
+      materials.push(meshBaeicMaterialNx);
+      materials.push(meshBaeicMaterialPy);
+      materials.push(meshBaeicMaterialNy);
+      materials.push(meshBaeicMaterialPz);
+      materials.push(meshBaeicMaterialNz);
+      let mesh = new Three.Mesh(new Three.BoxBufferGeometry(100,100,100), materials);//网络模型对象Mesh
+      mesh.geometry.scale(1,1,-1);
+      scene.add(mesh);//网络模型添加到场景中
+      this.camera = new Three.PerspectiveCamera(90, width / height, 0.1, 100)
+      this.camera.position.set(0, 0, 0)
       this.controls = new OrbitControls(this.camera, this.renderer.domElement)
-      let loader = new GLTFLoader()
-      this.menuData.map(function(item){
-          loader.load(item.src, (gltf) => {
-            gltf.scene.name=item.name;
-            if(item.leve){
-                let i=0;
-                while (i<item.leve){
-                  console.log(gltf.scene)
-                  const cloneGltf=gltf.scene.clone();
-                  cloneGltf.name=item.name+i;
-                  if(item.position){
-                    gltf.scene.translateY(item.position);
-                  }
-                  scene.add(cloneGltf)
-                  i++;
+      
+      window.addEventListener('resize',this.onWindowResize,false)
+
+      let bMouseDown=false;
+      let x=-1;
+      let y=-1;
+      threeLoader.onmousedown=function(event){
+        event.preventDefault();
+        x=event.clientX;
+        y=event.clientY;
+        bMouseDown=true;
+      }
+      threeLoader.onmouseup=function(event){
+        event.preventDefault();
+        bMouseDown=false;
+      }
+      threeLoader.onmousemove=function(event){
+        event.preventDefault();
+        if(bMouseDown){
+                mesh.rotation.y+=-0.005*(event.clientX-x);
+                mesh.rotation.x+=-0.005*(event.clientY-y);
+                if(mesh.rotation.x>Math.PI/2){
+                    mesh.rotation.x=Math.PI/2
                 }
-            }else{
-                if(item.position){
-                  gltf.scene.translateY(item.position[1]);
-                  gltf.scene.translateZ(item.position[2]);
-                  gltf.scene.translateX(item.position[0]);
-                  gltf.scene.rotateY(Math.PI / 60);
-                  gltf.scene.scale.set(1,1,1.2)
+                if(mesh.rotation.x<-Math.PI/2){
+                    mesh.rotation.x=-Math.PI/2
                 }
-                scene.add(gltf.scene)
+                x=event.clientX;
+                y=event.clientY;
             }
-          })
-       })
+      }
+      threeLoader.onmousewheel=function(event){
+            event.preventDefault();
+            if(event.wheelDelta!=0){
+                this.camera.fov+=event.wheelDelta>0 ? 1 : -1;
+                if(this.camera.fov>150){
+                    this.camera.fov=150;
+                }else if(this.camera.fov<30){
+                    this.camera.fov=30;
+                }
+                this.camera.updateProjectionMatrix();
+            }
+      }
+
+      let loader = new GLTFLoader()
+      loader.load('/static/models/Bee.glb', (glb) => {
+        scene.add(glb.scene)
+        scene.scale.set(0.2,0.2,0.2)
+      })
     },
-    setEnvMap(hdr) {
-      new RGBELoader().setPath("/static/gltf/").load(hdr + ".hdr", (texture) => {
-        texture.mapping = Three.EquirectangularReflectionMapping;
-        scene.background = texture;
-        scene.environment = texture;
-      });
-    },
-    cloneModel (gltf,item) {
-        let i=0;
-        while (i<item.leve){
-            const cloneGltf=gltf.clone();
-            cloneGltf.scene.name=item.name+i;
-            scene.add(cloneGltf)
-            i++;
-        }
+    onWindowResize () {
+      this.camera.aspect=window.innerWidth/window.innerHeight;
+      this.camera.updateProjectionMatrix();
+      this.renderer.setSize(window.innerWidth.window.innerHeight)
     },
     animate () {
       requestAnimationFrame(this.animate)
       this.renderer.render(scene, this.camera)
-      if (mixer !== null) {
-        mixer.update(clock.getDelta())
-      }
     }
   },
   mounted () {

@@ -12,9 +12,6 @@ let scene=null;
 export default {
   name: 'FactoryPage',
   methods: {
-    handleScroll () {
-      this.scrollTop = document.body.scrollTop || document.documentElement.scrollTop
-    },
     initThree () {
       let threeLoader = document.getElementById('factory')
       let width = window.innerWidth //窗口宽
@@ -22,16 +19,22 @@ export default {
       this.renderer = new THREE.WebGL1Renderer({antialias: true})
       this.renderer.setSize(width, height)
       threeLoader.appendChild(this.renderer.domElement)
-
+      
       scene = new THREE.Scene()
-      scene.background = new THREE.Color(0xeeeeee)
+      let cubeTextureLoader = new THREE.CubeTextureLoader();
+			cubeTextureLoader.setPath( '/static/models/lc/' );
 
-      let light = new THREE.HemisphereLight(0xbbbbff, 0x444422, 1.5)
-      light.position.set(0,1, 0)
-      scene.add(light)
+			let textureCube = cubeTextureLoader.load( [ 'px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg' ] );
+			textureCube.encoding = THREE.sRGBEncoding;
+      scene.background = textureCube;
+      this.setEnvMap("004");
+      
       this.camera = new THREE.PerspectiveCamera(50, width / height, 1, 10000)
       this.camera.position.set(0, 0, 400)
       this.camera.lookAt(scene.position)
+      let light = new THREE.HemisphereLight(0xbbbbff, 0x444422, 1.5)
+      light.position.set(0, 1, 0)
+      scene.add(light)
       this.controls = new OrbitControls(this.camera, this.renderer.domElement)
       this.setEnvMap("002");
 

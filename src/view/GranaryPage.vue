@@ -9,9 +9,6 @@ let scene=null;
 export default {
   name: 'GranaryPage',
   methods: {
-    handleScroll () {
-      this.scrollTop = document.body.scrollTop || document.documentElement.scrollTop
-    },
     initThree () {
       let threeLoader = document.getElementById('granary')
       let width = window.innerWidth //窗口宽
@@ -20,7 +17,12 @@ export default {
       this.renderer.setSize(width, height)
       threeLoader.appendChild(this.renderer.domElement)
       scene = new THREE.Scene()
-      scene.background = new THREE.Color(0xeeeeee)
+      let cubeTextureLoader = new THREE.CubeTextureLoader();
+			cubeTextureLoader.setPath( '/static/models/lc/' );
+
+			let textureCube = cubeTextureLoader.load( [ 'px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg' ] );
+			textureCube.encoding = THREE.sRGBEncoding;
+      scene.background = textureCube;
 
       let light = new THREE.HemisphereLight(0xbbbbff, 0x444422, 1.5)
       light.position.set(0, 1, 0)
