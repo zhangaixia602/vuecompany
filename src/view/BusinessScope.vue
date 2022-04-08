@@ -233,7 +233,7 @@ h3.titbg span {
 }
 .caseItem h2 {
   position: relative;
-  padding-left: 1rem;
+  padding-left: 1.5rem;
 }
 .caseItem h2:before {
   content: "";
@@ -245,7 +245,7 @@ h3.titbg span {
   display: block;
   position: absolute;
   top: 50%;
-  left: 0;
+  left: 8px;
   transform: translateY(-50%);
 }
 .caseItem p {
