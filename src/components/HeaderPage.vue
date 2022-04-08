@@ -22,7 +22,7 @@ export default {
         },
         {
           path: '/business',
-          name: '业务领域'
+          name: '产品服务'
         },
         {
           path: '/case',
