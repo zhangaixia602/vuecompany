@@ -8,9 +8,9 @@
     </div>
   </a-carousel>
   <section>
-    <video controls="controls" autoplay="true">
-      <source :src="require('../assets/factory.mp4')" type="video/mp4" />
-    </video>
+    //<video controls="controls" autoplay="true">
+     // <source :src="require('../assets/factory.mp4')" type="video/mp4" />
+    //</video>
     <div class="wrapper">
       <a-tabs v-model:activeKey="activeKey" centered>
         <a-tab-pane v-for="(tab, index) in tabs" :key="index">
