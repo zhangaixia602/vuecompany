@@ -1,13 +1,16 @@
 <template>
-  <HeaderPage />
+  <HeaderPage :isFullpage="true"/>
   <a-carousel autoplay="true">
     <div v-for="(banner, index) in banners" :key="index">
-      <video style="width:100%" controls="controls" autoplay="true">
+      <video controls="controls" autoplay="true">
         <source :src="require('../' + banner)" type="video/mp4" />
       </video>
     </div>
   </a-carousel>
   <section>
+    <video controls="controls" autoplay="true">
+      <source :src="require('../assets/factory.mp4')" type="video/mp4" />
+    </video>
     <div class="wrapper">
       <a-tabs v-model:activeKey="activeKey" centered>
         <a-tab-pane v-for="(tab, index) in tabs" :key="index">
@@ -25,7 +28,7 @@
       </a-tabs>
     </div>
   </section>
-  <div class="homeCase">
+  <!-- <div class="homeCase">
     <div class="wrapper">
       <h3 class="titbg">主要领域<span>main areas</span></h3>
       <div v-for="(menu, index) in menus" :key="index" class="caseItem clear">
@@ -53,7 +56,7 @@
         >更多案例<i class="icon iconfont icon-gengduo"></i
       ></router-link>
     </div>
-  </div>
+  </div> -->
   <div class="homeCase">
     <div class="wrapper">
       <h3 class="titbg">合作伙伴<span>partners</span></h3>
@@ -77,11 +80,11 @@ export default defineComponent({
   components: {
     HeaderPage: HeaderPage,
     FooterPage: FooterPage,
-    ToTop: ToTop,
+    ToTop: ToTop
   },
   data() {
     return {
-      banners: ["assets/lc.mp4", "assets/lc.mp4", "assets/lc.mp4"],
+      banners: ["assets/lc.mp4"],
       tabs: [
         {
           title: "智慧园区",
@@ -193,35 +196,46 @@ export default defineComponent({
         "assets/partner/k23.png",
       ],
     };
-  },
+  }
 });
 </script>
 <style scoped>
 .ant-carousel :deep(.slick-slide) {
   text-align: center;
-  height: 100vh;
-  line-height: 100vh;
+  height:100vh;
+  line-height:100vh;
   background: #364d79;
   overflow: hidden;
 }
+video{
+  width:100%;
+}
 section {
   background: linear-gradient(0deg, #f2f7fb, #f2f7fb);
-  height: 22rem;
-  padding-top: 1rem;
+  height:100vh;
+  position:relative;
+  overflow: hidden;
+}
+section .wrapper{
+	height: 100%;
+  position: absolute;
+  top:4rem;
+  left: 50%;
+  z-index: 9999;
+  transform: translateX(-50%);
 }
 .tabItem {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  height: 18rem;
+  height:100%;
 }
 .tabItem img {
   width: 15.5rem;
-  height: 13rem;
 }
 .tabItem p {
   width: 40rem;
-  height: 10rem;
+  height: 100%;
   padding: 3rem 3.2rem;
   background: white;
   box-shadow: 0.4rem 0.7rem 0.8rem 0 rgb(237 241 247 / 60%);
@@ -231,6 +245,7 @@ section {
   text-indent: 2em;
 }
 .homeCase {
+  height:100vh;
   padding-top: 2.5rem;
 }
 h3.titbg {
@@ -326,10 +341,10 @@ h3.titbg span {
 .partnerBox span img {
   width: 100%;
   height: 100%;
-  filter: grayscale(1);
+  /* filter: grayscale(1); */
   cursor: pointer;
 }
-.partnerBox span img:hover {
+/* .partnerBox span img:hover {
   filter: grayscale(0);
-}
+} */
 </style>
