@@ -3,41 +3,56 @@
 		<div class='wrapper'>
 			<img class="logo" src="../assets/logo.png">
 			<nav>
-				<router-link v-for="(route,index) in routes" :to="route.path" :key="index">{{route.name}}</router-link>
+				<router-link v-for="(route,index) in routes" :to="route.path" :key="index">{{t('header.'+route.id)}}</router-link>
 			</nav>
+			<a-switch v-model:checked="checked" @change="changeLanguage(checked)" checked-children="中文" un-checked-children="EN" />
 		</div>
 	</header>
 </template>
 <script>
+import {useI18n} from 'vue-i18n';
+import LANGUAGE from '../constants/app';
 let that;
 	export default {
 		name: 'HeaderPage',
 		props: ['isFullpage'],
 		data() {
 			return {
+				checked:LANGUAGE==='zh_CN',
 				scrollTop: 0,
 				currentIndex: 0,
-        flag:false,
+                flag:false,
 				currentHeight: window.innerHeight,
 				routes: [{
 						path: '/',
+						id: 'home',
 						name: '首页'
 					},
 					{
 						path: '/business',
+						id: 'business',
 						name: '产品服务'
 					},
 					{
 						path: '/case',
+						id: 'case',
 						name: '案例演示'
 					},
 					{
 						path: '/about',
+						id: 'about',
 						name: '关于我们'
 					}
 				]
 			}
 		},
+    setup() {
+		const {t,locale}=useI18n();
+		return {
+			t,
+			locale
+		}
+	},
     created() {
       that=this;
     },
@@ -58,6 +73,10 @@ let that;
             }else{
                 this.scrollTop = document.body.scrollTop || document.documentElement.scrollTop
 			}
+		},
+		changeLanguage(checked) {
+			localStorage.setItem('lang',(checked ? 'zh_CN' : 'en'));
+			window.location.reload()
 		}
 	},
 	mounted() {
