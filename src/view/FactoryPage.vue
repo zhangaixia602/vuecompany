@@ -1,6 +1,7 @@
 <template>
-  <div id="factory"></div>
-  <div id='echarts'></div>
+  <div id="factory">
+    <div id='echarts'></div>
+  </div>
 </template>
 <script>
 import * as THREE from 'three'
@@ -35,9 +36,12 @@ export default {
       let light = new THREE.HemisphereLight(0xbbbbff, 0x444422, 1.5)
       light.position.set(0, 1, 0)
       scene.add(light)
-      this.controls = new OrbitControls(this.camera, this.renderer.domElement)
+      this.controls = new OrbitControls(this.camera, this.renderer.domElement);
       let objLoader = new GLTFLoader()
       objLoader.load('/static/models/lc.gltf', function(glb) {
+        glb.scene.position.set(-1000, -600,-1200);
+        glb.scene.scale.set(5, 5, 8);
+        glb.scene.rotateX(Math.PI/20);//绕x轴旋转π/4
         scene.add(glb.scene);
       })
     },
@@ -81,8 +85,15 @@ export default {
 }
 </script>
 <style scoped>
+#factory{
+  position:relative;
+}
 #echarts{
-  width:1200px;
-  height:600px;
+  width:20rem;
+  height:15rem;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  z-index: 999;
 }
 </style>
