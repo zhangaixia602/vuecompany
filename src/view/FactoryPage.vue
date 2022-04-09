@@ -1,8 +1,10 @@
 <template>
   <div id="factory"></div>
+  <div id='echarts'></div>
 </template>
 <script>
 import * as THREE from 'three'
+import * as echarts from "echarts";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
@@ -40,12 +42,32 @@ export default {
       })
     },
     setEnvMap(hdr) {
-    new RGBELoader().setPath("/static/gltf/").load(hdr + ".hdr", (texture) => {
-      texture.mapping = THREE.EquirectangularReflectionMapping;
-      this.scene.background = texture;
-      this.scene.environment = texture;
-    });
-  },
+      new RGBELoader().setPath("/static/gltf/").load(hdr + ".hdr", (texture) => {
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+        scene.environment = texture;
+      })
+    },
+    initChart () {
+      const myChart=echarts.init(document.getElementById('echarts'));
+      // 绘制图表
+      myChart.setOption({
+        title: {
+          text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        xAxis: {
+          data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+        },
+        yAxis: {},
+        series: [
+          {
+            name: '销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+          }
+        ]
+      });
+    },
     animate () {
       requestAnimationFrame(this.animate)
       this.renderer.render(scene, this.camera)
@@ -54,6 +76,13 @@ export default {
   mounted () {
     this.initThree()
     this.animate()
+    this.initChart()
   }
 }
 </script>
+<style scoped>
+#echarts{
+  width:1200px;
+  height:600px;
+}
+</style>
