@@ -56,7 +56,8 @@
 						padding: [10, 0, 20, 10],
 						textStyle: {
 							color: '#ffffff',
-							fontFamily: 'sans-serif'
+							fontFamily: 'sans-serif',
+							fontSize:14
 						}
 					};
 					options.title = title;

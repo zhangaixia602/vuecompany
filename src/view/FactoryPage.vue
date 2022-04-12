@@ -4,20 +4,27 @@
     <div class='category'>
       <BarPage 
         :options="{
-        domSelector: 'echarts',
+        domSelector: 'category',
         viewData: this.category,
         smooth:true,
         data:this.categoryData,
         config:this.echartsConfig
       }"
       />
+      <PiePage
+        :options="{
+        domSelector: 'pie',
+        title:this.pieTitle,
+        data:this.pieData
+      }"
+      />
     </div>
   </section>
   <section class='right'>
-    <div class='category'>
+    <div class='temDity'>
       <BarPage 
         :options="{
-        domSelector: 'echarts1',
+        domSelector: 'temDity',
         viewData: this.temDity,
         smooth:true,
         data:this.temDityData
@@ -29,7 +36,8 @@
 <script>
 import * as echarts from "echarts";
 import { defineComponent } from "vue";
-import BarPage from '@/components/BarPage'
+import BarPage from '@/components/BarPage';
+import PiePage from '@/components/PiePage';
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
@@ -38,7 +46,8 @@ let scene=null;
 export default defineComponent({
   name: 'FactoryPage',
   components: {
-    'BarPage': BarPage
+    'BarPage': BarPage,
+    'PiePage': PiePage
   },
   data (){
     return {
@@ -56,7 +65,8 @@ export default defineComponent({
       ],
       temDity:{
         title:"当日温湿度",
-        xAxis:Array(24).fill(1).map(function(index){
+        xAxis:Array(24).fill(1).map(function(item,index){
+          console.log(item)
           return index+':00'
         }),
         legend:[{name:"温度",key:"tempe"},{name:"湿度",key:"dity"}]
@@ -76,7 +86,15 @@ export default defineComponent({
             return parseInt(Math.random()*30+30)
           })
         }
-      ]
+      ],
+      pieTitle:'设备状况',
+      pieData:Array(4).fill(1).map(function(item,index){
+          console.log(item)
+          return {
+            value:parseInt(Math.random()*10+60),
+            name:"报警"+index
+          }
+        })
     }
   },
   methods: {
@@ -125,7 +143,6 @@ export default defineComponent({
       options.backgroundColor='rgba(4,103,247,0.2)';
       options.title.x='center';
       options.color=['#FFBF00'];
-      options.title.textStyle.fontSize=14;
       options.series[0].lineStyle={
         width: 0
       };
@@ -153,6 +170,9 @@ export default defineComponent({
 })
 </script>
 <style scoped>
+body{
+  overflow: hidden;
+}
 header{
   background:url(../assets/tbg.png) no-repeat center center;
   background-size: cover;
@@ -173,7 +193,7 @@ header{
   top:4rem;
   right: 0;
 }
-#echarts,#echarts1{
+#category,#temDity,#pie{
   width:14rem;
   height:10rem;
 }
