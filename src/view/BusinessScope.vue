@@ -40,7 +40,7 @@
           <h2>{{ menu.title }}</h2>
           <p>{{ menu.text }}</p>
           <a href="javascript:void(0);"
-            >查看详情<i class="icon iconfont icon-chakanxiangqing"></i
+            >案例详情<i class="icon iconfont icon-chakanxiangqing"></i
           ></a>
         </div>
         <img
@@ -262,7 +262,8 @@ h3.titbg span {
   padding: 0.4rem;
   border: 1px solid #038bff;
   background-color: #fff;
-  border-radius: 0.2rem;
+  border-radius: 1.2rem;
+  font-size: 16px;
 }
 .more {
   width: 6rem;
