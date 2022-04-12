@@ -1,10 +1,15 @@
 <template>
   <HeaderPage />
-  <a-carousel autoplay>
+  <!-- <a-carousel autoplay>
     <div v-for="(banner, index) in banners" :key="index">
       <img :src="require('../' + banner)" />
+    </div>    
+  </a-carousel> -->
+   <div class='caseHeader'>
+      <h2>行业痛点</h2>
+      <p>目前园区、工厂所涉及的信息要素较多、信息流转也较快，日常运维过程中难免发生各项故障，如不及时处理，可能会给园区带来极大损失。而园区、能源等管理系统相互独立，不同系统间的信息互联和沟通成本高，导致园区整体运维效率低。</p>
+      <p>为了解决这一问题，我们运用三维可视化底层技术，将二维、三维数据有机联合，同时使各系统数据信息统一运筹，可管控。</p>
     </div>
-  </a-carousel>
   <section>
     <div class="wrapper">
       <h2 class="titbgl">可视化工程制作的主要流程</h2>
@@ -39,9 +44,9 @@
         >
           <h2>{{ menu.title }}</h2>
           <p>{{ menu.text }}</p>
-          <a href="javascript:void(0);"
-            >案例详情<i class="icon iconfont icon-chakanxiangqing"></i
-          ></a>
+          <router-link  :to="menu.path" target="_blank" :key='index'>
+            案例详情<i class="icon iconfont icon-chakanxiangqing"></i>
+          </router-link>
         </div>
         <img
           :src="require('../' + menu.src)"
@@ -82,14 +87,14 @@ export default defineComponent({
           icon: "icon-gengduo",
           src: "assets/01.png",
           content:
-            "根据不同方式方法对模型进行真实性数据采集，达到可支持1:1还原建筑设备的制作基础。真实照片采集+CAD图纸，Blender和3DMax作图，SCARDA采集数据",
+            "现如今园区、景区、工厂涉及的信息要素很多，对数据模型采集我们根据不同方式方法对模型进行真实性数据采集，达到可支持1:1还原建筑设备的制作基础。真实照片采集+CAD图纸，Blender和3DMax作图，SCARDA采集数据",
         },
         {
           title: "模型制作",
           icon: "icon-gengduo",
           src: "assets/02.png",
           content:
-            "通过三维建模工具，例如：3DMAX、MAYA等，对模型的点、线、面、 贴图位置进行构建。模型构建基础形状设备设施,模型细节精度提升建设,模型贴图纹理还原真实,模型材质粗糙反射还原真实,模型效果渲染调试",
+            "我们通过三维建模工具，例如：3DMAX、MAYA等，对模型的点、线、面、 贴图位置进行构建。模型构建基础形状设备设施,模型细节精度提升建设,模型贴图纹理还原真实,模型材质粗糙反射还原真实,模型效果渲染调试",
         },
         {
           title: "三维可视化功能",
@@ -106,42 +111,31 @@ export default defineComponent({
             "采用新一代HTML5+WebGL构架和Canvas布局的B/S 架构，电脑不 用安装任何插件软件即可运行。大数据图表可视化,图形分析化能力,交互式观察数据改变,一键集成方便部署",
         },
       ],
-      menus: [
-        {
-          title: "石油化工",
-          src: "assets/sy.jpg",
-          text: "我公司遵循SIS系统回路设计过程中的“可靠性和安全性原则、可用性原则、独立性原则、标准认证原则、故障安全原则”采用冗余容错结构而集成的安全仪表系统，在石油化工、核电等重要工业领域得到广泛的应用。储油罐区监控系统是石化行业的重要仪控系统，石油化工储罐容量从几千立方到几十万立方，对监控系统的要求十分苛刻.电子监管系统（ICQ）是我公司与政府部门在信息化领域内技术合作的典范，将先进测量技术、实时数据采集、在线校准、远程访问和数据统计分析管理等技术应用到出口成品油数量和重量鉴定领域，它改变了商检沿用船舱计重的惯例，解决了大通关背景下船舱静态计量模式偏差大、效率低的问题，实现了出口成油商检模式的创新.",
-          position: "right",
-        },
-        {
-          title: "电力",
-          src: "assets/dl.png",
-          text: "公司主要致力于火电厂信息化辅控系统（实现了辅控系统与工厂DCS系统、MIS系统的数据共享）,火电厂水处理控制系统（实施完成的多套生水、锅炉补给水、凝结水、循环水、工业废水和机组排水等电厂水处理系统）,污染源排放（烟气）在线监控系统（在线监测是由分布在各个污染源现场的监测仪器、摄像头、控制系统、通讯设备以及应用软件组成）,核电仪控系统（核电数字化仪控系统要求具备高安全性、高可靠性，开放灵活、控制功能齐全、控制算法丰富，能精确和实时测量大量核物理、热工、水利等特性参数）。",
-          position: "left",
-        },
-        {
-          title: "市政水处理信息化系统",
-          src: "assets/ws.png",
-          text: "污水处理信息化系统（基于PLC的分布式控制方案实现了低成本和高可靠的统一，保证污水处理过程的质量，使得出水水质符合规定的标准），供水信息化系统（公司在水厂的变频节能技术、供水综合自动化系统、供水厂管控一体化系统有深入的研究和许多成功的应用业绩），污染源排放（废水）在线监测仪表系统（我公司根据政府对监管的要求和用户的实际需求，提供多参数“污染源排放在线监测仪表系统”）。",
-          position: "right",
-        },
-        {
-          title: "水利自动化工程",
-          src: "assets/sl.png",
-          text: "大坝安全监测系统（系统基于B/S结构来实现,，用户端无需安装应用程序，能上网就能监视水情状态；可充分发挥图形化应用程序的丰富界面功能），泵站控制和信息化系统（根据泵站自动化、信息化的需求，采用开放式分层分布结构的计算机监控方式，使泵站运行管理智能化，可实现对水泵机组、水闸、配电系统、进出水池、直流系统、消防系统、技术供水系统、液压系统及其它泵站运行重要部位与关键对象、参数进行有效监视、监测和控制，实现报警记录、智能分析设备效能、自动生成报表，数据、图像的储存、上传和归档，提高管理和办公自动化水平.）。",
-         position: "left",
-        },
-        {
-          title: "环境监控系统",
-          src: "assets/hj.jpg",
-          text: "净化空调控制系统(实现各种安全保护、联锁、节能运行等功能)，轨道交通BAS系统(我公司承担建设的轨道交通综合监控系统涉及“环境与设备监控系统-BAS”、“电力监控系统-PSCADA”、“火灾报警系统-FAS”。)，楼宇中央空调节能与控制系统(提供常规中央空调系统、冰蓄冷系统、集中供冷系统的自动化、智能化和信息化解决方案)，润版液处理控制系统(在印刷中快速达到水墨平衡，降低废品率，提高生产速率)。",
-          position: "right",
-        },
+      menus: [            
+      
         {
           title: "智慧园区",
-          src: "assets/dl.png",
-          text: "公司主要致力于火电厂信息化辅控系统（实现了辅控系统与工厂DCS系统、MIS系统的数据共享）,火电厂水处理控制系统（实施完成的多套生水、锅炉补给水、凝结水、循环水、工业废水和机组排水等电厂水处理系统）,污染源排放（烟气）在线监控系统（在线监测是由分布在各个污染源现场的监测仪器、摄像头、控制系统、通讯设备以及应用软件组成）,核电仪控系统（核电数字化仪控系统要求具备高安全性、高可靠性，开放灵活、控制功能齐全、控制算法丰富，能精确和实时测量大量核物理、热工、水利等特性参数）。",
+          src: "assets/c03.png",
+          text: "利用Threejs,WebGL技术，将3G大小BIM楼宇模型轻松展示在网页端，让整个园区与分层信息实现3D可视化集成展示园区多功能运维管理系统，对接线下IOT设备接口，实时数据展示，降低风险损失。结合GIS地图、实景三维、BIM模型和单物品模型，通过3D展示技术实现城市全景展示、园区地理位置、楼房室内布局的3D可视化.",
           position: "left",
+          path: '/model/insect' 
+
+        },
+        {
+          title: "智慧水利",
+          src: "assets/sl.png",
+          text: "采用3D仿真技术，将数据中心园区、建筑、机房、机柜、设备、端口等逐级可视化呈现，可自定义路线巡检，提高运维管理效率。数字孪生线上线下，实时监控反馈设备运行状态，及时预警。客户端程序设计，安全系数更高。",
+          position: "right",
+          path: '/model/water' 
+
+        },  
+         {
+          title: "智慧能源",
+          src: "assets/c02.png",
+          text: "基于三维仿真技术，将综合能源园区、楼宇、设备、管线等3D展示，实现全局能源安全可视化管理系统将各类能源监控数据集中整合，联通IOT实时数据，快速可视化分析，实现智能互联，提升企业能源管理效率。实时数据仿真，对配电房、路灯等实时监控、一键自动化智慧管理，线上线下实时同步，实现能源安全标准化管理",
+          position: "left",
+          path: '/model/granary' 
+
         },
       ],
     };
@@ -155,6 +149,25 @@ export default defineComponent({
   line-height:100vh;
   background: #364d79;
   overflow: hidden;
+}
+.caseHeader{
+  width:100%;
+  height:100vh;
+  background:url(../assets/hy.png) no-repeat center center;
+  background-size: cover;
+  padding:7rem 6rem;
+  color: #fffefe;
+}
+.caseHeader h2{
+  font-size:3rem;
+  color: #fffefe;  
+  position: relative;
+}
+.caseHeader p{
+  width:43%;
+  font-size:0.8rem;
+  font-family: SimHei;
+  padding-top: 16px;
 }
 section {
   background: linear-gradient(0deg, #f2f7fb, #f2f7fb);
@@ -226,6 +239,7 @@ h3.titbg span {
 .caseItem div {
   width: 50%;
   height: 100%;
+  text-align: center;
 }
 .caseItem img {
   width: 28rem;
@@ -245,7 +259,7 @@ h3.titbg span {
   display: block;
   position: absolute;
   top: 50%;
-  left: 8px;
+  left: 230px;
   transform: translateY(-50%);
 }
 .caseItem p {
@@ -263,7 +277,7 @@ h3.titbg span {
   border: 1px solid #038bff;
   background-color: #fff;
   border-radius: 1.2rem;
-  font-size: 16px;
+  font-size: 20px; 
 }
 .more {
   width: 6rem;
