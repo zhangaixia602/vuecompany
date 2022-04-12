@@ -50,20 +50,12 @@ export default {
           group: 'park'
          },
         {
-          title: '水利自动化',
+          title: '智慧水利',
           group: 'draulic'
         },
         {
           title: '智慧能源',
           group: 'energy'
-        },
-        {
-          title: '环境监控',
-          group: 'envir'
-        },
-        {
-          title: '旧系统升级',
-          group: 'old'
         }
       ],
       products:[
@@ -75,29 +67,22 @@ export default {
           path: '/model/insect' 
         },
         {
-          group:'old',
-          title: '升降梯改造',
+          group:'energy',
+          title: '智慧能源',
           src: 'assets/c02.png',
           id: '02',
           path: '/model/granary' 
         },
         {
-          group:'energy',
-          title: '智慧能源',
+          group:'park',
+          title: '智慧粮仓',
           src: 'assets/power.png',
           id: '03',
           path: '/model/factory' 
         },
         {
-          group:'envir',
-          title: '环境监控',
-          src: 'assets/hj.jpg',
-          id: '04',
-          path: '/model/environ' 
-        },
-              {
-          group:'old',
-          title: '水利自动化',
+          group:'draulic',
+          title: '智慧水利',
           src: 'assets/c01.png',
           id: '05',
           path: '/model/water' 
