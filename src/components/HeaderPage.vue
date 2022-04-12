@@ -1,5 +1,5 @@
 <template>
-	<header :class="{shadow: this.scrollTop >= this.currentHeight}">
+	<header :class="{shadow: this.scrollTop >=500}">
 		<div class='wrapper'>
 			<img class="logo" src="../assets/logo.png">
 			<nav>
@@ -22,7 +22,6 @@ let that;
 				scrollTop: 0,
 				currentIndex: 0,
                 flag:false,
-				currentHeight: window.innerHeight,
 				routes: [{
 						path: '/',
 						id: 'home',

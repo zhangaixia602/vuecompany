@@ -1,16 +1,14 @@
 <template>
   <HeaderPage :isFullpage="true"/>
-  <a-carousel autoplay="true">
-    <div v-for="(banner, index) in banners" :key="index">
-      <video controls="controls" autoplay="true">
-        <source :src="require('../' + banner)" type="video/mp4" />
-      </video>
-      
-    </div>
-  </a-carousel>
   <section>
-     <video controls="controls" autoplay="true">
-      <source :src="require('../assets/factory.mp4')" type="video/mp4" />
+    <video controls="controls" autoplay="true" loop>
+      <source :src="require('../assets/lc.mp4')" type="video/mp4" />
+    </video>
+    <img :src="require('../assets/zt2.png')" />
+  </section>
+  <section>
+     <video controls="controls" autoplay="true" loop>
+      <source :src="require('../assets/water.mp4')" type="video/mp4" />
     </video>
     <div class="wrapper">
       <a-tabs v-model:activeKey="activeKey" centered>
@@ -85,7 +83,6 @@ export default defineComponent({
   },
   data() {
     return {
-      banners: ["assets/lc.mp4"],
       tabs: [
         {
           title: "智慧园区",
@@ -95,7 +92,7 @@ export default defineComponent({
             "电子监管系统（ICQ）是我公司与政府部门在信息化领域内技术合作的典范，将先进测量技术、实时数据采集、在线校准、远程访问和数据统计分析管理等技术应用到出口成品油数量和重量鉴定领域，它改变了商检沿用船舱计重的惯例，解决了大通关背景下船舱静态计量模式偏差大、效率低的问题，实现了出口成油商检模式的创新。电子监管系统的应用，实现了反欺诈的功能，有效地挽回企业不必要的经济损失并加快了通关速度，体现了政府部门服务企业的高时效性，树立了良好的检验检疫形象。以往进行的船舱计量，由于多种原因，计量结果常会受到贸易关系人的质疑，而且由于检验现场的不可复现性，难以用有力的证据来解释。电子监控系统后，对装船过程中的异常情况随时发现、随时处理，建立了公平、公正、公开的计量形象。",
         },
         {
-          title: "水利自动化",
+          title: "智慧水利",
           icon: "icon-shuiliqiye",
           src: "assets/02.png",
           content:
@@ -107,21 +104,7 @@ export default defineComponent({
           src: "assets/02.png",
           content:
             "是我公司与政府部门在信息化领域内技术合作的典范，将先进测量技术、实时数据采集、在线校准、远程访问和数据统计分析管理等技术应用到出口成品油数量和重量鉴定领域，它改变了商检沿用船舱计重的惯例，解决了大通关背景下船舱静态计量模式偏差大、效率低的问题，实现了出口成油商检模式的创新。电子监管系统的应用，实现了反欺诈的功能，有效地挽回企业不必要的经济损失并加快了通关速度，体现了政府部门服务企业的高时效性，树立了良好的检验检疫形象。以往进行的船舱计量，由于多种原因，计量结果常会受到贸易关系人的质疑，而且由于检验现场的不可复现性，难以用有力的证据来解释。电子监控系统后，对装船过程中的异常情况随时发现、随时处理，建立了公平、公正、公开的计量形象。",
-        },
-        {
-          title: "环境监控",
-          icon: "icon-huanjingjiankong",
-          src: "assets/02.png",
-          content:
-            "是我公司与政府部门在信息化领域内技术合作的典范，将先进测量技术、实时数据采集、在线校准、远程访问和数据统计分析管理等技术应用到出口成品油数量和重量鉴定领域，它改变了商检沿用船舱计重的惯例，解决了大通关背景下船舱静态计量模式偏差大、效率低的问题，实现了出口成油商检模式的创新。电子监管系统的应用，实现了反欺诈的功能，有效地挽回企业不必要的经济损失并加快了通关速度，体现了政府部门服务企业的高时效性，树立了良好的检验检疫形象。以往进行的船舱计量，由于多种原因，计量结果常会受到贸易关系人的质疑，而且由于检验现场的不可复现性，难以用有力的证据来解释。电子监控系统后，对装船过程中的异常情况随时发现、随时处理，建立了公平、公正、公开的计量形象。",
-        },
-        {
-          title: "旧系统升级",
-          icon: "icon-xitongshengji",
-          src: "assets/02.png",
-          content:
-            "是我公司与政府部门在信息化领域内技术合作的典范，将先进测量技术、实时数据采集、在线校准、远程访问和数据统计分析管理等技术应用到出口成品油数量和重量鉴定领域，它改变了商检沿用船舱计重的惯例，解决了大通关背景下船舱静态计量模式偏差大、效率低的问题，实现了出口成油商检模式的创新。电子监管系统的应用，实现了反欺诈的功能，有效地挽回企业不必要的经济损失并加快了通关速度，体现了政府部门服务企业的高时效性，树立了良好的检验检疫形象。以往进行的船舱计量，由于多种原因，计量结果常会受到贸易关系人的质疑，而且由于检验现场的不可复现性，难以用有力的证据来解释。电子监控系统后，对装船过程中的异常情况随时发现、随时处理，建立了公平、公正、公开的计量形象。",
-        },
+        }
       ],
       menus: [
         {
@@ -201,29 +184,30 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-.ant-carousel :deep(.slick-slide) {
-  text-align: center;
-  height:100vh;
-  line-height:100vh;
-  background: #364d79;
-  overflow: hidden;
-}
 video{
   width:100%;
 }
-section {
-  background: linear-gradient(0deg, #f2f7fb, #f2f7fb);
+section{
   height:100vh;
   position:relative;
   overflow: hidden;
 }
-section .wrapper{
-	height: 15rem;
+section>img{
   position: absolute;
-  top:4rem;
+  max-width:60rem;
+  max-height:100%;
+  top:0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+section .wrapper{
+	height: 18rem;
+  position: absolute;
+  top:6rem;
   left: 50%;
   z-index: 9999;
   transform: translateX(-50%);
+  background: rgba(255,255,255,0.2);
 }
 .tabItem {
   display: flex;
