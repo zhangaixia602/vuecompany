@@ -116,7 +116,7 @@ export default defineComponent({
         {
           title: "智慧园区",
           src: "assets/c03.png",
-          text: "利用Threejs,WebGL技术，将3G大小BIM楼宇模型轻松展示在网页端，让整个园区与分层信息实现3D可视化集成展示园区多功能运维管理系统，对接线下IOT设备接口，实时数据展示，降低风险损失。结合GIS地图、实景三维、BIM模型和单物品模型，通过3D展示技术实现城市全景展示、园区地理位置、楼房室内布局的3D可视化.",
+          text: "利用Threejs,WebGL技术，将3G大小BIM楼宇模型轻松展示在网页端，让整个园区与分层信息实现3D可视化集成展示园区多功能运维管理系统，对接线下IOT设备接口，实时数据展示，降低风险损失。结合GIS地图、实景三维、BIM模型和单物品模型，通过3D展示技术实现城市全景展示、园区地理位置、楼房室内布局的3D可视化。",
           position: "left",
           path: '/model/insect' 
 
@@ -132,7 +132,7 @@ export default defineComponent({
          {
           title: "智慧能源",
           src: "assets/c02.png",
-          text: "基于三维仿真技术，将综合能源园区、楼宇、设备、管线等3D展示，实现全局能源安全可视化管理系统将各类能源监控数据集中整合，联通IOT实时数据，快速可视化分析，实现智能互联，提升企业能源管理效率。实时数据仿真，对配电房、路灯等实时监控、一键自动化智慧管理，线上线下实时同步，实现能源安全标准化管理",
+          text: "基于三维仿真技术，将综合能源园区、楼宇、设备、管线等3D展示，实现全局能源安全可视化管理系统将各类能源监控数据集中整合，联通IOT实时数据，快速可视化分析，实现智能互联，提升企业能源管理效率。实时数据仿真，对配电房、路灯等实时监控、一键自动化智慧管理，线上线下实时同步，实现能源安全标准化管理。",
           position: "left",
           path: '/model/granary' 
 
@@ -162,12 +162,37 @@ export default defineComponent({
   font-size:3rem;
   color: #fffefe;  
   position: relative;
+  animation: rotate3 3s linear infinite;
+ 
+}
+
+@keyframes rotate2{
+
+0% { margin-left:800px; }
+
+20% { margin-left:-800px; }
+
+35% { margin-left:0px; }
+
+100% { margin-left:0px; }
+
+}
+
+@keyframes rotate3 {
+
+  0%{ text-shadow: 0 0 4px rgb(245, 12, 12)}
+  50%{ text-shadow: 0 0 40px rgb(4, 250, 106)}
+  100%{ text-shadow: 0 0 4px rgb(247, 246, 246)}
+
+
 }
 .caseHeader p{
   width:43%;
   font-size:0.8rem;
   font-family: SimHei;
   padding-top: 16px;
+  animation: rotate3 2000ms 2000ms linear;
+
 }
 section {
   background: linear-gradient(0deg, #f2f7fb, #f2f7fb);

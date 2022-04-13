@@ -1,19 +1,53 @@
 <template>
+<div>
+  <header>智慧能源</header>
+    <section class='left'>
+    <div class='category'>
+      <BarPage 
+        :options="{
+        domSelector: 'echarts',
+        viewData: this.category,
+        smooth:true,
+        data:this.categoryData,
+        config:this.echartsConfig
+      }"
+      />
+    </div>
+  </section>
   <div id="threeLoader">
   <div id="plant" :class="{show:this.isShow}">电表信息</div>
   </div>
+  </div>
 </template>
 <script>
+import * as echarts from "echarts";
+import { defineComponent } from "vue";
+import BarPage from '@/components/BarPage'
 import * as Three from 'three'
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 let mixer = null
 let clock = new Three.Clock()
-export default {
+export default defineComponent( {
   name: 'InsectPage',
+   components: {
+    'BarPage': BarPage
+  },
   data () {
     return {
+       category:{
+        title:"各粮品的存储量",
+        xAxis:['小麦','大米','玉米'],
+        legend:[]
+      },
+      categoryData:[
+        {
+          key:"",
+          type:"line",
+          data:[parseInt(Math.random()*100+1000),parseInt(Math.random()*100+800),parseInt(Math.random()*100+600)]
+        }
+      ],
       isShow:false
     }
   },
@@ -52,6 +86,8 @@ export default {
       this.controls = new OrbitControls(this.camera, this.renderer.domElement)
       let loader = new GLTFLoader()
       loader.load('../../../static/models/lc3.gltf', (gltf) => {
+        this.scene.position.set(-1000,-600,-1200);
+        this.scene.scale.set(5,5,8);
         this.scene.add(gltf.scene)
         mixer = new Three.AnimationMixer(gltf.scene)
         var AnimationAction = mixer.clipAction(gltf.animations[0])
@@ -89,15 +125,53 @@ export default {
       }
     }
   },
+    echartsConfig (options){
+      options.backgroundColor='rgba(4,103,247,0.2)';
+      options.title.x='center';
+      options.color=['#FFBF00'];
+      options.title.textStyle.fontSize=14;
+      options.series[0].lineStyle={
+        width: 0
+      };
+      options.series[0].showSymbol=false;
+      options.series[0].areaStyle={
+        opacity: 0.8,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: 'rgb(255, 191, 0)'
+          },
+          {
+            offset: 1,
+            color: 'rgb(224, 62, 76)'
+          }
+        ])
+      };
+      return options;
+    },
   mounted () {
     this.initThree()
     this.animate()
   }
-}
+})
 </script>
 <style scoped>
+header{
+  background:url(../assets/tb.png) no-repeat center center;
+  background-size: cover;
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  line-height: 3.5rem;
+}
 #threeLoader{
   position: relative;
+}
+.left{
+  margin-left:1rem;
+  position: absolute !important;
+  top:4rem;
+  left: 0;
 }
 #plant{
   display:none;
@@ -109,5 +183,9 @@ export default {
 }
 #plant.show{
   display:block;
+}
+#echarts,#echarts1{
+  width:14rem;
+  height:10rem;
 }
 </style>
