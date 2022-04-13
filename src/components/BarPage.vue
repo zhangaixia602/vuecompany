@@ -26,6 +26,7 @@
 				const titleText = this.viewData.title || "";
 				const xAxis = this.viewData.xAxis || [];
 				const options = {
+					backgroundColor:'rgba(4,103,247,0.2)',
 					tooltip: {
 						trigger: 'axis',
                         axisPointer: {
@@ -56,7 +57,8 @@
 						padding: [10, 0, 20, 10],
 						textStyle: {
 							color: '#ffffff',
-							fontFamily: 'sans-serif'
+							fontFamily: 'sans-serif',
+							fontSize:14
 						}
 					};
 					options.title = title;
@@ -111,5 +113,3 @@
 		}
 	}
 </script>
-<style scoped>
-</style>

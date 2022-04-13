@@ -2,7 +2,7 @@
   <HeaderPage :isFullpage="true"/>
   <section>
     <video controls="controls" autoplay="true" loop>
-      <source :src="require('../assets/lc.mp4')" type="video/mp4" />
+      <source :src="require('../assets/home.mp4')" type="video/mp4" />
     </video>
     <img :src="require('../assets/zt2.png')" />
   </section>

@@ -209,11 +209,41 @@ footer{
     align-items: center;
     justify-content: center;
 }
+.goShow{
+    animation:goShow 1s;
+}
 @keyframes LeftToRight {
     from{transform: translateX(100%)}
     to{transform: translateX(0);}
 }
+@keyframes goShow {
+    from{
+        transform:scale(0);
+        opacity: 0;
+    }
+    to{
+        transform: scale(1);
+        opacity:1;
+    }
+}
 #threeLoader{
     width: 100%;
     height: 30rem
+}
+.titleBg{
+    position: relative;
+    border-bottom: 1px solid #58fdff;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: white;
+}
+.titleBg::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 41px;
+    height: 3px;
+    background: #58fdff;
 }

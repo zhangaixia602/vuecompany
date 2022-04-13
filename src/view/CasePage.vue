@@ -2,8 +2,10 @@
   <HeaderPage/>
   <div class='casePage'>
     <div class='caseHeader'>
-      <h1>案例展示</h1>
-      <p>客户是企业存在的基础，为客户创造价值、提供满意的服务是我们的一贯追求，更是公司持续发展的前提和保证。</p>
+      <div class='wrapper goShow'>
+        <h1>案例展示</h1>
+        <p>客户是企业存在的基础，为客户创造价值、提供满意的服务是我们的一贯追求，更是公司持续发展的前提和保证。</p>
+      </div>
     </div>
     <div class='nav'>
       <div class='wrapper'>
@@ -76,7 +78,7 @@ export default {
         {
           group:'park',
           title: '智慧粮仓',
-          src: 'assets/power.png',
+          src: 'assets/lc.png',
           id: '03',
           path: '/model/factory' 
         },
@@ -104,14 +106,18 @@ export default {
   height:100vh;
   background:url(../assets/casebg.jpg) no-repeat center center;
   background-size: cover;
-  padding:9rem 12rem;
   color: #fffefe;
+  padding-top:calc(50vh - 4rem);
+}
+.caseHeader .wrapper{
+  padding-left:2rem;
 }
 .caseHeader h1{
   font-size:3rem;
   color: #fffefe;
   padding-left:1rem;
   position: relative;
+  margin-bottom:2.3rem;
 }
 .caseHeader h1:before{
   content: "";
