@@ -2,14 +2,12 @@
 <div>
   <header>智慧能源</header>
     <section class='left'>
-    <div class='category'>
-      <BarPage 
+    <div class='category borderBg'>
+      <PiePage
         :options="{
-        domSelector: 'echarts',
-        viewData: this.category,
-        smooth:true,
-        data:this.categoryData,
-        config:this.echartsConfig
+        domSelector: 'pie',
+        title:this.categoryTitle,
+        data:this.categoryData
       }"
       />
     </div>
@@ -22,7 +20,7 @@
 <script>
 import * as echarts from "echarts";
 import { defineComponent } from "vue";
-import BarPage from '@/components/BarPage'
+import PiePage from '@/components/PiePage'
 import * as Three from 'three'
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
@@ -32,20 +30,23 @@ let clock = new Three.Clock()
 export default defineComponent( {
   name: 'InsectPage',
    components: {
-    'BarPage': BarPage
+    'PiePage': PiePage
   },
   data () {
     return {
-       category:{
-        title:"各粮品的存储量",
-        xAxis:['小麦','大米','玉米'],
-        legend:[]
-      },
-      categoryData:[
+       categoryTitle:"各粮品的存储量",
+       categoryData:[
         {
-          key:"",
-          type:"line",
-          data:[parseInt(Math.random()*100+1000),parseInt(Math.random()*100+800),parseInt(Math.random()*100+600)]
+          name:"小麦",
+          value:parseInt(Math.random()*100+1000)
+        },
+        {
+          name:"大米",
+          value:parseInt(Math.random()*100+800)
+        },
+        {
+          name:"玉米",
+          value:parseInt(Math.random()*100+600)
         }
       ],
       isShow:false
@@ -123,13 +124,9 @@ export default defineComponent( {
       if (mixer !== null) {
         mixer.update(clock.getDelta())
       }
-    }
-  },
-    echartsConfig (options){
-      options.backgroundColor='rgba(4,103,247,0.2)';
-      options.title.x='center';
-      options.color=['#FFBF00'];
-      options.title.textStyle.fontSize=14;
+    },
+         echartsConfig (options){
+      options.color= ['#FFBF00','#80FFA5'];
       options.series[0].lineStyle={
         width: 0
       };
@@ -148,7 +145,9 @@ export default defineComponent( {
         ])
       };
       return options;
-    },
+    }
+  },
+  
   mounted () {
     this.initThree()
     this.animate()
@@ -167,9 +166,22 @@ header{
 #threeLoader{
   position: relative;
 }
+.borderBg{
+  width:14rem;
+  height:10rem;
+  background:url(../assets/border.png) no-repeat center center;
+  background-size: 14rem 10rem;
+  overflow: hidden;
+}
 .left{
-  margin-left:1rem;
+  width:14rem;
+  height:calc(100% - 4rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items:center;
   position: absolute !important;
+  top:4rem;
+  margin-left:1rem;
   top:4rem;
   left: 0;
 }
@@ -184,7 +196,7 @@ header{
 #plant.show{
   display:block;
 }
-#echarts,#echarts1{
+#category,#temDity,#pie,#vehicle{
   width:14rem;
   height:10rem;
 }
