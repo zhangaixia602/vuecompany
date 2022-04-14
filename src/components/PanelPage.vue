@@ -31,7 +31,7 @@
 }
 .panelBox{
     font-size:0.7rem;
-    color:blue;
+    color:rgb(255, 251, 0);
 }
 .panelItem .iconfont{
     font-size:1.5rem;
