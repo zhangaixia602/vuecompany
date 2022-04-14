@@ -11,7 +11,8 @@
 				domSelector: this.options.domSelector,
 				viewData: this.options.viewData,
 				data: this.options.data,
-                smooth:this.options.smooth || false
+                smooth:this.options.smooth || false,
+				boundaryGap:this.options.boundaryGap || false
 			}
 		},
 		methods: {
@@ -66,7 +67,7 @@
 				if (xAxis) {
 					options.xAxis = [{
 						type: 'category',
-						boundaryGap: false,
+						boundaryGap: this.boundaryGap,
 						data: xAxis
 					}]
 				}

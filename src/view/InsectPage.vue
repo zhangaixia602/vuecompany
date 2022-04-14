@@ -5,7 +5,7 @@
     <div class='category borderBg'>
       <PiePage
         :options="{
-        domSelector: 'pie',
+        domSelector: 'pie1',
         title:this.categoryTitle,
         data:this.categoryData
       }"
@@ -196,7 +196,7 @@ header{
 #plant.show{
   display:block;
 }
-#category,#temDity,#pie,#vehicle{
+#category,#temDity,#pie1,#vehicle{
   width:14rem;
   height:10rem;
 }
