@@ -1,7 +1,8 @@
 <template>
 <div>
-  <header>智慧能源</header>
-    <section class='left'>
+  <header>智慧园区</header>
+  
+  <section class='left'>
     <div class='category borderBg'>
       <PiePage
         :options="{
@@ -11,121 +12,235 @@
       }"
       />
     </div>
+    <div class='bottomborderBg'>
+      <BarPage 
+        :options="{
+        domSelector: 'vehicle',
+        viewData: this.vehicle,
+        smooth:true,
+        data:this.vehicleData
+      }"
+      />
+    </div>
   </section>
-  <div id="threeLoader">
-  <div id="plant" :class="{show:this.isShow}">电表信息</div>
-  </div>
+  <!-- <section class='bottom'>
+    <div class='borderBg'>
+      <BarPage 
+        :options="{
+        domSelector: 'temDity',
+        viewData: this.temDity,
+        smooth:true,
+        data:this.temDityData,
+        config:this.echartsConfig
+      }"
+      />     
+    </div>
+  </section> -->
+  <section class='right'>
+    <div class='alarmborder'>
+      <div class='borderBg'>
+     <PanelPage 
+        :options="{
+        title:this.panelTitle,
+        data:this.panelData
+      }"
+      />
+     </div>
+    </div>
+    <div class='borderBg'>
+    <CarouselTable
+        :options="{
+          title:this.carouselTitle,
+          viewData: this.columns,
+          data:this.dataSource,
+      }"
+      />
+   
+    </div>
+     <div class='borderBg'>
+      <BarPage 
+        :options="{
+        domSelector: 'temDity',
+        viewData: this.temDity,
+        smooth:true,
+        data:this.temDityData,
+        config:this.echartsConfig
+      }"
+      />     
+    </div>
+  </section>
   </div>
 </template>
 <script>
 import * as echarts from "echarts";
 import { defineComponent } from "vue";
-import PiePage from '@/components/PiePage'
-import * as Three from 'three'
-import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
+import BarPage from '@/components/BarPage';
+import PiePage from '@/components/PiePage';
+import PanelPage from '@/components/PanelPage';
+import CarouselTable from '@/components/CarouselTable';
+import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-let mixer = null
-let clock = new Three.Clock()
-export default defineComponent( {
-  name: 'InsectPage',
-   components: {
-    'PiePage': PiePage
+let scene=null;
+export default defineComponent({
+  name: 'InsertPage',
+  components: {
+    'BarPage': BarPage,
+    'PiePage': PiePage,
+    'PanelPage': PanelPage,
+    'CarouselTable': CarouselTable
   },
-  data () {
+  data (){
     return {
-       categoryTitle:"各粮品的存储量",
-       categoryData:[
+      carouselTitle: 'SEO报警情况',
+      dataSource:Array(24).fill(1).map(function(item,index){
+        return {
+          key:"id"+index,
+          name: '2022-4-14',
+          age:'co7'+parseInt(Math.random()*2)+'号锅炉水位极高',
+          remark: '未解决'
+        }
+      }),
+      columns: [
         {
-          name:"小麦",
-          value:parseInt(Math.random()*100+1000)
+          title:'报警时间',
+          width:80,
+          dataIndex:'name',
+          key:'name'
         },
         {
-          name:"大米",
-          value:parseInt(Math.random()*100+800)
+          title:'变量',
+          width:100,
+          dataIndex:'age',
+          key:'age'
         },
         {
-          name:"玉米",
-          value:parseInt(Math.random()*100+600)
+          title:'报警描述',
+          width:80,
+          dataIndex:'remark',
+          key:'remark'
         }
       ],
-      isShow:false
+      categoryTitle:"大型设备开机率",
+      categoryData:[
+        {
+          name:"开机率",
+          value:parseInt(Math.random()*10+10)
+        },
+        {
+          name:"待机率",
+          value:parseInt(Math.random()*10+8)
+        }
+      ],
+      temDity:{
+        title:"综合能效",
+        xAxis:Array(24).fill(1).map(function(item,index){
+          return index+':00'
+        }),
+        legend:[{name:"今日",key:"tempe"},{name:"昨日",key:"dity"}]
+      },
+      temDityData:[
+        {
+          key:"tempe",
+          type:"line",
+          data:Array(24).fill(1).map(function(){
+            return parseInt(Math.random()*20+20)
+          })
+        },
+        {
+          key:"dity",
+          type:"line",
+          data:Array(24).fill(1).map(function(){
+            return parseInt(Math.random()*30+30)
+          })
+        }
+      ],
+      vehicle:{
+        title:"单台设备开机率",
+        xAxis:[],
+        legend:[{name:"冰水机",key:"b"},{name:"空压机",key:"k"},{name:"锅炉房",key:"g"}]
+      },
+       vehicleData:[
+         {
+          key:"b",
+          type:"bar",
+          data:[10]
+        },
+        {
+          key:"k",
+          type:"bar",
+          data:[11]
+        },
+          {
+          key:"g",
+          type:"bar",
+          data:[8]
+        }
+      ],
+      panelTitle:'设备状况统计',
+      panelData:[
+        {
+          icon:'icon-zhihuiyuanqu',
+          label:'健康',
+          value:parseInt(Math.random()*1000)
+        },
+        {
+          icon:'icon-zhihuiyuanqu',
+          label:'异常',
+          value:parseInt(Math.random()*1000)
+        },
+        {
+          icon:'icon-zhihuiyuanqu',
+          label:'维护中',
+          value:parseInt(Math.random()*1000)
+        }
+      ]
     }
   },
   methods: {
     initThree () {
-      let threeLoader = document.getElementById('threeLoader')
-      let width = window.innerWidth
+      let width = window.innerWidth //窗口宽
       let height = window.innerHeight
-      this.renderer = new Three.WebGL1Renderer({antialias: true})
+      this.renderer = new THREE.WebGL1Renderer({antialias: true})
       this.renderer.setSize(width, height)
-      threeLoader.appendChild(this.renderer.domElement)      
-   
-      this.scene = new Three.Scene()
+      document.body.appendChild(this.renderer.domElement)
+      
+      scene = new THREE.Scene()
+      let cubeTextureLoader = new THREE.CubeTextureLoader();
+			cubeTextureLoader.setPath( '/static/models/lc/' );
+
+			let textureCube = cubeTextureLoader.load( [ '1.jpg', '1.jpg', '1.jpg', '1.jpg', '1.jpg', '1.jpg' ] );
+			textureCube.encoding = THREE.sRGBEncoding;
+      scene.background = textureCube;
       this.setEnvMap("004");
-      this.scene.background = new Three.Color(0xeeeeee)
-      //添加小图标
-      //let geometry = new Three.BufferGeometry()
-      var texture = new Three.TextureLoader().load("../../../static/cameraRed.png");
-      // 创建精灵材质对象SpriteMaterial
-      let SpriteMaterial = new Three.SpriteMaterial({
-        color:0xff00ff,
-        map: texture,//设置精灵纹理贴图
-      });
-      let sprite = new Three.Sprite(SpriteMaterial);
-      this.scene.add(sprite);
-      // 控制精灵大小，比如可视化中精灵大小表征数据大小
-      sprite.scale.set(15, 15, 1); //// 只需要设置x、y两个分量就可以
-      sprite.position.set(190, 110, -106)
-      sprite.name = "电表"
-      let light = new Three.HemisphereLight(0xbbbbff, 0x444422, 1.5)
-      light.position.set(0, 1, 0)
-      this.scene.add(light)
-      this.camera = new Three.PerspectiveCamera(50, width / height, 1, 10000)
+      
+      this.camera = new THREE.PerspectiveCamera(50, width / height, 1, 10000)
       this.camera.position.set(0, 0, 400)
-      this.camera.lookAt(this.scene.position)
-      this.controls = new OrbitControls(this.camera, this.renderer.domElement)
-      let loader = new GLTFLoader()
-      loader.load('../../../static/models/lc3.gltf', (gltf) => {
-        this.scene.position.set(-1000,-600,-1200);
-        this.scene.scale.set(5,5,8);
-        this.scene.add(gltf.scene)
-        mixer = new Three.AnimationMixer(gltf.scene)
-        var AnimationAction = mixer.clipAction(gltf.animations[0])
-        AnimationAction.play()
+      this.camera.lookAt(scene.position)
+      let light = new THREE.HemisphereLight(0xbbbbff, 0x444422, 1.5)
+      light.position.set(0, 1, 0)
+      scene.add(light)
+      this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+      let objLoader = new GLTFLoader()
+      objLoader.load('/static/models/lc.gltf', function(glb) {
+        glb.scene.position.set(-1000, -600,-1200);
+        glb.scene.scale.set(5, 5, 8);
+        glb.scene.rotateX(Math.PI/20);//绕x轴旋转π/4
+        scene.add(glb.scene);
       })
-      window.addEventListener('click',this.clickModel,false);
     },
     setEnvMap(hdr) {
-      new RGBELoader().setPath("../../../static/gltf/").load(hdr + ".hdr", (texture) => {
-        texture.mapping = Three.EquirectangularReflectionMapping;
-        this.scene.background = texture;
-        this.scene.environment = texture;
-      });
-    },
-    clickModel (event) {
-      let raycaster = new Three.Raycaster();
-      let mouse = new Three.Vector2();
-      mouse.x = ( event.clientX / window.innerWidth )*2 - 1;
-      mouse.y = -( event.clientY / window.innerHeight )*2 + 1;
-      raycaster.setFromCamera( mouse, this.camera );
-      let intersects = raycaster.intersectObjects( this.scene.children );
-      if(intersects[0]['object']['name']==="电表"){
-        if(this.isShow){
-          this.isShow=false
-        }else{
-          this.isShow=true
-        }
-      }
+      new RGBELoader().setPath("/static/gltf/").load(hdr + ".hdr", (texture) => {
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+        scene.environment = texture;
+      })
     },
     animate () {
       requestAnimationFrame(this.animate)
-      this.renderer.render(this.scene, this.camera)
-      if (mixer !== null) {
-        mixer.update(clock.getDelta())
-      }
+      this.renderer.render(scene, this.camera)
     },
-         echartsConfig (options){
+    echartsConfig (options){
       options.color= ['#FFBF00','#80FFA5'];
       options.series[0].lineStyle={
         width: 0
@@ -147,7 +262,6 @@ export default defineComponent( {
       return options;
     }
   },
-  
   mounted () {
     this.initThree()
     this.animate()
@@ -155,6 +269,9 @@ export default defineComponent( {
 })
 </script>
 <style scoped>
+body{
+  overflow: hidden;
+}
 header{
   background:url(../assets/tb.png) no-repeat center center;
   background-size: cover;
@@ -163,17 +280,7 @@ header{
   font-size: 2rem;
   line-height: 3.5rem;
 }
-#threeLoader{
-  position: relative;
-}
-.borderBg{
-  width:14rem;
-  height:10rem;
-  background:url(../assets/border.png) no-repeat center center;
-  background-size: 14rem 10rem;
-  overflow: hidden;
-}
-.left{
+.left,.right{
   width:14rem;
   height:calc(100% - 4rem);
   display: flex;
@@ -181,20 +288,45 @@ header{
   align-items:center;
   position: absolute !important;
   top:4rem;
+}
+.left{
   margin-left:1rem;
-  top:4rem;
   left: 0;
 }
-#plant{
-  display:none;
-  font-size:0.5rem;
-  color:red;
-  position: absolute;
-  pointer-events: auto;
-  user-select: none;
+.right{
+  margin-right:1rem;
+  right: 0;
 }
-#plant.show{
-  display:block;
+ .bottom{
+  position: absolute !important;
+  bottom:1.8rem;
+  left:62%;
+  transform:translateX(-50%);
+ }
+.borderBg{
+  width:14rem;
+  height:10rem;
+  background:url(../assets/border.png) no-repeat center center;
+  background-size: 14rem 10rem;
+  overflow: hidden;
+}
+.bottomborderBg{
+  width:14rem;
+  height:10rem;
+  margin-top:10px;
+  background:url(../assets/border.png) no-repeat center center;
+  background-size: 14rem 10rem;
+  overflow: hidden;
+}
+.bottom .borderBg{
+  width:15rem;
+  height:5rem;
+  background-size: 15rem 5rem;
+}
+.alarmborder .borderBg{
+   width:15rem;
+  height:5rem;
+  background-size: 15rem 5rem;
 }
 #category,#temDity,#pie,#vehicle{
   width:14rem;

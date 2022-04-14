@@ -42,12 +42,14 @@
 					let newLegend = legend.map(item => item.name);
 					options.legend = {
 						x: 'right',
-						y: '-15px',
+						y: '-5px',
 						textStyle: {
-							color: '#d5f2fa'
+							color: '#d5f2fa',
+							fontSize:10
+
 						},
 						icon: 'rect',
-						padding: [34, 10, 0, 0],
+						padding: [30, 5, 0, 0],
 						data: newLegend
 					}
 				}
@@ -78,7 +80,7 @@
 				}
 				options.grid = {
 					top: '20%',
-					left: '3%',
+					left: '10%',
 					right: '10%',
 					bottom: '3%',
 					containLabel: true
