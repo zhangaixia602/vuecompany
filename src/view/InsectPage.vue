@@ -210,7 +210,7 @@ export default defineComponent({
       let cubeTextureLoader = new THREE.CubeTextureLoader();
 			cubeTextureLoader.setPath( '/static/models/lc/' );
 
-			let textureCube = cubeTextureLoader.load( [ '1.jpg', '1.jpg', '1.jpg', '1.jpg', '1.jpg', '1.jpg' ] );
+			let textureCube = cubeTextureLoader.load( ['4.jpg', '1.jpg', '2.jpg', '5.jpg', '6.jpg', '3.jpg' ] );
 			textureCube.encoding = THREE.sRGBEncoding;
       scene.background = textureCube;
       this.setEnvMap("004");
