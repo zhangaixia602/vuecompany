@@ -22,20 +22,7 @@
       }"
       />
     </div>
-  </section>
-  <!-- <section class='bottom'>
-    <div class='borderBg'>
-      <BarPage 
-        :options="{
-        domSelector: 'temDity',
-        viewData: this.temDity,
-        smooth:true,
-        data:this.temDityData,
-        config:this.echartsConfig
-      }"
-      />     
-    </div>
-  </section> -->
+  </section> 
   <section class='right'>
     <div class='alarmborder'>
       <div class='borderBg'>
@@ -138,7 +125,7 @@ export default defineComponent({
         xAxis:Array(24).fill(1).map(function(item,index){
           return index+':00'
         }),
-        legend:[{name:"今日",key:"tempe"},{name:"昨日",key:"dity"}]
+        legend:[{name:"空压机cop",key:"tempe"},{name:"冰水机cop",key:"dity"}]
       },
       temDityData:[
         {
@@ -223,7 +210,7 @@ export default defineComponent({
       scene.add(light)
       this.controls = new OrbitControls(this.camera, this.renderer.domElement);
       let objLoader = new GLTFLoader()
-      objLoader.load('/static/models/lc.gltf', function(glb) {
+      objLoader.load('/static/models/WisdomPort.glb', function(glb) {
         glb.scene.position.set(-1000, -600,-1200);
         glb.scene.scale.set(5, 5, 8);
         glb.scene.rotateX(Math.PI/20);//绕x轴旋转π/4

@@ -37,7 +37,7 @@
     color:blue;
 }
 .progressItem h3{
-    font-size:0.8rem;
+    font-size:0.4rem;
     color:white;
 }
 .progressItem p{
@@ -51,12 +51,12 @@
 .progressItem span{
     display:inline-block;
     height:100%;
-    background-image: linear-gradient(to right, red , yellow);
+    background-image: linear-gradient(to right, rgb(0, 255, 21) , yellow);
     border-radius: 0.6rem;
     position: absolute;
     top:0;
     left:0;
-    font-size: 0.6rem;
+    font-size: 0.4rem;
     color: white;
     line-height: 100%;
     text-align: center;

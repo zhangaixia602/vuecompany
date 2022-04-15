@@ -57,6 +57,7 @@
 				if (titleText) {
 					let title = {
 						text: titleText,
+						left:'center',
 						padding: [10, 0, 20, 10],
 						textStyle: {
 							color: '#ffffff',

@@ -57,7 +57,7 @@
                     radius: ['20%', '50%'],
 					label: {
 						alignTo: 'edge',
-						formatter: '{b}\n{c}t',
+						formatter: '{b}\n{c}%',
                         minMargin: 5,
                         edgeDistance: 10,
                         lineHeight: 15,
