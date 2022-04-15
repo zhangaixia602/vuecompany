@@ -85,7 +85,7 @@ export default {
         {
           group:'draulic',
           title: '智慧水利',
-          src: 'assets/c01.png',
+          src: 'assets/water.png',
           id: '05',
           path: '/model/water' 
         }
