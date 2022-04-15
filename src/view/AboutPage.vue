@@ -53,10 +53,7 @@ export default defineComponent({
   data() {
     return {
       banners: [
-        "assets/banner.png",
-        "assets/banner01.png",
-        "assets/banner02.png",
-        "assets/banner03.png",
+        "assets/banner01.png"
       ],
 
       menus: [

@@ -85,28 +85,28 @@ export default defineComponent({
         {
           title: "数据模型采集",
           icon: "icon-gengduo",
-          src: "assets/01.png",
+          src: "assets/cj.png",
           content:
             "现如今园区、景区、工厂涉及的信息要素很多，对数据模型采集我们根据不同方式方法对模型进行真实性数据采集，达到可支持1:1还原建筑设备的制作基础。真实照片采集+CAD图纸，Blender和3DMax作图，SCARDA采集数据",
         },
         {
           title: "模型制作",
           icon: "icon-gengduo",
-          src: "assets/02.png",
+          src: "assets/model.png",
           content:
             "我们通过三维建模工具，例如：3DMAX、MAYA等，对模型的点、线、面、 贴图位置进行构建。模型构建基础形状设备设施,模型细节精度提升建设,模型贴图纹理还原真实,模型材质粗糙反射还原真实,模型效果渲染调试",
         },
         {
           title: "三维可视化功能",
           icon: "icon-gengduo",
-          src: "assets/02.png",
+          src: "assets/3D.png",
           content:
             "基于WebGL标准自主封装框架KT 3D-SDK进行系统三维可视化功能编程，实现所看即所得。实现与真实设备的交互反控,实现与真实场景无缝衔接切换,实现数据高速统计分析",
         },
         {
           title: "大数据集成",
           icon: "icon-jiantou_xiangxia",
-          src: "assets/02.png",
+          src: "assets/dsj.png",
           content:
             "采用新一代HTML5+WebGL构架和Canvas布局的B/S 架构，电脑不 用安装任何插件软件即可运行。大数据图表可视化,图形分析化能力,交互式观察数据改变,一键集成方便部署",
         },
