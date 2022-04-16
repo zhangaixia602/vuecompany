@@ -64,14 +64,14 @@ export default {
         {
           group:'park',
           title: '智慧园区',
-          src: 'assets/c03.png',
+          src: 'assets/yq.png',
           id: '01',
           path: '/model/insect' 
         },
         {
           group:'energy',
           title: '智慧能源',
-          src: 'assets/c02.png',
+          src: 'assets/ny.png',
           id: '02',
           path: '/model/granary' 
         },
