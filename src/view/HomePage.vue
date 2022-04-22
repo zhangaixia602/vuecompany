@@ -1,13 +1,16 @@
 <template>
-  <HeaderPage />
-  <a-carousel autoplay="true">
-    <div v-for="(banner, index) in banners" :key="index">
-      <video style="width:100%" controls="controls" autoplay="true">
-        <source :src="require('../' + banner)" type="video/mp4" />
-      </video>
-    </div>
-  </a-carousel>
+  <HeaderPage :isFullpage="true"/>
   <section>
+    <video controls="controls" autoplay="true" loop>
+      <source :src="require('../assets/home.mp4')" type="video/mp4" />
+    </video>
+    <h4 class='text'>智慧城市 数字赋能</h4>
+    <!-- <img :src="require('../assets/zt2.png')" /> -->
+  </section>
+  <section>
+     <video controls="controls" autoplay="true" loop>
+      <source :src="require('../assets/water.mp4')" type="video/mp4" />
+    </video>
     <div class="wrapper">
       <a-tabs v-model:activeKey="activeKey" centered>
         <a-tab-pane v-for="(tab, index) in tabs" :key="index">
@@ -25,7 +28,7 @@
       </a-tabs>
     </div>
   </section>
-  <div class="homeCase">
+  <!-- <div class="homeCase">
     <div class="wrapper">
       <h3 class="titbg">主要领域<span>main areas</span></h3>
       <div v-for="(menu, index) in menus" :key="index" class="caseItem clear">
@@ -53,7 +56,7 @@
         >更多案例<i class="icon iconfont icon-gengduo"></i
       ></router-link>
     </div>
-  </div>
+  </div> -->
   <div class="homeCase">
     <div class="wrapper">
       <h3 class="titbg">合作伙伴<span>partners</span></h3>
@@ -77,47 +80,32 @@ export default defineComponent({
   components: {
     HeaderPage: HeaderPage,
     FooterPage: FooterPage,
-    ToTop: ToTop,
+    ToTop: ToTop
   },
   data() {
     return {
-      banners: ["assets/lc.mp4", "assets/lc.mp4", "assets/lc.mp4"],
       tabs: [
         {
           title: "智慧园区",
           icon: "icon-zhihuiyuanqu",
-          src: "assets/01.png",
+          src: "assets/yq.png",
           content:
-            "电子监管系统（ICQ）是我公司与政府部门在信息化领域内技术合作的典范，将先进测量技术、实时数据采集、在线校准、远程访问和数据统计分析管理等技术应用到出口成品油数量和重量鉴定领域，它改变了商检沿用船舱计重的惯例，解决了大通关背景下船舱静态计量模式偏差大、效率低的问题，实现了出口成油商检模式的创新。电子监管系统的应用，实现了反欺诈的功能，有效地挽回企业不必要的经济损失并加快了通关速度，体现了政府部门服务企业的高时效性，树立了良好的检验检疫形象。以往进行的船舱计量，由于多种原因，计量结果常会受到贸易关系人的质疑，而且由于检验现场的不可复现性，难以用有力的证据来解释。电子监控系统后，对装船过程中的异常情况随时发现、随时处理，建立了公平、公正、公开的计量形象。",
+            "智慧园区,基于数字孪生,三维可视化等新一代技术,具备迅捷信息采集、高速信息传输、高度集中计算、智能事务处理和无所不在的服务提供能力，实现园区内及时、互动、整合的信息感知、传递和处理，以提高园区产业集聚能力、企业经济竞争力、园区可持续发展为目标的先进园区发展理念。",
         },
         {
-          title: "水利自动化",
+          title: "智慧水利",
           icon: "icon-shuiliqiye",
-          src: "assets/02.png",
+          src: "assets/water.png",
           content:
-            "是我公司与政府部门在信息化领域内技术合作的典范，将先进测量技术、实时数据采集、在线校准、远程访问和数据统计分析管理等技术应用到出口成品油数量和重量鉴定领域，它改变了商检沿用船舱计重的惯例，解决了大通关背景下船舱静态计量模式偏差大、效率低的问题，实现了出口成油商检模式的创新。电子监管系统的应用，实现了反欺诈的功能，有效地挽回企业不必要的经济损失并加快了通关速度，体现了政府部门服务企业的高时效性，树立了良好的检验检疫形象。以往进行的船舱计量，由于多种原因，计量结果常会受到贸易关系人的质疑，而且由于检验现场的不可复现性，难以用有力的证据来解释。电子监控系统后，对装船过程中的异常情况随时发现、随时处理，建立了公平、公正、公开的计量形象。",
+            "水厂作为城市供水及输配水的一个核心环节，与城市的供水系统、水资源循环利用等城市管理职能有着密不可分的联系，是智慧城市的核心之一，是建设生态社会、实现环境可持续发展的重要组成部分,在云计算、大数据、移动互联网为代表的新一代信息技术推动下，创新运营管理模式，逐步实现供水系统的自动化、智能化、智慧化的运营与管理。",
         },
         {
           title: "智慧能源",
-          icon: "icon-dianli",
-          src: "assets/02.png",
+          icon: "icon-dianli",       
+          src: "assets/ny.png",
           content:
-            "是我公司与政府部门在信息化领域内技术合作的典范，将先进测量技术、实时数据采集、在线校准、远程访问和数据统计分析管理等技术应用到出口成品油数量和重量鉴定领域，它改变了商检沿用船舱计重的惯例，解决了大通关背景下船舱静态计量模式偏差大、效率低的问题，实现了出口成油商检模式的创新。电子监管系统的应用，实现了反欺诈的功能，有效地挽回企业不必要的经济损失并加快了通关速度，体现了政府部门服务企业的高时效性，树立了良好的检验检疫形象。以往进行的船舱计量，由于多种原因，计量结果常会受到贸易关系人的质疑，而且由于检验现场的不可复现性，难以用有力的证据来解释。电子监控系统后，对装船过程中的异常情况随时发现、随时处理，建立了公平、公正、公开的计量形象。",
-        },
-        {
-          title: "环境监控",
-          icon: "icon-huanjingjiankong",
-          src: "assets/02.png",
-          content:
-            "是我公司与政府部门在信息化领域内技术合作的典范，将先进测量技术、实时数据采集、在线校准、远程访问和数据统计分析管理等技术应用到出口成品油数量和重量鉴定领域，它改变了商检沿用船舱计重的惯例，解决了大通关背景下船舱静态计量模式偏差大、效率低的问题，实现了出口成油商检模式的创新。电子监管系统的应用，实现了反欺诈的功能，有效地挽回企业不必要的经济损失并加快了通关速度，体现了政府部门服务企业的高时效性，树立了良好的检验检疫形象。以往进行的船舱计量，由于多种原因，计量结果常会受到贸易关系人的质疑，而且由于检验现场的不可复现性，难以用有力的证据来解释。电子监控系统后，对装船过程中的异常情况随时发现、随时处理，建立了公平、公正、公开的计量形象。",
-        },
-        {
-          title: "旧系统升级",
-          icon: "icon-xitongshengji",
-          src: "assets/02.png",
-          content:
-            "是我公司与政府部门在信息化领域内技术合作的典范，将先进测量技术、实时数据采集、在线校准、远程访问和数据统计分析管理等技术应用到出口成品油数量和重量鉴定领域，它改变了商检沿用船舱计重的惯例，解决了大通关背景下船舱静态计量模式偏差大、效率低的问题，实现了出口成油商检模式的创新。电子监管系统的应用，实现了反欺诈的功能，有效地挽回企业不必要的经济损失并加快了通关速度，体现了政府部门服务企业的高时效性，树立了良好的检验检疫形象。以往进行的船舱计量，由于多种原因，计量结果常会受到贸易关系人的质疑，而且由于检验现场的不可复现性，难以用有力的证据来解释。电子监控系统后，对装船过程中的异常情况随时发现、随时处理，建立了公平、公正、公开的计量形象。",
-        },
+            "智慧能源，即能源行业的自动化与智能化,利用大数据优化能源消耗,保障生产稳定性和连续性,是能源管理更加敏捷、精准、高效。",
+        }
       ],
       menus: [
         {
@@ -193,44 +181,73 @@ export default defineComponent({
         "assets/partner/k23.png",
       ],
     };
-  },
+  }
 });
 </script>
 <style scoped>
-.ant-carousel :deep(.slick-slide) {
-  text-align: center;
-  height: 100vh;
-  line-height: 100vh;
-  background: #364d79;
+video{
+  width:100%;
+}
+section{
+  height:100vh;
+  position:relative;
   overflow: hidden;
 }
-section {
-  background: linear-gradient(0deg, #f2f7fb, #f2f7fb);
-  height: 22rem;
-  padding-top: 1rem;
+section>img,section h4{
+  position: absolute;
+  max-width:60rem;
+  max-height:100%;
+  top:0;
+  left: 50%;
+  transform: translateX(-50%);
+  height:625px;
+  line-height:625px;
+  font-size:3rem;
+}
+section .wrapper{
+	height:21rem;
+  position: absolute;
+  top:6rem;
+  left: 50%;
+  z-index: 9999;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.2);
+}
+.ant-tabs-tab>div{
+  color:white;
+}
+.ant-tabs-tab.ant-tabs-tab-active>div{
+  color:#1890ff;
+}
+.ant-tabs-tab{
+  font-size:1.2rem;
+}
+.ant-tabs-tab .iconfont{
+  font-size:1.5rem;
 }
 .tabItem {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  height: 18rem;
+  height:100%;
 }
 .tabItem img {
   width: 15.5rem;
-  height: 13rem;
 }
 .tabItem p {
   width: 40rem;
-  height: 10rem;
+  height: 100%;
   padding: 3rem 3.2rem;
-  background: white;
-  box-shadow: 0.4rem 0.7rem 0.8rem 0 rgb(237 241 247 / 60%);
+  /* background: white;
+  box-shadow: 0.4rem 0.7rem 0.8rem 0 rgb(237 241 247 / 60%); */
+  background: rgba(4,103,247,0.1);
+  color:white;
   border-radius: 0.5rem;
-  font-size: 0.6rem;
-  color: #2d2e33;
+  font-size:1rem;
   text-indent: 2em;
 }
 .homeCase {
+  height:100vh;
   padding-top: 2.5rem;
 }
 h3.titbg {
@@ -326,10 +343,17 @@ h3.titbg span {
 .partnerBox span img {
   width: 100%;
   height: 100%;
-  filter: grayscale(1);
+  /* filter: grayscale(1); */
   cursor: pointer;
 }
-.partnerBox span img:hover {
+/* .partnerBox span img:hover {
   filter: grayscale(0);
+} */
+.text{
+  font-size:3rem;
+  background-image: linear-gradient(to right,#FFCF02, #FF7352);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; /*需要文字透明*/
 }
 </style>

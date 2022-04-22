@@ -4,7 +4,7 @@
 <script>
 import InsectPage from '@/view/InsectPage'
 import FactoryPage from '@/view/FactoryPage'
-import TopPage from '@/view/TopPage'
+import waterPage from '@/view/waterPage'
 import GranaryPage from '@/view/GranaryPage'
 import EnvironmentPage from '@/view/EnvironmentPage'
 export default {
@@ -12,7 +12,7 @@ export default {
   components: {
     'InsectPage': InsectPage,
     'FactoryPage': FactoryPage,
-    'TopPage': TopPage,
+    'waterPage': waterPage,
     'GranaryPage': GranaryPage,
     'EnvironmentPage': EnvironmentPage
   },
@@ -29,8 +29,8 @@ export default {
           component: 'FactoryPage'
         },
         {
-          id: 'top',
-          component: 'TopPage'
+          id: 'water',
+          component: 'waterPage'
         },
         {
           id: 'granary',

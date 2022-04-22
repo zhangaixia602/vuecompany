@@ -1,10 +1,13 @@
 <template>
   <HeaderPage/>
-  <a-carousel autoplay>
+  <!-- <a-carousel autoplay>
     <div v-for="(banner, index) in banners" :key="index">
       <img :src="require('../' + banner)" />
     </div>
-  </a-carousel>
+  </a-carousel> -->
+   <div class='caseHeader'>
+      
+  </div>
   <div>     
     <div>
       <div class="wrapper">
@@ -53,10 +56,7 @@ export default defineComponent({
   data() {
     return {
       banners: [
-        "assets/banner.png",
-        "assets/banner01.png",
-        "assets/banner02.png",
-        "assets/banner03.png",
+        "assets/banner01.png"
       ],
 
       menus: [
@@ -90,6 +90,14 @@ export default defineComponent({
   line-height:100vh;
   background: #364d79;
   overflow: hidden;
+}
+.caseHeader{
+  width:100%;
+  height:100vh;
+  background:url(../assets/aboutus.jpg) no-repeat center center;
+  background-size: cover;
+  padding:7rem 6rem;
+  color: #fffefe;
 }
 .box-c {
   display: flex;
@@ -149,7 +157,7 @@ h3.titbg {
   margin: 0;
   font-size: 1.3rem;
   text-align: center;
-  color: #444444;
+  color:#444444;
 }
 h3.titbg span {
   font-size: 0.7rem;
@@ -161,8 +169,8 @@ h3.titbg span {
 .caseItem {
   height: 18rem;
   margin-top: 2.5rem;
-  box-shadow: 0.4rem 0.7rem 1rem 0 rgb(237 241 247 / 80%), 0 0 0 3px #fff;
-  border-radius: 0.3rem;
+  box-shadow: 0.4rem 0.7rem 1rem 0 rgb(237 241 247 / 80%), 0 0 0 3px #f0f0f0;
+  border-radius: 0.05rem;
 }
 .caseItem div {
   width: 50%;
