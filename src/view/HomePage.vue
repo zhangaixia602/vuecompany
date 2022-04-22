@@ -87,7 +87,7 @@ export default defineComponent({
         {
           title: "智慧园区",
           icon: "icon-zhihuiyuanqu",
-          src: "assets/01.png",
+          src: "assets/yq.png",
           content:
             "智慧园区,基于数字孪生,三维可视化等新一代技术,具备迅捷信息采集、高速信息传输、高度集中计算、智能事务处理和无所不在的服务提供能力，实现园区内及时、互动、整合的信息感知、传递和处理，以提高园区产业集聚能力、企业经济竞争力、园区可持续发展为目标的先进园区发展理念。",
         },
@@ -101,7 +101,7 @@ export default defineComponent({
         {
           title: "智慧能源",
           icon: "icon-dianli",
-          src: "assets/02.png",
+          src: "assets/ny.png",
           content:
             "智慧能源，即能源行业的自动化与智能化,利用大数据优化能源消耗,保障生产稳定性和连续性,是能源管理更加敏捷、精准、高效。",
         }
@@ -228,8 +228,8 @@ section .wrapper{
   width: 40rem;
   height: 100%;
   padding: 3rem 3.2rem;
-  background: white;
-  box-shadow: 0.4rem 0.7rem 0.8rem 0 rgb(237 241 247 / 60%);
+  /* background: white;
+  box-shadow: 0.4rem 0.7rem 0.8rem 0 rgb(237 241 247 / 60%); */
   border-radius: 0.5rem;
   font-size:1rem;
   color: #2d2e33;

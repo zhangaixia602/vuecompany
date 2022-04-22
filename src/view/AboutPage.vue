@@ -1,10 +1,13 @@
 <template>
   <HeaderPage/>
-  <a-carousel autoplay>
+  <!-- <a-carousel autoplay>
     <div v-for="(banner, index) in banners" :key="index">
       <img :src="require('../' + banner)" />
     </div>
-  </a-carousel>
+  </a-carousel> -->
+   <div class='caseHeader'>
+      
+  </div>
   <div>     
     <div>
       <div class="wrapper">
@@ -87,6 +90,14 @@ export default defineComponent({
   line-height:100vh;
   background: #364d79;
   overflow: hidden;
+}
+.caseHeader{
+  width:100%;
+  height:100vh;
+  background:url(../assets/aboutus.jpg) no-repeat center center;
+  background-size: cover;
+  padding:7rem 6rem;
+  color: #fffefe;
 }
 .box-c {
   display: flex;
