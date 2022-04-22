@@ -29,7 +29,7 @@ export default createRouter({
       component: AboutPage
     },
     {
-      path: '/:id',
+      path: '/model/:id',
       name: '示例',
       component: ModelPage
     }

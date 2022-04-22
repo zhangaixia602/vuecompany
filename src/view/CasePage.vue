@@ -66,28 +66,28 @@ export default {
           title: '智慧园区',
           src: 'assets/yq.png',
           id: '01',
-          path: '/insect' 
+          path: '/model/insect' 
         },
         {
           group:'energy',
           title: '智慧能源',
           src: 'assets/ny.png',
           id: '02',
-          path: '/granary' 
+          path: '/model/granary' 
         },
         {
           group:'park',
           title: '智慧粮仓',
           src: 'assets/lc.png',
           id: '03',
-          path: '/factory' 
+          path: '/model/factory' 
         },
         {
           group:'draulic',
           title: '智慧水利',
           src: 'assets/water.png',
           id: '05',
-          path: '/water' 
+          path: '/model/water' 
         }
       ]
     }
