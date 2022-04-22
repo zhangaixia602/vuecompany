@@ -1,6 +1,14 @@
 <template>
   <header>XXXX粮仓</header>
   <section class='left'>
+    <div class='borderBg'>
+      <PanelPage 
+        :options="{
+        title:this.panelTitle,
+        data:this.panelData
+      }"
+      />
+    </div>
     <div class='category borderBg'>
       <PiePage
         :options="{
@@ -23,12 +31,26 @@
   </section>
   <section class='bottom'>
     <div class='borderBg'>
-      <PanelPage 
-        :options="{
-        title:this.panelTitle,
-        data:this.panelData
-      }"
-      />
+      <h2 class='titleBg'>工单统计</h2>
+      <div class='orderBox'>
+        <div v-for='(order,index) in orders' class='orderItem' :key='index'>
+          <div class='order-header'>
+            <label class='textCenter'><i class="icon iconfont" :class="order.icon"></i></label>
+            <span>{{order.title}}</span>
+          </div>
+          <div class='order-body textCenter'>
+            <p>
+              <label>数量</label>
+              <span>{{order.quantity}}</span>
+            </p>
+            <p class='border'></P>
+            <p>
+              <label>完成率</label>
+              <span>{{order.rate}}%</span>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
   <section class='right'>
@@ -150,7 +172,7 @@ export default defineComponent({
         }),
         legend:[{name:"上周",key:"tempe"},{name:"本周",key:"dity"}]
       },
-       vehicleData:[
+      vehicleData:[
         {
           key:"tempe",
           type:"bar",
@@ -182,6 +204,32 @@ export default defineComponent({
           icon:'icon-zhihuiyuanqu',
           label:'维护中',
           value:parseInt(Math.random()*1000)
+        }
+      ],
+      orders:[
+        {
+          icon:'icon-yaoji',
+          title:'药剂',
+          rate:(Math.random()*100).toFixed(2),
+          quantity:parseInt(Math.random()*100)
+        },
+        {
+          icon:'icon-qiti',
+          title:'气控',
+          rate:(Math.random()*100).toFixed(2),
+          quantity:parseInt(Math.random()*100)
+        },
+        {
+          icon:'icon-a-28tongfengfengshan',
+          title:'干控',
+          rate:(Math.random()*100).toFixed(2),
+          quantity:parseInt(Math.random()*100)
+        },
+        {
+          icon:'icon-lengquebeng',
+          title:'温控',
+          rate:(Math.random()*100).toFixed(2),
+          quantity:parseInt(Math.random()*100)
         }
       ]
     }
@@ -288,7 +336,9 @@ header{
  .bottom{
   position: absolute !important;
   bottom:1.8rem;
-  left:62%;
+  left:50%;
+  color:white;
+  font-size:0.6rem;
   transform:translateX(-50%);
  }
 .borderBg{
@@ -298,13 +348,57 @@ header{
   background-size: 14rem 10rem;
   overflow: hidden;
 }
-.bottom .borderBg{
-  width:15rem;
+.left .borderBg:first-child{
+  width:14rem;
   height:5rem;
-  background-size: 15rem 5rem;
+  background-size: 14rem 5rem;
+}
+.bottom .borderBg:first-child{
+  width:28rem;
+  height:8rem;
+  background-size:28rem 8rem;
+}
+.bottom .titleBg{
+  margin-bottom:0.5rem;
 }
 #category,#temDity,#pie,#vehicle{
   width:14rem;
   height:10rem;
+}
+.orderBox{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.orderItem{
+  width:25%;
+  height:calc(100% - 1.8rem);
+}
+.order-header{
+  text-align: center;
+  margin-bottom:0.7rem;
+}
+.order-header label{
+  width: 2.5rem;
+  height: 2.5rem;
+  background: rgba(4,103,247,0.2);
+  border-radius: 50%;
+  margin:0 auto;
+}
+.order-body label{
+  display:block;
+}
+.order-body span{
+  color:rgb(0, 255, 21);
+}
+.order-body p{
+  width:2rem;
+  text-align: center;
+}
+.order-body p.border{
+  margin: 0 0.2rem;
+  width: 0.2rem;
+  height: 1rem;
+  background: #00fff3;
 }
 </style>

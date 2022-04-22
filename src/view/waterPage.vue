@@ -45,11 +45,21 @@
       </video>
     </div>
     <div class='card' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">
-      <h3 class='cardTitle'>维保工单</h3>
+      <h3 class='cardTitle'>保养工单</h3>
       <PiePage
         :options="{
         domSelector: 'maintenance',
         data:this.maintenanceData,
+        config:this.orderConfig
+      }"
+      />
+    </div>
+    <div class='card' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">
+      <h3 class='cardTitle'>维修工单</h3>
+      <PiePage
+        :options="{
+        domSelector: 'repair',
+        data:this.repairData,
         config:this.orderConfig
       }"
       />
@@ -364,7 +374,7 @@ export default defineComponent({
       ],
       alarmVideos:['lc.mp4','lc.mp4','lc.mp4'],
       maintenanceData:[
-          {
+        {
           name:"完成",
           value:parseInt(Math.random()*100+700)
         },
@@ -375,6 +385,20 @@ export default defineComponent({
         {
           name:"未开始",
           value:parseInt(Math.random()*100+600)
+        }
+      ],
+      repairData:[
+        {
+          name:"完成",
+          value:parseInt(Math.random()*100+500)
+        },
+        {
+          name:"进行中",
+          value:parseInt(Math.random()*100+400)
+        },
+        {
+          name:"未开始",
+          value:parseInt(Math.random()*100+300)
         }
       ],
       patrolData:[
@@ -665,7 +689,7 @@ nav a.active{
   background-size: 11rem 1.5rem;
   overflow: hidden;
 }
-#dayStatis,#weekly,#workHours,#category,#alarm,#patrol,#maintenance,#mouthOrder,#weeklyOrder{
+#dayStatis,#weekly,#workHours,#category,#alarm,#patrol,#maintenance,#mouthOrder,#weeklyOrder,#repair{
   width:15rem;
   height:8rem;
   transform: translateX(-40px) scale(0.75);

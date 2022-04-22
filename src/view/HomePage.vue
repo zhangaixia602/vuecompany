@@ -4,7 +4,8 @@
     <video controls="controls" autoplay="true" loop>
       <source :src="require('../assets/home.mp4')" type="video/mp4" />
     </video>
-    <img :src="require('../assets/zt2.png')" />
+    <h4 class='text'>智慧城市 数字赋能</h4>
+    <!-- <img :src="require('../assets/zt2.png')" /> -->
   </section>
   <section>
      <video controls="controls" autoplay="true" loop>
@@ -100,7 +101,7 @@ export default defineComponent({
         },
         {
           title: "智慧能源",
-          icon: "icon-dianli",
+          icon: "icon-dianli",       
           src: "assets/ny.png",
           content:
             "智慧能源，即能源行业的自动化与智能化,利用大数据优化能源消耗,保障生产稳定性和连续性,是能源管理更加敏捷、精准、高效。",
@@ -192,13 +193,16 @@ section{
   position:relative;
   overflow: hidden;
 }
-section>img{
+section>img,section h4{
   position: absolute;
   max-width:60rem;
   max-height:100%;
   top:0;
   left: 50%;
   transform: translateX(-50%);
+  height:625px;
+  line-height:625px;
+  font-size:3rem;
 }
 section .wrapper{
 	height:21rem;
@@ -208,6 +212,12 @@ section .wrapper{
   z-index: 9999;
   transform: translateX(-50%);
   background: rgba(255,255,255,0.2);
+}
+.ant-tabs-tab>div{
+  color:white;
+}
+.ant-tabs-tab.ant-tabs-tab-active>div{
+  color:#1890ff;
 }
 .ant-tabs-tab{
   font-size:1.2rem;
@@ -230,9 +240,10 @@ section .wrapper{
   padding: 3rem 3.2rem;
   /* background: white;
   box-shadow: 0.4rem 0.7rem 0.8rem 0 rgb(237 241 247 / 60%); */
+  background: rgba(4,103,247,0.1);
+  color:white;
   border-radius: 0.5rem;
   font-size:1rem;
-  color: #2d2e33;
   text-indent: 2em;
 }
 .homeCase {
@@ -338,4 +349,11 @@ h3.titbg span {
 /* .partnerBox span img:hover {
   filter: grayscale(0);
 } */
+.text{
+  font-size:3rem;
+  background-image: linear-gradient(to right,#FFCF02, #FF7352);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; /*需要文字透明*/
+}
 </style>

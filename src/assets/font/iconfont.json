@@ -6,6 +6,41 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "11195049",
+      "name": "药剂",
+      "font_class": "yaoji",
+      "unicode": "e661",
+      "unicode_decimal": 58977
+    },
+    {
+      "icon_id": "11858520",
+      "name": "气体",
+      "font_class": "qiti",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "22898788",
+      "name": "2.8通风风扇",
+      "font_class": "a-28tongfengfengshan",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "28784663",
+      "name": "冷却泵",
+      "font_class": "lengquebeng",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "577402",
+      "name": "向右1",
+      "font_class": "xiangyou1",
+      "unicode": "e775",
+      "unicode_decimal": 59253
+    },
+    {
       "icon_id": "2195987",
       "name": "链接",
       "font_class": "lianjie",
