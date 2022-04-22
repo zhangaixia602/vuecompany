@@ -31,7 +31,7 @@
         <div class='footerB'>
             <div class="wrapper ovh textCenter">
                 <span >Copyright ©2019深圳市达英和自动化工程有限公司.版权所有</span>
-                <a href="http://beian.miit.gov.cn/" target="_blank">粤ICP备140136389</a>
+                <a href="http://beian.miit.gov.cn/" target="_blank">粤ICP备2022047319号</a>
             </div>
         </div>
     </footer>
