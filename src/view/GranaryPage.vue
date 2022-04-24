@@ -50,7 +50,8 @@ import BarPage from '@/components/BarPage';
 import PiePage from '@/components/PiePage';
 import progressBar from '@/components/progressBar';
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 let scene=null;
@@ -192,8 +193,12 @@ export default defineComponent({
       light.position.set(0, 1, 0)
       scene.add(light)
       this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-      let objLoader = new GLTFLoader()
-      objLoader.load('/static/models/WisdomPort.glb', function(glb) {
+      let objLoader = new GLTFLoader();
+      let dracoLoader=new DRACOLoader();
+      dracoLoader.setDecoderPath('/draco/');
+      dracoLoader.preload();
+      objLoader.setDRACOLoader(dracoLoader);
+      objLoader.load('/static/models/WisdomPort-processed.glb', function(glb) {
         glb.scene.position.set(-1000, -600,-1200);
         glb.scene.scale.set(5, 5, 8);
         glb.scene.rotateX(Math.PI/20);//绕x轴旋转π/4
