@@ -206,7 +206,7 @@ export default defineComponent({
       this.camera.position.set(0, 0, 400)
       this.camera.lookAt(scene.position)
       let light = new THREE.HemisphereLight(0xbbbbff, 0x444422, 1.5)
-      light.position.set(0, 1, 0)
+      light.position.set(0, 50, 0)
       scene.add(light)
       this.controls = new OrbitControls(this.camera, this.renderer.domElement);
       let objLoader = new GLTFLoader()
