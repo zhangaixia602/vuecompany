@@ -18,6 +18,16 @@
       }"
       />
     </div>
+     <div class='borderBg'>
+      <BarPage 
+        :options="{
+        domSelector: 'dayStatis',
+        viewData: this.dayStatis,
+        smooth:true,
+        data:this.dayStatisData
+      }"
+      />
+     </div>
   </section>  
   <section class='right'>
     <div class='temDity borderBg'>
@@ -38,6 +48,17 @@
         viewData: this.vehicle,
         smooth:true,
         data:this.vehicleData
+      }"
+      />
+    </div>
+    <div class='borderBg'>
+       <BarPage 
+        :options="{
+        domSelector: 'resource',
+        viewData: this.resource,
+        smooth:true,
+        data:this.resourceData,
+
       }"
       />
     </div>
@@ -156,6 +177,52 @@ export default defineComponent({
           type:"bar",
           data:Array(24).fill(1).map(function(){
             return parseInt(Math.random()*30+30)
+          })
+        }
+      ],
+       resource:{
+        title:"单台设备开机率",
+        xAxis:[],
+        legend:[{name:"冰水机",key:"b"},{name:"空压机",key:"k"},{name:"锅炉房",key:"g"}]
+      },
+       resourceData:[
+         {
+          key:"b",
+          type:"bar",
+          data:[10]
+        },
+        {
+          key:"k",
+          type:"bar",
+          data:[11]
+        },
+          {
+          key:"g",
+          type:"bar",
+          data:[8]
+        }
+      ],
+      dayStatis:{
+        title:'工单统计',
+         xAxis:Array(7).fill(1).map(function(item,index){
+          index++
+          return index
+        }),
+        legend:[{name:"巡检工单",key:"inlet"},{name:"维保工单",key:"effluent"}]
+      },
+      dayStatisData:[
+        {
+          key:"inlet",
+          type:"line",
+          data:Array(7).fill(1).map(function(){
+            return parseInt(Math.random()*20+40)
+          })
+        },
+        {
+          key:"effluent",
+          type:"line",
+          data:Array(7).fill(1).map(function(){
+            return parseInt(Math.random()*30+20)
           })
         }
       ],
@@ -300,7 +367,7 @@ header{
   background-size: 11rem 1.5rem;
   overflow: hidden;
 }
-#category,#temDity,#pie,#vehicle{
+#category,#temDity,#pie,#vehicle,#dayStatis,#resource{
   width:14rem;
   height:10rem;
 }

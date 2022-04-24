@@ -233,14 +233,14 @@ export default defineComponent({
           key:"inlet",
           type:"line",
           data:Array(7).fill(1).map(function(){
-            return parseInt(Math.random()*200+400)
+            return parseInt(Math.random()*20+40)
           })
         },
         {
           key:"effluent",
           type:"line",
           data:Array(7).fill(1).map(function(){
-            return parseInt(Math.random()*300+200)
+            return parseInt(Math.random()*30+20)
           })
         }
       ],

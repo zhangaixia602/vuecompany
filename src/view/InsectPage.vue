@@ -18,7 +18,18 @@
         domSelector: 'vehicle',
         viewData: this.vehicle,
         smooth:true,
-        data:this.vehicleData
+        data:this.vehicleData,
+
+      }"
+      />
+    </div>
+    <div class='bottomborderBg'>
+     <BarPage 
+        :options="{
+        domSelector: 'dayStatis',
+        viewData: this.dayStatis,
+        smooth:true,
+        data:this.dayStatisData
       }"
       />
     </div>
@@ -166,6 +177,30 @@ export default defineComponent({
           data:[8]
         }
       ],
+       dayStatis:{
+        title:'工单统计',
+         xAxis:Array(7).fill(1).map(function(item,index){
+          index++
+          return index
+        }),
+        legend:[{name:"巡检工单",key:"inlet"},{name:"维保工单",key:"effluent"}]
+      },
+      dayStatisData:[
+        {
+          key:"inlet",
+          type:"line",
+          data:Array(7).fill(1).map(function(){
+            return parseInt(Math.random()*20+40)
+          })
+        },
+        {
+          key:"effluent",
+          type:"line",
+          data:Array(7).fill(1).map(function(){
+            return parseInt(Math.random()*30+20)
+          })
+        }
+      ],
       panelTitle:'设备状况统计',
       panelData:[
         {
@@ -218,7 +253,7 @@ export default defineComponent({
       objLoader.load('/static/models/WisdomPort-processed.glb', function(glb) {
         glb.scene.position.set(-1000, -600,-1200);
         glb.scene.scale.set(5, 5, 8);
-        glb.scene.rotateX(Math.PI/20);//绕x轴旋转π/4
+        glb.scene.rotateY(-80);//绕x轴旋转π/4
         scene.add(glb.scene);
       })
     },
@@ -233,7 +268,7 @@ export default defineComponent({
       this.renderer.render(scene, this.camera)
     },
     echartsConfig (options){
-      options.color= ['#FFBF00','#80FFA5'];
+      options.color= ['#e7717b','#80FFA5'];
       options.series[0].lineStyle={
         width: 0
       };
@@ -243,7 +278,8 @@ export default defineComponent({
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: 'rgb(255, 191, 0)'
+            //rgb(104, 186, 252)
+            color: 'rgb(104, 186, 252)'
           },
           {
             offset: 1,
@@ -320,7 +356,7 @@ header{
   height:5rem;
   background-size: 15rem 5rem;
 }
-#category,#temDity,#pie1,#vehicle{
+#category,#temDity,#pie1,#vehicle,#dayStatis{
   width:14rem;
   height:10rem;
 }
