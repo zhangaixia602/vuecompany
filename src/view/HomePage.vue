@@ -1,14 +1,14 @@
 <template>
   <HeaderPage :isFullpage="true"/>
   <section>
-    <video controls="controls" autoplay="true" loop>
+    <video autoplay="true" loop>
       <source :src="require('../assets/home.mp4')" type="video/mp4" />
     </video>
     <h4 class='text'>智慧城市 数字赋能</h4>
     <!-- <img :src="require('../assets/zt2.png')" /> -->
   </section>
   <section>
-     <video controls="controls" autoplay="true" loop>
+     <video autoplay="true" loop>
       <source :src="require('../assets/water.mp4')" type="video/mp4" />
     </video>
     <div class="wrapper">
@@ -207,10 +207,10 @@ section>img,section h4{
 section .wrapper{
 	height:21rem;
   position: absolute;
-  top:6rem;
+  top:50%;
   left: 50%;
   z-index: 9999;
-  transform: translateX(-50%);
+  transform: translate(-50%,-50%);
   background: rgba(255,255,255,0.2);
 }
 .ant-tabs-tab>div{

@@ -161,6 +161,7 @@
 <script>
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { defineComponent } from "vue";
@@ -537,8 +538,12 @@ export default defineComponent({
       this.controls.minDistance=0;
       this.controls.maxDistance=1700;
       this.controls.maxPolarAngle=Math.PI * 0.48;
-      let objLoader = new GLTFLoader()
-      objLoader.load('/static/models/lc.gltf', function(gltf) {
+      let objLoader = new GLTFLoader();
+      let dracoLoader=new DRACOLoader();
+      dracoLoader.setDecoderPath('/draco/');
+      dracoLoader.preload();
+      objLoader.setDRACOLoader(dracoLoader);
+      objLoader.load('/static/models/lc-processed.gltf', function(gltf) {
         const scenes = gltf.scene.clone();
         scenes.traverse((child) => {
           if (child.isMesh) {
