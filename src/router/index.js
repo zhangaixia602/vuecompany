@@ -1,9 +1,4 @@
 import { createRouter,createWebHistory } from 'vue-router'
-import HomePage from '@/view/HomePage'
-import AboutPage from '@/view/AboutPage'
-import CasePage from '@/view/CasePage'
-import BusinessScope from '@/view/BusinessScope'
-import ModelPage from '@/view/ModelPage'
 const routerHistory=createWebHistory()
 export default createRouter({
   history:routerHistory,
@@ -11,27 +6,27 @@ export default createRouter({
     {
       path: '/',
       name: '首页',
-      component: HomePage
+      component: () => import('@/view/HomePage')
     },
     {
       path: '/business',
       name: '业务领域',
-      component: BusinessScope
+      component: () => import('@/view/BusinessScope')
     },
     {
       path: '/case',
       name: '案例演示',
-      component: CasePage
+      component: () => import('@/view/CasePage')
     },
     {
       path: '/about',
       name: '关于我们',
-      component: AboutPage
+      component: () => import('@/view/AboutPage')
     },
     {
       path: '/model/:id',
       name: '示例',
-      component: ModelPage
+      component: () => import('@/view/ModelPage')
     }
   ]
 })

@@ -207,10 +207,10 @@ section>img,section h4{
 section .wrapper{
 	height:21rem;
   position: absolute;
-  top:6rem;
+  top:50%;
   left: 50%;
   z-index: 9999;
-  transform: translateX(-50%);
+  transform: translate(-50%,-50%);
   background: rgba(255,255,255,0.2);
 }
 .ant-tabs-tab>div{
