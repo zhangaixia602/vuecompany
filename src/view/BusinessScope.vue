@@ -210,6 +210,7 @@ section {
 }
 .homeCase {
   padding: 2.5rem;
+  padding: 2.5rem 0;
 }
 h3.titbg {
   background: url(../assets/titbg.jpg) no-repeat bottom center;
