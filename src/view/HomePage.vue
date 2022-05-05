@@ -75,6 +75,7 @@ import { defineComponent } from "vue";
 import HeaderPage from "@/components/HeaderPage";
 import FooterPage from "@/components/FooterPage";
 import ToTop from "@/components/ToTop";
+console.log(Cesium)
 export default defineComponent({
   name: "HomePage",
   components: {
