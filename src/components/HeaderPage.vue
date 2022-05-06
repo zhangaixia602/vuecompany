@@ -41,11 +41,6 @@ let that;
 						path: '/about',
 						id: 'about',
 						name: '关于我们'
-					},
-					{
-						path: '/cesium',
-						id: 'cesium',
-						name: '测试'
 					}
 				]
 			}

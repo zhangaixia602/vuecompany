@@ -24,11 +24,6 @@ export default createRouter({
       component: () => import('@/view/AboutPage')
     },
     {
-      path: '/cesium',
-      name: '测试',
-      component: () => import('@/view/EarthPage')
-    },
-    {
       path: '/model/:id',
       name: '示例',
       component: () => import('@/view/ModelPage')
