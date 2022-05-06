@@ -7,5 +7,4 @@ import 'ant-design-vue/dist/antd.css';
 import './assets/css/common.css';
 import './assets/font/iconfont.css';
 import 'video.js/dist/video-js.css';
-//import './assets/Cesium/Widgets/widgets.css';
 createApp(App).use(Antd).use(router).use(setLanguage()).mount("#app");

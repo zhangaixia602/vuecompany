@@ -11,7 +11,7 @@
     "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.11",
     "ant-design-vue": "^2.2.8",
-    "cesium": "^1.60.0",
+    "cesium": "^1.66.0",
     "copy-webpack-plugin": "^5.0.4",
     "core-js": "^3.8.3",
     "css-loader": "^6.7.1",
