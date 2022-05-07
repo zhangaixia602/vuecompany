@@ -45,7 +45,7 @@ import { defineComponent, ref } from 'vue';
 			}
 		},
 		mounted() {
-			Cesium.Ion.defaultAccessToken ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJhZGM3ZTlkOC05MjU5LTRlNjQtYTg0Ni03MWZmYzhmYTZlMTkiLCJpZCI6OTA1NzIsImlhdCI6MTY1MDQ0NTQzNX0.r29U9u7yO4-TwMM1rxy8wufYoCRtt5_VJYev4tQWXbs";
+			Cesium.Ion.defaultAccessToken ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzZjQ4NDIwZS1jMDg5LTQ4NjQtOWY1MS1mMzRjZWNhMGJjOWIiLCJpZCI6OTE0NDYsImlhdCI6MTY1MTcxODUxNn0.BbaE7gmxMnoKzjUHjztR4HIqulxHFrHYzIx-BcsNUMw";
 			const viewer = new Cesium.Viewer("modelContainer", {
 				geocoder: false,
 				homeButton: false,
@@ -66,8 +66,8 @@ import { defineComponent, ref } from 'vue';
 			viewer.scene.screenSpaceCameraController.maximumZoomDistance = 2500;
 			const tileset = viewer.scene.primitives.add(
 				new Cesium.Cesium3DTileset({
-					url: '/static/tileset.json',
-					// url: Cesium.IonResource.fromAssetId(976768),
+					// url: '/static/tileset.json',
+					url: Cesium.IonResource.fromAssetId(984161),
 					skipLevelOfDetail: true,
 					baseScreenSpaceError: 1024,
 					skipScreenSpaceErrorFactor: 16,
@@ -99,17 +99,23 @@ import { defineComponent, ref } from 'vue';
 			let that=this;
 			viewer.screenSpaceEventHandler.setInputAction(function(clickEvent) {
 				let pickModel = viewer.scene.pick(clickEvent.position);
-				if(pickModel._batchId){
-					let modeId=pickModel._content._batchTable._properties['name'][pickModel._batchId];
-					that.pops.map((item,index)=>{
-						if(item.id===modeId){
-							that.visible=true;
-							that.title=item.id;
-							that.geometry=item.name;
-							that.color=item.color;
-						}
-					})
-				}
+		
+				
+          		that.visible=true;
+							that.title=pickModel._content._batchTable._properties['name'][pickModel._batchId];
+							that.geometry=pickModel._content._batchTable._properties['字段一'][pickModel._batchId];
+              that.color=pickModel._content._batchTable._properties['字段二'][pickModel._batchId];
+
+					// that.pops.map((item,index)=>{
+					// 	if(item.id===modeId){
+					// 		that.visible=true;
+					// 		that.title=item.id;
+					// 		that.geometry=item.name;
+					// 		that.color=item.color;
+					// 	}
+					// })
+				
+        console.log(pickModel)
 			}, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 		}
 	})
