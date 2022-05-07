@@ -74,7 +74,9 @@ import { defineComponent, ref } from 'vue';
 					skipLevels: 1,
 					immediatelyLoadDesiredLevelOfDetail: false,
 					loadSiblings: false,
-					cullWithChildrenBounds: true
+					cullWithChildrenBounds: true,
+          maximumScreenSpaceError: 2, //最大的屏幕空间误差
+          maximumNumberOfLoadedTiles: 1000, //最大加载瓦片个数
 
 				})
 			);
@@ -95,27 +97,16 @@ import { defineComponent, ref } from 'vue';
 				} catch (error) {
 					console.log(error);
 				}
-			})();
+			})();   
 			let that=this;
 			viewer.screenSpaceEventHandler.setInputAction(function(clickEvent) {
-				let pickModel = viewer.scene.pick(clickEvent.position);
-		
+			let pickModel = viewer.scene.pick(clickEvent.position);
 				
-          		that.visible=true;
-							that.title=pickModel._content._batchTable._properties['name'][pickModel._batchId];
-							that.geometry=pickModel._content._batchTable._properties['字段一'][pickModel._batchId];
-              that.color=pickModel._content._batchTable._properties['字段二'][pickModel._batchId];
-
-					// that.pops.map((item,index)=>{
-					// 	if(item.id===modeId){
-					// 		that.visible=true;
-					// 		that.title=item.id;
-					// 		that.geometry=item.name;
-					// 		that.color=item.color;
-					// 	}
-					// })
+      that.visible=true;
+			that.title=pickModel._content._batchTable._properties['name'][pickModel._batchId];
+			that.geometry=pickModel._content._batchTable._properties['字段一'][pickModel._batchId];
+      that.color=pickModel._content._batchTable._properties['字段二'][pickModel._batchId];		
 				
-        console.log(pickModel)
 			}, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 		}
 	})
