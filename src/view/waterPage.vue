@@ -538,12 +538,16 @@ export default defineComponent({
       this.controls.minDistance=0;
       this.controls.maxDistance=1700;
       this.controls.maxPolarAngle=Math.PI * 0.48;
+      this.controls.minAzimuthAngle=Math.PI * 0.48;
       let objLoader = new GLTFLoader();
       let dracoLoader=new DRACOLoader();
       dracoLoader.setDecoderPath('/draco/');
       dracoLoader.preload();
       objLoader.setDRACOLoader(dracoLoader);
       objLoader.load('/static/models/lc-processed.gltf', function(gltf) {
+        gltf.scene.position.set(200, -600,-1200);
+        gltf.scene.scale.set(5, 5, 8);
+        gltf.scene.rotateY(-80);//绕x轴旋转π/4    
         const scenes = gltf.scene.clone();
         scenes.traverse((child) => {
           if (child.isMesh) {

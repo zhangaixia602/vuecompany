@@ -245,6 +245,8 @@ export default defineComponent({
       light.position.set(0, 50, 0)
       scene.add(light)
       this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+      this.controls.maxDistance=1700;
+      this.controls.maxPolarAngle=Math.PI * 0.48;
       let objLoader = new GLTFLoader();
       let dracoLoader=new DRACOLoader();
       dracoLoader.setDecoderPath('/draco/');
@@ -253,7 +255,7 @@ export default defineComponent({
       objLoader.load('/static/models/WisdomPort-processed.glb', function(glb) {
         glb.scene.position.set(-1000, -600,-1200);
         glb.scene.scale.set(5, 5, 8);
-        glb.scene.rotateY(-80);//绕x轴旋转π/4
+        glb.scene.rotateY(-80);//绕x轴旋转π/4        
         scene.add(glb.scene);
       })
     },

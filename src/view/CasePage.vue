@@ -88,14 +88,8 @@ export default {
           src: 'assets/water.png',
           id: '05',
           path: '/model/water' 
-        },
-        {
-          group:'draulic',
-          title: 'Cesium',
-          src: 'assets/water.png',
-          id: '06',
-          path: '/model/earth' 
         }
+        
       ]
     }
   },

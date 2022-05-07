@@ -1,5 +1,5 @@
 <template>
-  <header>XXXX粮仓</header>
+  <header>智慧粮仓</header>
   <section class='left'>
     <div class='borderBg'>
       <PanelPage 
