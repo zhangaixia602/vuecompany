@@ -88,6 +88,13 @@ export default {
           src: 'assets/water.png',
           id: '05',
           path: '/model/water' 
+        },
+        {
+          group:'draulic',
+          title: '智慧水利',
+          src: 'assets/water.png',
+          id: '05',
+          path: '/model/earth' 
         }
         
       ]

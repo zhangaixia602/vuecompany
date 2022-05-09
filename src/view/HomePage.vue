@@ -4,8 +4,8 @@
     <video autoplay="true" loop>
       <source :src="require('../assets/home.mp4')" type="video/mp4" />
     </video>
-    <h4 class='text'>智慧城市 数字赋能</h4>
-    <!-- <img :src="require('../assets/zt2.png')" /> -->
+    <!-- <h4 class='text'>智慧城市 数字赋能</h4>-->
+    <img :src="require('../assets/zt2.png')" /> 
   </section>
   <section>
      <video autoplay="true" loop>
