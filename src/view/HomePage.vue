@@ -4,8 +4,8 @@
     <video autoplay="true" loop>
       <source :src="require('../assets/home.mp4')" type="video/mp4" />
     </video>
-    <h4 class='text'>智慧城市 数字赋能</h4>
-    <!-- <img :src="require('../assets/zt2.png')" /> -->
+    <!-- <h4 class='text'>智慧城市 数字赋能</h4>-->
+    <img :src="require('../assets/zt2.png')" /> 
   </section>
   <section>
      <video autoplay="true" loop>
@@ -239,8 +239,9 @@ section .wrapper{
   height: 100%;
   padding: 3rem 3.2rem;
   /* background: white;
-  box-shadow: 0.4rem 0.7rem 0.8rem 0 rgb(237 241 247 / 60%); */
-  background: rgba(4,103,247,0.1);
+  box-shadow: 0.4rem 0.7rem 0.8rem 0 rgb(237 241 247 / 60%);
+  background: rgba(4,103,247,0.1); */
+  background:rgb(128 128 128 / 20%);
   color:white;
   border-radius: 0.5rem;
   font-size:1rem;
