@@ -239,8 +239,9 @@ section .wrapper{
   height: 100%;
   padding: 3rem 3.2rem;
   /* background: white;
-  box-shadow: 0.4rem 0.7rem 0.8rem 0 rgb(237 241 247 / 60%); */
-  background: rgba(4,103,247,0.1);
+  box-shadow: 0.4rem 0.7rem 0.8rem 0 rgb(237 241 247 / 60%);
+  background: rgba(4,103,247,0.1); */
+  background:rgb(128 128 128 / 20%);
   color:white;
   border-radius: 0.5rem;
   font-size:1rem;
