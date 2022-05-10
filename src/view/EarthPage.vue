@@ -3,7 +3,7 @@
 		<div id="modelContainer"></div>
 		<div class='popupBox' :style="{ display: this.visible ? 'block' : 'none'}">
 			<div class='popup' id="popup" :style="{transform: 'matrix(1, 0, 0, 1, '+left+', '+top+')'}">
-			    <span class='popup-close-button' @click="handleOk">x</span>
+				<span class='popup-close-button' @click="handleOk">x</span>
 				<div class='popup-content'>
 					<h3>{{title}}</h3>
 					<p><label>形状</label>
@@ -101,16 +101,33 @@
 				let popup = document.getElementById('popup')
 				let width = popup.clientWidth;
 				let height = popup.clientHeight;
-				//if (pickModel._batchId) {
-				that.left = clickEvent.position.x - width / 2;
-				that.top = clickEvent.position.y - height - 20;
-				that.visible = true;
-				that.title = pickModel._content._batchTable._properties['name'][pickModel._batchId];
-				that.geometry = pickModel._content._batchTable._properties['字段一'][pickModel._batchId];
-				that.color = pickModel._content._batchTable._properties['字段二'][pickModel._batchId];
-				//}
+				if (pickModel._batchId) {
+					that.left = clickEvent.position.x - width / 2;
+					that.top = clickEvent.position.y - height - 20;
+					that.visible = true;
+					that.title = pickModel._content._batchTable._properties['name'][pickModel._batchId];
+					that.geometry = pickModel._content._batchTable._properties['字段一'][pickModel._batchId];
+					that.color = pickModel._content._batchTable._properties['字段二'][pickModel._batchId];
+				}
 
 			}, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+			const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+			handler.setInputAction(function(movement) {
+				const pickedObject = viewer.scene.pick(movement.endPosition);
+				let popup = document.getElementById('popup')
+				let width = popup.clientWidth;
+				let height = popup.clientHeight;
+				if (pickedObject instanceof Cesium.Cesium3DTileFeature) {
+					that.visible = true;
+					that.left = movement.endPosition.x - width / 2;
+					that.top = movement.endPosition.y - height - 20;
+					that.title = pickedObject._content._batchTable._properties['name'][pickedObject
+						._batchId
+					];
+				} else {
+					that.visible = false;
+				}
+			}, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 		}
 	})
 </script>
@@ -120,6 +137,7 @@
 		width: 100%;
 		height: 100vh;
 	}
+
 	#modelContainer {
 		width: 100%;
 		height: 100vh;
@@ -131,7 +149,8 @@
 		left: 0;
 		top: 0;
 		z-index: 10000000;
-		transform-origin:left bottom 0px;
+		transform-origin: left bottom 0px;
+		pointer-events: none;
 	}
 
 	.popup-content {
