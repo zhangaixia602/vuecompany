@@ -1,19 +1,20 @@
 <template>
 	<div class='container'>
 		<div id="modelContainer"></div>
-<!-- 		<div class='popup' :style="{ display: this.visible ? 'block' : 'none',transform: 'matrix(1, 0, 0, 1, '+left+', '+top+')','transform-origin': 'left bottom 0px'}"> -->
-        <div class='popup' id="popup" :style="{ display: this.visible ? 'block' : 'none',left:left+'px',top:top+'px'}">
-			<span class='popup-close-button' @click="handleOk">x</span>
-			<div class='popup-content'>
-				<h3>{{title}}</h3>
-				<p><label>形状</label>
-					<value>{{geometry}}</value>
-				</p>
-				<p><label>颜色</label>
-					<value>{{color}}</value>
-				</p>
+		<div class='popupBox' :style="{ display: this.visible ? 'block' : 'none'}">
+			<div class='popup' id="popup" :style="{transform: 'matrix(1, 0, 0, 1, '+left+', '+top+')'}">
+			    <span class='popup-close-button' @click="handleOk">x</span>
+				<div class='popup-content'>
+					<h3>{{title}}</h3>
+					<p><label>形状</label>
+						<value>{{geometry}}</value>
+					</p>
+					<p><label>颜色</label>
+						<value>{{color}}</value>
+					</p>
+				</div>
+				<div class='popup-tip-container'></div>
 			</div>
-			<div class='popup-tip-container'></div>
 		</div>
 	</div>
 </template>
@@ -27,8 +28,8 @@
 		data() {
 			return {
 				visible: false,
-				left:0,
-				top:0,
+				left: 0,
+				top: 0,
 				geometry: "几何体",
 				title: "",
 				color: "红色"
@@ -98,16 +99,16 @@
 			viewer.screenSpaceEventHandler.setInputAction(function(clickEvent) {
 				let pickModel = viewer.scene.pick(clickEvent.position);
 				let popup = document.getElementById('popup')
-                let width = popup.clientWidth;
-                let height = popup.clientHeight;
-				if (pickModel._batchId) {
-					that.left = clickEvent.position.x-width/2;
-					that.top = clickEvent.position.y-height-20;
-					that.visible = true;
-					that.title = pickModel._content._batchTable._properties['name'][pickModel._batchId];
-					that.geometry = pickModel._content._batchTable._properties['字段一'][pickModel._batchId];
-					that.color = pickModel._content._batchTable._properties['字段二'][pickModel._batchId];
-				}
+				let width = popup.clientWidth;
+				let height = popup.clientHeight;
+				//if (pickModel._batchId) {
+				that.left = clickEvent.position.x - width / 2;
+				that.top = clickEvent.position.y - height - 20;
+				that.visible = true;
+				that.title = pickModel._content._batchTable._properties['name'][pickModel._batchId];
+				that.geometry = pickModel._content._batchTable._properties['字段一'][pickModel._batchId];
+				that.color = pickModel._content._batchTable._properties['字段二'][pickModel._batchId];
+				//}
 
 			}, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 		}
@@ -119,21 +120,18 @@
 		width: 100%;
 		height: 100vh;
 	}
-
 	#modelContainer {
 		width: 100%;
 		height: 100vh;
-		position: absolute;
+		position: relative;
 	}
 
 	.popup {
 		position: absolute;
 		left: 0;
 		top: 0;
-		animation-duration: 0.3s;
-		animation-fill-mode: both;
-		animation-name: popupwashIn;
 		z-index: 10000000;
+		transform-origin:left bottom 0px;
 	}
 
 	.popup-content {
@@ -148,17 +146,20 @@
 		min-width: 2.5rem;
 		max-height: 40rem;
 		overflow-y: auto;
-		color:white;
+		color: white;
 	}
-	.popup-content h3{
-		font-size:1rem;
-		color:white;
-		margin:0.2rem 0 0.5rem;
+
+	.popup-content h3 {
+		font-size: 1rem;
+		color: white;
+		margin: 0.2rem 0 0.5rem;
 	}
-    .popup-content label::after{
+
+	.popup-content label::after {
 		content: " :";
-		margin-right:0.5rem;
+		margin-right: 0.5rem;
 	}
+
 	.popup-close-button {
 		position: absolute;
 		top: 0;
@@ -187,26 +188,5 @@
 		transform: translateX(-60%) rotate(180deg);
 		position: absolute;
 		left: 50%;
-	}
-
-
-	@keyframes popupwashIn {
-		0% {
-			opacity: 0;
-			transform-origin: 50% 50%;
-			transform: scale(0, 0);
-		}
-
-		90% {
-			opacity: 1;
-			transform-origin: 50% 50%;
-			transform: scale(0.9, 0.9);
-		}
-
-		100% {
-			opacity: 1;
-			transform-origin: 50% 50%;
-			transform: scale(1, 1);
-		}
 	}
 </style>
