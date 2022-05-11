@@ -15,8 +15,8 @@
       <h2 class="titbgl">可视化工程制作的主要流程</h2>
       <p class="des">
         可视化制作过程共分为4大步骤流程，随着每一个步骤制作，系统整体真实可视化性也逐步实现。
-      </p>
-      <a-tabs v-model:activeKey="activeKey" centered>
+      </p> 
+      <a-tabs tabPosition="top" v-model:activeKey="activeKey" centered >
         <a-tab-pane v-for="(tab, index) in tabs" :key="index">
           <template #tab>
             <div>
@@ -142,8 +142,7 @@ export default defineComponent({
 .ant-carousel :deep(.slick-slide) {
   text-align: center;
   height:100vh;
-  line-height:100vh;
-  background: #364d79;
+  line-height:100vh;  
   overflow: hidden;
 }
 .caseHeader{

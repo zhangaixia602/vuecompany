@@ -79,7 +79,7 @@ export default defineComponent({
           {
           title: "关于技术",
           src: "assets/15.png",
-          text: "简单地说，数据可视化就是以图形化方式表示数据。决策者可以通过图形直观地看到数据分析结果，从而更容易理解复杂的数据集，以进一步获得更细节的信息，交互式地观察数据改变或处理过程。",
+          text: "深圳市达英和技术有限公司涉及可视化技术、数字孪生技术、可视化运行平台、数字孪生、三维场景管理、三维GIS。主要用到cesium框架、threejs、gis、WebGIS、marsgis，代表案例有智慧园区、智慧粮仓、智慧水务。",
           position: "right",
         }
       ],
