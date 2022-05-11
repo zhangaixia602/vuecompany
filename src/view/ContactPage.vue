@@ -26,12 +26,11 @@
             <input type="submit" value="立即提交" class="message-btn">
         </form>
       </div> 
-    
       </div> 
-      <div>
-       <div style="width:100%;height:400px;border:#ccc solid 1px;" id="allmap"></div>
-      </div>
-	   <!-- <div class="baidumap" id="allmap"></div> -->
+      <div style="margin-bottom:15px">
+        <div style="width:100%;height:400px;border:#ccc solid 1px;" id="allmap"></div>
+
+      </div>    
 
   </div>
   <FooterPage/>
@@ -134,9 +133,9 @@ export default defineComponent({
 }
 .caseHeader{
   width:100%;
-  height:100vh;
+  height:80vh;
   background:url(../assets/contact.png) no-repeat center center;
-  background-size: cover;
+  background-size: 100%;
   padding:7rem 6rem;
   color: #fffefe;
 }
