@@ -59,8 +59,7 @@
 			});
 			//关闭logo
 			viewer._cesiumWidget._creditContainer.style.display = "none";
-			//限制缩放
-			viewer.scene.screenSpaceCameraController.maximumZoomDistance = 2500;
+
 			const tileset = viewer.scene.primitives.add(
 				new Cesium.Cesium3DTileset({
 					url: '/static/tileset.json',
@@ -95,7 +94,42 @@
 					console.log(error);
 				}
 			})();
-			let that = this;
+			//限制缩放
+			viewer.scene.screenSpaceCameraController.maximumZoomDistance = 200;
+			tileset.readyPromise.then(function(tileset) {
+				 var params = {
+				    tx: 121,  //模型中心X轴坐标（经度，单位：十进制度）
+				    ty: 32,    //模型中心Y轴坐标（纬度，单位：十进制度）
+				    tz: 50,    //模型中心Z轴坐标（高程，单位：米）
+				    rx: 0,    //X轴（经度）方向旋转角度（单位：度）
+				    ry: 0,    //Y轴（纬度）方向旋转角度（单位：度）
+				    rz: 0      //Z轴（高程）方向旋转角度（单位：度）
+				};
+			 //旋转
+			    var mx = Cesium.Matrix3.fromRotationX(Cesium.Math.toRadians(params.rx));
+			    var my = Cesium.Matrix3.fromRotationY(Cesium.Math.toRadians(params.ry));
+			    var mz = Cesium.Matrix3.fromRotationZ(Cesium.Math.toRadians(params.rz));
+			    var rotationX = Cesium.Matrix4.fromRotationTranslation(mx);
+			    var rotationY = Cesium.Matrix4.fromRotationTranslation(my);
+			    var rotationZ = Cesium.Matrix4.fromRotationTranslation(mz);
+			    //平移
+			    var position = Cesium.Cartesian3.fromDegrees(params.tx, params.ty, params.tz);
+			    var m = Cesium.Transforms.eastNorthUpToFixedFrame(position);
+			    //旋转、平移矩阵相乘
+			    Cesium.Matrix4.multiply(m, rotationX, m);
+			    Cesium.Matrix4.multiply(m, rotationY, m);
+			    Cesium.Matrix4.multiply(m, rotationZ, m);
+			    //赋值给tileset
+			    tileset._root.transform = m;
+				var scale = Cesium.Matrix4.fromUniformScale(26)
+				Cesium.Matrix4.multiply(m, scale, m);
+				var originalSphere = tileset.boundingSphere;
+				
+				var radius = originalSphere.radius;
+				
+				viewer.zoomTo(tileset, new Cesium.HeadingPitchRange(0.5, -0.5, radius * 4.0));
+			});
+	        let that = this;
 			viewer.screenSpaceEventHandler.setInputAction(function(clickEvent) {
 				let pickModel = viewer.scene.pick(clickEvent.position);
 				let popup = document.getElementById('popup')
