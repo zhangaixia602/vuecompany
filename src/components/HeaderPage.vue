@@ -63,7 +63,7 @@ let that;
 	methods: {
 		fullPage() {
 			let event =window.event;
-			if(that.isFullpage){
+			if(that.isFullpage && this.scrollTop<=525){
 				if(event.wheelDelta>0){
                     this.currentIndex--;
                     if(this.currentIndex<0){

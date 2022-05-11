@@ -124,10 +124,7 @@ footer{
     display: flex;
     justify-content:space-between;
 }
-.footerItem p{
-    text-align: left;
-}
-.footerL a{
+.footerItem a{
     color:inherit;
     font-size: 0.8rem;
 }
@@ -140,19 +137,28 @@ footer{
     text-align: left;
     width:100%;
 }
-.footerR{
-    width:15rem;
+.footerItem{
+    width:20rem;
 }
-.footerR p{
-    padding-top:1rem;
+.footerItem h3{
+    padding-bottom:1rem;
+    font-size:0.9rem;
+    color:white;
 }
-.footerR span{
+.footerItem p{
+    padding-top:0.2rem;
+    line-height: 1.8rem;
+}
+.footerItem:last-child p:first-of-type{
+    margin-top:2.4rem;
+}
+.footerItem span{
     display: inline-block;
     width:calc(100% - 1rem);
     padding-left:1rem;
     text-align: left;
 }
-.footerR .icon{
+.footerItem .icon{
     font-size: 1rem;
 }
 .footerB{

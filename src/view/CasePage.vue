@@ -25,18 +25,15 @@
     </div>
   </div>
   <FooterPage/>
-  <ToTop/>
 </template>
 <script>
 import HeaderPage from '@/components/HeaderPage'
 import FooterPage from '@/components/FooterPage'
-import ToTop from '@/components/ToTop'
 export default {
   name: 'CasePage',
   components: {
     'HeaderPage': HeaderPage,
-    'FooterPage': FooterPage,
-    'ToTop': ToTop
+    'FooterPage': FooterPage
   },
   data () {
     return {
@@ -63,7 +60,7 @@ export default {
       products:[
         {
           group:'park',
-          title: '智慧园区',
+          title: '智慧工厂',
           src: 'assets/yq.png',
           id: '01',
           path: '/model/insect' 
@@ -88,14 +85,15 @@ export default {
           src: 'assets/water.png',
           id: '05',
           path: '/model/water' 
-        },
-        {
-          group:'draulic',
-          title: '智慧水利',
-          src: 'assets/water.png',
-          id: '05',
-          path: '/model/earth' 
         }
+        //,
+        //{
+          //group:'draulic',
+          //title: '智慧水利',
+          //src: 'assets/water.png',
+          //id: '05',
+         // path: '/model/earth' 
+        //}
         
       ]
     }
@@ -111,11 +109,11 @@ export default {
 <style>
 .caseHeader{
   width:100%;
-  height:100vh;
+  height:80vh;
   background:url(../assets/casebg.jpg) no-repeat center center;
   background-size: cover;
   color: #fffefe;
-  padding-top:calc(50vh - 4rem);
+  padding-top:calc(50vh - 8rem);
 }
 .caseHeader .wrapper{
   padding-left:2rem;

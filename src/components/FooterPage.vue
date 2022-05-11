@@ -2,17 +2,14 @@
     <footer>
         <div class="footerT">
             <div class="wrapper ovh">
-                <div class="footerL">
-                    <div class="footerItem">
-                        <p>技术服务</p>
-                        <div class="ftb">
-                            <div><a href="/">技术咨询</a></div>
-                            <div><a href="/">工程实施</a></div>
-                            <div><a href="/">售后服务</a></div>
-                        </div>
-                    </div>
+                <div class="footerItem">
+                    <h3>公司栏目</h3>
+                    <p><a href="/business">产品服务</a></p>
+                    <p><a href="/case">案例演示</a></p>
+                    <p><a href="/about">关于我们</a></p>
+                    <p><a href="/contact">联系我们</a></p>
                 </div>
-                <div class="footerR">
+                <div class="footerItem">
                     <p class="textCenter">
                         <i class="icon iconfont icon-dianhua"></i>
                         <span>0755-8326-9919</span>

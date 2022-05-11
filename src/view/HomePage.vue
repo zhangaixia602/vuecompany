@@ -1,14 +1,14 @@
 <template>
   <HeaderPage :isFullpage="true"/>
   <section>
-    <video autoplay="true" loop>
+    <video autoplay="true" loop :poster="require('../assets/videoH.png')">
       <source :src="require('../assets/home.mp4')" type="video/mp4" />
     </video>
     <!-- <h4 class='text'>智慧城市 数字赋能</h4>-->
     <img :src="require('../assets/zt2.png')" /> 
   </section>
   <section>
-     <video autoplay="true" loop>
+     <video autoplay="true" loop :poster="require('../assets/videoW.png')">
       <source :src="require('../assets/water.mp4')" type="video/mp4" />
     </video>
     <div class="wrapper">
@@ -68,19 +68,16 @@
     </div>
   </div>
   <FooterPage />
-  <ToTop />
 </template>
 <script>
 import { defineComponent } from "vue";
 import HeaderPage from "@/components/HeaderPage";
 import FooterPage from "@/components/FooterPage";
-import ToTop from "@/components/ToTop";
 export default defineComponent({
   name: "HomePage",
   components: {
     HeaderPage: HeaderPage,
-    FooterPage: FooterPage,
-    ToTop: ToTop
+    FooterPage: FooterPage
   },
   data() {
     return {
@@ -250,6 +247,7 @@ section .wrapper{
 .homeCase {
   height:100vh;
   padding-top: 2.5rem;
+  margin-top: 8rem;
 }
 h3.titbg {
   background: url(../assets/titbg.jpg) no-repeat bottom center;
