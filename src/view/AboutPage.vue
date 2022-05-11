@@ -38,20 +38,18 @@
     </div>
   </div>
   <FooterPage/>
-  <ToTop/>
+ 
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import HeaderPage from '@/components/HeaderPage'
 import FooterPage from '@/components/FooterPage'
-import ToTop from '@/components/ToTop'
 export default defineComponent({
   name: "AboutPage",
   components: {
     'HeaderPage': HeaderPage,
     'FooterPage': FooterPage,
-    'ToTop': ToTop
   },
   data() {
     return {
@@ -67,17 +65,23 @@ export default defineComponent({
           position: "left",
         },
         {
-          title: "关于效果图",
+          title: "实况效果图",
           src: "assets/c02.png",
           text: "效果图是通过计算机三维仿真软件技术来模拟真实环境的高仿真虚拟图片。在园区、工业等细分行业来看，效果图的主要功能是将平面的图纸三维化，仿真化，通过高仿真的制作，来检查设计方案的细微瑕疵或进行项目方案修改的推敲。",
           position: "right",
         },
         {
-          title: "关于数字可视化",
+          title: "数字可视化",
           src: "assets/15.png",
           text: "简单地说，数据可视化就是以图形化方式表示数据。决策者可以通过图形直观地看到数据分析结果，从而更容易理解复杂的数据集，以进一步获得更细节的信息，交互式地观察数据改变或处理过程。",
           position: "left",
         },
+          {
+          title: "关于技术",
+          src: "assets/15.png",
+          text: "简单地说，数据可视化就是以图形化方式表示数据。决策者可以通过图形直观地看到数据分析结果，从而更容易理解复杂的数据集，以进一步获得更细节的信息，交互式地观察数据改变或处理过程。",
+          position: "right",
+        }
       ],
     };
   }, 

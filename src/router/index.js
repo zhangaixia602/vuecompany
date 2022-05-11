@@ -10,7 +10,7 @@ export default createRouter({
     },
     {
       path: '/business',
-      name: '业务领域',
+      name: '产品服务',
       component: () => import('@/view/BusinessScope')
     },
     {
@@ -22,6 +22,11 @@ export default createRouter({
       path: '/about',
       name: '关于我们',
       component: () => import('@/view/AboutPage')
+    },
+    {
+      path: '/contact',
+      name: '联系我们',
+      component: () => import('@/view/ContactPage')
     },
     {
       path: '/model/:id',

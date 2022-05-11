@@ -4,7 +4,8 @@ export default{
             home:"Home",
             business:"Business",
             case:"Dome",
-            about:"AboutUs"
+            about:"AboutUs",
+            contact:"contactUS"
         }
 
     },
@@ -13,7 +14,8 @@ export default{
             home:"首页",
             business:"产品服务",
             case:"案例演示",
-            about:"关于我们"
+            about:"关于我们",
+            contact:"联系我们"
         }
     }
 }

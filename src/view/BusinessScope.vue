@@ -6,7 +6,7 @@
     </div>    
   </a-carousel> -->
    <div class='caseHeader'>
-      <h2>行业痛点</h2>
+      <h2>行业现状</h2>
       <p>园区、能源等管理系统间的信息互联和沟通成本高，故障不能及时处理，导致园区整体运维效率低。</p>
       <p>为了解决这一问题，我们运用三维可视化底层技术，将二维、三维数据有机联合，同时使各系统数据信息统一运筹，可管控。</p>
     </div>
@@ -59,19 +59,18 @@
     </div>
   </div>
   <FooterPage/>
-  <ToTop/>
+
 </template>
 <script>
 import { defineComponent } from "vue";
 import HeaderPage from '@/components/HeaderPage'
 import FooterPage from '@/components/FooterPage'
-import ToTop from '@/components/ToTop'
 export default defineComponent({
   name: "BusinessScope",
   components: {
     'HeaderPage': HeaderPage,
-    'FooterPage': FooterPage,
-    'ToTop': ToTop
+    'FooterPage': FooterPage
+    
   },
   data() {
     return {

@@ -41,6 +41,11 @@ let that;
 						path: '/about',
 						id: 'about',
 						name: '关于我们'
+					},					
+					{
+						path: '/contact',
+						id: 'contact',
+						name: '联系我们'
 					}
 				]
 			}
