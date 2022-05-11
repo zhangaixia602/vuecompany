@@ -97,9 +97,9 @@ export default defineComponent({
 }
 .caseHeader{
   width:100%;
-  height:100vh;
+  height:80vh;
   background:url(../assets/aboutus.jpg) no-repeat center center;
-  background-size: cover;
+  background-size: 100%;
   padding:7rem 6rem;
   color: #fffefe;
 }

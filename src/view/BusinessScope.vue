@@ -148,7 +148,7 @@ export default defineComponent({
 }
 .caseHeader{
   width:100%;
-  height:100vh;
+  height:80vh;
   background:url(../assets/hy.png) no-repeat center center;
   background-size: cover;
   padding:7rem 6rem;
