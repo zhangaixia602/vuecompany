@@ -343,7 +343,7 @@ h3.titbg span {
   height: 100%;
   cursor: pointer;
 }
-section h4,section p{
+section h4,section>p{
   position: absolute;
   top:24%;
   left: 50%;
@@ -353,7 +353,7 @@ section h4,section p{
 section h4:last-of-type{
   top:38%;
 }
-section p{
+section>p{
   top:56%;
   font-size:1.5rem;
 }
