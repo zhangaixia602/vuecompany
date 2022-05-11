@@ -4,8 +4,10 @@
     <video autoplay="true" loop :poster="require('../assets/videoH.png')">
       <source :src="require('../assets/home.mp4')" type="video/mp4" />
     </video>
-    <!-- <h4 class='text'>智慧城市 数字赋能</h4>-->
-    <img :src="require('../assets/zt2.png')" /> 
+    <h4 class='text'>智慧城市 数字赋能</h4>
+	<h4 class='text'>产业变革 慧领未来</h4>
+	<p class='text'>技术引领世界 创新照耀未来</p>
+    <!-- <img :src="require('../assets/zt2.png')" /> -->
   </section>
   <section>
      <video autoplay="true" loop :poster="require('../assets/videoW.png')">
@@ -190,7 +192,7 @@ section{
   position:relative;
   overflow: hidden;
 }
-section>img,section h4{
+section>img{
   position: absolute;
   max-width:60rem;
   max-height:100%;
@@ -235,9 +237,6 @@ section .wrapper{
   width: 40rem;
   height: 100%;
   padding: 3rem 3.2rem;
-  /* background: white;
-  box-shadow: 0.4rem 0.7rem 0.8rem 0 rgb(237 241 247 / 60%);
-  background: rgba(4,103,247,0.1); */
   background:rgb(128 128 128 / 20%);
   color:white;
   border-radius: 0.5rem;
@@ -342,15 +341,25 @@ h3.titbg span {
 .partnerBox span img {
   width: 100%;
   height: 100%;
-  /* filter: grayscale(1); */
   cursor: pointer;
 }
-/* .partnerBox span img:hover {
-  filter: grayscale(0);
-} */
-.text{
+section h4,section p{
+  position: absolute;
+  top:24%;
+  left: 50%;
+  transform: translateX(-50%);
   font-size:3rem;
-  background-image: linear-gradient(to right,#FFCF02, #FF7352);
+}
+section h4:last-of-type{
+  top:38%;
+}
+section p{
+  top:56%;
+  font-size:1.5rem;
+}
+.text{
+  /* background-image: linear-gradient(to right,#FFCF02, #FF7352); */
+  background-image: linear-gradient(to right,#003882, #c60f2e);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; /*需要文字透明*/
