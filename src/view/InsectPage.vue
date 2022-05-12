@@ -252,9 +252,9 @@ export default defineComponent({
       dracoLoader.setDecoderPath('/draco/');
       dracoLoader.preload();
       objLoader.setDRACOLoader(dracoLoader);
-      objLoader.load('/static/models/WisdomPort-processed.glb', function(glb) {
-        glb.scene.position.set(-1000, -600,-1200);
-        glb.scene.scale.set(5, 5, 8);
+      objLoader.load('/static/models/智慧工厂.glb', function(glb) {
+        // glb.scene.position.set(-1000, -600,-1200);
+        glb.scene.scale.set(9, 8, 10);
         glb.scene.rotateY(-80);//绕x轴旋转π/4        
         scene.add(glb.scene);
       })
