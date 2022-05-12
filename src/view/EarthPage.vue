@@ -6,11 +6,8 @@
 				<span class='popup-close-button' @click="handleOk">x</span>
 				<div class='popup-content'>
 					<h3>{{title}}</h3>
-					<p><label>形状</label>
+					<p><label>名称</label>
 						<value>{{geometry}}</value>
-					</p>
-					<p><label>颜色</label>
-						<value>{{color}}</value>
 					</p>
 				</div>
 				<div class='popup-tip-container'></div>
@@ -31,8 +28,7 @@
 				left: 0,
 				top: 0,
 				geometry: "几何体",
-				title: "",
-				color: "红色"
+				title: ""
 			}
 		},
 		methods: {
@@ -95,7 +91,7 @@
 				}
 			})();
 			//限制缩放
-			viewer.scene.screenSpaceCameraController.maximumZoomDistance = 200;
+			//viewer.scene.screenSpaceCameraController.maximumZoomDistance = 500;
 			tileset.readyPromise.then(function(tileset) {
 				 var params = {
 				    tx: 121,  //模型中心X轴坐标（经度，单位：十进制度）
@@ -121,7 +117,7 @@
 			    Cesium.Matrix4.multiply(m, rotationZ, m);
 			    //赋值给tileset
 			    tileset._root.transform = m;
-				var scale = Cesium.Matrix4.fromUniformScale(26)
+				var scale = Cesium.Matrix4.fromUniformScale(6)
 				Cesium.Matrix4.multiply(m, scale, m);
 				var originalSphere = tileset.boundingSphere;
 				
@@ -141,7 +137,6 @@
 					that.visible = true;
 					that.title = pickModel._content._batchTable._properties['name'][pickModel._batchId];
 					that.geometry = pickModel._content._batchTable._properties['字段一'][pickModel._batchId];
-					that.color = pickModel._content._batchTable._properties['字段二'][pickModel._batchId];
 				}
 
 			}, Cesium.ScreenSpaceEventType.LEFT_CLICK);
@@ -152,12 +147,17 @@
 				let width = popup.clientWidth;
 				let height = popup.clientHeight;
 				if (pickedObject instanceof Cesium.Cesium3DTileFeature) {
-					that.visible = true;
 					that.left = movement.endPosition.x - width / 2;
 					that.top = movement.endPosition.y - height - 20;
 					that.title = pickedObject._content._batchTable._properties['name'][pickedObject
 						._batchId
 					];
+					that.geometry = pickedObject._content._batchTable._properties['字段一'][pickedObject._batchId];
+					if(that.geometry!==null && that.geometry!=="" && that.geometry!=="null"){
+						that.visible = true;
+					}else{
+						that.visible = false;
+					}
 				} else {
 					that.visible = false;
 				}
