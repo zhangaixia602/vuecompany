@@ -544,19 +544,25 @@ export default defineComponent({
       dracoLoader.setDecoderPath('/draco/');
       dracoLoader.preload();
       objLoader.setDRACOLoader(dracoLoader);
-      objLoader.load('/static/models/lc-processed.gltf', function(gltf) {
-        gltf.scene.position.set(200, -600,-1200);
-        gltf.scene.scale.set(5, 5, 8);
-        gltf.scene.rotateY(-80);//绕x轴旋转π/4    
-        const scenes = gltf.scene.clone();
-        scenes.traverse((child) => {
-          if (child.isMesh) {
-            child.material.envMap =envMap
-            child.material.envMapIntensity = 1;
-          }
-        })
-        scene.add(scenes)
+        objLoader.load('/static/models/3dcity.glb', function(glb) {
+        glb.scene.position.set(-1000, -600,-1200);
+        glb.scene.scale.set(4, 4, 8);
+        glb.scene.rotateY(-80);//绕x轴旋转π/4  
+        scene.add(glb.scene);
       })
+      // objLoader.load('/static/models/3dcity.glb', function(gltf) {
+      //   gltf.scene.position.set(200, -600,-1200);
+      //   gltf.scene.scale.set(5, 5, 8);
+      //   gltf.scene.rotateY(-80);//绕x轴旋转π/4    
+      //   const scenes = gltf.scene.clone();
+      //   scenes.traverse((child) => {
+      //     if (child.isMesh) {
+      //       child.material.envMap =envMap
+      //       child.material.envMapIntensity = 1;
+      //     }
+      //   })
+      //   scene.add(scenes)
+      // })
     },
     setEnvMap(hdr) {
       const pmremGenerator = new THREE.PMREMGenerator(this.renderer)
