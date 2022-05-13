@@ -544,7 +544,7 @@ export default defineComponent({
       dracoLoader.setDecoderPath('/draco/');
       dracoLoader.preload();
       objLoader.setDRACOLoader(dracoLoader);
-        objLoader.load('/static/models/3dcity.glb', function(glb) {
+        objLoader.load('/static/models/3dcity-processed.glb', function(glb) {
         glb.scene.position.set(-1000, -600,-1200);
         glb.scene.scale.set(4, 4, 8);
         glb.scene.rotateY(-80);//绕x轴旋转π/4  
