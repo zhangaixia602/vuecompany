@@ -1,7 +1,7 @@
 <template>
 	<div class='container'>
 		<div id="modelContainer"></div>
-		<header>智慧园区</header>
+		<header>智慧厂区</header>
 		<section class='left'>
 			<div class='borderBg'>
 				<PanelPage :options="{
