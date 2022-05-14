@@ -86,14 +86,14 @@ export default {
           id: '05',
           path: '/model/water' 
         }
-        // ,
-        // {
-        //   group:'draulic',
-        //   title: '智慧水利',
-        //   src: 'assets/water.png',
-        //   id: '05',
-        //  path: '/model/earth' 
-        // }
+        ,
+        {
+          group:'draulic',
+          title: '智慧厂区',
+          src: 'assets/cyq.png',
+          id: '05',
+         path: '/model/earth' 
+        }
         
       ]
     }

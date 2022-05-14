@@ -354,8 +354,8 @@ export default defineComponent({
         }
       ],
       alarm:{
-        xAxis:['刘欢','周涛','王玮','李倩'],
-        legend:[{name:"标准工时",key:"inlet"},{name:"实际工时",key:"effluent"}]
+        xAxis:['一级报警','二级报警','三级报警'],
+        legend:[{name:"报警级别",key:"inlet"}]
       },
       alarmData:[
         {
@@ -363,13 +363,6 @@ export default defineComponent({
           type:"bar",
           data:Array(4).fill(1).map(function(){
             return parseInt(Math.random()*200+400)
-          })
-        },
-        {
-          key:"effluent",
-          type:"bar",
-          data:Array(4).fill(1).map(function(){
-            return parseInt(Math.random()*300+200)
           })
         }
       ],

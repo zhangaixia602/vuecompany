@@ -362,21 +362,6 @@
 					this.visible = false;
 				}
 			},
-			showPopup(name, x, y) {
-				let popup = document.getElementById('popup')
-				let width = popup.clientWidth;
-				let height = popup.clientHeight;
-				let findItem = this.modelData.find((element) => element.name === name)
-				if (findItem) {
-					this.title = name;
-					this.visible = true;
-					this.geometry = findItem.text;
-					this.left = x - width / 2;
-					this.top = y - height - 20;
-				} else {
-					this.visible = false;
-				}
-			},
 			echartsConfig(options) {
 				options.color = ['#FFBF00', '#80FFA5'];
 				options.series[0].lineStyle = {

@@ -1,6 +1,49 @@
 <template>
 	<div class='container'>
 		<div id="modelContainer"></div>
+		<header>智慧园区</header>
+		<section class='left'>
+			<div class='borderBg'>
+				<PanelPage :options="{
+		    title:this.panelTitle,
+		    data:this.panelData
+		  }" />
+			</div>
+			<div class='category borderBg'>
+				<PiePage :options="{
+		    domSelector: 'pie',
+		    title:this.categoryTitle,
+		    data:this.categoryData
+		  }" />
+			</div>
+			<div class='borderBg'>
+				<BarPage :options="{
+		    domSelector: 'vehicle',
+		    viewData: this.vehicle,
+		    smooth:true,
+		    data:this.vehicleData,
+			boundaryGap:true
+		  }" />
+			</div>
+		</section>
+		<section class='right'>
+			<div class='temDity borderBg'>
+				<BarPage :options="{
+		    domSelector: 'temDity',
+		    viewData: this.temDity,
+		    smooth:true,
+		    data:this.temDityData,
+		    config:this.echartsConfig
+		  }" />
+			</div>
+			<div class='borderBg'>
+				<CarouselTable :options="{
+		      title:this.carouselTitle,
+		      viewData: this.columns,
+		      data:this.dataSource,
+		  }" />
+			</div>
+		</section>
 		<div class='popupBox' :style="{ display: this.visible ? 'block' : 'none'}">
 			<div class='popup' id="popup" :style="{transform: 'matrix(1, 0, 0, 1, '+left+', '+top+')'}">
 				<span class='popup-close-button' @click="handleOk">x</span>
@@ -16,14 +59,140 @@
 	</div>
 </template>
 <script>
+	import * as echarts from "echarts";
 	import {
 		defineComponent,
 		ref
 	} from 'vue';
+	import BarPage from '@/components/BarPage';
+	import PiePage from '@/components/PiePage';
+	import PanelPage from '@/components/PanelPage';
+	import CarouselTable from '@/components/CarouselTable';
 	export default defineComponent({
 		name: "EarthPage",
+		components: {
+			'BarPage': BarPage,
+			'PiePage': PiePage,
+			'PanelPage': PanelPage,
+			'CarouselTable': CarouselTable
+		},
 		data() {
 			return {
+				carouselTitle: '实时报警情况',
+				dataSource: Array(24).fill(1).map(function(item, index) {
+					return {
+						key: "id" + index,
+						name: '超限报警',
+						age:index%2===0 ? '一级报警' : '二级报警',
+						remark: '未解决'
+					}
+				}),
+				columns: [{
+						title: '名称',
+						width: 80,
+						dataIndex: 'name',
+						key: 'name'
+					},
+					{
+						title: '报警类别',
+						width: 80,
+						dataIndex: 'age',
+						key: 'age'
+					},
+					{
+						title: '报警描述',
+						width: 80,
+						dataIndex: 'remark',
+						key: 'remark'
+					}
+				],
+				categoryTitle: "主要能源消耗",
+				categoryData: [{
+						name: "电",
+						value: parseInt(Math.random() * 100 + 1000)
+					},
+					{
+						name: "水",
+						value: parseInt(Math.random() * 100 + 800)
+					},
+					{
+						name: "天然气",
+						value: parseInt(Math.random() * 100 + 600)
+					}
+				],
+				temDity: {
+					title: "周产量对比",
+					xAxis: Array(7).fill(1).map(function(item, index) {
+						return index
+					}),
+					legend: [{
+						name: "本周",
+						key: "tempe"
+					}, {
+						name: "上周",
+						key: "dity"
+					}]
+				},
+				temDityData: [{
+						key: "tempe",
+						type: "line",
+						data: Array(24).fill(1).map(function() {
+							return parseInt(Math.random() * 20 + 20)
+						})
+					},
+					{
+						key: "dity",
+						type: "line",
+						data: Array(24).fill(1).map(function() {
+							return parseInt(Math.random() * 30 + 30)
+						})
+					}
+				],
+				vehicle: {
+					title: "订单对比",
+					xAxis: Array(7).fill(1).map(function(item, index) {
+						return index++
+					}),
+					legend: [{
+						name: "上周",
+						key: "tempe"
+					}, {
+						name: "本周",
+						key: "dity"
+					}]
+				},
+				vehicleData: [{
+						key: "tempe",
+						type: "bar",
+						data: Array(7).fill(1).map(function() {
+							return parseInt(Math.random() * 20 + 20)
+						})
+					},
+					{
+						key: "dity",
+						type: "bar",
+						data: Array(7).fill(1).map(function() {
+							return parseInt(Math.random() * 30 + 30)
+						})
+					}
+				],
+				panelTitle: '设备状况统计',
+				panelData: [{
+						icon: 'icon-zhihuiyuanqu',
+						label: '健康',
+						value: parseInt(Math.random() * 1000)
+					},
+					{
+						icon: 'icon-zhihuiyuanqu',
+						label: '异常',
+						value: parseInt(Math.random() * 1000)
+					},
+					{
+						icon: 'icon-zhihuiyuanqu',
+						label: '维护中',
+						value: parseInt(Math.random() * 1000)
+					}
+				],
 				visible: false,
 				left: 0,
 				top: 0,
@@ -34,6 +203,26 @@
 		methods: {
 			handleOk() {
 				this.visible = false
+			},
+			echartsConfig(options) {
+				options.color = ['#FFBF00', '#80FFA5'];
+				options.series[0].lineStyle = {
+					width: 0
+				};
+				options.series[0].showSymbol = false;
+				options.series[0].areaStyle = {
+					opacity: 0.8,
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+							offset: 0,
+							color: 'rgb(255, 191, 0)'
+						},
+						{
+							offset: 1,
+							color: 'rgb(224, 62, 76)'
+						}
+					])
+				};
+				return options;
 			}
 		},
 		mounted() {
@@ -42,8 +231,8 @@
 			const viewer = new Cesium.Viewer("modelContainer", {
 				geocoder: false,
 				homeButton: false,
-				sceneModePicker: true,
-				baseLayerPicker: true,
+				sceneModePicker: false,
+				baseLayerPicker: false,
 				navigationHelpButton: false,
 				animation: false,
 				timeline: false,
@@ -93,39 +282,39 @@
 			//限制缩放
 			//viewer.scene.screenSpaceCameraController.maximumZoomDistance = 500;
 			tileset.readyPromise.then(function(tileset) {
-				 var params = {
-				    tx: 121,  //模型中心X轴坐标（经度，单位：十进制度）
-				    ty: 32,    //模型中心Y轴坐标（纬度，单位：十进制度）
-				    tz: 50,    //模型中心Z轴坐标（高程，单位：米）
-				    rx: 0,    //X轴（经度）方向旋转角度（单位：度）
-				    ry: 0,    //Y轴（纬度）方向旋转角度（单位：度）
-				    rz: 0      //Z轴（高程）方向旋转角度（单位：度）
+				var params = {
+					tx: 121, //模型中心X轴坐标（经度，单位：十进制度）
+					ty: 32, //模型中心Y轴坐标（纬度，单位：十进制度）
+					tz: 50, //模型中心Z轴坐标（高程，单位：米）
+					rx: 0, //X轴（经度）方向旋转角度（单位：度）
+					ry: 0, //Y轴（纬度）方向旋转角度（单位：度）
+					rz: 0 //Z轴（高程）方向旋转角度（单位：度）
 				};
-			 //旋转
-			    var mx = Cesium.Matrix3.fromRotationX(Cesium.Math.toRadians(params.rx));
-			    var my = Cesium.Matrix3.fromRotationY(Cesium.Math.toRadians(params.ry));
-			    var mz = Cesium.Matrix3.fromRotationZ(Cesium.Math.toRadians(params.rz));
-			    var rotationX = Cesium.Matrix4.fromRotationTranslation(mx);
-			    var rotationY = Cesium.Matrix4.fromRotationTranslation(my);
-			    var rotationZ = Cesium.Matrix4.fromRotationTranslation(mz);
-			    //平移
-			    var position = Cesium.Cartesian3.fromDegrees(params.tx, params.ty, params.tz);
-			    var m = Cesium.Transforms.eastNorthUpToFixedFrame(position);
-			    //旋转、平移矩阵相乘
-			    Cesium.Matrix4.multiply(m, rotationX, m);
-			    Cesium.Matrix4.multiply(m, rotationY, m);
-			    Cesium.Matrix4.multiply(m, rotationZ, m);
-			    //赋值给tileset
-			    tileset._root.transform = m;
+				//旋转
+				var mx = Cesium.Matrix3.fromRotationX(Cesium.Math.toRadians(params.rx));
+				var my = Cesium.Matrix3.fromRotationY(Cesium.Math.toRadians(params.ry));
+				var mz = Cesium.Matrix3.fromRotationZ(Cesium.Math.toRadians(params.rz));
+				var rotationX = Cesium.Matrix4.fromRotationTranslation(mx);
+				var rotationY = Cesium.Matrix4.fromRotationTranslation(my);
+				var rotationZ = Cesium.Matrix4.fromRotationTranslation(mz);
+				//平移
+				var position = Cesium.Cartesian3.fromDegrees(params.tx, params.ty, params.tz);
+				var m = Cesium.Transforms.eastNorthUpToFixedFrame(position);
+				//旋转、平移矩阵相乘
+				Cesium.Matrix4.multiply(m, rotationX, m);
+				Cesium.Matrix4.multiply(m, rotationY, m);
+				Cesium.Matrix4.multiply(m, rotationZ, m);
+				//赋值给tileset
+				tileset._root.transform = m;
 				var scale = Cesium.Matrix4.fromUniformScale(6)
 				Cesium.Matrix4.multiply(m, scale, m);
 				var originalSphere = tileset.boundingSphere;
-				
+
 				var radius = originalSphere.radius;
-				
+
 				viewer.zoomTo(tileset, new Cesium.HeadingPitchRange(0.5, -0.5, radius * 4.0));
 			});
-	        let that = this;
+			let that = this;
 			viewer.screenSpaceEventHandler.setInputAction(function(clickEvent) {
 				let pickModel = viewer.scene.pick(clickEvent.position);
 				let popup = document.getElementById('popup')
@@ -134,9 +323,13 @@
 				if (pickModel._batchId) {
 					that.left = clickEvent.position.x - width / 2;
 					that.top = clickEvent.position.y - height - 20;
-					that.visible = true;
 					that.title = pickModel._content._batchTable._properties['name'][pickModel._batchId];
 					that.geometry = pickModel._content._batchTable._properties['字段一'][pickModel._batchId];
+					if (that.geometry !== null && that.geometry !== "" && that.geometry !== "null") {
+						that.visible = true;
+					} else {
+						that.visible = false;
+					}
 				}
 
 			}, Cesium.ScreenSpaceEventType.LEFT_CLICK);
@@ -152,10 +345,12 @@
 					that.title = pickedObject._content._batchTable._properties['name'][pickedObject
 						._batchId
 					];
-					that.geometry = pickedObject._content._batchTable._properties['字段一'][pickedObject._batchId];
-					if(that.geometry!==null && that.geometry!=="" && that.geometry!=="null"){
+					that.geometry = pickedObject._content._batchTable._properties['字段一'][pickedObject
+						._batchId
+					];
+					if (that.geometry !== null && that.geometry !== "" && that.geometry !== "null") {
 						that.visible = true;
-					}else{
+					} else {
 						that.visible = false;
 					}
 				} else {
@@ -171,13 +366,11 @@
 		width: 100%;
 		height: 100vh;
 	}
-
 	#modelContainer {
 		width: 100%;
 		height: 100vh;
 		position: relative;
 	}
-
 	.popup {
 		position: absolute;
 		left: 0;
@@ -186,7 +379,6 @@
 		transform-origin: left bottom 0px;
 		pointer-events: none;
 	}
-
 	.popup-content {
 		background-color: rgba(41, 84, 141, 0.9);
 		box-shadow: 0 3px 14px rgb(0 0 0 / 40%);
@@ -201,18 +393,15 @@
 		overflow-y: auto;
 		color: white;
 	}
-
 	.popup-content h3 {
 		font-size: 1rem;
 		color: white;
 		margin: 0.2rem 0 0.5rem;
 	}
-
 	.popup-content label::after {
 		content: " :";
 		margin-right: 0.5rem;
 	}
-
 	.popup-close-button {
 		position: absolute;
 		top: 0;
@@ -229,7 +418,6 @@
 		cursor: pointer;
 		color: white;
 	}
-
 	.popup-tip-container {
 		display: inline-block;
 		width: 0;
@@ -241,5 +429,56 @@
 		transform: translateX(-60%) rotate(180deg);
 		position: absolute;
 		left: 50%;
+	}
+	header{
+	  background:url(../assets/hbg.png) no-repeat center center;
+	  background-size: cover;
+	  color: white;
+	  font-size: 1.3rem;
+	  height: 2.3rem;
+	  line-height: 2.3rem;
+	  text-align: center;
+	}
+	.left,
+	.right {
+		width: 14rem;
+		height: calc(100% - 4rem);
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		position: absolute !important;
+		top: 4rem;
+	}
+	
+	.left {
+		margin-left: 1rem;
+		left: 0;
+	}
+	
+	.right {
+		margin-right: 1rem;
+		right: 0;
+	}
+	
+	.borderBg {
+		width: 14rem;
+		height: 10rem;
+		background: url(../assets/border.png) no-repeat center center;
+		background-size: 14rem 10rem;
+		overflow: hidden;
+	}
+	
+	.left .borderBg:first-child {
+		width: 14rem;
+		height: 5rem;
+		background-size: 14rem 5rem;
+	}
+	
+	#category,
+	#temDity,
+	#pie,
+	#vehicle {
+		width: 14rem;
+		height: 10rem;
 	}
 </style>
