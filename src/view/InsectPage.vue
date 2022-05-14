@@ -1,7 +1,17 @@
 <template>
 <div>
-  <header>智慧园区</header>
-  
+  <header>智慧工厂</header>
+   <div class="factory" v-show="!data.isLoading" id="factory">
+    <div
+      class="desc"
+      :class="{ active: data.descIndex == i }"
+      v-if="data.factorys[data.pIndex]"
+      v-for="(desc, i) in data.factorys[data.pIndex].desc"
+    >
+      <h1 class="title">{{ desc.title }}</h1>
+      <p class="content">{{ desc.content }}</p>
+    </div>    
+  </div>
   <section class='left'>
     <div class='category borderBg'>
       <PiePage
@@ -90,7 +100,7 @@ export default defineComponent({
     'PanelPage': PanelPage,
     'CarouselTable': CarouselTable
   },
-  data (){
+  data (){ 
     return {
       carouselTitle: 'SEO报警情况',
       dataSource:Array(24).fill(1).map(function(item,index){
@@ -101,7 +111,13 @@ export default defineComponent({
           remark: '未解决'
         }
       }),
-      columns: [
+        factorys: [],  
+    pIndex: 0,
+    sceneIndex: 0,
+    base3d: {},
+    descIndex: 0,
+    progress: 0,
+    columns: [
         {
           title:'报警时间',
           width:80,
@@ -258,6 +274,8 @@ export default defineComponent({
         glb.scene.rotateY(-80);//绕x轴旋转π/4        
         scene.add(glb.scene);
       })
+         // 监听滚轮事件
+      window.addEventListener("mousewheel", this.onMouseWheel.bind(this));
     },
     setEnvMap(hdr) {
       new RGBELoader().setPath("/static/gltf/").load(hdr + ".hdr", (texture) => {
@@ -269,6 +287,19 @@ export default defineComponent({
       requestAnimationFrame(this.animate)
       this.renderer.render(scene, this.camera)
     },
+    onMouseWheel(e) {
+    // console.log(this.animateAction);
+    let timeScale = e.deltaY > 0 ? 1 : -1;
+    this.animateAction.setEffectiveTimeScale(timeScale);
+    this.animateAction.paused = false;
+    this.animateAction.play();
+    if (this.timeoutid) {
+      clearTimeout(this.timeoutid);
+    }
+    this.timeoutid = setTimeout(() => {
+      this.animateAction.halt(0.5);
+    }, 300);
+  },
     echartsConfig (options){
       options.color= ['#e7717b','#80FFA5'];
       options.series[0].lineStyle={
@@ -295,15 +326,41 @@ export default defineComponent({
   mounted () {
     this.initThree()
     this.animate()
+      console.log(result);
+  //   data.isLoading = false;
+   data.factorys = result.list;
+   data.scenes = result.hdr; 
+ 
   }
 })
 </script>
 <style scoped>
+.desc {
+  position: fixed;
+  z-index: 100000;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 600px;
+  top: 100px;
+  left: 50%;
+  margin-left: -300px;
+  transition: all 0.5s;
+  transform: translate(-100vw, 0);
+  padding: 15px;
+}
+.desc.active {
+  transform: translate(0, 0);
+}
+.factory {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} 
 body{
   overflow: hidden;
 }
 header{
-  background:url(../assets/tb.png) no-repeat center center;
+  background:url(../assets/tb1.png) no-repeat center center;
   background-size: cover;
   text-align: center;
   color: white;
