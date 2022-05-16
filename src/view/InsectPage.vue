@@ -1,249 +1,42 @@
 <template>
-<div>
-  <header>智慧工厂</header>
-   <div class="factory" v-show="!data.isLoading" id="factory">
-    <div
-      class="desc"
-      :class="{ active: data.descIndex == i }"
-      v-if="data.factorys[data.pIndex]"
-      v-for="(desc, i) in data.factorys[data.pIndex].desc"
-    >
-      <h1 class="title">{{ desc.title }}</h1>
-      <p class="content">{{ desc.content }}</p>
-    </div>    
-  </div>
-  <section class='left'>
-    <div class='category borderBg'>
-      <PiePage
-        :options="{
-        domSelector: 'pie1',
-        title:this.categoryTitle,
-        data:this.categoryData
-      }"
-      />
+<div id="WebGL-output">
+        <div class="css_style" id="lableItem">
+            <span class="css3dTitleWarning" id="lableTitleWarning">报警信息: 无异常</span>
+            <br>
+            <span class="css3dTitleWarning" id="lableTitleTemperature">温度: 37℃</span>
+        </div>
     </div>
-    <div class='bottomborderBg'>
-      <BarPage 
-        :options="{
-        domSelector: 'vehicle',
-        viewData: this.vehicle,
-        smooth:true,
-        data:this.vehicleData,
-
-      }"
-      />
+    <div id="WebGL-output1">
+        <div class="css_style" id="lableItem">
+            <span class="css3dTitleWarning" id="lableTitleWarning">报警信息: 无异常</span>
+            <br>
+            <span class="css3dTitleWarning" id="lableTitleTemperature">温度: 36℃</span>
+        </div>
     </div>
-    <div class='bottomborderBg'>
-     <BarPage 
-        :options="{
-        domSelector: 'dayStatis',
-        viewData: this.dayStatis,
-        smooth:true,
-        data:this.dayStatisData
-      }"
-      />
-    </div>
-  </section> 
-  <section class='right'>
-    <div class='alarmborder'>
-      <div class='borderBg'>
-     <PanelPage 
-        :options="{
-        title:this.panelTitle,
-        data:this.panelData
-      }"
-      />
-     </div>
-    </div>
-    <div class='borderBg'>
-    <CarouselTable
-        :options="{
-          title:this.carouselTitle,
-          viewData: this.columns,
-          data:this.dataSource,
-      }"
-      />
-   
-    </div>
-     <div class='borderBg'>
-      <BarPage 
-        :options="{
-        domSelector: 'temDity',
-        viewData: this.temDity,
-        smooth:true,
-        data:this.temDityData,
-        config:this.echartsConfig
-      }"
-      />     
-    </div>
-  </section>
-  </div>
 </template>
+
 <script>
-import * as echarts from "echarts";
-import { defineComponent } from "vue";
-import BarPage from '@/components/BarPage';
-import PiePage from '@/components/PiePage';
-import PanelPage from '@/components/PanelPage';
-import CarouselTable from '@/components/CarouselTable';
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-let scene=null;
-export default defineComponent({
-  name: 'InsertPage',
-  components: {
-    'BarPage': BarPage,
-    'PiePage': PiePage,
-    'PanelPage': PanelPage,
-    'CarouselTable': CarouselTable
-  },
-  data (){ 
-    return {
-      carouselTitle: 'SEO报警情况',
-      dataSource:Array(24).fill(1).map(function(item,index){
-        return {
-          key:"id"+index,
-          name: '2022-4-14',
-          age:'co7'+parseInt(Math.random()*2)+'号锅炉水位极高',
-          remark: '未解决'
-        }
-      }),
-        factorys: [],  
-    pIndex: 0,
-    sceneIndex: 0,
-    base3d: {},
-    descIndex: 0,
-    progress: 0,
-    columns: [
-        {
-          title:'报警时间',
-          width:80,
-          dataIndex:'name',
-          key:'name'
-        },
-        {
-          title:'变量',
-          width:100,
-          dataIndex:'age',
-          key:'age'
-        },
-        {
-          title:'报警描述',
-          width:80,
-          dataIndex:'remark',
-          key:'remark'
-        }
-      ],
-      categoryTitle:"大型设备开机率",
-      categoryData:[
-        {
-          name:"开机率",
-          value:parseInt(Math.random()*10+10)
-        },
-        {
-          name:"待机率",
-          value:parseInt(Math.random()*10+8)
-        }
-      ],
-      temDity:{
-        title:"综合能效",
-        xAxis:Array(24).fill(1).map(function(item,index){
-          return index+':00'
-        }),
-        legend:[{name:"空压机cop",key:"tempe"},{name:"冰水机cop",key:"dity"}]
-      },
-      temDityData:[
-        {
-          key:"tempe",
-          type:"line",
-          data:Array(24).fill(1).map(function(){
-            return parseInt(Math.random()*20+20)
-          })
-        },
-        {
-          key:"dity",
-          type:"line",
-          data:Array(24).fill(1).map(function(){
-            return parseInt(Math.random()*30+30)
-          })
-        }
-      ],
-      vehicle:{
-        title:"单台设备开机率",
-        xAxis:[],
-        legend:[{name:"冰水机",key:"b"},{name:"空压机",key:"k"},{name:"锅炉房",key:"g"}]
-      },
-       vehicleData:[
-         {
-          key:"b",
-          type:"bar",
-          data:[10]
-        },
-        {
-          key:"k",
-          type:"bar",
-          data:[11]
-        },
-          {
-          key:"g",
-          type:"bar",
-          data:[8]
-        }
-      ],
-       dayStatis:{
-        title:'工单统计',
-         xAxis:Array(7).fill(1).map(function(item,index){
-          index++
-          return index
-        }),
-        legend:[{name:"巡检工单",key:"inlet"},{name:"维保工单",key:"effluent"}]
-      },
-      dayStatisData:[
-        {
-          key:"inlet",
-          type:"line",
-          data:Array(7).fill(1).map(function(){
-            return parseInt(Math.random()*20+40)
-          })
-        },
-        {
-          key:"effluent",
-          type:"line",
-          data:Array(7).fill(1).map(function(){
-            return parseInt(Math.random()*30+20)
-          })
-        }
-      ],
-      panelTitle:'设备状况统计',
-      panelData:[
-        {
-          icon:'icon-zhihuiyuanqu',
-          label:'健康',
-          value:parseInt(Math.random()*1000)
-        },
-        {
-          icon:'icon-zhihuiyuanqu',
-          label:'异常',
-          value:parseInt(Math.random()*1000)
-        },
-        {
-          icon:'icon-zhihuiyuanqu',
-          label:'维护中',
-          value:parseInt(Math.random()*1000)
-        }
-      ]
-    }
-  },
-  methods: {
+import { CSS3DRenderer,CSS3DObject} from "three/examples/jsm/renderers/CSS3DRenderer"
+    
+var scene, orbitControls,labelRenderer;
+let css3DObject,css3DObject1;  
+
+export default {
+  
+  name: "InsertPage",  
+  
+   methods: {
     initThree () {
       let width = window.innerWidth //窗口宽
       let height = window.innerHeight
       this.renderer = new THREE.WebGL1Renderer({antialias: true})
       this.renderer.setSize(width, height)
-      document.body.appendChild(this.renderer.domElement)
+    
       
       scene = new THREE.Scene()
       let cubeTextureLoader = new THREE.CubeTextureLoader();
@@ -262,20 +55,40 @@ export default defineComponent({
       scene.add(light)
       this.controls = new OrbitControls(this.camera, this.renderer.domElement);
       this.controls.maxDistance=1700;
-      this.controls.maxPolarAngle=Math.PI * 0.48;
+      this.controls.maxPolarAngle=Math.PI * 0.48;    
+      document.body.appendChild(this.renderer.domElement);
+      labelRenderer = new CSS3DRenderer();
+      labelRenderer.setSize(window.innerWidth,window.innerHeight);     
+      labelRenderer.domElement.style.position = 'absolute';
+      labelRenderer.domElement.style.top = '0px';
+      document.body.appendChild(labelRenderer.domElement);
+      this.addCSS3DLabelToScene();
       let objLoader = new GLTFLoader();
       let dracoLoader=new DRACOLoader();
+     
+          
       dracoLoader.setDecoderPath('/draco/');
       dracoLoader.preload();
       objLoader.setDRACOLoader(dracoLoader);
       objLoader.load('/static/models/smartfactory-processed.glb', function(glb) {
         // glb.scene.position.set(-1000, -600,-1200);
         glb.scene.scale.set(9, 8, 10);
-        glb.scene.rotateY(-80);//绕x轴旋转π/4        
+        glb.scene.rotateY(-80);//绕y轴旋转π/4        
         scene.add(glb.scene);
+        css3DObject.position.x = 180;
+        css3DObject.position.y = glb.scene.position.y + 50 + 38;
+        css3DObject.position.z = glb.scene.position.z;    
       })
-         // 监听滚轮事件
-      window.addEventListener("mousewheel", this.onMouseWheel.bind(this));
+   
+      
+     
+      orbitControls = new OrbitControls(this.camera, labelRenderer.domElement);
+      orbitControls.maxDistance=1700;
+      orbitControls.maxPolarAngle=Math.PI * 0.48; 
+      orbitControls.update(); 
+      css3DObject.visible = true;   
+      document.body.appendChild(this.renderer.domElement)
+    
     },
     setEnvMap(hdr) {
       new RGBELoader().setPath("/static/gltf/").load(hdr + ".hdr", (texture) => {
@@ -283,23 +96,60 @@ export default defineComponent({
         scene.environment = texture;
       })
     },
+    modifyDocument(id, color, value) {
+            var dom = document.getElementById(id);
+            dom.style.color = color;
+            dom.textContent = value;
+        },
+    addCSS3DLabelToScene() {
+            var element = document.getElementById("WebGL-output");
+            var element1 = document.getElementById("WebGL-output1");
+            //把生成的CSSDOM对象处理成three的节点对象
+            css3DObject = new CSS3DObject(element);
+            css3DObject1 = new CSS3DObject(element1);
+            //设置CSS3DObject对象
+            css3DObject.position.x = 180;
+            css3DObject.position.y = 0;
+            css3DObject.position.z = 0;
+            css3DObject1.position.x = -180;
+            css3DObject1.position.y = 50;
+            css3DObject1.position.z = 120;
+            //在第二个场景中添加这个对象
+            scene.add(css3DObject);
+            scene.add(css3DObject1);
+            // 默认不显示
+            css3DObject.visible = false;
+        },
+    // onMouseClick(event) {
+    //         console.log("===");
+    //         const mousePoint = new THREE.Vector2();
+    //         mousePoint.x = (event.clientX / window.innerWidth) * 2 - 1;
+    //         mousePoint.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    //         const rayCaster = new THREE.Raycaster();
+    //         rayCaster.setFromCamera(mousePoint, this.camera);
+    //         let intersects = rayCaster.intersectObjects(scene.children, true);
+    //         console.log(intersects);
+    //         if (intersects.length > 0) {
+    //             css3DObject.visible = true;
+    //             css3DObject.position.x = intersects[0].object.position.x - 50 + 18;
+    //             css3DObject.position.y = intersects[0].object.position.y + 50 + 38;
+    //             css3DObject.position.z = intersects[0].object.position.z;
+
+
+    //            this.modifyDocument("lableTitleWarning", "red", "报警信息: 温度过高");
+    //            this. modifyDocument("lableTitleTemperature", "red", "温度: 120℃");
+    //         } else {
+    //             // css3DObject.visible = false;
+    //         }
+    //     },
+
     animate () {
       requestAnimationFrame(this.animate)
+      orbitControls.update();
+      labelRenderer.render(scene, this.camera);
       this.renderer.render(scene, this.camera)
-    },
-    onMouseWheel(e) {
-    // console.log(this.animateAction);
-    let timeScale = e.deltaY > 0 ? 1 : -1;
-    this.animateAction.setEffectiveTimeScale(timeScale);
-    this.animateAction.paused = false;
-    this.animateAction.play();
-    if (this.timeoutid) {
-      clearTimeout(this.timeoutid);
-    }
-    this.timeoutid = setTimeout(() => {
-      this.animateAction.halt(0.5);
-    }, 300);
-  },
+    },  
+
     echartsConfig (options){
       options.color= ['#e7717b','#80FFA5'];
       options.series[0].lineStyle={
@@ -325,98 +175,54 @@ export default defineComponent({
   },
   mounted () {
     this.initThree()
-    this.animate()
-      console.log(result);
-  //   data.isLoading = false;
-   data.factorys = result.list;
-   data.scenes = result.hdr; 
- 
+    this.animate() 
   }
-})
+};
 </script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.desc {
-  position: fixed;
-  z-index: 100000;
-  background-color: rgba(255, 255, 255, 0.5);
-  width: 600px;
-  top: 100px;
-  left: 50%;
-  margin-left: -300px;
-  transition: all 0.5s;
-  transform: translate(-100vw, 0);
-  padding: 15px;
-}
-.desc.active {
-  transform: translate(0, 0);
-}
-.factory {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-} 
-body{
-  overflow: hidden;
-}
-header{
-  background:url(../assets/tb1.png) no-repeat center center;
-  background-size: cover;
-  text-align: center;
-  color: white;
-  font-size: 2rem;
-  line-height: 3.5rem;
-}
-.left,.right{
-  width:14rem;
-  height:calc(100% - 4rem);
-  display: flex;
-  flex-wrap: wrap;
-  align-items:center;
-  position: absolute !important;
-  top:4rem;
-}
-.left{
-  margin-left:1rem;
-  left: 0;
-}
-.right{
-  margin-right:1rem;
-  right: 0;
-}
- .bottom{
-  position: absolute !important;
-  bottom:1.8rem;
-  left:62%;
-  transform:translateX(-50%);
- }
-.borderBg{
-  width:14rem;
-  height:10rem;
-  background:url(../assets/border.png) no-repeat center center;
-  background-size: 14rem 10rem;
-  overflow: hidden;
-}
-.bottomborderBg{
-  width:14rem;
-  height:10rem;
-  margin-top:10px;
-  background:url(../assets/border.png) no-repeat center center;
-  background-size: 14rem 10rem;
-  overflow: hidden;
-}
-.bottom .borderBg{
-  width:15rem;
-  height:5rem;
-  background-size: 15rem 5rem;
-}
-.alarmborder .borderBg{
-   width:15rem;
-  height:5rem;
-  background-size: 15rem 5rem;
-}
-#category,#temDity,#pie1,#vehicle,#dayStatis{
-  width:14rem;
-  height:10rem;
-}
+ .css_style {
+            background-color: MidnightBlue;
+            background-color: rgba(0, 10, 40);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            opacity: 0.5;
+            font-size: 4px;
+            color: aqua;
+            padding: 10px 10px 10px;
+            white-space: nowrap;
+        }
+
+        .css_style:after {
+            content: "";
+            border-style: solid;
+            border-top: 18px solid rgba(0, 10, 40);
+            ;
+            border-right: 8px solid transparent;
+            border-bottom: 18px solid transparent;
+            border-left: 8px solid transparent;
+            /* border-left: 18px solid rgba(0, 10, 40); */
+            ;
+            position: absolute;
+            /* left: 100%; */
+            top: 100%;
+            /* margin-top: 18px; */
+            margin-right: 18px;
+        }
+        .css3dcontain{
+            background-color: MidnightBlue;
+            background-color: rgba(0, 10, 40);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            opacity: 0.5;
+            font-size: 4px;
+            color: aqua;
+            padding: 10px 10px 10px;
+            white-space: nowrap;
+        }
 </style>
