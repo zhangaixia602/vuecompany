@@ -27,8 +27,30 @@
         </form>
       </div> 
       </div> 
-      <div style="margin-bottom:15px">
-        <div style="width:100%;height:400px;border:#ccc solid 1px;" id="allmap"></div>
+      <div style="margin:15px;position: relative;width: 100%;height: 400px;">
+        <div class="left-map" id="allmap"></div>
+        <div class="right-map">
+          <div class="left-content">
+           <p>公司地址:</p>
+          深圳市龙华新区清祥路1号宝能科技园7栋A座11楼
+          <p>邮箱:</p>
+          dyhzn@qq.com
+          <p>邮编:</p>
+          518000
+          <p>微信:</p>
+          shawnszs
+          </div>
+          <div class="left-content">
+          <p>联系电话:</p>
+          0755-8326-9919
+          <p>QQ:</p>
+          shawnszs
+          </div>
+          
+          
+        </div>
+        
+      
 
       </div>    
 
@@ -220,6 +242,39 @@ h3.titbg span {
     margin-bottom: 80px;
     cursor: pointer;
     border-radius: 10px;
+}
+.left-map{
+  width:49%;
+  height:400px;
+  border:#ccc solid 1px;
+  position: absolute;
+  
+}
+.right-map{
+  width:49%;
+  height:400px;
+  border: #f3eaea solid 1px;
+  background-color: #f6f6f6;
+  position: absolute; 
+  right:25px;
+  display: flex;
+  flex-direction: row;
+}
+
+.left-content{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  font-size: 16px;
+  color: #000000;
+  width: 385px;
+  line-height: 35px;
+  padding: 10px;
+
+}
+.left-content p{
+  font-size: 14px;
+  color:#999999;
 }
 
 </style>
