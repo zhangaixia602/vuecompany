@@ -27,6 +27,7 @@
 			</div>
 		</section>
 		<section class='right'>
+			<DatePage/>
 			<div class='temDity borderBg'>
 				<BarPage :options="{
 		    domSelector: 'temDity',
@@ -43,6 +44,10 @@
 		      data:this.dataSource,
 		  }" />
 			</div>
+		</section>
+		<section class='bottom'>
+			<img :src="require('../assets/monitor.png')" />
+			<img :src="require('../assets/monitor01.png')" />
 		</section>
 		<div class='popupBox' :style="{ display: this.visible ? 'block' : 'none'}">
 			<div class='popup' id="popup" :style="{transform: 'matrix(1, 0, 0, 1, '+left+', '+top+')'}">
@@ -68,13 +73,15 @@
 	import PiePage from '@/components/PiePage';
 	import PanelPage from '@/components/PanelPage';
 	import CarouselTable from '@/components/CarouselTable';
+	import DatePage from '@/components/DatePage';
 	export default defineComponent({
 		name: "EarthPage",
 		components: {
 			'BarPage': BarPage,
 			'PiePage': PiePage,
 			'PanelPage': PanelPage,
-			'CarouselTable': CarouselTable
+			'CarouselTable': CarouselTable,
+			'DatePage': DatePage
 		},
 		data() {
 			return {
@@ -83,7 +90,7 @@
 					return {
 						key: "id" + index,
 						name: '超限报警',
-						age:index%2===0 ? '一级报警' : '二级报警',
+						age: index % 2 === 0 ? '一级报警' : '二级报警',
 						remark: '未解决'
 					}
 				}),
@@ -366,11 +373,13 @@
 		width: 100%;
 		height: 100vh;
 	}
+
 	#modelContainer {
 		width: 100%;
 		height: 100vh;
 		position: relative;
 	}
+
 	.popup {
 		position: absolute;
 		left: 0;
@@ -379,6 +388,7 @@
 		transform-origin: left bottom 0px;
 		pointer-events: none;
 	}
+
 	.popup-content {
 		background-color: rgba(41, 84, 141, 0.9);
 		box-shadow: 0 3px 14px rgb(0 0 0 / 40%);
@@ -393,15 +403,18 @@
 		overflow-y: auto;
 		color: white;
 	}
+
 	.popup-content h3 {
 		font-size: 1rem;
 		color: white;
 		margin: 0.2rem 0 0.5rem;
 	}
+
 	.popup-content label::after {
 		content: " :";
 		margin-right: 0.5rem;
 	}
+
 	.popup-close-button {
 		position: absolute;
 		top: 0;
@@ -418,6 +431,7 @@
 		cursor: pointer;
 		color: white;
 	}
+
 	.popup-tip-container {
 		display: inline-block;
 		width: 0;
@@ -430,15 +444,17 @@
 		position: absolute;
 		left: 50%;
 	}
-	header{
-	  background:url(../assets/hbg.png) no-repeat center center;
-	  background-size: cover;
-	  color: white;
-	  font-size: 1.3rem;
-	  height: 2.3rem;
-	  line-height: 2.3rem;
-	  text-align: center;
+
+	header {
+		background: url(../assets/hbg.png) no-repeat center center;
+		background-size: cover;
+		color: white;
+		font-size: 1.3rem;
+		height: 2.3rem;
+		line-height: 2.3rem;
+		text-align: center;
 	}
+
 	.left,
 	.right {
 		width: 14rem;
@@ -449,17 +465,17 @@
 		position: absolute !important;
 		top: 4rem;
 	}
-	
+
 	.left {
 		margin-left: 1rem;
 		left: 0;
 	}
-	
+
 	.right {
 		margin-right: 1rem;
 		right: 0;
 	}
-	
+
 	.borderBg {
 		width: 14rem;
 		height: 10rem;
@@ -467,13 +483,22 @@
 		background-size: 14rem 10rem;
 		overflow: hidden;
 	}
-	
+
 	.left .borderBg:first-child {
 		width: 14rem;
 		height: 5rem;
 		background-size: 14rem 5rem;
 	}
-	
+
+	.bottom {
+		position: absolute !important;
+		bottom: 0.6rem;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	.bottom img{
+		width:50%;
+	}
 	#category,
 	#temDity,
 	#pie,
