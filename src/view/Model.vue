@@ -25,8 +25,8 @@
 		{
 			text: 'card02',
 			color: 'blue',
-			x:680,
-			y:580,
+			x:180,
+			y:0,
 			z: 0
 		},
 		{
@@ -107,9 +107,9 @@
 				scene.add(meshBox); // 网格模型添加到场景中，未设定x/y/z坐标，默认位于坐标轴原点
 
 				css3DObject.visible = true;
-				css3DObject.position.x = meshBox.position.x - 50 + 18;
-				css3DObject.position.y = meshBox.position.y + 50 + 38;
-				css3DObject.position.z = meshBox.position.z;
+				css3DObject.position.x = 0;
+				css3DObject.position.y = 0;
+				css3DObject.position.z = 0;
 			},
 			addCSS3DLabelToScene() {
 				var element = document.getElementById("WebGL-output");
@@ -117,17 +117,18 @@
 				css3DObject = new CSS3DObject(element);
 				sources.map((item, index) => {
 					let cardContainer = document.createElement('div');
-					cardContainer.style.background = item.color;
+					cardContainer.style= "background:"+item.color+";color:white;font-size:12px";
 					cardContainer.innerHTML = item.text;
 					cardContainer.className = 'css_style1';
+					document.styleSheets[0].insertRule('.css_style::after { content: "";border-style: solid;border-top: 18px solid rgba(0, 10, 40);border-right: 8px solid transparent;border-bottom: 18px solid transparent;border-left: 8px solid transparent;position: absolute;top: 100%;left:50%}', 0);
 					let cardCSS3DObject = new CSS3DObject(cardContainer);
-					cardCSS3DObject.rotation.x = item.x;
+					cardCSS3DObject.position.x = item.x;
 					cardCSS3DObject.position.y = item.y;
 					cardCSS3DObject.position.z = item.z;
 					cardCSS3DObject.visible = true;
 					css3DObject.add(cardCSS3DObject);
 				})
-				css3DObject.rotation.x = 0;
+				css3DObject.position.x = 0;
 				css3DObject.position.y = 0;
 				css3DObject.position.z = 0;
 				scene.add(css3DObject);
@@ -149,7 +150,7 @@
 		border-bottom-left-radius: 10px;
 		border-bottom-right-radius: 10px;
 		opacity: 0.5;
-		font-size: 20px;
+		font-size: 20px !important;
 		color: red;
 		padding: 10px 10px 10px;
 		white-space: nowrap;
