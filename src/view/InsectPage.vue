@@ -32,6 +32,18 @@
       />
     </div>
   </section> 
+  <section class='bottom'> 
+    <div class="borderBg">	
+			<h2 class='titleBg'>视频监控</h2>
+      <div class="jkbox">
+      <div class="imgbox"></div>
+      <div class="r-gifbox">
+          <img :src="require('../assets/gc.gif')" />
+          <img :src="require('../assets/jq.gif')" />
+      </div>
+      </div>
+	</div>	
+	</section>
   <section class='right'>
     <div class='alarmborder'>
       <div class='borderBg'>
@@ -436,32 +448,59 @@ header{
 }
  .bottom{
   position: absolute !important;
-  bottom:1.8rem;
-  left:62%;
-  transform:translateX(-50%);
+  bottom:1px;
+  left:50%;
+  transform:translateX(-50%); 
  }
+
 .borderBg{
   width:14rem;
   height:10rem;
-  background:url(../assets/border.png) no-repeat center center;
-  background-size: 14rem 10rem;
+  /* background:url(../assets/border.png) no-repeat center center;  */
   overflow: hidden;
 }
 .bottomborderBg{
   width:14rem;
-  height:10rem;
+  height:9rem;
   margin-top:10px;
   background:url(../assets/border.png) no-repeat center center;
   background-size: 14rem 10rem;
   overflow: hidden;
 }
 .bottom .borderBg{
-  width:15rem;
-  height:5rem;
-  background-size: 15rem 5rem;
+  width:17rem;
+  height:12rem;
+  background-size: 17rem 12rem;
+}
+.jkbox{
+  display: flex;
+  justify-content: space-between;
+ 
+}
+.imgbox{
+  width: 14rem;
+  height: 9rem;
+  background:url(../assets/jk.png) no-repeat center center;
+  /* background-size: 300px 300px; */
+  overflow: hidden;
+
+}
+
+
+.r-gifbox{
+  display: flex;
+  flex-direction: column;
+  height:10rem;
+}
+.r-gifbox img{
+   background-size: 300px 300px;
+   overflow: hidden;
+   width: 7rem;
+   height: 4rem;
+   margin-top: 0.5rem;
 }
 .alarmborder .borderBg{
-   width:15rem;
+  width:15rem;
   height:5rem;
   background-size: 15rem 5rem;
 }

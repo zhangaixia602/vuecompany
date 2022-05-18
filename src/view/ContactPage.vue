@@ -45,13 +45,8 @@
           0755-8326-9919
           <p>QQ:</p>
           shawnszs
-          </div>
-          
-          
+          </div>         
         </div>
-        
-      
-
       </div>    
 
   </div>
