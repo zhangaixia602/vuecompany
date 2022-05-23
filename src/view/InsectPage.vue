@@ -273,7 +273,8 @@ export default {
       let cubeTextureLoader = new THREE.CubeTextureLoader();
 			cubeTextureLoader.setPath( '/static/models/lc/' );
 
-			let textureCube = cubeTextureLoader.load( ['4.jpg', '1.jpg', '2.jpg', '5.jpg', '6.jpg', '3.jpg' ] );
+			let textureCube = cubeTextureLoader.load( ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg',
+					'nz.jpg' ] );
 			textureCube.encoding = THREE.sRGBEncoding;
       scene.background = textureCube;
       this.setEnvMap("004");
@@ -301,7 +302,7 @@ export default {
       dracoLoader.setDecoderPath('/draco/');
       dracoLoader.preload();
       objLoader.setDRACOLoader(dracoLoader);
-      objLoader.load('/static/models/smartfactory-processed.glb', function(glb) {
+      objLoader.load('/static/models/mode2-processed.glb', function(glb) {
         // glb.scene.position.set(-1000, -600,-1200);
         glb.scene.scale.set(9, 8, 10);
         glb.scene.rotateY(-80);//绕y轴旋转π/4        
