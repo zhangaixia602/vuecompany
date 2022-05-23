@@ -347,166 +347,265 @@ export default {
 					  cardCSS3DObject.visible = true;
 					  css3DObject.add(cardCSS3DObject);
 				})
-          
-            //设置CSS3DObject对象
-            css3DObject.position.x = 0;
-            css3DObject.position.y = 0;
-            css3DObject.position.z = 0;          
-            //在第二个场景中添加这个对象
-            scene.add(css3DObject);          
-            // 默认不显示
-            css3DObject.visible = false;
-        },
-    // onMouseClick(event) {
-    //         console.log("===");
-    //         const mousePoint = new THREE.Vector2();
-    //         mousePoint.x = (event.clientX / window.innerWidth) * 2 - 1;
-    //         mousePoint.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    //         const rayCaster = new THREE.Raycaster();
-    //         rayCaster.setFromCamera(mousePoint, this.camera);
-    //         let intersects = rayCaster.intersectObjects(scene.children, true);
-    //         console.log(intersects);
-    //         if (intersects.length > 0) {
-    //             css3DObject.visible = true;
-    //             css3DObject.position.x = intersects[0].object.position.x - 50 + 18;
-    //             css3DObject.position.y = intersects[0].object.position.y + 50 + 38;
-    //             css3DObject.position.z = intersects[0].object.position.z;
+				this.renderer.setSize(width, height)
 
 
-    //            this.modifyDocument("lableTitleWarning", "red", "报警信息: 温度过高");
-    //            this. modifyDocument("lableTitleTemperature", "red", "温度: 120℃");
-    //         } else {
-    //             // css3DObject.visible = false;
-    //         }
-    //     },
+				scene = new THREE.Scene()
+				let cubeTextureLoader = new THREE.CubeTextureLoader();
+				cubeTextureLoader.setPath('/static/models/lc/');
 
-    animate () {
-      requestAnimationFrame(this.animate)
-      orbitControls.update();
-      labelRenderer.render(scene, this.camera);
-      this.renderer.render(scene, this.camera)
-    },  
+				let textureCube = cubeTextureLoader.load(['4.jpg', '1.jpg', '2.jpg', '5.jpg', '6.jpg', '3.jpg' 
+				]);
+				textureCube.encoding = THREE.sRGBEncoding;
+				scene.background = textureCube;
+				this.setEnvMap("004");
 
-    echartsConfig (options){
-      options.color= ['#e7717b','#80FFA5'];
-      options.series[0].lineStyle={
-        width: 0
-      };
-      options.series[0].showSymbol=false;
-      options.series[0].areaStyle={
-        opacity: 0.8,
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          {
-            offset: 0,
-            //rgb(104, 186, 252)
-            color: 'rgb(104, 186, 252)'
-          },
-          {
-            offset: 1,
-            color: 'rgb(224, 62, 76)'
-          }
-        ])
-      };
-      return options;
-    }
-  },
-  mounted () {
-    this.initThree()
-    this.animate() 
-  }
-};
+				this.camera = new THREE.PerspectiveCamera(50, width / height, 1, 10000)
+				this.camera.position.set(0, 0, 400)
+				this.camera.lookAt(scene.position)
+				let light = new THREE.HemisphereLight(0xbbbbff, 0x444422, 1.5)
+				light.position.set(0, 50, 0)
+				scene.add(light)
+				this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+				this.controls.maxDistance = 1700;
+				this.controls.maxPolarAngle = Math.PI * 0.48;
+				document.body.appendChild(this.renderer.domElement);
+				labelRenderer = new CSS3DRenderer();
+				labelRenderer.setSize(window.innerWidth, window.innerHeight);
+				labelRenderer.domElement.style.position = 'absolute';
+				labelRenderer.domElement.style.top = '0px';
+				document.body.appendChild(labelRenderer.domElement);
+				this.addCSS3DLabelToScene();
+				let objLoader = new GLTFLoader();
+				let dracoLoader = new DRACOLoader();
+
+
+				dracoLoader.setDecoderPath('/draco/');
+				dracoLoader.preload();
+				objLoader.setDRACOLoader(dracoLoader);
+				objLoader.load('/static/models/smartfactory-processed.glb', function(glb) {
+					glb.scene.scale.set(9, 8, 10);
+					glb.scene.rotateY(-80); //绕y轴旋转π/4        
+					scene.add(glb.scene);
+					css3DObject.position.x = 180;
+					css3DObject.position.y = 0;
+					css3DObject.position.z = 0;
+				})
+				orbitControls = new OrbitControls(this.camera, labelRenderer.domElement);
+				orbitControls.maxDistance = 1700;
+				orbitControls.maxPolarAngle = Math.PI * 0.48;
+				orbitControls.update();
+				css3DObject.visible = true;
+				document.body.appendChild(this.renderer.domElement)
+
+			},
+			setEnvMap(hdr) {
+				new RGBELoader().setPath("/static/gltf/").load(hdr + ".hdr", (texture) => {
+					texture.mapping = THREE.EquirectangularReflectionMapping;
+					scene.environment = texture;
+				})
+			},
+			modifyDocument(id, color, value) {
+				var dom = document.getElementById(id);
+				dom.style.color = color;
+				dom.textContent = value;
+			},
+			addCSS3DLabelToScene() {
+				var element = document.getElementById("WebGL-output");
+				//把生成的CSSDOM对象处理成three的节点对象
+				css3DObject = new CSS3DObject(element);
+				sources.map((item, index) => {
+					let cardContainer = document.createElement('div');
+					cardContainer.style =
+						" background-color: MidnightBlue;background-color: rgba(0, 10, 40); border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;opacity: 0.5;font-size: 1px;color: aqua; padding: 10px 10px 10px;white-space: nowrap;"
+					cardContainer.className = "style1";
+					document.styleSheets[0].insertRule(
+						'.style1::after { content: "";border-style: solid;border-top: 18px solid rgba(0, 10, 40);border-right: 8px solid transparent;border-bottom: 18px solid transparent;border-left: 8px solid transparent;position: absolute;top: 100%;left:50%;top:80%;}',
+						0);
+					cardContainer.innerHTML = item.text;
+					let cardCSS3DObject = new CSS3DObject(cardContainer);
+					cardCSS3DObject.position.x = item.x;
+					cardCSS3DObject.position.y = item.y;
+					cardCSS3DObject.position.z = item.z;
+					cardCSS3DObject.visible = true;
+					css3DObject.add(cardCSS3DObject);
+				})
+
+				//设置CSS3DObject对象
+				css3DObject.position.x = 0;
+				css3DObject.position.y = 0;
+				css3DObject.position.z = 0;
+				//在第二个场景中添加这个对象
+				scene.add(css3DObject);
+				// 默认不显示
+				css3DObject.visible = false;
+			},
+			// onMouseClick(event) {
+			//         console.log("===");
+			//         const mousePoint = new THREE.Vector2();
+			//         mousePoint.x = (event.clientX / window.innerWidth) * 2 - 1;
+			//         mousePoint.y = -(event.clientY / window.innerHeight) * 2 + 1;
+			//         const rayCaster = new THREE.Raycaster();
+			//         rayCaster.setFromCamera(mousePoint, this.camera);
+			//         let intersects = rayCaster.intersectObjects(scene.children, true);
+			//         console.log(intersects);
+			//         if (intersects.length > 0) {
+			//             css3DObject.visible = true;
+			//             css3DObject.position.x = intersects[0].object.position.x - 50 + 18;
+			//             css3DObject.position.y = intersects[0].object.position.y + 50 + 38;
+			//             css3DObject.position.z = intersects[0].object.position.z;
+
+
+			//            this.modifyDocument("lableTitleWarning", "red", "报警信息: 温度过高");
+			//            this. modifyDocument("lableTitleTemperature", "red", "温度: 120℃");
+			//         } else {
+			//             // css3DObject.visible = false;
+			//         }
+			//     },
+
+			animate() {
+				requestAnimationFrame(this.animate)
+				orbitControls.update();
+				labelRenderer.render(scene, this.camera);
+				this.renderer.render(scene, this.camera)
+			},
+
+			echartsConfig(options) {
+				options.color = ['#e7717b', '#80FFA5'];
+				options.series[0].lineStyle = {
+					width: 0
+				};
+				options.series[0].showSymbol = false;
+				options.series[0].areaStyle = {
+					opacity: 0.8,
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+							offset: 0,
+							//rgb(104, 186, 252)
+							color: 'rgb(104, 186, 252)'
+						},
+						{
+							offset: 1,
+							color: 'rgb(224, 62, 76)'
+						}
+					])
+				};
+				return options;
+			}
+		},
+		mounted() {
+			this.initThree()
+			this.animate()
+		}
+	};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-body{
-  overflow: hidden;
-}
-header{
-  background:url(../assets/tb1.png) no-repeat center center;
-  background-size: cover;
-  text-align: center;
-  color: white;
-  font-size: 2rem;
-  line-height: 3.5rem;
-}
-.left,.right{
-  width:14rem;
-  height:calc(100% - 4rem);
-  display: flex;
-  flex-wrap: wrap;
-  align-items:center;
-  position: absolute !important;
-  top:4rem;
-}
-.left{
-  margin-left:1rem;
-  left: 0;
-}
-.right{
-  margin-right:1rem;
-  right: 0;
-}
- .bottom{
-  position: absolute !important;
-  bottom:1px;
-  left:50%;
-  transform:translateX(-50%); 
- }
+	body {
+		overflow: hidden;
+	}
 
-.borderBg{
-  width:14rem;
-  height:10rem;
-  /* background:url(../assets/border.png) no-repeat center center;  */
-  overflow: hidden;
-}
-.bottomborderBg{
-  width:14rem;
-  height:9rem;
-  margin-top:10px;
-  background:url(../assets/border.png) no-repeat center center;
-  background-size: 14rem 10rem;
-  overflow: hidden;
-}
-.bottom .borderBg{
-  width:17rem;
-  height:12rem;
-  background-size: 17rem 12rem;
-}
-.jkbox{
-  display: flex;
-  justify-content: space-between;
- 
-}
-.imgbox{
-  width: 14rem;
-  height: 9rem;
-  background:url(../assets/jk.png) no-repeat center center;
-  /* background-size: 300px 300px; */
-  overflow: hidden;
+	header {
+		background: url(../assets/tb1.png) no-repeat center center;
+		background-size: cover;
+		text-align: center;
+		color: white;
+		font-size: 2rem;
+		line-height: 3.5rem;
+	}
 
-}
+	.left,
+	.right {
+		width: 14rem;
+		height: calc(100% - 4rem);
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		position: absolute !important;
+		top: 4rem;
+	}
+
+	.left {
+		margin-left: 1rem;
+		left: 0;
+	}
+
+	.right {
+		margin-right: 1rem;
+		right: 0;
+	}
+
+	.bottom {
+		position: absolute !important;
+		bottom: 1px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.borderBg {
+		width: 14rem;
+		height: 10rem;
+		/* background:url(../assets/border.png) no-repeat center center;  */
+		overflow: hidden;
+	}
+
+	.bottomborderBg {
+		width: 14rem;
+		height: 9rem;
+		margin-top: 10px;
+		background: url(../assets/border.png) no-repeat center center;
+		background-size: 14rem 10rem;
+		overflow: hidden;
+	}
+
+	.bottom .borderBg {
+		width: 17rem;
+		height: 12rem;
+		background-size: 17rem 12rem;
+	}
+
+	.jkbox {
+		display: flex;
+		justify-content: space-between;
+
+	}
+
+	.imgbox {
+		width: 14rem;
+		height: 9rem;
+		background: url(../assets/jk.png) no-repeat center center;
+		/* background-size: 300px 300px; */
+		overflow: hidden;
+
+	}
 
 
-.r-gifbox{
-  display: flex;
-  flex-direction: column;
-  height:10rem;
-}
-.r-gifbox img{
-   background-size: 300px 300px;
-   overflow: hidden;
-   width: 7rem;
-   height: 4rem;
-   margin-top: 0.5rem;
-}
-.alarmborder .borderBg{
-  width:15rem;
-  height:5rem;
-  background-size: 15rem 5rem;
-}
-#category,#temDity,#pie1,#vehicle,#dayStatis{
-  width:14rem;
-  height:10rem;
-}
+	.r-gifbox {
+		display: flex;
+		flex-direction: column;
+		height: 10rem;
+	}
+
+	.r-gifbox img {
+		background-size: 300px 300px;
+		overflow: hidden;
+		width: 7rem;
+		height: 4rem;
+		margin-top: 0.5rem;
+	}
+
+	.alarmborder .borderBg {
+		width: 15rem;
+		height: 5rem;
+		background-size: 15rem 5rem;
+	}
+
+	#category,
+	#temDity,
+	#pie1,
+	#vehicle,
+	#dayStatis {
+		width: 14rem;
+		height: 10rem;
+	}
 </style>
