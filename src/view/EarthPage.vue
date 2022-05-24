@@ -711,6 +711,7 @@
 		top: 3rem;
 		left: 50%;
 		transform: translateX(-50%);
+		height:2.3rem;
 	}
 
 	nav a {
