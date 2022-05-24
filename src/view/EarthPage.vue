@@ -1,22 +1,37 @@
 <template>
 	<div class='container'>
 		<div id="modelContainer"></div>
-		<header>智慧厂区</header>
+		<header>智慧厂区
+			<DatePage />
+		</header>
+		<nav>
+			<a v-for='(nav,index) in navs' :key='index' @click="showNav(nav,index)"
+				:class="{active: this.currentIndex===index}">{{nav.title}}</a>
+		</nav>
 		<section class='left'>
-			<div class='borderBg'>
+			<div class='borderBg energy'
+				:style="{ display: this.currentNav==='home' || this.currentNav==='operate' ? 'block' : 'none' }">
 				<PanelPage :options="{
 		    title:this.panelTitle,
 		    data:this.panelData
 		  }" />
 			</div>
-			<div class='category borderBg'>
+			<div class='borderBg energy' :style="{ display: this.currentNav==='energy' ? 'block' : 'none' }">
+				<PanelPage :options="{
+			  title:this.energyTitle,
+			  data:this.energyData
+			}" />
+			</div>
+			<div class='category borderBg'
+				:style="{ display: this.currentNav==='home' || this.currentNav==='energy' ? 'block' : 'none' }">
 				<PiePage :options="{
 		    domSelector: 'pie',
 		    title:this.categoryTitle,
 		    data:this.categoryData
 		  }" />
 			</div>
-			<div class='borderBg'>
+			<div class='borderBg'
+				:style="{ display: this.currentNav==='home' || this.currentNav==='operate' ? 'block' : 'none' }">
 				<BarPage :options="{
 		    domSelector: 'vehicle',
 		    viewData: this.vehicle,
@@ -25,29 +40,97 @@
 			boundaryGap:true
 		  }" />
 			</div>
-		</section>
-		<section class='right'>
-			<DatePage/>
-			<div class='temDity borderBg'>
+			<div class='category borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none' }">
+				<PiePage :options="{
+			  domSelector: 'monitorPie',
+			  title:this.monitorTitle,
+			  data:this.monitorData
+			}" />
+			</div>
+			<div class='borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none' }">
 				<BarPage :options="{
-		    domSelector: 'temDity',
-		    viewData: this.temDity,
-		    smooth:true,
-		    data:this.temDityData,
-		    config:this.echartsConfig
+			  domSelector: 'alarm',
+			  viewData: this.alarm,
+			  smooth:true,
+			  data:this.alarmData,
+						boundaryGap:true
+			}" />
+			</div>
+			<div class='temDity borderBg' :style="{ display:this.currentNav==='operate' ? 'block' : 'none' }">
+				<BarPage :options="{
+			  domSelector: 'temDity',
+			  viewData: this.temDity,
+			  smooth:true,
+			  data:this.temDityData,
+			  config:this.echartsConfig
+			}" />
+			</div>
+			<div class='borderBg' :style="{ display:this.currentNav==='energy' ? 'block' : 'none' }">
+				<BarPage :options="{
+			  domSelector: 'water',
+			  viewData: this.water,
+			  smooth:true,
+			  data:this.waterData,
+			  config:this.echartsConfig
+			}" />
+			</div>
+			<div class='borderBg' :style="{ display: this.currentNav==='environment' ? 'block' : 'none' }">
+				<BarPage :options="{
+		  domSelector: 'envir',
+		  viewData: this.envir,
+		  smooth:true,
+		  data:this.envirData,
+					boundaryGap:true
+		}" />
+			</div>
+			<div class='borderBg' :style="{ display: this.currentNav==='environment' ? 'block' : 'none' }">
+				<h3 class='titleBg'>化验室KPI</h3>
+				<progressBar :options="{
+		      data:this.progressData,
 		  }" />
 			</div>
-			<div class='borderBg'>
+		</section>
+		<section class='right'>
+			<div class='borderBg'
+				:style="{ display: this.currentNav==='home' || this.currentNav==='monitor' ? 'block' : 'none' }">
 				<CarouselTable :options="{
 		      title:this.carouselTitle,
 		      viewData: this.columns,
 		      data:this.dataSource,
 		  }" />
 			</div>
-		</section>
-		<section class='bottom'>
-			<img :src="require('../assets/monitor.png')" />
-			<img :src="require('../assets/monitor01.png')" />
+			<div class='borderBg'
+				:style="{ display: this.currentNav==='home' || this.currentNav==='environment' ? 'block' : 'none' }">
+				<BarPage :options="{
+			  domSelector: 'design',
+			  viewData: this.design,
+			  smooth:true,
+			  data:this.designData,
+						boundaryGap:true
+			}" />
+			</div>
+			<div class='bottom borderBg' :style="{ display:this.currentNav==='monitor' ? 'flex' : 'none' }">
+				<img :src="require('../assets/monitor.png')" />
+				<img :src="require('../assets/monitor01.png')" />
+				<img :src="require('../assets/monitor.png')" />
+				<img :src="require('../assets/monitor01.png')" />
+			</div>
+			<div class='borderBg' :style="{ display:this.currentNav==='energy' ? 'block' : 'none' }">
+				<BarPage :options="{
+			  domSelector: 'electric',
+			  viewData: this.electric,
+			  smooth:true,
+			  data:this.electricData
+			}" />
+			</div>
+			<div class='borderBg' :style="{ display:this.currentNav==='energy' ? 'block' : 'none' }">
+				<BarPage :options="{
+			  domSelector: 'natural',
+			  viewData: this.natural,
+			  smooth:true,
+			  data:this.naturalData
+			}" />
+			</div>
 		</section>
 		<div class='popupBox' :style="{ display: this.visible ? 'block' : 'none'}">
 			<div class='popup' id="popup" :style="{transform: 'matrix(1, 0, 0, 1, '+left+', '+top+')'}">
@@ -74,6 +157,7 @@
 	import PanelPage from '@/components/PanelPage';
 	import CarouselTable from '@/components/CarouselTable';
 	import DatePage from '@/components/DatePage';
+	import progressBar from '@/components/progressBar';
 	export default defineComponent({
 		name: "EarthPage",
 		components: {
@@ -81,10 +165,34 @@
 			'PiePage': PiePage,
 			'PanelPage': PanelPage,
 			'CarouselTable': CarouselTable,
-			'DatePage': DatePage
+			'DatePage': DatePage,
+			'progressBar': progressBar
 		},
 		data() {
 			return {
+				navs: [{
+						id: 'home',
+						title: '首页'
+					},
+					{
+						id: 'monitor',
+						title: '安全监视'
+					},
+					{
+						id: 'energy',
+						title: '能耗监控',
+					},
+					{
+						id: 'operate',
+						title: '数字运维',
+					},
+					{
+						id: 'environment',
+						title: '环保监管',
+					}
+				],
+				currentIndex: 0,
+				currentNav: 'home',
 				carouselTitle: '实时报警情况',
 				dataSource: Array(24).fill(1).map(function(item, index) {
 					return {
@@ -127,8 +235,22 @@
 						value: parseInt(Math.random() * 100 + 600)
 					}
 				],
+				monitorTitle: "报警类型",
+				monitorData: [{
+						name: "一级",
+						value: parseInt(Math.random() * 100 + 1000)
+					},
+					{
+						name: "二级",
+						value: parseInt(Math.random() * 100 + 800)
+					},
+					{
+						name: "三级",
+						value: parseInt(Math.random() * 100 + 600)
+					}
+				],
 				temDity: {
-					title: "周产量对比",
+					title: "维修工单对比",
 					xAxis: Array(7).fill(1).map(function(item, index) {
 						return index
 					}),
@@ -155,8 +277,47 @@
 						})
 					}
 				],
+				water: {
+					title: "水耗检测",
+					xAxis: Array(7).fill(1).map(function(item, index) {
+						return index
+					})
+				},
+				waterData: [{
+					key: "tempe",
+					type: "line",
+					data: Array(24).fill(1).map(function() {
+						return parseInt(Math.random() * 20 + 20)
+					})
+				}],
+				electric: {
+					title: "电耗检测",
+					xAxis: Array(7).fill(1).map(function(item, index) {
+						return index
+					})
+				},
+				electricData: [{
+					key: "tempe",
+					type: "line",
+					data: Array(24).fill(1).map(function() {
+						return parseInt(Math.random() * 20 + 200)
+					})
+				}],
+				natural: {
+					title: "天然气检测",
+					xAxis: Array(7).fill(1).map(function(item, index) {
+						return index
+					})
+				},
+				naturalData: [{
+					key: "tempe",
+					type: "line",
+					data: Array(24).fill(1).map(function() {
+						return parseInt(Math.random() * 20 + 200)
+					})
+				}],
 				vehicle: {
-					title: "订单对比",
+					title: "巡检工单对比",
 					xAxis: Array(7).fill(1).map(function(item, index) {
 						return index++
 					}),
@@ -183,6 +344,52 @@
 						})
 					}
 				],
+				alarm: {
+					title: "报警对比",
+					xAxis: Array(7).fill(1).map(function(item, index) {
+						return index++
+					}),
+					legend: [{
+						name: "上周",
+						key: "tempe"
+					}, {
+						name: "本周",
+						key: "dity"
+					}]
+				},
+				alarmData: [{
+						key: "tempe",
+						type: "bar",
+						data: Array(7).fill(1).map(function() {
+							return parseInt(Math.random() * 20 + 20)
+						})
+					},
+					{
+						key: "dity",
+						type: "bar",
+						data: Array(7).fill(1).map(function() {
+							return parseInt(Math.random() * 30 + 30)
+						})
+					}
+				],
+				envir: {
+					title: "废水日处理量",
+					xAxis: ['酸碱', '染色', '含磷', '含镍']
+				},
+				envirData: [{
+					key: "dity",
+					type: "bar",
+					data: [824, 631, 473, 202]
+				}],
+				design: {
+					title: "设计处理量(h)",
+					xAxis: ['酸碱', '染色', '含磷', '含镍']
+				},
+				designData: [{
+					key: "dity",
+					type: "bar",
+					data: [40, 30, 25, 10]
+				}],
 				panelTitle: '设备状况统计',
 				panelData: [{
 						icon: 'icon-zhihuiyuanqu',
@@ -200,6 +407,31 @@
 						value: parseInt(Math.random() * 1000)
 					}
 				],
+				energyTitle: '当天能耗',
+				energyData: [{
+						icon: 'icon-zhihuiyuanqu',
+						label: '电耗',
+						value: parseInt(Math.random() * 1000)
+					},
+					{
+						icon: 'icon-zhihuiyuanqu',
+						label: '水耗',
+						value: parseInt(Math.random() * 1000)
+					},
+					{
+						icon: 'icon-zhihuiyuanqu',
+						label: '气耗',
+						value: parseInt(Math.random() * 1000)
+					}
+				],
+				progressData: Array(4).fill(1).map(function(item, index) {
+					return {
+						key: "id" + index,
+						name: index % 2 === 0 ? '出厂水' : '回收水',
+						actual: parseInt(Math.random() * 200),
+						standard: parseInt(Math.random() * 310)
+					}
+				}),
 				visible: false,
 				left: 0,
 				top: 0,
@@ -208,6 +440,11 @@
 			}
 		},
 		methods: {
+			showNav(nav, index) {
+				console.log(index)
+				this.currentNav = nav.id
+				this.currentIndex = index
+			},
 			handleOk() {
 				this.visible = false
 			},
@@ -251,7 +488,9 @@
 			});
 			//关闭logo
 			viewer._cesiumWidget._creditContainer.style.display = "none";
-
+			// viewer.scene.globe.show = false; //不显示地球，这条和地球透明度选一个就可以
+			// viewer.scene.globe.baseColor = new Cesium.Color(0, 0, 0, 0);
+			// viewer.scene.backgroundcolor = new Cesium.Color(0, 0, 0, 0);
 			const tileset = viewer.scene.primitives.add(
 				new Cesium.Cesium3DTileset({
 					url: '/static/tileset.json',
@@ -368,10 +607,15 @@
 	})
 </script>
 <style scoped>
+	body {
+		overflow: hidden;
+	}
+
 	.container {
 		position: relative;
 		width: 100%;
 		height: 100vh;
+		overflow: hidden;
 	}
 
 	#modelContainer {
@@ -455,6 +699,37 @@
 		text-align: center;
 	}
 
+	header div {
+		position: absolute;
+		left: 80%;
+		top: -0.6rem;
+		font-size: 0.8rem;
+	}
+
+	nav {
+		position: absolute;
+		top: 3rem;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	nav a {
+		display: inline-block;
+		cursor: pointer;
+		font-size: 0.6rem;
+		color: white;
+		width: 5.1rem;
+		height: 2.3rem;
+		text-align: center;
+		line-height: 2.3rem;
+		background: url(../assets/navG.png) no-repeat center center;
+	}
+
+	nav a.active {
+		color: #58fdff;
+		background: url(../assets/nav.png) no-repeat center center;
+	}
+
 	.left,
 	.right {
 		width: 14rem;
@@ -484,25 +759,33 @@
 		overflow: hidden;
 	}
 
-	.left .borderBg:first-child {
+	.left .energy {
 		width: 14rem;
 		height: 5rem;
 		background-size: 14rem 5rem;
 	}
 
 	.bottom {
-		position: absolute !important;
-		bottom: 0.6rem;
-		left: 50%;
-		transform: translateX(-50%);
+		padding: 0.2rem;
+		flex-wrap: wrap-reverse;
 	}
-	.bottom img{
-		width:50%;
+
+	.bottom img {
+		width: 50%;
 	}
+
 	#category,
 	#temDity,
 	#pie,
-	#vehicle {
+	#monitorPie,
+	#vehicle,
+	#envir,
+	#WebGL-outputn,
+	#design,
+	#alarm,
+	#water,
+	#electric,
+	#natural {
 		width: 14rem;
 		height: 10rem;
 	}
