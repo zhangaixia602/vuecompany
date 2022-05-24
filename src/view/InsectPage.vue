@@ -1,16 +1,19 @@
 <template>
- <header>智慧工厂</header>
+ <header>智慧工厂</header> 
+   <nav>
+    <a v-for='(nav,index) in navs' :key='index' @click="showNavs(nav,index)" :class="{active: this.currentIndex===index}">{{nav.title}}</a>
+  </nav>
   <section class='left'>
-    <div class='category borderBg'>
+    <div class='card' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
+   
       <PiePage
         :options="{
-        domSelector: 'pie1',
-        title:this.categoryTitle,
+        domSelector: 'pie1', 
+        title:this.categoryTitle,      
         data:this.categoryData
       }"
-      />
-    </div>
-    <div class='bottomborderBg'>
+      />   
+
       <BarPage 
         :options="{
         domSelector: 'vehicle',
@@ -19,9 +22,7 @@
         data:this.vehicleData,
 
       }"
-      />
-    </div>
-    <div class='bottomborderBg'>
+      />   
      <BarPage 
         :options="{
         domSelector: 'dayStatis',
@@ -31,8 +32,84 @@
       }"
       />
     </div>
+    <div class='card' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">
+  
+     <PanelPage 
+        :options="{
+        title:this.panelTitle1,
+        data:this.panelData1
+      }"
+      />
+         
+    <PiePage
+        :options="{
+        domSelector: 'repair',
+        title:this.orderTitle,
+        data:this.repairData
+      }"
+      />    
+    
+     <BarPage 
+        :options="{
+        domSelector: 'orderStatis',
+        viewData: this.orderStatis,
+        smooth:true,
+        data:this.orderStatisData
+      }"
+      />
+    
+    </div>
+    <div class='card' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none' }">      
+    <PiePage
+        :options="{
+        domSelector: 'maintenance',
+        title:this.maintenanceTitle,       
+        data:this.maintenanceData, 
+      }"
+      />    
+    
+      <BarPage 
+        :options="{
+        domSelector: 'monitor',
+        viewData: this.monitor,
+        smooth:true,
+        data:this.monitorData,
+
+      }"
+      />
+    </div>
+    <div class='card' :style="{ display: this.currentNav==='alarms' ? 'block' : 'none' }">
+      <PiePage
+        :options="{
+        domSelector: 'maintenance',
+        data:this.maintenanceData,
+        config:this.orderConfig
+
+      }"
+      />
+    </div>
+    <div class='card' :style="{ display: this.currentNav==='energy' ? 'block' : 'none' }">
+      <PiePage
+        :options="{
+        domSelector: 'maintenance',
+        data:this.maintenanceData,
+        config:this.orderConfig
+
+      }"
+      />
+    </div>
+   <div class='card' :style="{ display: this.currentNav==='environment' ? 'block' : 'none' }">
+      <PiePage
+        :options="{
+        domSelector: 'maintenance',
+        data:this.maintenanceData,
+        config:this.orderConfig
+
+      }"
+      />
+    </div>
   </section> 
-  <section class='bottom'> 
+  <!-- <section class='bottom'> 
     <div class="borderBg">	
 			<h2 class='titleBg'>视频监控</h2>
       <div class="jkbox">
@@ -43,13 +120,13 @@
       </div>
       </div>
 	</div>	
-	</section>
+	</section> -->
   <section class='right'>
     <div class='alarmborder'>
       <div class='borderBg'>
      <PanelPage 
         :options="{
-        title:this.panelTitle,
+        title:this.panelTitle1,
         data:this.panelData
       }"
       />
@@ -139,7 +216,34 @@ export default {
           remark: '未解决'
         }
       }),
- 
+      navs:[
+        {
+          id:'home',
+          title:'首页'
+        },
+        {
+          id:'order',
+          title:'设备管理'
+        },
+        {
+          id:'monitor',
+          title:'数字运维'
+        },
+         {
+          id:'alarms',
+          title:'安全监视'
+        },
+         {
+          id:'energy ',
+          title:'能耗监测'
+        },
+          {
+          id:'environment',
+          title:'环保'
+        }
+      ],
+    currentIndex:0,
+    currentNav:'home',
     columns: [
         {
           title:'报警时间',
@@ -158,6 +262,28 @@ export default {
           width:80,
           dataIndex:'remark',
           key:'remark'
+        }
+      ],
+        maintenanceTitle:" 维修完成率",
+        maintenanceData:[
+        {
+          name:"在使用",
+          value:parseInt(Math.random()*100+700)
+        },
+        {
+          name:"未使用",
+          value:parseInt(Math.random()*100+800)
+        }
+      ],
+      orderTitle:"设备使用比率",
+      repairData:[       
+        {
+          name:"使用",
+          value:parseInt(Math.random()*100+400)
+        },
+        {
+          name:"未使用",
+          value:parseInt(Math.random()*100+300)
         }
       ],
       categoryTitle:"大型设备开机率",
@@ -194,6 +320,28 @@ export default {
           })
         }
       ],
+      monitor:{
+        title:"维修及时统计",
+        xAxis:[],
+        legend:[{name:"冰水机",key:"b"},{name:"空压机",key:"k"},{name:"锅炉房",key:"g"}]
+      },
+       monitorData:[
+        {
+          key:"b",
+          type:"bar",
+          data:[10]
+        },
+        {
+          key:"k",
+          type:"bar",
+          data:[11]
+        },
+          {
+          key:"g",
+          type:"bar",
+          data:[8]
+        }
+      ],
       vehicle:{
         title:"单台设备开机率",
         xAxis:[],
@@ -214,6 +362,30 @@ export default {
           key:"g",
           type:"bar",
           data:[8]
+        }
+      ],
+      orderStatis:{
+        title:'设备统计',
+         xAxis:Array(7).fill(1).map(function(item,index){
+          index++
+          return index
+        }),
+        legend:[{name:"门禁系统",key:"inlet"},{name:"安防系统",key:"effluent"}]
+      },
+      orderStatisData:[
+        {
+          key:"inlet",
+          type:"line",
+          data:Array(7).fill(1).map(function(){
+            return parseInt(Math.random()*20+40)
+          })
+        },
+        {
+          key:"effluent",
+          type:"line",
+          data:Array(7).fill(1).map(function(){
+            return parseInt(Math.random()*30+20)
+          })
         }
       ],
        dayStatis:{
@@ -240,6 +412,24 @@ export default {
           })
         }
       ],
+      panelTitle1:'设备总数统计',
+      panelData1:[
+        {
+          icon:'icon-zhihuiyuanqu',
+          label:'总数',
+          value:parseInt(Math.random()*1000)
+        },
+        {
+          icon:'icon-zhihuiyuanqu',
+          label:'子系统',
+          value:parseInt(Math.random()*1000)
+        },
+        {
+          icon:'icon-zhihuiyuanqu',
+          label:'机房',
+          value:parseInt(Math.random()*1000)
+        }
+      ],
       panelTitle:'设备状况统计',
       panelData:[
         {
@@ -262,6 +452,29 @@ export default {
   },
   
    methods: {
+    showNavs(nav,index) {
+      this.currentNav=nav.id
+      this.currentIndex=index
+      
+    },
+   
+    orderConfig (options){
+      options.backgroundColor="transparent";
+      options.legend={
+        orient: 'vertical',
+        left: 'left',
+        textStyle: {
+          color: '#fff'
+        }
+      };
+      options.series[0].radius='80%';
+      options.series[0].label={
+        position:'inside',
+        formatter: '{c}',
+        color: '#fff' 
+      };
+      return options
+    },
     initThree () {
       let width = window.innerWidth //窗口宽
       let height = window.innerHeight
@@ -298,11 +511,11 @@ export default {
       let objLoader = new GLTFLoader();
       let dracoLoader=new DRACOLoader();
      
-          
+      css3DObject.visible = false;       
       dracoLoader.setDecoderPath('/draco/');
       dracoLoader.preload();
       objLoader.setDRACOLoader(dracoLoader);
-      objLoader.load('/static/models/mode2-processed.glb', function(glb) {
+      objLoader.load('/static/models/smartfactory-processed.glb', function(glb) {
         // glb.scene.position.set(-1000, -600,-1200);
         glb.scene.scale.set(9, 8, 10);
         glb.scene.rotateY(-80);//绕y轴旋转π/4        
@@ -315,7 +528,7 @@ export default {
       orbitControls.maxDistance=1700;
       orbitControls.maxPolarAngle=Math.PI * 0.48; 
       orbitControls.update(); 
-      css3DObject.visible = true;   
+      
       document.body.appendChild(this.renderer.domElement)
     
     },
@@ -327,7 +540,7 @@ export default {
     },
     modifyDocument(id, color, value) {
             var dom = document.getElementById(id);
-            dom.style.color = color;
+            dom.style.color = color; 
             dom.textContent = value;
         },
     addCSS3DLabelToScene() {
@@ -427,7 +640,8 @@ export default {
 					cardCSS3DObject.position.x = item.x;
 					cardCSS3DObject.position.y = item.y;
 					cardCSS3DObject.position.z = item.z;
-					cardCSS3DObject.visible = true;
+          //这里
+					cardCSS3DObject.visible = false;
 					css3DObject.add(cardCSS3DObject);
 				})
 
@@ -501,8 +715,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-	body {
+	body {	
+    width:100%;
+		height:100%;
+		margin:0;
+		padding:0;
 		overflow: hidden;
+
 	}
 
 	header {
@@ -513,6 +732,28 @@ export default {
 		font-size: 2rem;
 		line-height: 3.5rem;
 	}
+  nav{
+  position: absolute;
+  top: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100000;
+}
+nav a{
+  display: inline-block;
+  cursor: pointer;
+  font-size:0.6rem;
+  color:white;
+  width:5.1rem;
+  height:2.3rem;
+  text-align: center;
+  line-height: 2.3rem;
+  background:url(../assets/navG.png) no-repeat center center;
+}
+nav a.active{
+  color:#58fdff;
+  background:url(../assets/nav.png) no-repeat center center;
+}
 
 	.left,
 	.right {
@@ -527,6 +768,7 @@ export default {
 
 	.left {
 		margin-left: 1rem;
+    margin-bottom: 5rem;
 		left: 0;
 	}
 
@@ -537,30 +779,35 @@ export default {
 
 	.bottom {
 		position: absolute !important;
-		bottom: 1px;
+		bottom: 1rem;
 		left: 50%;
 		transform: translateX(-50%);
 	}
+.card{
+  width:100%;
+  
+}
 
 	.borderBg {
 		width: 14rem;
-		height: 10rem;
-		/* background:url(../assets/border.png) no-repeat center center;  */
+		height: 8rem;
+		/* background:url(../assets/border.png) no-repeat center center; 
+    background-size: 14rem 10rem; */
 		overflow: hidden;
 	}
 
 	.bottomborderBg {
 		width: 14rem;
-		height: 9rem;
+		height: 8rem;
 		margin-top: 10px;
 		background: url(../assets/border.png) no-repeat center center;
-		background-size: 14rem 10rem;
+		background-size: 14rem 8rem;
 		overflow: hidden;
 	}
 
 	.bottom .borderBg {
 		width: 17rem;
-		height: 12rem;
+		height: 8rem;
 		background-size: 17rem 12rem;
 	}
 
@@ -572,7 +819,7 @@ export default {
 
 	.imgbox {
 		width: 14rem;
-		height: 9rem;
+		height: 8rem;
 		background: url(../assets/jk.png) no-repeat center center;
 		/* background-size: 300px 300px; */
 		overflow: hidden;
@@ -583,7 +830,7 @@ export default {
 	.r-gifbox {
 		display: flex;
 		flex-direction: column;
-		height: 10rem;
+		height: 8rem;
 	}
 
 	.r-gifbox img {
@@ -599,13 +846,14 @@ export default {
 		height: 5rem;
 		background-size: 15rem 5rem;
 	}
-
+  #maintenance,#repair,
 	#category,
 	#temDity,
 	#pie1,
 	#vehicle,
-	#dayStatis {
+	#dayStatis,#orderStatis,#monitor{
 		width: 14rem;
-		height: 10rem;
+		height: 8rem;
+   
 	}
 </style>
