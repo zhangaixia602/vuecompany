@@ -4,25 +4,26 @@
     <a v-for='(nav,index) in navs' :key='index' @click="showNavs(nav,index)" :class="{active: this.currentIndex===index}">{{nav.title}}</a>
   </nav>
   <section class='left'>
-    <div class='card' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
-   
+    <div class='card borderBg' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
       <PiePage
         :options="{
-        domSelector: 'pie1', 
-        title:this.categoryTitle,      
+        domSelector: 'pie1',
+        title:this.categoryTitle,
         data:this.categoryData
       }"
-      />   
-
+      />  
+      </div>
+      <div class='card borderBg' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
       <BarPage 
         :options="{
         domSelector: 'vehicle',
         viewData: this.vehicle,
         smooth:true,
         data:this.vehicleData,
-
       }"
-      />   
+      />
+    </div> 
+    <div class='card borderBg' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
      <BarPage 
         :options="{
         domSelector: 'dayStatis',
@@ -32,15 +33,17 @@
       }"
       />
     </div>
-    <div class='card' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">
-  
+    <div class='alarmborder' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">
+    <div class='borderBg'>
      <PanelPage 
         :options="{
         title:this.panelTitle1,
         data:this.panelData1
       }"
       />
-         
+     </div>
+    </div>
+    <div class='card borderBg' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">      
     <PiePage
         :options="{
         domSelector: 'repair',
@@ -48,7 +51,8 @@
         data:this.repairData
       }"
       />    
-    
+    </div>
+    <div class='card borderBg' :style="{ display: this.currentNav==='order' ? 'block' : 'none'}">
      <BarPage 
         :options="{
         domSelector: 'orderStatis',
@@ -57,9 +61,8 @@
         data:this.orderStatisData
       }"
       />
-    
     </div>
-    <div class='card' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none' }">      
+    <div class='card borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none' }">      
     <PiePage
         :options="{
         domSelector: 'maintenance',
@@ -67,7 +70,8 @@
         data:this.maintenanceData, 
       }"
       />    
-    
+    </div>
+    <div class='card borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none'}">
       <BarPage 
         :options="{
         domSelector: 'monitor',
@@ -78,39 +82,18 @@
       }"
       />
     </div>
-    <div class='card' :style="{ display: this.currentNav==='alarms' ? 'block' : 'none' }">
-      <PiePage
-        :options="{
-        domSelector: 'maintenance',
-        data:this.maintenanceData,
-        config:this.orderConfig
-
-      }"
-      />
+    <div class='card borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none'}">
+     	<BarPage :options="{
+			  domSelector: 'maindif',
+			  viewData: this.maindif,
+			  smooth:true,
+			  data:this.maindifData,
+			  config:this.echartsConfig
+			}" />
+		
     </div>
-    <div class='card' :style="{ display: this.currentNav==='energy' ? 'block' : 'none' }">
-      <PiePage
-        :options="{
-        domSelector: 'maintenance',
-        data:this.maintenanceData,
-        config:this.orderConfig
-
-      }"
-      />
-    </div>
-   <div class='card' :style="{ display: this.currentNav==='environment' ? 'block' : 'none' }">
-      <PiePage
-        :options="{
-        domSelector: 'maintenance',
-        data:this.maintenanceData,
-        config:this.orderConfig
-
-      }"
-      />
-    </div>
-  </section> 
-  <!-- <section class='bottom'> 
-    <div class="borderBg">	
+     
+    <div class="borderBg" :style="{ display: this.currentNav==='alarms' ? 'block' : 'none'}">	
 			<h2 class='titleBg'>视频监控</h2>
       <div class="jkbox">
       <div class="imgbox"></div>
@@ -120,19 +103,48 @@
       </div>
       </div>
 	</div>	
-	</section> -->
+
+    <div class='card borderBg' :style="{ display: this.currentNav==='alarms' ? 'block' : 'none' }">
+     <PiePage :options="{
+			  domSelector: 'alarmPie',
+			  title:this.alarmTitle,
+			  data:this.alarmData
+			}" />
+    </div>
+  	<div class='card borderBg'	:style="{ display: this.currentNav==='environment' ? 'block' : 'none' }">
+				<BarPage :options="{
+			  domSelector: 'design',
+			  viewData: this.design,
+			  smooth:true,
+			  data:this.designData,
+						boundaryGap:true
+			}" />
+		</div>
+ 	<div class='card borderBg' :style="{ display: this.currentNav==='environment' ? 'block' : 'none' }">
+			<BarPage :options="{
+		  domSelector: 'envir',
+		  viewData: this.envir,
+		  smooth:true,
+		  data:this.envirData,
+					boundaryGap:true
+		}" />
+			</div>
+		
+  </section> 
+ 
   <section class='right'>
-    <div class='alarmborder'>
-      <div class='borderBg'>
+    <div class='alarmborder' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}"> 
+     <div class='borderBg'>      
      <PanelPage 
         :options="{
         title:this.panelTitle1,
         data:this.panelData
       }"
-      />
-     </div>
+      />    
     </div>
-    <div class='borderBg'>
+    </div>
+
+    <div class='card borderBg' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
     <CarouselTable
         :options="{
           title:this.carouselTitle,
@@ -142,7 +154,7 @@
       />
    
     </div>
-     <div class='borderBg'>
+     <div class='card borderBg' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
       <BarPage 
         :options="{
         domSelector: 'temDity',
@@ -152,6 +164,25 @@
         config:this.echartsConfig
       }"
       />     
+    </div>
+    <div class='card borderBg' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">      
+    <BarPage :options="{
+			  domSelector: 'orderdif',
+			  viewData: this.orderdif,
+			  smooth:true,
+			  data:this.orderdifData,
+						boundaryGap:true
+			}" />		  
+    </div>
+      <div class='card borderBg' :style="{ display: this.currentNav==='alarms' ? 'block' : 'none'}">
+    <CarouselTable
+        :options="{
+          title:this.alarmsTitle,
+          viewData: this.alarms,
+          data:this.alarmsData,
+      }"
+      />
+   
     </div>
   </section>
  <div id="WebGL-output">      
@@ -207,8 +238,17 @@ export default {
   },
   data (){ 
     return {
+      alarmsTitle: 'SEO报警情况',
       carouselTitle: 'SEO报警情况',
       dataSource:Array(24).fill(1).map(function(item,index){
+        return {
+          key:"id"+index,
+          name: '2022-4-14',
+          age:'co7'+parseInt(Math.random()*2)+'号锅炉水位极高',
+          remark: '未解决'
+        }
+      }),
+      alarmsData:Array(24).fill(1).map(function(item,index){
         return {
           key:"id"+index,
           name: '2022-4-14',
@@ -232,11 +272,7 @@ export default {
          {
           id:'alarms',
           title:'安全监视'
-        },
-         {
-          id:'energy ',
-          title:'能耗监测'
-        },
+        },      
           {
           id:'environment',
           title:'环保'
@@ -245,6 +281,26 @@ export default {
     currentIndex:0,
     currentNav:'home',
     columns: [
+        {
+          title:'报警时间',
+          width:80,
+          dataIndex:'name',
+          key:'name'
+        },
+        {
+          title:'变量',
+          width:100,
+          dataIndex:'age',
+          key:'age'
+        },
+        {
+          title:'报警描述',
+          width:80,
+          dataIndex:'remark',
+          key:'remark'
+        }
+      ],
+      alarms: [
         {
           title:'报警时间',
           width:80,
@@ -342,6 +398,34 @@ export default {
           data:[8]
         }
       ],
+      maindif: {
+					title: "维修工单对比",
+					xAxis: Array(7).fill(1).map(function(item, index) {
+						return index
+					}),
+					legend: [{
+						name: "本周",
+						key: "tempe"
+					}, {
+						name: "上周",
+						key: "dity"
+					}]
+				},
+			maindifData: [{
+						key: "tempe",
+						type: "line",
+						data: Array(24).fill(1).map(function() {
+							return parseInt(Math.random() * 20 + 20)
+						})
+					},
+					{
+						key: "dity",
+						type: "line",
+						data: Array(24).fill(1).map(function() {
+							return parseInt(Math.random() * 30 + 30)
+						})
+					}
+				],
       vehicle:{
         title:"单台设备开机率",
         xAxis:[],
@@ -447,7 +531,67 @@ export default {
           label:'维护中',
           value:parseInt(Math.random()*1000)
         }
-      ]
+      ],
+      	alarmTitle: "报警类型",
+			  alarmData: [{
+						name: "一级",
+						value: parseInt(Math.random() * 100 + 1000)
+					},
+					{
+						name: "二级",
+						value: parseInt(Math.random() * 100 + 800)
+					},
+					{
+						name: "三级",
+						value: parseInt(Math.random() * 100 + 600)
+					}
+				],
+        design: {
+					title: "设计处理量(h)",
+					xAxis: ['酸碱', '染色', '含磷', '含镍']
+				},
+				designData: [{
+					key: "dity",
+					type: "bar",
+					data: [40, 30, 25, 10]
+				}],
+        	envir: {
+					title: "废水日处理量",
+					xAxis: ['酸碱', '染色', '含磷', '含镍']
+				},
+				envirData: [{
+					key: "dity",
+					type: "bar",
+					data: [824, 631, 473, 202]
+				}],
+        orderdif: {
+					title: "设备对比",
+					xAxis: Array(7).fill(1).map(function(item, index) {
+						return index++
+					}),
+					legend: [{
+						name: "上周",
+						key: "tempe"
+					}, {
+						name: "本周",
+						key: "dity"
+					}]
+				},
+				orderdifData: [{
+						key: "tempe",
+						type: "bar",
+						data: Array(7).fill(1).map(function() {
+							return parseInt(Math.random() * 20 + 20)
+						})
+					},
+					{
+						key: "dity",
+						type: "bar",
+						data: Array(7).fill(1).map(function() {
+							return parseInt(Math.random() * 30 + 30)
+						})
+					}
+				],
     }
   },
   
@@ -608,7 +752,7 @@ export default {
 				orbitControls.maxDistance = 1700;
 				orbitControls.maxPolarAngle = Math.PI * 0.48;
 				orbitControls.update();
-				css3DObject.visible = true;
+				css3DObject.visible = false;
 				document.body.appendChild(this.renderer.domElement)
 
 			},
@@ -641,7 +785,7 @@ export default {
 					cardCSS3DObject.position.y = item.y;
 					cardCSS3DObject.position.z = item.z;
           //这里
-					cardCSS3DObject.visible = false;
+					cardCSS3DObject.visible = true;
 					css3DObject.add(cardCSS3DObject);
 				})
 
@@ -652,7 +796,7 @@ export default {
 				//在第二个场景中添加这个对象
 				scene.add(css3DObject);
 				// 默认不显示
-				css3DObject.visible = false;
+				css3DObject.visible = true;
 			},
 			// onMouseClick(event) {
 			//         console.log("===");
@@ -736,6 +880,7 @@ export default {
   position: absolute;
   top: 3rem;
   left: 50%;
+   height:2.3rem;
   transform: translateX(-50%);
   z-index: 100000;
 }
@@ -763,12 +908,11 @@ nav a.active{
 		flex-wrap: wrap;
 		align-items: center;
 		position: absolute !important;
-		top: 4rem;
+		top: 2rem;
 	}
 
 	.left {
 		margin-left: 1rem;
-    margin-bottom: 5rem;
 		left: 0;
 	}
 
@@ -776,6 +920,11 @@ nav a.active{
 		margin-right: 1rem;
 		right: 0;
 	}
+  .card{
+  width:100%; 
+ 
+}
+
 
 	.bottom {
 		position: absolute !important;
@@ -783,25 +932,21 @@ nav a.active{
 		left: 50%;
 		transform: translateX(-50%);
 	}
-.card{
-  width:100%;
-  
-}
 
 	.borderBg {
 		width: 14rem;
-		height: 8rem;
-		/* background:url(../assets/border.png) no-repeat center center; 
-    background-size: 14rem 10rem; */
+		height: 10rem;
+		background:url(../assets/border.png) no-repeat center center; 
+    background-size: 14rem 10rem;
 		overflow: hidden;
 	}
 
 	.bottomborderBg {
 		width: 14rem;
 		height: 8rem;
-		margin-top: 10px;
-		background: url(../assets/border.png) no-repeat center center;
-		background-size: 14rem 8rem;
+		margin-top: 0.5rem;
+		/* background: url(../assets/border.png) no-repeat center center;
+		background-size: 14rem 8rem; */
 		overflow: hidden;
 	}
 
@@ -842,18 +987,18 @@ nav a.active{
 	}
 
 	.alarmborder .borderBg {
-		width: 15rem;
+		width: 14rem;
 		height: 5rem;
-		background-size: 15rem 5rem;
+		background-size: 14rem 5rem;
 	}
   #maintenance,#repair,
 	#category,
 	#temDity,
 	#pie1,
 	#vehicle,
-	#dayStatis,#orderStatis,#monitor{
+	#dayStatis,#orderStatis,#monitor,#maindif,#alarmPie,#design,#envir,#orderdif{
 		width: 14rem;
-		height: 8rem;
+		height: 10rem;
    
 	}
 </style>

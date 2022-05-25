@@ -39,7 +39,7 @@
 					let title = {
 						text: this.titleText,
 						padding: [10, 0, 20, 10],
-						left:'left',
+						left:'center',
 						textStyle: {
 							color: '#ffffff',
 							fontFamily: 'sans-serif',
