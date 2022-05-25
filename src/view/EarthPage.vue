@@ -488,9 +488,9 @@
 			});
 			//关闭logo
 			viewer._cesiumWidget._creditContainer.style.display = "none";
-			// viewer.scene.globe.show = false; //不显示地球，这条和地球透明度选一个就可以
-			// viewer.scene.globe.baseColor = new Cesium.Color(0, 0, 0, 0);
-			// viewer.scene.backgroundcolor = new Cesium.Color(0, 0, 0, 0);
+			viewer.scene.globe.show = false; //不显示地球，这条和地球透明度选一个就可以
+			viewer.scene.globe.baseColor = new Cesium.Color(0, 0, 0, 0);
+			viewer.scene.backgroundcolor = new Cesium.Color(0, 0, 0, 0);
 			const tileset = viewer.scene.primitives.add(
 				new Cesium.Cesium3DTileset({
 					url: '/static/tileset.json',

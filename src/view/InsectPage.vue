@@ -797,6 +797,7 @@ export default {
 		margin:0;
 		padding:0;
 		overflow: hidden;
+    background:url(../assets/px.jpg) no-repeat;
 
 	}
 
