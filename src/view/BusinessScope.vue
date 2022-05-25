@@ -157,7 +157,7 @@ export default defineComponent({
   font-size:3rem;
   color: #fffefe;  
   position: relative;
-  animation: rotate3 3s linear infinite;
+ /* animation: rotate3 3s linear infinite; */
  
 }
 @keyframes rotate2{
@@ -176,7 +176,7 @@ export default defineComponent({
   font-size:0.8rem;
   font-family: SimHei;
   padding-top: 16px;
-  animation: rotate3 2000ms 2000ms linear;
+  /* animation: rotate3 2000ms 2000ms linear; */
 }
 section {
   background: linear-gradient(0deg, #f2f7fb, #f2f7fb);

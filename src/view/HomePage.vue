@@ -244,9 +244,8 @@ section .wrapper{
   text-indent: 2em;
 }
 .homeCase {
-  height:100vh;
-  padding-top: 2.5rem;
-  margin-top: 8rem;
+  height:30rem;
+  margin-top: 2.5rem;
 }
 h3.titbg {
   background: url(../assets/titbg.jpg) no-repeat bottom center;
