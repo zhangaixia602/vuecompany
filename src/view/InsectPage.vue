@@ -23,16 +23,7 @@
       }"
       />
     </div> 
-    <div class='card borderBg' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
-     <BarPage 
-        :options="{
-        domSelector: 'dayStatis',
-        viewData: this.dayStatis,
-        smooth:true,
-        data:this.dayStatisData
-      }"
-      />
-    </div>
+   
     <div class='alarmborder' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">
     <div class='borderBg'>
      <PanelPage 
@@ -82,16 +73,7 @@
       }"
       />
     </div>
-    <div class='card borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none'}">
-     	<BarPage :options="{
-			  domSelector: 'maindif',
-			  viewData: this.maindif,
-			  smooth:true,
-			  data:this.maindifData,
-			  config:this.echartsConfig
-			}" />
-		
-    </div>
+
      
     <div class="borderBg" :style="{ display: this.currentNav==='alarms' ? 'block' : 'none'}">	
 			<h2 class='titleBg'>视频监控</h2>
@@ -165,6 +147,26 @@
       }"
       />     
     </div>
+     <div class='card borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none'}">
+     <BarPage 
+        :options="{
+        domSelector: 'dayStatis',
+        viewData: this.dayStatis,
+        smooth:true,
+        data:this.dayStatisData
+      }"
+      />
+    </div>
+    <div class='card borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none'}">
+     	<BarPage :options="{
+			  domSelector: 'maindif',
+			  viewData: this.maindif,
+			  smooth:true,
+			  data:this.maindifData,
+			  config:this.echartsConfig
+			}" />
+		
+    </div>
     <div class='card borderBg' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">      
     <BarPage :options="{
 			  domSelector: 'orderdif',
@@ -205,6 +207,7 @@ import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import { CSS3DRenderer,CSS3DObject} from "three/examples/jsm/renderers/CSS3DRenderer"
     
 var scene, orbitControls,labelRenderer;
+
 let css3DObject; 
 let sources = [{
 			text: '室内温度:26℃ <br/> 报警信息: 无异常',      
@@ -595,12 +598,7 @@ export default {
     }
   },
   
-   methods: {
-    showNavs(nav,index) {
-      this.currentNav=nav.id
-      this.currentIndex=index
-      
-    },
+   methods: {   
    
     orderConfig (options){
       options.backgroundColor="transparent";
@@ -675,87 +673,7 @@ export default {
       
       document.body.appendChild(this.renderer.domElement)
     
-    },
-    setEnvMap(hdr) {
-      new RGBELoader().setPath("/static/gltf/").load(hdr + ".hdr", (texture) => {
-        texture.mapping = THREE.EquirectangularReflectionMapping;
-        scene.environment = texture;
-      })
-    },
-    modifyDocument(id, color, value) {
-            var dom = document.getElementById(id);
-            dom.style.color = color; 
-            dom.textContent = value;
-        },
-    addCSS3DLabelToScene() {
-            var element = document.getElementById("WebGL-output");
-            //把生成的CSSDOM对象处理成three的节点对象
-            css3DObject = new CSS3DObject(element);
-            sources.map((item, index) => {
-					  let cardContainer = document.createElement('div');					  				 
-            cardContainer.style=" background-color: MidnightBlue;background-color: rgba(0, 10, 40); border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;opacity: 0.5;font-size: 1px;color: aqua; padding: 10px 10px 10px;white-space: nowrap;"
-					  cardContainer.className="style1";
-            document.styleSheets[0].insertRule('.style1::after { content: "";border-style: solid;border-top: 18px solid rgba(0, 10, 40);border-right: 8px solid transparent;border-bottom: 18px solid transparent;border-left: 8px solid transparent;position: absolute;top: 100%;left:50%;top:80%;}', 0);
-            cardContainer.innerHTML = item.text;            
-            let cardCSS3DObject = new CSS3DObject(cardContainer);
-				  	cardCSS3DObject.position.x = item.x;
-				  	cardCSS3DObject.position.y = item.y;
-					  cardCSS3DObject.position.z = item.z;
-					  cardCSS3DObject.visible = true;
-					  css3DObject.add(cardCSS3DObject);
-				})
-				this.renderer.setSize(width, height)
-
-
-				scene = new THREE.Scene()
-				let cubeTextureLoader = new THREE.CubeTextureLoader();
-				cubeTextureLoader.setPath('/static/models/lc/');
-
-				let textureCube = cubeTextureLoader.load(['4.jpg', '1.jpg', '2.jpg', '5.jpg', '6.jpg', '3.jpg' 
-				]);
-				textureCube.encoding = THREE.sRGBEncoding;
-				scene.background = textureCube;
-				this.setEnvMap("004");
-
-				this.camera = new THREE.PerspectiveCamera(50, width / height, 1, 10000)
-				this.camera.position.set(0, 0, 400)
-				this.camera.lookAt(scene.position)
-				let light = new THREE.HemisphereLight(0xbbbbff, 0x444422, 1.5)
-				light.position.set(0, 50, 0)
-				scene.add(light)
-				this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-				this.controls.maxDistance = 1700;
-				this.controls.maxPolarAngle = Math.PI * 0.48;
-				document.body.appendChild(this.renderer.domElement);
-				labelRenderer = new CSS3DRenderer();
-				labelRenderer.setSize(window.innerWidth, window.innerHeight);
-				labelRenderer.domElement.style.position = 'absolute';
-				labelRenderer.domElement.style.top = '0px';
-				document.body.appendChild(labelRenderer.domElement);
-				this.addCSS3DLabelToScene();
-				let objLoader = new GLTFLoader();
-				let dracoLoader = new DRACOLoader();
-
-
-				dracoLoader.setDecoderPath('/draco/');
-				dracoLoader.preload();
-				objLoader.setDRACOLoader(dracoLoader);
-				objLoader.load('/static/models/smartfactory-processed.glb', function(glb) {
-					glb.scene.scale.set(9, 8, 10);
-					glb.scene.rotateY(-80); //绕y轴旋转π/4        
-					scene.add(glb.scene);
-					css3DObject.position.x = 180;
-					css3DObject.position.y = 0;
-					css3DObject.position.z = 0;
-				})
-				orbitControls = new OrbitControls(this.camera, labelRenderer.domElement);
-				orbitControls.maxDistance = 1700;
-				orbitControls.maxPolarAngle = Math.PI * 0.48;
-				orbitControls.update();
-				css3DObject.visible = false;
-				document.body.appendChild(this.renderer.domElement)
-
-			},
+    },    
 			setEnvMap(hdr) {
 				new RGBELoader().setPath("/static/gltf/").load(hdr + ".hdr", (texture) => {
 					texture.mapping = THREE.EquirectangularReflectionMapping;
@@ -767,7 +685,7 @@ export default {
 				dom.style.color = color;
 				dom.textContent = value;
 			},
-			addCSS3DLabelToScene() {
+      addCSS3DLabelToScene() {
 				var element = document.getElementById("WebGL-output");
 				//把生成的CSSDOM对象处理成three的节点对象
 				css3DObject = new CSS3DObject(element);
@@ -783,21 +701,21 @@ export default {
 					let cardCSS3DObject = new CSS3DObject(cardContainer);
 					cardCSS3DObject.position.x = item.x;
 					cardCSS3DObject.position.y = item.y;
-					cardCSS3DObject.position.z = item.z;
-          //这里
-					cardCSS3DObject.visible = true;
-					css3DObject.add(cardCSS3DObject);
+					cardCSS3DObject.position.z = item.z;                    
+          cardCSS3DObject.visible=false;
+				  css3DObject.add(cardCSS3DObject);
 				})
 
 				//设置CSS3DObject对象
+        css3DObject.name="安全监控";
 				css3DObject.position.x = 0;
 				css3DObject.position.y = 0;
 				css3DObject.position.z = 0;
 				//在第二个场景中添加这个对象
 				scene.add(css3DObject);
 				// 默认不显示
-				css3DObject.visible = true;
-			},
+				// css3DObject.visible = false;
+			},		
 			// onMouseClick(event) {
 			//         console.log("===");
 			//         const mousePoint = new THREE.Vector2();
@@ -827,6 +745,20 @@ export default {
 				labelRenderer.render(scene, this.camera);
 				this.renderer.render(scene, this.camera)
 			},
+      showNavs(nav,index) {
+      this.currentNav=nav.id
+      this.currentIndex=index 
+      scene.getObjectByName("安全监控").children.map((item)=>{
+    
+        if(nav.id==='alarms'){
+          item.visible=true;
+
+        }else{
+          item.visible=false;
+        }
+      }) 
+      this.animate();       
+    },
 
 			echartsConfig(options) {
 				options.color = ['#e7717b', '#80FFA5'];
@@ -926,12 +858,6 @@ nav a.active{
 }
 
 
-	.bottom {
-		position: absolute !important;
-		bottom: 1rem;
-		left: 50%;
-		transform: translateX(-50%);
-	}
 
 	.borderBg {
 		width: 14rem;
@@ -941,20 +867,6 @@ nav a.active{
 		overflow: hidden;
 	}
 
-	.bottomborderBg {
-		width: 14rem;
-		height: 8rem;
-		margin-top: 0.5rem;
-		/* background: url(../assets/border.png) no-repeat center center;
-		background-size: 14rem 8rem; */
-		overflow: hidden;
-	}
-
-	.bottom .borderBg {
-		width: 17rem;
-		height: 8rem;
-		background-size: 17rem 12rem;
-	}
 
 	.jkbox {
 		display: flex;
