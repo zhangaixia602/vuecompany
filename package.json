@@ -10,6 +10,7 @@
   "dependencies": {
     "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.11",
+    "@tweenjs/tween.js": "^18.6.4",
     "ant-design-vue": "^2.2.8",
     "cesium": "^1.66.0",
     "copy-webpack-plugin": "^5.0.4",
