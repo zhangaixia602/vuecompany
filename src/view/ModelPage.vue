@@ -8,6 +8,7 @@ import waterPage from '@/view/waterPage'
 import GranaryPage from '@/view/GranaryPage'
 import EnvironmentPage from '@/view/EnvironmentPage'
 import EarthPage from '@/view/EarthPage'
+import TestPage from '@/view/TestPage'
 export default {
   name: 'ModelPage',
   components: {
@@ -16,7 +17,8 @@ export default {
     'waterPage': waterPage,
     'GranaryPage': GranaryPage,
     'EnvironmentPage': EnvironmentPage,
-    'EarthPage': EarthPage
+    'EarthPage': EarthPage,
+	'TestPage': TestPage
   },
   data () {
     return {
@@ -45,7 +47,11 @@ export default {
         {
           id: 'earth',
           component: 'EarthPage'
-        }
+        },
+		{
+			id: 'test',
+			component: 'TestPage'
+		}
       ]
     }
   },
