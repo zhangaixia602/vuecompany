@@ -812,9 +812,9 @@ export default {
 	}
   nav{
   position: absolute;
-  top: 3rem;
+  top: 4rem;
   left: 50%;
-   height:2.3rem;
+  height:2.3rem;
   transform: translateX(-50%);
   z-index: 100000;
 }
