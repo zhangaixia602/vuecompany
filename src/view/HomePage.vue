@@ -216,6 +216,7 @@ section .wrapper{
   z-index: 9999;
   transform: translateX(-50%);
   background: rgba(255,255,255,0.3);
+  padding-bottom:0.5rem;
 }
 .ant-tabs-tab>div{
   color:white;

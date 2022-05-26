@@ -42,5 +42,17 @@
     font-size: 0.9rem;
     text-align: center;
     color:white;
+	display:block;
+}
+@media (min-width:1920px) {
+	.panelBox{
+	    font-size:1.2rem;
+	}
+	.panelItem .iconfont{
+	    font-size:2.2rem;
+	}
+	.panelItem label{
+	    font-size: 1.5rem;
+	}
 }
 </style>
