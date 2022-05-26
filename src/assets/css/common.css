@@ -253,3 +253,8 @@ footer{
     height: 3px;
     background: #58fdff;
 }
+@media (min-width:1920px) {
+	.wrapper{
+	  width:1600px;
+	}
+}

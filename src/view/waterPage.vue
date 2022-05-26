@@ -663,9 +663,9 @@ nav a.active{
 .left,.right{
   width:11rem;
   height:calc(100% - 4rem);
-  display: flex;
+ /* display: flex;
   flex-wrap: wrap;
-  align-items:center;
+  align-items:center; */
   position: absolute !important;
   top:4rem;
 }
@@ -701,5 +701,8 @@ nav a.active{
   width:15rem;
   height:8rem;
   transform: translateX(-40px) scale(0.75);
+}
+#patrol,#maintenance,#repair{
+  transform: translateX(-20px) scale(0.9);
 }
 </style>
