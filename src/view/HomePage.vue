@@ -1,16 +1,16 @@
 <template>
   <HeaderPage :isFullpage="true"/>
   <section>
-    <video autoplay="true" loop :poster="require('../assets/videoH.png')">
+    <video autoplay="true" loop>
       <source :src="require('../assets/home.mp4')" type="video/mp4" />
     </video>
-    <h4 class='text'>智慧城市 数字赋能</h4>
+   <!-- <h4 class='text'>智慧城市 数字赋能</h4>
 	<h4 class='text'>产业变革 慧领未来</h4>
-	<p class='text'>技术引领世界 创新照耀未来</p>
-    <!-- <img :src="require('../assets/zt2.png')" /> -->
+	<p class='text'>技术引领世界 创新照耀未来</p> -->
+    <img :src="require('../assets/zt2.png')" />
   </section>
   <section>
-     <video autoplay="true" loop :poster="require('../assets/videoW.png')">
+     <video autoplay="true" loop>
       <source :src="require('../assets/water.mp4')" type="video/mp4" />
     </video>
     <div class="wrapper">
@@ -187,6 +187,12 @@ export default defineComponent({
 video{
   width:100%;
 }
+@media (min-width:1920px and max-width:3840px) {
+	video{
+	  width:100%;
+	  height:100vh;
+	}
+}
 section{
   height:100vh;
   position:relative;
@@ -204,13 +210,12 @@ section>img{
   font-size:3rem;
 }
 section .wrapper{
-	height:21rem;
   position: absolute;
-  top:50%;
+  top:12%;
   left: 50%;
   z-index: 9999;
-  transform: translate(-50%,-50%);
-  background: rgba(255,255,255,0.2);
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.3);
 }
 .ant-tabs-tab>div{
   color:white;
@@ -218,11 +223,11 @@ section .wrapper{
 .ant-tabs-tab.ant-tabs-tab-active>div{
   color:#1890ff;
 }
-.ant-tabs-tab{
-  font-size:1.2rem;
+.ant-tabs-tab div{
+  font-size:1.3rem;
 }
 .ant-tabs-tab .iconfont{
-  font-size:1.5rem;
+  font-size:1.8rem;
 }
 .tabItem {
   display: flex;
@@ -231,10 +236,10 @@ section .wrapper{
   height:100%;
 }
 .tabItem img {
-  width: 15.5rem;
+  width:49%;
 }
 .tabItem p {
-  width: 40rem;
+  width:49%;
   height: 100%;
   padding: 3rem 3.2rem;
   background:rgb(128 128 128 / 20%);
