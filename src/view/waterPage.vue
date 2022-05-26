@@ -268,20 +268,20 @@ export default defineComponent({
         return {
           key:"id"+index,
           name: '水位表'+index,
-          age:'10-'+parseInt(Math.random()*31),
+          age:'2021 10-'+parseInt(Math.random()*31),
           remark: index%2===0 ? '未解决' : '已处理'
         }
       }),
       columns: [
         {
           title:'设备',
-          width:70,
+          width:90,
           dataIndex:'name',
           key:'name'
         },
         {
           title:'日期',
-          width:50,
+          width:90,
           dataIndex:'age',
           key:'age'
         },
@@ -463,13 +463,13 @@ export default defineComponent({
       orderColumns:[
         {
           title:'所属区域',
-          width:60,
+          width:80,
           dataIndex:'area',
           key:'name'
         },
         {
           title:'工单类型',
-          width:60,
+          width:80,
           dataIndex:'type',
           key:'remark'
         },
@@ -629,7 +629,7 @@ body{
   overflow: hidden;
 }
 video{
-  margin-top:1rem;
+  margin-top:0.5rem;
   width:100%;
 }
 header{
@@ -661,11 +661,8 @@ nav a.active{
   background:url(../assets/nav.png) no-repeat center center;
 }
 .left,.right{
-  width:11rem;
+  width:20%;
   height:calc(100% - 4rem);
- /* display: flex;
-  flex-wrap: wrap;
-  align-items:center; */
   position: absolute !important;
   top:4rem;
 }
@@ -679,6 +676,7 @@ nav a.active{
 }
  .bottom{
   position: absolute !important;
+  height:8rem;
   bottom:1rem;
   left:50%;
   transform:translateX(-50%);
@@ -694,15 +692,22 @@ nav a.active{
   height:1.5rem;
   line-height:1.5rem;
   background:url(../assets/cardBg.png) no-repeat center center;
-  background-size: 11rem 1.5rem;
+  background-size:100% 1.5rem;
   overflow: hidden;
 }
 #dayStatis,#weekly,#workHours,#category,#alarm,#patrol,#maintenance,#mouthOrder,#weeklyOrder,#repair{
   width:15rem;
   height:8rem;
-  transform: translateX(-40px) scale(0.75);
+  transform: translateX(-14px) scale(0.9);
 }
-#patrol,#maintenance,#repair{
-  transform: translateX(-20px) scale(0.9);
+@media (min-width:1920px) {
+	#dayStatis,#weekly,#workHours,#category,#alarm,#patrol,#maintenance,#mouthOrder,#weeklyOrder,#repair{
+	  width:23rem;
+	  height:16rem;
+	  transform: translateX(-36px) scale(0.8);
+	}
+	video{
+	  margin-top:2rem;
+	}
 }
 </style>

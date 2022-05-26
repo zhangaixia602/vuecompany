@@ -257,21 +257,21 @@
 						text: 'guangzi'
 					},
 					{
-							name: 'jiqi_2',
-							text: 'jiqi_2'
-						},
-						{
-							name: 'jiqi_1',
-							text: 'jiqi_1'
-						},
-						{
-							name: 'paifeng_2',
-							text: 'paifeng_2'
-						},
-						{
-							name: 'yancong',
-							text: 'yancong'
-						}
+						name: 'jiqi_2',
+						text: 'jiqi_2'
+					},
+					{
+						name: 'jiqi_1',
+						text: 'jiqi_1'
+					},
+					{
+						name: 'paifeng_2',
+						text: 'paifeng_2'
+					},
+					{
+						name: 'yancong',
+						text: 'yancong'
+					}
 				],
 				visible: false,
 				left: 0,
@@ -341,16 +341,18 @@
 				let height = popup.clientHeight;
 				let rayCaster = new THREE.Raycaster();
 				let mouse = new THREE.Vector2();
-				let getBoundingClientRect=this.renderer.domElement.getBoundingClientRect();
-				mouse.x = ((event.clientX-getBoundingClientRect.left)/this.renderer.domElement.offsetWidth)*2-1;
-				mouse.y = ((event.clientY-getBoundingClientRect.top)/this.renderer.domElement.offsetHeight)*2+1;
+				let getBoundingClientRect = this.renderer.domElement.getBoundingClientRect();
+				mouse.x = ((event.clientX - getBoundingClientRect.left) / this.renderer.domElement.offsetWidth) *
+					2 - 1;
+				mouse.y = ((event.clientY - getBoundingClientRect.top) / this.renderer.domElement.offsetHeight) *
+					2 + 1;
 				rayCaster.setFromCamera(mouse, this.camera);
 				let intersects = rayCaster.intersectObjects(scene.children, true);
 				console.log(intersects)
 				if (intersects.length !== 0 && intersects[0].object.type === 'Mesh') {
 					let selectObject = intersects[0].object;
-					this.modelData.map((item,index)=>{
-						if (item.name===selectObject.name) {
+					this.modelData.map((item, index) => {
+						if (item.name === selectObject.name) {
 							this.title = item.name;
 							this.visible = true;
 							this.geometry = item.text;
@@ -405,7 +407,7 @@
 
 	.left,
 	.right {
-		width: 14rem;
+		width: 22%;
 		height: calc(100% - 4rem);
 		display: flex;
 		flex-wrap: wrap;
@@ -434,17 +436,16 @@
 	}
 
 	.borderBg {
-		width: 14rem;
-		height: 10rem;
+		width: 100%;
+		height: 30%;
 		background: url(../assets/border.png) no-repeat center center;
-		background-size: 14rem 10rem;
+		background-size: 100% 100%;
 		overflow: hidden;
 	}
 
 	.left .borderBg:first-child {
-		width: 14rem;
-		height: 5rem;
-		background-size: 14rem 5rem;
+		width: 100%;
+		height: 20%;
 	}
 
 	.bottom .borderBg:first-child {
@@ -461,8 +462,19 @@
 	#temDity,
 	#pie,
 	#vehicle {
-		width: 14rem;
-		height: 10rem;
+		width: 15rem;
+		height: 8.2rem;
+	}
+
+	@media (min-width:1920px) {
+
+		#category,
+		#temDity,
+		#pie,
+		#vehicle {
+			width: 21.2rem;
+			height: 15rem;
+		}
 	}
 
 	.orderBox {
