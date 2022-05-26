@@ -216,7 +216,7 @@
 					},
 					{
 						title: '报警描述',
-						width: 80,
+						width:120,
 						dataIndex: 'remark',
 						key: 'remark'
 					}
@@ -424,7 +424,7 @@
 						value: parseInt(Math.random() * 1000)
 					}
 				],
-				progressData: Array(4).fill(1).map(function(item, index) {
+				progressData: Array(3).fill(1).map(function(item, index) {
 					return {
 						key: "id" + index,
 						name: index % 2 === 0 ? '出厂水' : '回收水',
@@ -733,7 +733,7 @@
 
 	.left,
 	.right {
-		width: 14rem;
+		width:22%;
 		height: calc(100% - 4rem);
 		display: flex;
 		flex-wrap: wrap;
@@ -753,17 +753,17 @@
 	}
 
 	.borderBg {
-		width: 14rem;
-		height: 10rem;
+		width:100%;
+		height:30%;
 		background: url(../assets/border.png) no-repeat center center;
-		background-size: 14rem 10rem;
+		background-size:100% 100%;
 		overflow: hidden;
 	}
 
 	.left .energy {
-		width: 14rem;
-		height: 5rem;
-		background-size: 14rem 5rem;
+		width:100%;
+		height: 20%;
+		background-size: 100% 100%;
 	}
 
 	.bottom {
@@ -787,7 +787,24 @@
 	#water,
 	#electric,
 	#natural {
-		width: 14rem;
-		height: 10rem;
+		width:15rem;
+		height:8.2rem;
+	}
+	@media (min-width:1920px) {
+		#category,
+		#temDity,
+		#pie,
+		#monitorPie,
+		#vehicle,
+		#envir,
+		#WebGL-outputn,
+		#design,
+		#alarm,
+		#water,
+		#electric,
+		#natural {
+			width:21.2rem;
+			height:15rem;
+		}
 	}
 </style>

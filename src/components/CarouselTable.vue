@@ -7,7 +7,7 @@
                     <div  v-for="(column,index) in columns" :style="{width:column.width+'px'}" :key="index">{{column.title}}</div>
                 </li>
            </ul>
-           <div class='body-table-carousel-container' :style="{ height: this.title!=='' ? '5.5rem' : '7.5rem' }">
+           <div class='body-table-carousel-container'>
                 <ul class='body-table-carousel ' :class="{goCarousel:this.title!=='',goCarousel1:this.title==''}">
                     <li  v-for="(sources,index) in sources" :key='index'>
                         <div  v-for="(column,i) in columns" :style="{width:column.width+'px'}" :key="i">{{sources[column.dataIndex]}}</div>
@@ -40,6 +40,9 @@
     height:100%;
     background:'rgba(4,103,247,0.2)';
 }
+.table-carousel{
+	height:calc(100% - 2.3rem);
+}
 .table-carousel div{
     display:inline-block;
     font-size:0.7rem;
@@ -48,6 +51,7 @@
 }
 .body-table-carousel-container{
     overflow: hidden;
+	height:calc(100% - 1.6rem);
 }
 .goCarousel{
     animation:goCarousel 10s infinite;
