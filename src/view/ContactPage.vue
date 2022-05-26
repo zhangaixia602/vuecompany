@@ -34,7 +34,7 @@
 				<div class="right-map">
 					<div class="left-content">
 						<p>公司地址:</p>
-						深圳市龙华新区清祥路1号宝能科技园7栋A座11楼
+						深圳市龙华区龙华街道壹成环智中心2座13层B08、B09单位
 						<p>邮箱:</p>
 						dyhzn@qq.com
 						<p>邮编:</p>

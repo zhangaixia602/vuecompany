@@ -113,7 +113,7 @@ export default defineComponent({
       menus: [            
       
         {
-          title: "智慧园区",
+          title: "智慧工厂",
           src: "assets/yq.png",
           text: "利用Threejs,WebGL技术，将3G大小BIM楼宇模型轻松展示在网页端，让整个园区与分层信息实现3D可视化集成展示园区多功能运维管理系统，对接线下IOT设备接口，实时数据展示，降低风险损失。结合GIS地图、实景三维、BIM模型和单物品模型，通过3D展示技术实现城市全景展示、园区地理位置、楼房室内布局的3D可视化。",
           position: "left",

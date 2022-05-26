@@ -72,7 +72,7 @@ export default defineComponent({
         },
         {
           title: "数字可视化",
-          src: "assets/15.png",
+          src: "assets/szksh.jpg",
           text: "简单地说，数据可视化就是以图形化方式表示数据。决策者可以通过图形直观地看到数据分析结果，从而更容易理解复杂的数据集，以进一步获得更细节的信息，交互式地观察数据改变或处理过程。",
           position: "left",
         },
