@@ -47,11 +47,7 @@ export default {
         {
           id: 'earth',
           component: 'EarthPage'
-        },
-		{
-			id: 'test',
-			component: 'TestPage'
-		}
+        }
       ]
     }
   },

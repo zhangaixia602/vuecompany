@@ -4,6 +4,7 @@
     <a v-for='(nav,index) in navs' :key='index' @click="showNavs(nav,index)" :class="{active: this.currentIndex===index}">{{nav.title}}</a>
   </nav>
   <section class='left'>
+   
     <div class='card borderBg' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
       <PiePage
         :options="{
@@ -836,17 +837,18 @@ nav a.active{
 	.left,
 	.right {
 		width: 14rem;
-		height: calc(100% - 4rem);
+		height: calc(100% - 10rem);
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
 		position: absolute !important;
-		top: 2rem;
+		top: 5rem;
 	}
 
 	.left {
 		margin-left: 1rem;
 		left: 0;
+       
 	}
 
 	.right {
@@ -862,9 +864,9 @@ nav a.active{
 
 	.borderBg {
 		width: 14rem;
-		height: 10rem;
+		height: 12rem;
 		background:url(../assets/border.png) no-repeat center center; 
-    background-size: 14rem 10rem;
+    background-size: 14rem 12rem;
 		overflow: hidden;
 	}
 
@@ -911,7 +913,7 @@ nav a.active{
 	#vehicle,
 	#dayStatis,#orderStatis,#monitor,#maindif,#alarmPie,#design,#envir,#orderdif{
 		width: 14rem;
-		height: 10rem;
+		height: 12rem;
    
 	}
 </style>
