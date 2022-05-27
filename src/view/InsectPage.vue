@@ -5,7 +5,7 @@
   </nav>
   <section class='left'>
    
-    <div class='card borderBg' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
+    <div class='borderBg' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
       <PiePage
         :options="{
         domSelector: 'pie1',
@@ -14,7 +14,7 @@
       }"
       />  
       </div>
-      <div class='card borderBg' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
+      <div class='borderBg' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
       <BarPage 
         :options="{
         domSelector: 'vehicle',
@@ -25,8 +25,8 @@
       />
     </div> 
    
-    <div class='alarmborder' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">
-    <div class='borderBg'>
+    <div class='borderBg alarmborder' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">
+    
      <PanelPage 
         :options="{
         title:this.panelTitle1,
@@ -34,8 +34,8 @@
       }"
       />
      </div>
-    </div>
-    <div class='card borderBg' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">      
+   
+    <div class='borderBg' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">      
     <PiePage
         :options="{
         domSelector: 'repair',
@@ -44,7 +44,7 @@
       }"
       />    
     </div>
-    <div class='card borderBg' :style="{ display: this.currentNav==='order' ? 'block' : 'none'}">
+    <div class='borderBg' :style="{ display: this.currentNav==='order' ? 'block' : 'none'}">
      <BarPage 
         :options="{
         domSelector: 'orderStatis',
@@ -54,7 +54,7 @@
       }"
       />
     </div>
-    <div class='card borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none' }">      
+    <div class='borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none' }">      
     <PiePage
         :options="{
         domSelector: 'maintenance',
@@ -63,7 +63,7 @@
       }"
       />    
     </div>
-    <div class='card borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none'}">
+    <div class='borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none'}">
       <BarPage 
         :options="{
         domSelector: 'monitor',
@@ -87,14 +87,14 @@
       </div>
 	</div>	
 
-    <div class='card borderBg' :style="{ display: this.currentNav==='alarms' ? 'block' : 'none' }">
+    <div class='borderBg ' :style="{ display: this.currentNav==='alarms' ? 'block' : 'none' }">
      <PiePage :options="{
 			  domSelector: 'alarmPie',
 			  title:this.alarmTitle,
 			  data:this.alarmData
 			}" />
     </div>
-  	<div class='card borderBg'	:style="{ display: this.currentNav==='environment' ? 'block' : 'none' }">
+  	<div class='borderBg'	:style="{ display: this.currentNav==='environment' ? 'block' : 'none' }">
 				<BarPage :options="{
 			  domSelector: 'design',
 			  viewData: this.design,
@@ -103,7 +103,7 @@
 						boundaryGap:true
 			}" />
 		</div>
- 	<div class='card borderBg' :style="{ display: this.currentNav==='environment' ? 'block' : 'none' }">
+ 	<div class='borderBg' :style="{ display: this.currentNav==='environment' ? 'block' : 'none' }">
 			<BarPage :options="{
 		  domSelector: 'envir',
 		  viewData: this.envir,
@@ -116,8 +116,7 @@
   </section> 
  
   <section class='right'>
-    <div class='alarmborder' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}"> 
-     <div class='borderBg'>      
+    <div class='borderBg alarmborder' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">  
      <PanelPage 
         :options="{
         title:this.panelTitle1,
@@ -125,9 +124,7 @@
       }"
       />    
     </div>
-    </div>
-
-    <div class='card borderBg' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
+    <div class='borderBg1' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
     <CarouselTable
         :options="{
           title:this.carouselTitle,
@@ -137,7 +134,7 @@
       />
    
     </div>
-     <div class='card borderBg' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
+     <div class='borderBg' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
       <BarPage 
         :options="{
         domSelector: 'temDity',
@@ -148,7 +145,7 @@
       }"
       />     
     </div>
-     <div class='card borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none'}">
+     <div class='borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none'}">
      <BarPage 
         :options="{
         domSelector: 'dayStatis',
@@ -158,7 +155,7 @@
       }"
       />
     </div>
-    <div class='card borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none'}">
+    <div class='borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none'}">
      	<BarPage :options="{
 			  domSelector: 'maindif',
 			  viewData: this.maindif,
@@ -168,7 +165,7 @@
 			}" />
 		
     </div>
-    <div class='card borderBg' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">      
+    <div class='borderBg' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">      
     <BarPage :options="{
 			  domSelector: 'orderdif',
 			  viewData: this.orderdif,
@@ -177,7 +174,7 @@
 						boundaryGap:true
 			}" />		  
     </div>
-      <div class='card borderBg' :style="{ display: this.currentNav==='alarms' ? 'block' : 'none'}">
+      <div class='borderBg1' :style="{ display: this.currentNav==='alarms' ? 'block' : 'none'}">
     <CarouselTable
         :options="{
           title:this.alarmsTitle,
@@ -599,8 +596,7 @@ export default {
     }
   },
   
-   methods: {   
-   
+   methods: { 
     orderConfig (options){
       options.backgroundColor="transparent";
       options.legend={
@@ -801,6 +797,12 @@ export default {
     background:url(../assets/px.jpg) no-repeat;
 
 	}
+  .container {
+		position: relative;
+		width: 100%;
+		height: 100vh;
+		overflow: hidden;
+	}
 
 	header {
 		background: url(../assets/tb1.png) no-repeat center center;
@@ -836,7 +838,7 @@ nav a.active{
 
 	.left,
 	.right {
-		width: 14rem;
+		width: 22%;
 		height: calc(100% - 10rem);
 		display: flex;
 		flex-wrap: wrap;
@@ -863,14 +865,18 @@ nav a.active{
 
 
 	.borderBg {
-		width: 14rem;
-		height: 12rem;
+		width: 100%;
+		height: 35%;
 		background:url(../assets/border.png) no-repeat center center; 
-    background-size: 14rem 12rem;
+    background-size: 100% 100%;
 		overflow: hidden;
 	}
 
+ .borderBg1{
+   	width: 100%;
+		height: 30%;
 
+}
 	.jkbox {
 		display: flex;
 		justify-content: space-between;
@@ -900,20 +906,36 @@ nav a.active{
 		height: 4rem;
 		margin-top: 0.5rem;
 	}
-
-	.alarmborder .borderBg {
-		width: 14rem;
-		height: 5rem;
-		background-size: 14rem 5rem;
+   .alarmborder {
+		width:100%;
+		height: 20%;
+		background-size: 100% 100%;
 	}
+
+	/* .alarmborder .borderBg {
+		width: 100%;
+		height:30%;
+		background-size: 100% 30%;
+	} */
   #maintenance,#repair,
 	#category,
 	#temDity,
 	#pie1,
 	#vehicle,
 	#dayStatis,#orderStatis,#monitor,#maindif,#alarmPie,#design,#envir,#orderdif{
-		width: 14rem;
-		height: 12rem;
+		width: 15rem;
+		height: 8.2rem;
    
+	}
+	@media (min-width:1920px) {
+	#maintenance,#repair,
+	#category,
+	#temDity,
+	#pie1,
+	#vehicle,
+	#dayStatis,#orderStatis,#monitor,#maindif,#alarmPie,#design,#envir,#orderdif{
+			width:21.2rem;
+			height:15rem;
+		}
 	}
 </style>

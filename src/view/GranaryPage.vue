@@ -327,7 +327,7 @@ header{
   line-height: 3.5rem;
 }
 .left,.right{
-  width:14rem;
+  width:22%;
   height:calc(100% - 4rem);
   display: flex;
   flex-wrap: wrap;
@@ -350,10 +350,10 @@ header{
   transform:translateX(-50%);
  }
 .borderBg{
-  width:14rem;
-  height:10rem;
+  width:100%;
+  height:30%;
   background:url(../assets/border.png) no-repeat center center;
-  background-size: 14rem 10rem;
+  background-size: 100% 100%;
   overflow: hidden;
 }
 .bottom .borderBg{
@@ -372,7 +372,14 @@ header{
   overflow: hidden;
 }
 #category,#temDity,#pie,#vehicle,#dayStatis,#resource{
-  width:14rem;
-  height:10rem;
+  width:15rem;
+  height:8.2rem;
 }
+@media (min-width:1920px) {
+
+		#category,#temDity,#pie,#vehicle,#dayStatis,#resource {
+			width: 21.2rem;
+			height: 15rem;
+		}
+	}
 </style>
