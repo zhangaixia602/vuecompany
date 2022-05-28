@@ -26,6 +26,7 @@
 </script>
 <style scoped>
 .panelPage{
+    width: 15rem;
     padding:0 0.5rem;
     height:100%;
 }
@@ -45,6 +46,9 @@
 	display:block;
 }
 @media (min-width:1920px) {
+    .panelPage{
+    width: 21.2rem;
+    }
 	.panelBox{
 	    font-size:1.2rem;
 	}
