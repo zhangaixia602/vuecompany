@@ -1,7 +1,5 @@
 <template>
-	<header>智慧工厂<button  @click="showNavs()">{{visible}}</button></header>
-	<div id="WebGL-output">
-	</div>
+	<header>智慧工厂</header>
 
 
 </template>
@@ -25,58 +23,138 @@
 		CSS3DObject
 	} from "three/examples/jsm/renderers/CSS3DRenderer"
 
-	var scene, orbitControls, labelRenderer;
-	let css3DObject;
-	let sources = [{
-			text: '室内温度:26℃ <br/> 报警信息: 无异常',
-			x: -400,
-			y: 40,
-			z: -300
-		},
-		{
-			text: '室内温度:27℃',
-			des: '报警信息: 无异常',
-			x: -350,
-			y: 40,
-			z: 100
-		},
-		{
-			text: '室内温度:25℃',
-			des: '报警信息: 无异常',
-			x: 0,
-			y: 50,
-			z: -300
-		}
-	];
-
+	var scene,
+		labelRenderer,
+		DTTween,
+		iconObject = [];
 	export default {
 		name: 'TestPage',
-		data(){
+		data() {
 			return {
-				visible:false
+				iconArr: [{
+						img: '/static/models/lc/水表.png',
+						position: [-400, 40, -300],
+						scale: 75,
+						name: '水表',
+						data: {
+							type: '水表',
+							id: 'LJFDSFJNNF',
+							name: '水表25',
+							place: '大厦门口',
+							state: '异常状态',
+							position: [-400, 10, -300],
+							scale: 1.2
+						}
+					}, {
+						img: '/static/models/lc/摄像头.png',
+						position: [-350, 40, 100],
+						scale: 75,
+						name: '摄像头',
+						data: {
+							type: '摄像头',
+							id: 'LJFDSFJNNF',
+							name: '摄像头25',
+							place: '大厦门口',
+							state: '异常状态',
+							position: [-350, 10, 100],
+							scale: 1.2
+						}
+					}, {
+						img: '/static/models/lc/电表.png',
+						position: [0, 50, -300],
+						scale: 75,
+						name: '电表',
+						data: {
+							type: '电表',
+							id: 'LJFDSFJNNF',
+							name: '电表25',
+							place: '大厦门口',
+							state: '异常状态',
+							position: [0, 20, -300],
+							scale: 1.2
+						}
+					},
+					{
+						img: '/static/models/lc/燃气表.png',
+						position: [-764.8282959749986, 670, 300.3706885251563],
+						scale: 75,
+						name: '燃气表',
+						data: {
+							type: '燃气表',
+							id: 'LJFDSFJNNF',
+							name: '燃气表25',
+							place: '大厦门口',
+							state: '异常状态',
+							position: [-764.8282959749986, 520, 300.3706885251563],
+							scale: 1.2
+						}
+					},
+					{
+						img: '/static/models/lc/门禁.png',
+						position: [412.2413402072451, 200, -91.7230799691105],
+						scale: 75,
+						name: '门禁',
+						data: {
+							type: '门禁',
+							id: 'LJFDSFJNNF',
+							name: '门禁26',
+							place: '大厦门口',
+							state: '正常',
+							position: [412.2413402072451, 50, -91.7230799691105],
+							scale: 1.2
+						}
+					},
+					{
+						img: '/static/models/lc/烟感.png',
+						position: [213.7778211322986, 70, 77.8222650879916],
+						scale: 75,
+						name: '烟感',
+						data: {
+							type: '烟感',
+							id: 'LJFDSFJNNF',
+							name: '烟感26',
+							place: '大厦门口',
+							state: '正常',
+							position: [213.7778211322986, 20, 77.8222650879916],
+							scale: 1.2
+						}
+					},
+					{
+						img: '/static/models/lc/温感.png',
+						position: [-130.71775687414453, 90, -724.6109557548291],
+						scale: 75,
+						name: '温感',
+						data: {
+							type: '温感',
+							id: 'LJFDSFJNNF',
+							name: '温感25',
+							place: '大厦门口',
+							state: '异常状态',
+							position: [-130.71775687414453, 40, -724.6109557548291],
+							scale: 1.2
+						}
+					}
+				]
 			}
 		},
 		methods: {
-			showNavs() {
-				if(this.visible){
-					this.visible=false;
-				}else{
-					this.visible=true;
-				}
-			  scene.getObjectByName("精灵").children.map((item)=>{
-				  item.visible=this.visible;
-			  })
-			  this.animate();
-			},
 			initThree() {
 				let width = window.innerWidth //窗口宽
 				let height = window.innerHeight
 				this.renderer = new THREE.WebGL1Renderer({
 					antialias: true
 				})
-				this.renderer.setSize(width, height)
-
-
+				this.renderer.setSize(width, height);
+				document.body.appendChild(this.renderer.domElement);
+				//CSS3D render
+				labelRenderer = new CSS3DRenderer();
+				labelRenderer.setSize(width, height);
+				labelRenderer.domElement.id = 'CSS3D';
+				labelRenderer.domElement.style.position = 'absolute';
+				labelRenderer.domElement.style.top = 0;
+				labelRenderer.domElement.style.zIndex = 100;
+				labelRenderer.domElement.style.pointerEvents = 'none';
+				document.body.appendChild(labelRenderer.domElement)
 				scene = new THREE.Scene()
 				let cubeTextureLoader = new THREE.CubeTextureLoader();
 				cubeTextureLoader.setPath('/static/models/lc/');
@@ -97,17 +175,9 @@
 				this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 				this.controls.maxDistance = 1700;
 				this.controls.maxPolarAngle = Math.PI * 0.48;
-				document.body.appendChild(this.renderer.domElement);
-				labelRenderer = new CSS3DRenderer();
-				labelRenderer.setSize(window.innerWidth, window.innerHeight);
-				labelRenderer.domElement.style.position = 'absolute';
-				labelRenderer.domElement.style.top = '0px';
-				document.body.appendChild(labelRenderer.domElement);
-				this.addCSS3DLabelToScene();
+				//加载模型
 				let objLoader = new GLTFLoader();
 				let dracoLoader = new DRACOLoader();
-
-				css3DObject.visible =false;
 				dracoLoader.setDecoderPath('/draco/');
 				dracoLoader.preload();
 				objLoader.setDRACOLoader(dracoLoader);
@@ -116,17 +186,76 @@
 					glb.scene.scale.set(9, 8, 10);
 					glb.scene.rotateY(-80); //绕y轴旋转π/4        
 					scene.add(glb.scene);
-					css3DObject.position.x = 180;
-					css3DObject.position.y = 0;
-					css3DObject.position.z = 0;
 				})
-				orbitControls = new OrbitControls(this.camera, labelRenderer.domElement);
-				orbitControls.maxDistance = 1700;
-				orbitControls.maxPolarAngle = Math.PI * 0.48;
-				orbitControls.update();
+				//加载精灵
+				this.iconArr.map((item, index) => {
+					let spriteMaterial = new THREE.SpriteMaterial({
+						map: new THREE.TextureLoader().load(item.img)
+					});
+					// 创建精灵模型对象，不需要几何体geometry参数
+					let sprite = new THREE.Sprite(spriteMaterial);
+					sprite.position.set(item.position[0], item.position[1], item.position[2])
+					sprite.scale.set(item.scale, item.scale, 1)
+					sprite.name = item.name;
+					sprite.index = index;
+					sprite.type = 'Icon';
+					sprite.userData.hover = true;
+					iconObject.push(sprite)
+					scene.add(sprite)
+					this.CSS3DAdd(index, item.data);
+					console.log(scene)
+				})
+				this.renderer.domElement.addEventListener('click', this.onMouseclick);
+			},
+			// onMouseclick(event){
+			// 	event.preventDefault();
+			// 	let mainCanvas=event.path[0];
+			// 	let rayCaster = new THREE.Raycaster();
+			// 	let mouse = new THREE.Vector2();
+			// 	mouse.x = (event.clientX / window.innerWidth) *
+			// 		2 - 1;
+			// 	mouse.y = (event.clientY / window.innerWidth) *
+			// 		2 + 1;
+			// 	rayCaster.setFromCamera(mouse, this.camera);
+			// 	let intersects = rayCaster.intersectObjects(scene.children, true);
+			// 	if(intersects.length>0){
+			// 		console.log(intersects)
+			// 	}
+			// },
+			onMouseclick(event) {
+				event.preventDefault();
+				let mouse = new THREE.Vector2();
+				mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+				mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+				//新建一个三维单位向量 假设z方向就是0.5
+				//根据照相机，把这个向量转换到视点坐标系
+				var vector = new THREE.Vector3(mouse.x, mouse.y, 0.5).unproject(this.camera);
 
-				document.body.appendChild(this.renderer.domElement)
+				//在视点坐标系中形成射线,射线的起点向量是照相机， 射线的方向向量是照相机到点击的点，这个向量应该归一标准化。
+				var raycaster = new THREE.Raycaster(this.camera.position, vector.sub(this.camera.position).normalize());
 
+				//射线和模型求交，选中一系列直线
+				var intersects = raycaster.intersectObjects(scene.children, true);
+				console.log('imtersrcts=' + intersects)
+			},
+			CSS3DAdd(i, data) {
+				let divDom = document.createElement('div')
+				divDom.setAttribute('id', `THREE3D_plant${i}`)
+				divDom.innerHTML = `<div class='plant3D' ${data.type == '摄像头' ? `style='display:inline-block'` : ``}>
+			             <div class='plant3DTitle'>${data.type}信息</div>
+			             <div class='plant3Dcontent'>
+			               <p style='margin:10px 0 0 10px'>设备ID: ${data.id}</p>
+			               <p>设备名称: ${data.name}</p>
+			               <p>设备位置: ${data.place}</p>
+			               <p>设备状态: <span ${data.state == '异常状态' ? `style='color:red'` : `style='color:green'`}>${data.state}</span></p>
+			             </div>
+			           </div>`
+				let cardCSS3DObject = new CSS3DObject(divDom);
+				cardCSS3DObject.position.set(data.position[0], data.position[1], data.position[2])
+				cardCSS3DObject.scale.set(data.scale, data.scale, 1);
+				cardCSS3DObject.visible = false;
+				cardCSS3DObject.name = data.name;
+				scene.add(cardCSS3DObject)
 			},
 			setEnvMap(hdr) {
 				new RGBELoader().setPath("/static/gltf/").load(hdr + ".hdr", (texture) => {
@@ -134,45 +263,8 @@
 					scene.environment = texture;
 				})
 			},
-			modifyDocument(id, color, value) {
-				var dom = document.getElementById(id);
-				dom.style.color = color;
-				dom.textContent = value;
-			},
-			addCSS3DLabelToScene() {
-				var element = document.getElementById("WebGL-output");
-				//把生成的CSSDOM对象处理成three的节点对象
-				css3DObject = new CSS3DObject(element);
-				sources.map((item, index) => {
-					let cardContainer = document.createElement('div');
-					cardContainer.style =
-						" background-color: MidnightBlue;background-color: rgba(0, 10, 40); border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;opacity: 0.5;font-size: 1px;color: aqua; padding: 10px 10px 10px;white-space: nowrap;"
-					cardContainer.className = "style1";
-					document.styleSheets[0].insertRule(
-						'.style1::after { content: "";border-style: solid;border-top: 18px solid rgba(0, 10, 40);border-right: 8px solid transparent;border-bottom: 18px solid transparent;border-left: 8px solid transparent;position: absolute;top: 100%;left:50%;top:80%;}',
-						0);
-					cardContainer.innerHTML = item.text;
-					let cardCSS3DObject = new CSS3DObject(cardContainer);
-					cardCSS3DObject.position.x = item.x;
-					cardCSS3DObject.position.y = item.y;
-					cardCSS3DObject.position.z = item.z;
-					cardCSS3DObject.visible = false;
-					css3DObject.add(cardCSS3DObject);
-				})
-
-				//设置CSS3DObject对象
-				css3DObject.name='精灵';
-				css3DObject.position.x = 0;
-				css3DObject.position.y = 0;
-				css3DObject.position.z = 0;
-				//在第二个场景中添加这个对象
-				scene.add(css3DObject);
-				// 默认不显示
-				css3DObject.visible = false;
-			},
 			animate() {
 				requestAnimationFrame(this.animate)
-				orbitControls.update();
 				labelRenderer.render(scene, this.camera);
 				this.renderer.render(scene, this.camera)
 			}
@@ -185,13 +277,14 @@
 </script>
 <style scoped>
 	body {
-	    width:100%;
-		height:100vh;
-		margin:0;
-		padding:0;
+		width: 100%;
+		height: 100vh;
+		margin: 0;
+		padding: 0;
 		overflow: hidden;
-	
+
 	}
+
 	header {
 		background: url(../assets/tb1.png) no-repeat center center;
 		background-size: cover;
