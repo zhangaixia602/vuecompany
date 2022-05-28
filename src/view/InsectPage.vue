@@ -5,7 +5,7 @@
   </nav>
   <section class='left'>
    
-    <div class='borderBg' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
+    <div class='card' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
       <PiePage
         :options="{
         domSelector: 'pie1',
@@ -14,7 +14,7 @@
       }"
       />  
       </div>
-      <div class='borderBg' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
+      <div class='card' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
       <BarPage 
         :options="{
         domSelector: 'vehicle',
@@ -24,7 +24,16 @@
       }"
       />
     </div> 
-   
+  <div class='card' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
+       <BarPage 
+        :options="{
+        domSelector: 'orderStatis1',
+        viewData: this.orderStatis1,
+        smooth:true,
+        data:this.orderStatisData1
+      }"
+      />
+    </div> 
     <div class='borderBg alarmborder' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">
     
      <PanelPage 
@@ -35,7 +44,7 @@
       />
      </div>
    
-    <div class='borderBg' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">      
+    <div class='card' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">      
     <PiePage
         :options="{
         domSelector: 'repair',
@@ -44,7 +53,7 @@
       }"
       />    
     </div>
-    <div class='borderBg' :style="{ display: this.currentNav==='order' ? 'block' : 'none'}">
+    <div class='card' :style="{ display: this.currentNav==='order' ? 'block' : 'none'}">
      <BarPage 
         :options="{
         domSelector: 'orderStatis',
@@ -54,7 +63,7 @@
       }"
       />
     </div>
-    <div class='borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none' }">      
+    <div class='card' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none' }">      
     <PiePage
         :options="{
         domSelector: 'maintenance',
@@ -63,7 +72,7 @@
       }"
       />    
     </div>
-    <div class='borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none'}">
+    <div class='card' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none'}">
       <BarPage 
         :options="{
         domSelector: 'monitor',
@@ -76,7 +85,7 @@
     </div>
 
      
-    <div class="borderBg" :style="{ display: this.currentNav==='alarms' ? 'block' : 'none'}">	
+    <div class="card" :style="{ display: this.currentNav==='alarms' ? 'block' : 'none'}">	
 			<h2 class='titleBg'>视频监控</h2>
       <div class="jkbox">
       <div class="imgbox"></div>
@@ -87,14 +96,14 @@
       </div>
 	</div>	
 
-    <div class='borderBg ' :style="{ display: this.currentNav==='alarms' ? 'block' : 'none' }">
+    <div class='card ' :style="{ display: this.currentNav==='alarms' ? 'block' : 'none' }">
      <PiePage :options="{
 			  domSelector: 'alarmPie',
 			  title:this.alarmTitle,
 			  data:this.alarmData
 			}" />
     </div>
-  	<div class='borderBg'	:style="{ display: this.currentNav==='environment' ? 'block' : 'none' }">
+  	<div class='card'	:style="{ display: this.currentNav==='environment' ? 'block' : 'none' }">
 				<BarPage :options="{
 			  domSelector: 'design',
 			  viewData: this.design,
@@ -103,7 +112,7 @@
 						boundaryGap:true
 			}" />
 		</div>
- 	<div class='borderBg' :style="{ display: this.currentNav==='environment' ? 'block' : 'none' }">
+ 	<div class='card' :style="{ display: this.currentNav==='environment' ? 'block' : 'none' }">
 			<BarPage :options="{
 		  domSelector: 'envir',
 		  viewData: this.envir,
@@ -119,7 +128,7 @@
     <div class='borderBg alarmborder' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">  
      <PanelPage 
         :options="{
-        title:this.panelTitle1,
+        title:this.panelTitle,
         data:this.panelData
       }"
       />    
@@ -134,7 +143,7 @@
       />
    
     </div>
-     <div class='borderBg' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
+     <div class='card' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
       <BarPage 
         :options="{
         domSelector: 'temDity',
@@ -145,7 +154,7 @@
       }"
       />     
     </div>
-     <div class='borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none'}">
+     <div class='card' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none'}">
      <BarPage 
         :options="{
         domSelector: 'dayStatis',
@@ -155,7 +164,7 @@
       }"
       />
     </div>
-    <div class='borderBg' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none'}">
+    <div class='card' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none'}">
      	<BarPage :options="{
 			  domSelector: 'maindif',
 			  viewData: this.maindif,
@@ -165,7 +174,7 @@
 			}" />
 		
     </div>
-    <div class='borderBg' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">      
+    <div class='card' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">      
     <BarPage :options="{
 			  domSelector: 'orderdif',
 			  viewData: this.orderdif,
@@ -402,6 +411,7 @@ export default {
       maindif: {
 					title: "维修工单对比",
 					xAxis: Array(7).fill(1).map(function(item, index) {
+            index++;
 						return index
 					}),
 					legend: [{
@@ -447,6 +457,30 @@ export default {
           key:"g",
           type:"bar",
           data:[8]
+        }
+      ],
+      orderStatis1:{
+        title:'仓库统计',
+         xAxis:Array(7).fill(1).map(function(item,index){
+          index++
+          return index
+        }),
+        legend:[{name:"入库",key:"inlet"},{name:"出库",key:"effluent"}]
+      },
+      orderStatisData1:[
+        {
+          key:"inlet",
+          type:"line",
+          data:Array(7).fill(1).map(function(){
+            return parseInt(Math.random()*20+40)
+          })
+        },
+        {
+          key:"effluent",
+          type:"line",
+          data:Array(7).fill(1).map(function(){
+            return parseInt(Math.random()*30+20)
+          })
         }
       ],
       orderStatis:{
@@ -568,7 +602,8 @@ export default {
         orderdif: {
 					title: "设备对比",
 					xAxis: Array(7).fill(1).map(function(item, index) {
-						return index++
+            index++;
+						return index;
 					}),
 					legend: [{
 						name: "上周",
@@ -867,7 +902,8 @@ nav a.active{
 	.borderBg {
 		width: 100%;
 		height: 35%;
-		background:url(../assets/border.png) no-repeat center center; 
+    
+		/* background:url(../assets/border.png) no-repeat center center;  */
     background-size: 100% 100%;
 		overflow: hidden;
 	}
@@ -922,7 +958,7 @@ nav a.active{
 	#temDity,
 	#pie1,
 	#vehicle,
-	#dayStatis,#orderStatis,#monitor,#maindif,#alarmPie,#design,#envir,#orderdif{
+	#dayStatis,#orderStatis,#monitor,#maindif,#alarmPie,#design,#envir,#orderdif,#orderStatis1{
 		width: 15rem;
 		height: 8.2rem;
    
@@ -933,7 +969,7 @@ nav a.active{
 	#temDity,
 	#pie1,
 	#vehicle,
-	#dayStatis,#orderStatis,#monitor,#maindif,#alarmPie,#design,#envir,#orderdif{
+	#dayStatis,#orderStatis,#monitor,#maindif,#alarmPie,#design,#envir,#orderdif,#orderStatis1{
 			width:21.2rem;
 			height:15rem;
 		}

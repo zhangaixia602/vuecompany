@@ -36,6 +36,7 @@
 </script>
 <style scoped>
 .CarouselTable{
+    width: 15rem;
     padding:0 0.5rem;
     height:100%;
     background:'rgba(4,103,247,0.2)';
@@ -96,5 +97,10 @@
         -ms-transform:translateY(calc(7.5rem - 100%));
         -o-transform:translateY(calc(7.5rem - 100%));
     }
+}
+@media (min-width:1920px) {
+    .CarouselTable{
+    width: 21.2rem;
+    }	
 }
 </style>
