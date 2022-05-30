@@ -1,7 +1,8 @@
 <template>
 	<div class='container'>
 		<canvas class="c" ref="ThreeJS"></canvas>
-		<div class='popup' id="popup" :style="{display: this.visible ? 'block' : 'none',transform: 'matrix(1, 0, 0, 1, '+left+', '+top+')'}">
+		<div class='popup' id="popup"
+			:style="{display: this.visible ? 'block' : 'none',transform: 'matrix(1, 0, 0, 1, '+left+', '+top+')'}">
 			<span class='popup-close-button' @click="handleOk">x</span>
 			<div class='popup-content'>
 				<h3>{{title}}</h3>
@@ -31,7 +32,10 @@
 		CSS3DRenderer,
 		CSS3DObject
 	} from "three/examples/jsm/renderers/CSS3DRenderer"
-	let scene;
+	let scene,
+		labelRenderer,
+		plantArr = [],
+		iconObject = [];
 	export default {
 		name: 'TestPage',
 		data() {
@@ -62,26 +66,129 @@
 				top: 0,
 				geometry: "几何体",
 				title: "",
-				source:[
-					{
-						name:'yancong',
-						title:'烟囱'
+				iconArr: [{
+						img: '/static/models/lc/水表.png',
+						position: [4, 4, 8],
+						scale: 75,
+						name: '水表',
+						data: {
+							type: '水表',
+							id: 'LJFDSFJNNF',
+							name: '水表25',
+							place: '大厦门口',
+							state: '异常状态',
+							position: [4, 0, 8],
+							scale: 1.2
+						}
+					}, {
+						img: '/static/models/lc/摄像头.png',
+						position: [-5, 4, 8],
+						scale: 75,
+						name: '摄像头',
+						data: {
+							type: '摄像头',
+							id: 'LJFDSFJNNF',
+							name: '摄像头25',
+							place: '大厦门口',
+							state: '异常状态',
+							position: [-5, 0, 8],
+							scale: 1.2
+						}
+					}, {
+						img: '/static/models/lc/电表.png',
+						position: [0, 4, 10],
+						scale: 75,
+						name: '电表',
+						data: {
+							type: '电表',
+							id: 'LJFDSFJNNF',
+							name: '电表25',
+							place: '大厦门口',
+							state: '异常状态',
+							position: [0, 0, 10],
+							scale: 1.2
+						}
 					},
 					{
-						name:'guangzi',
-						title:'油罐'
+						img: '/static/models/lc/燃气表.png',
+						position: [-7, 4, 14],
+						scale: 75,
+						name: '燃气表',
+						data: {
+							type: '燃气表',
+							id: 'LJFDSFJNNF',
+							name: '燃气表25',
+							place: '大厦门口',
+							state: '异常状态',
+							position: [-7,0, 14],
+							scale: 1.2
+						}
 					},
 					{
-						name:'box_1',
-						title:'厂房'
+						img: '/static/models/lc/门禁.png',
+						position: [14, 4, -9],
+						scale: 75,
+						name: '门禁',
+						data: {
+							type: '门禁',
+							id: 'LJFDSFJNNF',
+							name: '门禁26',
+							place: '大厦门口',
+							state: '正常',
+							position: [14, 0, -9],
+							scale: 1.2
+						}
 					},
 					{
-						name:'wding_1',
-						title:'排风房'
+						img: '/static/models/lc/烟感.png',
+						position: [11, 4, 7],
+						scale: 75,
+						name: '烟感',
+						data: {
+							type: '烟感',
+							id: 'LJFDSFJNNF',
+							name: '烟感26',
+							place: '大厦门口',
+							state: '正常',
+							position: [11, 0, 7],
+							scale: 1.2
+						}
 					},
 					{
-						name:'box_10',
-						title:'厂房'
+						img: '/static/models/lc/温感.png',
+						position: [-13, 4, -7],
+						scale: 75,
+						name: '温感',
+						data: {
+							type: '温感',
+							id: 'LJFDSFJNNF',
+							name: '温感25',
+							place: '大厦门口',
+							state: '异常状态',
+							position: [-13, 0, -7],
+							scale: 1.2
+						}
+					}
+				],
+				source: [{
+						name: 'yancong',
+						title: '烟囱'
+					},
+					{
+						name: 'guangzi',
+						title: '油罐'
+					},
+					{
+						name: 'box_1',
+						title: '厂房'
+					},
+					{
+						name: 'wding_1',
+						title: '排风房'
+					},
+					{
+						name: 'box_10',
+						title: '厂房'
 					}
 				]
 			}
@@ -111,8 +218,8 @@
 				this.initRenderer()
 				// 添加环境光
 				this.addLight()
-				// 添加形状
-				this.createCube()
+				// 添加模型
+				this.getModel()
 				// 调⽤点击事件
 				this.clickEvents()
 			},
@@ -151,6 +258,12 @@
 					alpha: true, //是否可以设置背景⾊透明。
 					logarithmicDepthBuffer: true //模型的重叠部位便不停的闪烁起来。这便是Z-Fighting问题，为解决这个问题，我们可以采⽤该种⽅法
 				})
+				labelRenderer = new CSS3DRenderer();
+				labelRenderer.setSize(window.innerWidth,window.innerHeight);     
+				labelRenderer.domElement.style.position = 'absolute';
+				labelRenderer.domElement.style.top = '0px';
+				labelRenderer.domElement.style.pointerEvents='none';
+				document.body.appendChild(labelRenderer.domElement);
 			},
 			addLight() {
 				// 环境光
@@ -162,6 +275,7 @@
 			render() {
 				// 启动动画
 				this.renderer.render(scene, this.camera);
+				labelRenderer.render(scene, this.camera);
 				// 动态监听窗⼝尺⼨变化
 				if (this.resizeRendererToDisplaySize(this.renderer)) {
 					const canvas = this.renderer.domElement;
@@ -177,14 +291,14 @@
 				const needResize = canvas.width !== this.canvasW || canvas.height !== this.canvasH;
 				if (needResize) {
 					this.renderer.setSize(this.canvasW, this.canvasH, false);
+					labelRenderer.setSize(this.canvasW, this.canvasH, false);
 				}
 				return needResize;
 			},
-			createCube() {
+			getModel() {
 				this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 				this.controls.maxDistance = 1700;
 				this.controls.maxPolarAngle = Math.PI * 0.48;
-
 				//加载模型
 				let objLoader = new GLTFLoader();
 				let dracoLoader = new DRACOLoader();
@@ -196,23 +310,64 @@
 					glb.scene.rotateY(-80); //绕y轴旋转π/4        
 					scene.add(glb.scene);
 				})
+				//加载精灵
+				this.iconArr.map((item, index) => {
+					let spriteMaterial = new THREE.SpriteMaterial({
+						map: new THREE.TextureLoader().load(item.img)
+					});
+					// 创建精灵模型对象，不需要几何体geometry参数
+					let sprite = new THREE.Sprite(spriteMaterial);
+					sprite.position.set(item.position[0], item.position[1], item.position[2])
+					// sprite.scale.set(item.scale, item.scale, 1)
+					sprite.name = item.name;
+					sprite.index = index;
+					sprite.type = 'Icon';
+					iconObject.push(sprite)
+					scene.add(sprite)
+					this.CSS3DAdd(index, item.data);
+				})
+			},
+			CSS3DAdd(i, data) {
+				let divDom = document.createElement('div')
+				divDom.setAttribute('id', `THREE3D_plant${i}`)
+				divDom.innerHTML = `<div class='plant3D' style='font-size:6px;padding:10px;background:rgba(255,255,255,0.5)' ${data.type == '摄像头' ? `style='display:inline-block'` : ``}>
+			             <div class='plant3DTitle'>${data.type}信息</div>
+			             <div class='plant3Dcontent'>
+			               <p>设备ID: ${data.id}</p>
+			               <p>设备名称: ${data.name}</p>
+			               <p>设备位置: ${data.place}</p>
+			               <p>设备状态: <span ${data.state == '异常状态' ? `style='color:red'` : `style='color:green'`}>${data.state}</span></p>
+			             </div>
+			           </div>`;
+				divDom.style.cursor = "pointer";
+				divDom.style.pointerEvents='none';
+				let cardCSS3DObject = new CSS3DObject(divDom);
+				cardCSS3DObject.position.set(data.position[0], data.position[1], data.position[2])
+				cardCSS3DObject.scale.set(0.05, 0.05, 0.05);
+				cardCSS3DObject.visible = false;
+				cardCSS3DObject.name = data.name;
+				plantArr.push(cardCSS3DObject);
+				scene.add(cardCSS3DObject)
 			},
 			clickPickPosition(event) {
 				this.pickEvents(this.events.pickPosition, scene, this.camera, obj => {
 					obj.userData.checked = !obj.userData.checked;
-					console.log(obj.name)
-					let index=this.source.findIndex((element)=>element.name===obj.name);
-					let popup = document.getElementById('popup')
-					let width = popup.clientWidth;
-					let height = popup.clientHeight;
-					if(index>=0){
-						this.geometry=this.source[index].title;
-						this.title=obj.name;
-						this.left = event.x - width / 2;
-						this.top = event.y - height - 20;
-						this.visible=true;
+					if(obj.type==="Icon"){
+						plantArr[obj.index].visible =plantArr[obj.index].visible ? false : true;
 					}else{
-						this.visible=false;
+						let index = this.source.findIndex((element) => element.name === obj.name);
+						let popup = document.getElementById('popup')
+						let width = popup.clientWidth;
+						let height = popup.clientHeight;
+						if (index >= 0) {
+							this.geometry = this.source[index].title;
+							this.title = obj.name;
+							this.left = event.x - width / 2;
+							this.top = event.y - height - 20;
+							this.visible = true;
+						} else {
+							this.visible = false;
+						}
 					}
 				})
 			},
@@ -247,12 +402,11 @@
 				this.events.raycaster.setFromCamera(normalizedPosition, camera)
 				// 获取与射线光线相交的对象列表
 				const intersectedObjects = this.events.raycaster.intersectObjects(scene.children);
-				console.log(intersectedObjects)
 				if (intersectedObjects.length) {
 					// 获取与射线光纤相交的第⼀个对象。也是最近的⼀个
 					this.events.pickedObject = intersectedObjects[0].object;
 					// 保存当前对象的颜⾊
-					this.events.pickedObjectSavedColor = this.events.pickedObject.material.emissive.getHex();
+					// this.events.pickedObjectSavedColor = this.events.pickedObject.material.emissive.getHex();
 					// 将其发射颜⾊设置为闪烁的红⾊/黄⾊
 					// this.events.pickedObject.material.emissive.setHex(0xFFFF00)
 					if (callback) {
