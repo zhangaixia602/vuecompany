@@ -192,13 +192,13 @@ section {
   border-radius: 10px;
 }
 .tabItem img {
-  width: 60rem;
+  width:49%;
   height: 17rem;
   padding: 20px;
   padding-left: 20;
 }
 .tabItem p {
-  width: 40rem;
+  width: 49%;
   height: 14rem;
   padding: 1rem 1.2rem;
   font-size: 16px;
