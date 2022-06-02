@@ -32,10 +32,15 @@
 		CSS3DRenderer,
 		CSS3DObject
 	} from "three/examples/jsm/renderers/CSS3DRenderer"
+	import * as TWEEN from '@tweenjs/tween.js';
 	let scene,
 		labelRenderer,
 		plantArr = [],
 		iconObject = [];
+    var p1 = {x:0,y:10,z:20};
+   
+  
+
 	export default {
 		name: 'TestPage',
 		data() {
@@ -222,10 +227,28 @@
 				this.getModel()
 				// 调⽤点击事件
 				this.clickEvents()
+				
 			},
 			initScene() {
 				// 创建场景
 				scene = new THREE.Scene();
+				var coords = { x: 0, y: 0 }; // 起始点 (0, 0)
+				// 创建一个新的tween用来改变 'coords'
+                // var tween = new TWEEN.Tween(coords).to({ x: 300, y: 200 }, 1000) // 在1s内移动至 (300, 200)
+				
+              let tw = new TWEEN.Tween(coords)
+              .to({x: 3, y:3, z: 3}, 2000)     //最终值
+              .easing(TWEEN.Easing.Linear.None)    //变化方法
+              .onUpdate(function () {    // 更新函数
+				
+                obj.rotation.x = coords.x   //最新数值
+                obj.rotation.y = coords.y
+                obj.rotation.z = coords.z
+
+              })
+              tw.start();  //开始执行
+
+
 				let cubeTextureLoader = new THREE.CubeTextureLoader();
 				cubeTextureLoader.setPath('/static/models/lc/');
 
@@ -236,6 +259,15 @@
 				scene.background = textureCube;
 				this.setEnvMap("004");
 			},
+		// 	cameraCon(p2={x:10,y:30,z:10},time=6000) {
+        //     var tween1 = new TWEEN.Tween(p1).to(p2,time).easing(TWEEN.Easing.Quadratic.InOut);
+        //     var update = function () {
+        //         camera.position.set(p1.x,p1.y,p1.z);
+        //      };
+        //     tween1.onUpdate(update);
+        //     return tween1;
+        //    },
+
 			setEnvMap(hdr) {
 				new RGBELoader().setPath("/static/gltf/").load(hdr + ".hdr", (texture) => {
 					texture.mapping = THREE.EquirectangularReflectionMapping;

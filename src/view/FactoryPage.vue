@@ -1,5 +1,5 @@
 <template>
-	<header>智慧粮仓</header>
+	<header>智慧仓库</header>
 	<section class='left'>
 		<div class='borderBg'>
 			<PanelPage :options="{
@@ -25,7 +25,7 @@
 	</section>
 	<section class='bottom'>
 		<div class='borderBg'>
-			<h2 class='titleBg'>工单统计</h2>
+			<h2 class='titleBg'>货架情况统计</h2>
 			<div class='orderBox'>
 				<div v-for='(order,index) in orders' class='orderItem' :key='index'>
 					<div class='order-header'>
@@ -39,7 +39,7 @@
 						</p>
 						<p class='border'></P>
 						<p>
-							<label>完成率</label>
+							<label>存储量</label>
 							<span>{{order.rate}}%</span>
 						</p>
 					</div>
@@ -140,17 +140,17 @@
 						key: 'remark'
 					}
 				],
-				categoryTitle: "各粮品的存储量",
+				categoryTitle: "各货物的存储量",
 				categoryData: [{
-						name: "小麦",
+						name: "货物一",
 						value: parseInt(Math.random() * 100 + 1000)
 					},
 					{
-						name: "大米",
+						name: "货物二",
 						value: parseInt(Math.random() * 100 + 800)
 					},
 					{
-						name: "玉米",
+						name: "货物三",
 						value: parseInt(Math.random() * 100 + 600)
 					}
 				],
@@ -183,7 +183,7 @@
 					}
 				],
 				vehicle: {
-					title: "进出车辆情况",
+					title: "进出库存情况",
 					xAxis: Array(7).fill(1).map(function(item, index) {
 						return index++
 					}),
@@ -210,7 +210,7 @@
 						})
 					}
 				],
-				panelTitle: '设备状况统计',
+				panelTitle: '仓库设备状况',
 				panelData: [{
 						icon: 'icon-zhihuiyuanqu',
 						label: '健康',
@@ -229,25 +229,25 @@
 				],
 				orders: [{
 						icon: 'icon-yaoji',
-						title: '药剂',
+						title: '货架1',
 						rate: (Math.random() * 100).toFixed(2),
 						quantity: parseInt(Math.random() * 100)
 					},
 					{
 						icon: 'icon-qiti',
-						title: '气控',
+						title: '货架2',
 						rate: (Math.random() * 100).toFixed(2),
 						quantity: parseInt(Math.random() * 100)
 					},
 					{
 						icon: 'icon-a-28tongfengfengshan',
-						title: '干控',
+						title: '货架三',
 						rate: (Math.random() * 100).toFixed(2),
 						quantity: parseInt(Math.random() * 100)
 					},
 					{
 						icon: 'icon-lengquebeng',
-						title: '温控',
+						title: '货架四',
 						rate: (Math.random() * 100).toFixed(2),
 						quantity: parseInt(Math.random() * 100)
 					}
@@ -308,18 +308,20 @@
 				this.camera.position.set(0, 0, 400)
 				this.camera.lookAt(scene.position)
 				let light = new THREE.HemisphereLight(0xbbbbff, 0x444422, 1.5)
-				light.position.set(0, 1, 0)
+				light.position.set(0, 50, 0)
 				scene.add(light)
 				this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+				this.controls.maxDistance=1700;
+                this.controls.maxPolarAngle=Math.PI * 0.48;    
 				let objLoader = new GLTFLoader();
 				let dracoLoader = new DRACOLoader();
 				dracoLoader.setDecoderPath('/draco/');
 				dracoLoader.preload();
 				objLoader.setDRACOLoader(dracoLoader);
-				objLoader.load('/static/models/lc-processed.gltf', function(glb) {
-					glb.scene.position.set(-1000, -600, -1200);
-					glb.scene.scale.set(5, 5, 8);
-					glb.scene.rotateX(Math.PI / 20); //绕x轴旋转π/4
+				objLoader.load('/static/models/ck-processed.glb', function(glb) {
+					// glb.scene.position.set(-1000, -600, -1200);
+					glb.scene.scale.set(3, 5, 8);
+					glb.scene.rotateY(0); //绕y轴旋转
 					scene.add(glb.scene);
 				})
 				this.renderer.domElement.addEventListener('mousemove', this.onMouseDblclick);
