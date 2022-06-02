@@ -93,13 +93,7 @@
 						id: '05',
 						path: '/model/earth'
 					},
-					{
-						group: 'draulic',
-						title: '测试',
-						src: 'assets/cyq.png',
-						id: '05',
-						path: '/model/test'
-					}
+					
 
 				]
 			}
@@ -183,7 +177,7 @@
 	}
 
 	.productItem {
-		width: 48%;
+		width: 47%;
 		display: none;
 		border: 1px solid #edf1f7;
 		box-shadow: 0 0.2rem 0.3rem 0 #edf1f7;
@@ -198,7 +192,7 @@
 
 	.productItem img {
 		width: 100%;
-		height: 12rem;
+		height: 17.5rem;
 		filter: blur(0);
 	}
 
@@ -214,7 +208,7 @@
 		color: white;
 		position: absolute;
 		left: 50%;
-		top: 3rem;
+		top: 7rem;
 		transform: translate(-50%, -1rem);
 		display: none;
 	}
