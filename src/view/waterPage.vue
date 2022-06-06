@@ -531,15 +531,15 @@ export default defineComponent({
       this.controls.minDistance=0;
       this.controls.maxDistance=1700;
       this.controls.maxPolarAngle=Math.PI * 0.48;
-      this.controls.minAzimuthAngle=Math.PI * 0.48;
+      this.controls.minAzimuthAngle=Math.PI * (100/180);
       let objLoader = new GLTFLoader();
       let dracoLoader=new DRACOLoader();
       dracoLoader.setDecoderPath('/draco/');
       dracoLoader.preload();
       objLoader.setDRACOLoader(dracoLoader);
-        objLoader.load('/static/models/3dcity-processed.glb', function(glb) {
-        glb.scene.position.set(-1000, -600,-1200);
-        glb.scene.scale.set(4, 4, 8);
+        objLoader.load('/static/models/dsh-processed.glb', function(glb) {
+        glb.scene.position.set(200, -600,-2000);
+        glb.scene.scale.set(9,8,10);
         glb.scene.rotateY(-80);//绕x轴旋转π/4  
         scene.add(glb.scene);
       })

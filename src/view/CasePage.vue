@@ -74,7 +74,7 @@
 					},
 					{
 						group: 'park',
-						title: '智慧粮仓',
+						title: '智慧仓库',
 						src: 'assets/lc.png',
 						id: '03',
 						path: '/model/factory'
@@ -94,7 +94,7 @@
 						path: '/model/earth'
 					},
 					
-
+ 
 				]
 			}
 		},

@@ -252,8 +252,9 @@ h3.titbg span {
   text-align: center;
 }
 .caseItem img {
-  width: 28rem;
-  height: 16rem;
+  width: 49%;
+  height: 100%;
+  padding: 10px;
 }
 .caseItem h2 {
   position: relative;

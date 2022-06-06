@@ -182,8 +182,9 @@ h3.titbg span {
   padding: 1rem;
 }
 .caseItem img {
-  width: 28rem;
-  height: 16rem;
+  width: 48%;
+  height: 100%;
+  padding: 6px;
 }
 
 .caseItem p {
