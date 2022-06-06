@@ -16,6 +16,7 @@
 </template>
 <script>
 	import * as THREE from 'three';
+	import * as TWEEN from '@tweenjs/tween.js';
 	import {
 		GLTFLoader
 	} from "three/examples/jsm/loaders/GLTFLoader";
@@ -32,7 +33,6 @@
 		CSS3DRenderer,
 		CSS3DObject
 	} from "three/examples/jsm/renderers/CSS3DRenderer"
-	import * as TWEEN from '@tweenjs/tween.js';
 	let scene,
 		labelRenderer,
 		plantArr = [],
@@ -125,7 +125,7 @@
 							name: '燃气表25',
 							place: '大厦门口',
 							state: '异常状态',
-							position: [-7,0, 14],
+							position: [-7, 0, 14],
 							scale: 1.2
 						}
 					},
@@ -236,17 +236,17 @@
 				// 创建一个新的tween用来改变 'coords'
                 // var tween = new TWEEN.Tween(coords).to({ x: 300, y: 200 }, 1000) // 在1s内移动至 (300, 200)
 				
-              let tw = new TWEEN.Tween(coords)
-              .to({x: 3, y:3, z: 3}, 2000)     //最终值
-              .easing(TWEEN.Easing.Linear.None)    //变化方法
-              .onUpdate(function () {    // 更新函数
+    //           let tw = new TWEEN.Tween(coords)
+    //           .to({x: 3, y:3, z: 3}, 2000)     //最终值
+    //           .easing(TWEEN.Easing.Linear.None)    //变化方法
+    //           .onUpdate(function () {    // 更新函数
 				
-                obj.rotation.x = coords.x   //最新数值
-                obj.rotation.y = coords.y
-                obj.rotation.z = coords.z
+    //             obj.rotation.x = coords.x   //最新数值
+    //             obj.rotation.y = coords.y
+    //             obj.rotation.z = coords.z
 
-              })
-              tw.start();  //开始执行
+    //           })
+    //           tw.start();  //开始执行
 
 
 				let cubeTextureLoader = new THREE.CubeTextureLoader();
@@ -291,10 +291,10 @@
 					logarithmicDepthBuffer: true //模型的重叠部位便不停的闪烁起来。这便是Z-Fighting问题，为解决这个问题，我们可以采⽤该种⽅法
 				})
 				labelRenderer = new CSS3DRenderer();
-				labelRenderer.setSize(window.innerWidth,window.innerHeight);     
+				labelRenderer.setSize(window.innerWidth, window.innerHeight);
 				labelRenderer.domElement.style.position = 'absolute';
 				labelRenderer.domElement.style.top = '0px';
-				labelRenderer.domElement.style.pointerEvents='none';
+				labelRenderer.domElement.style.pointerEvents = 'none';
 				document.body.appendChild(labelRenderer.domElement);
 			},
 			addLight() {
@@ -314,6 +314,7 @@
 					this.camera.aspect = canvas.clientWidth / canvas.clientHeight;
 					this.camera.updateProjectionMatrix();
 				}
+				TWEEN.update();
 				requestAnimationFrame(this.render.bind(this))
 			},
 			resizeRendererToDisplaySize(renderer) {
@@ -356,6 +357,23 @@
 					sprite.type = 'Icon';
 					iconObject.push(sprite)
 					scene.add(sprite)
+					let tween = new TWEEN.Tween(sprite.position).to({
+							y: 3.8
+						}, 1000)
+						.easing(TWEEN.Easing.Sinusoidal.InOut).onComplete(function() {
+							sprite.position.y = 3.8;
+						})
+						.start();
+
+					let tweenback = new TWEEN.Tween(sprite.position).to({
+							y: 4
+						}, 1000)
+						.easing(TWEEN.Easing.Sinusoidal.InOut).onComplete(function() {
+							sprite.position.y = 4;
+						})
+
+					tween.chain(tweenback); //动画链接
+					tweenback.chain(tween);
 					this.CSS3DAdd(index, item.data);
 				})
 			},
@@ -372,7 +390,7 @@
 			             </div>
 			           </div>`;
 				divDom.style.cursor = "pointer";
-				divDom.style.pointerEvents='none';
+				divDom.style.pointerEvents = 'none';
 				let cardCSS3DObject = new CSS3DObject(divDom);
 				cardCSS3DObject.position.set(data.position[0], data.position[1], data.position[2])
 				cardCSS3DObject.scale.set(0.05, 0.05, 0.05);
@@ -384,9 +402,15 @@
 			clickPickPosition(event) {
 				this.pickEvents(this.events.pickPosition, scene, this.camera, obj => {
 					obj.userData.checked = !obj.userData.checked;
-					if(obj.type==="Icon"){
-						plantArr[obj.index].visible =plantArr[obj.index].visible ? false : true;
-					}else{
+					if (obj.type === "Icon") {
+						if (plantArr[obj.index].visible) {
+							plantArr[obj.index].visible = false
+							iconObject[obj.index].material.color.setRGB(1, 1, 1)
+						} else {
+							plantArr[obj.index].visible = true
+							iconObject[obj.index].material.color.set(0x00a8ff)
+						}
+					} else {
 						let index = this.source.findIndex((element) => element.name === obj.name);
 						let popup = document.getElementById('popup')
 						let width = popup.clientWidth;
