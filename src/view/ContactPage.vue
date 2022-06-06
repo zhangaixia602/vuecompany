@@ -5,12 +5,14 @@
 	<div>
 		<div class="wrapper">
 			<h3 class="titbg">联系方式</h3>
+			<div class="wrapper-content">
 			<div v-for="(menu, index) in menus" :key="index" class="caseItem clear">
 				<img :src="require('../' + menu.src)" />
 				<h2>
 					{{ menu.title }}
 				</h2>
 				<p>{{ menu.text }}</p>
+			</div>
 			</div>
 		</div>
 		<div class="message">
@@ -290,4 +292,13 @@
 		font-size: 14px;
 		color: #999999;
 	}
+	@media (min-width:1920px) {
+	.wrapper1{
+	  width:1600px;
+	}
+}
+.wrapper-content{
+	width:100%;
+	text-align: center;
+}
 </style>

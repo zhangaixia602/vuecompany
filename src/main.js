@@ -7,4 +7,6 @@ import 'ant-design-vue/dist/antd.css';
 import './assets/css/common.css';
 import './assets/font/iconfont.css';
 import 'video.js/dist/video-js.css';
-createApp(App).use(Antd).use(router).use(setLanguage()).mount("#app");
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+// import 'swiper/swiper-bundle.css'
+createApp(App).use(Antd).use(VueAwesomeSwiper).use(router).use(setLanguage()).mount("#app");
