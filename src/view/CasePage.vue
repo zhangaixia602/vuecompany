@@ -73,7 +73,7 @@
 						path: '/model/granary'
 					},
 					{
-						group: 'park',						
+						group: 'park',
 						title: '智慧仓库',
 						src: 'assets/lc.png',
 						id: '03',
@@ -93,7 +93,13 @@
 						id: '05',
 						path: '/model/earth'
 					},
- 
+					{
+						group: 'draulic',
+						title: '测试',
+						src: 'assets/cyq.png',
+						id: '05',
+						path: '/model/test'
+					}
 				]
 			}
 		},
