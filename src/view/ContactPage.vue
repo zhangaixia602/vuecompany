@@ -5,12 +5,14 @@
 	<div>
 		<div class="wrapper">
 			<h3 class="titbg">联系方式</h3>
-			<div v-for="(menu, index) in menus" :key="index" class="caseItem clear">
-				<img :src="require('../' + menu.src)" />
-				<h2>
-					{{ menu.title }}
-				</h2>
-				<p>{{ menu.text }}</p>
+			<div class="wrapper-content">
+				<div v-for="(menu, index) in menus" :key="index" class="caseItem clear">
+					<img :src="require('../' + menu.src)" />
+					<h2>
+						{{ menu.title }}
+					</h2>
+					<p>{{ menu.text }}</p>
+				</div>
 			</div>
 		</div>
 		<div class="message">
@@ -256,7 +258,7 @@
 	}
 
 	.left-map {
-		width:50%;
+		width: 50%;
 		height: 400px;
 		border: #ccc solid 1px;
 		position: absolute;
@@ -264,7 +266,7 @@
 	}
 
 	.right-map {
-		width:50%;
+		width: 50%;
 		height: 400px;
 		border: #f3eaea solid 1px;
 		background-color: #f6f6f6;
@@ -289,5 +291,10 @@
 	.left-content p {
 		font-size: 14px;
 		color: #999999;
+	}
+
+	.wrapper-content {
+		width: 100%;
+		text-align: center;
 	}
 </style>
