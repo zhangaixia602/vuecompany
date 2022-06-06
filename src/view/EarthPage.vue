@@ -137,9 +137,9 @@
 				<span class='popup-close-button' @click="handleOk">x</span>
 				<div class='popup-content'>
 					<h3>{{title}}</h3>
-					<p><label>名称</label>
-						<value>{{geometry}}</value>
-					</p>
+					<p><label>用电量</label><value>{{powerNum}}</value></p>
+					<p><label>正在运行设备量</label><value>{{equipmentNum}}</value></p>
+					<p><label>工作人员数量</label><value>{{staffNum}}</value></p>
 				</div>
 				<div class='popup-tip-container'></div>
 			</div>
@@ -435,8 +435,10 @@
 				visible: false,
 				left: 0,
 				top: 0,
-				geometry: "几何体",
-				title: ""
+				title: "",
+				powerNum:0,
+				equipmentNum:0,
+				staffNum:0
 			}
 		},
 		methods: {
@@ -569,9 +571,11 @@
 				if (pickModel._batchId) {
 					that.left = clickEvent.position.x - width / 2;
 					that.top = clickEvent.position.y - height - 20;
-					that.title = pickModel._content._batchTable._properties['name'][pickModel._batchId];
-					that.geometry = pickModel._content._batchTable._properties['字段一'][pickModel._batchId];
-					if (that.geometry !== null && that.geometry !== "" && that.geometry !== "null") {
+					that.title = pickModel._content._batchTable._properties['字段一'][pickModel._batchId];
+					that.powerNum=pickModel._content._batchTable._properties['字段二'][pickModel._batchId];
+					that.equipmentNum=pickModel._content._batchTable._properties['字段三'][pickModel._batchId];
+					that.staffNum=pickModel._content._batchTable._properties['字段四'][pickModel._batchId];
+					if (that.title !== null && that.title !== "" && that.title !== "null") {
 						that.visible = true;
 					} else {
 						that.visible = false;
@@ -588,13 +592,11 @@
 				if (pickedObject instanceof Cesium.Cesium3DTileFeature) {
 					that.left = movement.endPosition.x - width / 2;
 					that.top = movement.endPosition.y - height - 20;
-					that.title = pickedObject._content._batchTable._properties['name'][pickedObject
-						._batchId
-					];
-					that.geometry = pickedObject._content._batchTable._properties['字段一'][pickedObject
-						._batchId
-					];
-					if (that.geometry !== null && that.geometry !== "" && that.geometry !== "null") {
+					that.title = pickedObject._content._batchTable._properties['字段一'][pickedObject._batchId];
+					that.powerNum=pickedObject._content._batchTable._properties['字段二'][pickedObject._batchId];
+					that.equipmentNum=pickedObject._content._batchTable._properties['字段三'][pickedObject._batchId];
+					that.staffNum=pickedObject._content._batchTable._properties['字段四'][pickedObject._batchId];
+					if (that.title !== null && that.title !== "" && that.title !== "null") {
 						that.visible = true;
 					} else {
 						that.visible = false;
@@ -653,7 +655,11 @@
 		color: white;
 		margin: 0.2rem 0 0.5rem;
 	}
-
+    .popup-content label{
+		display:inline-block;
+		width:6rem;
+		text-align:right;
+	}
 	.popup-content label::after {
 		content: " :";
 		margin-right: 0.5rem;
