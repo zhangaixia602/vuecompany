@@ -33,7 +33,6 @@
 		CSS3DRenderer,
 		CSS3DObject
 	} from "three/examples/jsm/renderers/CSS3DRenderer"
-	import * as TWEEN from '@tweenjs/tween.js';
 	let scene,
 		labelRenderer,
 		plantArr = [],
@@ -237,17 +236,17 @@
 				// 创建一个新的tween用来改变 'coords'
                 // var tween = new TWEEN.Tween(coords).to({ x: 300, y: 200 }, 1000) // 在1s内移动至 (300, 200)
 				
-              let tw = new TWEEN.Tween(coords)
-              .to({x: 3, y:3, z: 3}, 2000)     //最终值
-              .easing(TWEEN.Easing.Linear.None)    //变化方法
-              .onUpdate(function () {    // 更新函数
+    //           let tw = new TWEEN.Tween(coords)
+    //           .to({x: 3, y:3, z: 3}, 2000)     //最终值
+    //           .easing(TWEEN.Easing.Linear.None)    //变化方法
+    //           .onUpdate(function () {    // 更新函数
 				
-                obj.rotation.x = coords.x   //最新数值
-                obj.rotation.y = coords.y
-                obj.rotation.z = coords.z
+    //             obj.rotation.x = coords.x   //最新数值
+    //             obj.rotation.y = coords.y
+    //             obj.rotation.z = coords.z
 
-              })
-              tw.start();  //开始执行
+    //           })
+    //           tw.start();  //开始执行
 
 
 				let cubeTextureLoader = new THREE.CubeTextureLoader();

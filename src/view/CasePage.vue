@@ -93,7 +93,13 @@
 						id: '05',
 						path: '/model/earth'
 					},
-					
+					{
+						group: 'draulic',
+						title: '测试',
+						src: 'assets/cyq.png',
+						id: '05',
+						path: '/model/test'
+					}
 
 				]
 			}
