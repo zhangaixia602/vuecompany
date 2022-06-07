@@ -258,7 +258,7 @@
 	}
 
 	.left-map {
-		width:50%;
+		width: 50%;
 		height: 400px;
 		border: #ccc solid 1px;
 		position: absolute;
@@ -266,7 +266,7 @@
 	}
 
 	.right-map {
-		width:50%;
+		width: 50%;
 		height: 400px;
 		border: #f3eaea solid 1px;
 		background-color: #f6f6f6;
@@ -292,13 +292,9 @@
 		font-size: 14px;
 		color: #999999;
 	}
-	@media (min-width:1920px) {
-	.wrapper1{
-	  width:1600px;
+
+	.wrapper-content {
+		width: 100%;
+		text-align: center;
 	}
-}
-.wrapper-content{
-	width:100%;
-	text-align: center;
-}
 </style>
