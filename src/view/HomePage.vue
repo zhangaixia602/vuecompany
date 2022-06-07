@@ -12,17 +12,17 @@
     class="mySwiper"
   >
     <swiper-slide><img src="../assets/banner01.png"> <img class="zt" :src="require('../assets/zt2.png')" /></swiper-slide>
-    <swiper-slide><div class="container-left"><p class="subtitle">¹«Ë¾¸ÅÒª</p></div>
+    <swiper-slide><div class="container-left"><p class="subtitle">å…¬å¸æ¦‚å†µ</p></div>
     <div class="container-right">
       <div class="container-top">
       <video autoplay="true" loop>
       <source :src="require('../assets/water.mp4')" type="video/mp4" />
     </video>
     </div>
-    <div class="container-bottom">¹«Ë¾¼ò½é</div>
+    <div class="container-bottom">å…¬å¸ç®€ä»‹</div>
     </div>
     </swiper-slide
-    ><swiper-slide><div class="container-left"><p class="subtitle">ºËĞÄÒµÎñ</p></div>
+    ><swiper-slide><div class="container-left"><p class="subtitle">æ ¸å¿ƒä¸šåŠ¡</p></div>
     	<div v-for="(menu, index) in menus" :key="index" class="caseItem clear">
 				<img :src="require('../' + menu.src)" />
 				<h2>
@@ -56,22 +56,22 @@ export default {
     return{
       menus: [{
 						src: "assets/yq.png",
-						title: "ÖÇ»ÛÔ°Çø",
+						title: "æ™ºæ…§å›­åŒº",
 						
 					},
 					{
 						src: "assets/water.png",
-						title: "ÖÇ»ÛË®Àû",
+						title: "æ™ºæ…§æ°´åˆ©",
 						
 					},
 					{
 						src: "assets/ny.png",
-						title: "ÖÇ»ÛÄÜÔ´",
+						title: "æ™ºæ…§èƒ½æº",
 						
 					},
 					{
 						src: "assets/lc.png",
-						title: "ÖÇ»Û²Ö¿â",
+						title: "æ™ºæ…§ä»“åº“",
 						
 					}
 				],
