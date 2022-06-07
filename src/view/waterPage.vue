@@ -710,4 +710,7 @@ nav a.active{
 	  margin-top:2rem;
 	}
 }
+.CarouselTable{
+	width:18rem;
+}
 </style>

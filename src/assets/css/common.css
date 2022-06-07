@@ -109,6 +109,7 @@ header a:hover{
     font-weight: bold;
 }
 footer{
+	width:100%;
     text-align: center;
     font-size: 0.8rem;
 }
@@ -116,7 +117,7 @@ footer{
 .footerT{
     color:white;
     background: #333333;
-    padding: 2rem 0 1.5rem;
+    padding:1rem 0;
 }
 .footerT .wrapper{
     box-sizing: border-box;
@@ -141,16 +142,15 @@ footer{
     width:20rem;
 }
 .footerItem h3{
-    padding-bottom:1rem;
+    padding-bottom:0.5rem;
     font-size:0.9rem;
     color:white;
 }
 .footerItem p{
-    padding-top:0.2rem;
-    line-height: 1.8rem;
+    line-height: 1.6rem;
 }
 .footerItem:last-child p:first-of-type{
-    margin-top:2.4rem;
+    margin-top:1.9rem;
 }
 .footerItem span{
     display: inline-block;
@@ -163,10 +163,10 @@ footer{
 }
 .footerB{
     background: #242424;
-    height:3rem;
 }
 .footerB div{
     height:100%;
+	padding:0.5rem;
     font-size:0.7rem;
     color: #DDDDDD;
 }
