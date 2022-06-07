@@ -9,4 +9,4 @@ import './assets/font/iconfont.css';
 import 'video.js/dist/video-js.css';
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 // import 'swiper/swiper-bundle.css'
-createApp(App).use(Antd).use(VueAwesomeSwiper).use(router).use(setLanguage()).mount("#app");
+createApp(App).use(Antd).use(VueAwesomeSwiper ).use(router).use(setLanguage()).mount("#app");
