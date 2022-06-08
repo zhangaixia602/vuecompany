@@ -9,17 +9,17 @@
     <swiper-slide><img src="../assets/banner01.png">    
      <img class="zt" :src="require('../assets/zt2.png')" />
      </swiper-slide>
-    <swiper-slide><div class="container-left"><p class="subtitle">公司概况</p></div>
+    <swiper-slide><div class="container-left"><p class="subtitle">��˾�ſ�</p></div>
     <div class="containers-right">
       <div class="container-top">
       <video autoplay="true" loop>
       <source :src="require('../assets/water.mp4')" type="video/mp4" />
     </video>
     </div>
-    <div class="container-bottom">公司简介<p class="gk-content">成立于1996年，集工程研究、产品和软件开发、系统集成、产品销售和技术服务于一体的高新技术企业，始终致力于用最新的工艺、最新的技术为社会和企业发展提供及时、高效的服务和保障。公司荟萃了一批年富力强的高技术人才、锤炼成有一支勇于进取的实干队伍，建立了完整的管理体系和质量保证体系，始终以诚信、热情、双赢、创新而负责任的理念服务各行业用户。公司与西北工业大学、华南理工大学、深圳职业技术学院等高校建立了紧密的技术协作关系；与SIEMENS、ROCKWELL AUTOMATION、ABB、HONEYWELL、EMERSON等国外著名公司达成了系统集成商、技术合作伙伴或战略合作伙伴的业务联系。</p></div>
+    <div class="container-bottom">��˾���<p class="gk-content">������1996�꣬�������о�����Ʒ������������ϵͳ���ɡ���Ʒ���ۺͼ���������һ��ĸ��¼�����ҵ��ʼ�������������µĹ��ա����µļ���Ϊ������ҵ��չ�ṩ��ʱ����Ч�ķ���ͱ��ϡ���˾������һ���긻��ǿ�ĸ߼����˲š���������һ֧���ڽ�ȡ��ʵ�ɶ��飬�����������Ĺ�����ϵ��������֤��ϵ��ʼ���Գ��š����顢˫Ӯ�����¶������ε�����������ҵ�û�����˾��������ҵ��ѧ������������ѧ������ְҵ����ѧԺ�ȸ�У�����˽��ܵļ���Э����ϵ����SIEMENS��ROCKWELL AUTOMATION��ABB��HONEYWELL��EMERSON�ȹ���������˾�����ϵͳ�����̡�������������ս�Ժ�������ҵ����ϵ��</p></div>
     </div>
     </swiper-slide
-    ><swiper-slide><div class="container-left"><p class="subtitle">核心业务</p></div>
+    ><swiper-slide><div class="container-left"><p class="subtitle">����ҵ��</p></div>
     <div class="container-right">
       <div class="caseItem clear" v-for="(menu, index) in menus" :key="index">
     	<router-link  :to="menu.path" target="_blank" >
@@ -31,7 +31,7 @@
 		</swiper-slide>
 		<swiper-slide> <div class="homeCase">
     <div class="wrapper">
-      <h3 class="titbg">合作伙伴<span>partners</span></h3>
+      <h3 class="titbg">�������<span>partners</span></h3>
       <div class="partnerBox">
         <span v-for="(partner, index) in partners" :key="index">
           <img :src="require('../' + partner)" />
@@ -42,8 +42,8 @@
   </swiper-slide>	    
 	</swiper>
    <div class="wrappers">
-   <span style="margin-right: 10px;">Copyright ©2019深圳市达英和自动化工程有限公司.版权所有</span>
-   <a href="http://beian.miit.gov.cn/" target="_blank" style="color:#FFFFFF">粤ICP备2022047319号</a>
+   <span style="margin-right: 10px;">Copyright �0�82019�����д�Ӣ���Զ����������޹�˾.��Ȩ����</span>
+   <a href="http://beian.miit.gov.cn/" target="_blank" style="color:#FFFFFF">��ICP��2022047319��</a>
    </div>
 </template>
 <script>
@@ -69,19 +69,19 @@
 			return {
 				menus: [{
 						src: "assets/yq.png",
-						title: "智慧园区",
+						title: "�ǻ�԰��",
             path: '/model/insect'
 						
 					},
 					{
 						src: "assets/water.png",
-						title: "智慧水利",
+						title: "�ǻ�ˮ��",
             path: '/model/water'
 						
 					},
 					{
 						src: "assets/ny.png",
-						title: "智慧能源",
+						title: "�ǻ���Դ",
             path: '/model/granary'
 						
 					},
