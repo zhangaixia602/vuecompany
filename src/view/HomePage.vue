@@ -7,9 +7,12 @@
     class="mySwiper"
   >
     <swiper-slide><img src="../assets/banner01.png">    
-     <img class="zt" :src="require('../assets/zt2.png')" />
+  <h4 class='text'>智慧城市 数字赋能</h4>
+	<h4 class='text'>产业变革 慧领未来</h4>
+	<p class='p-text'>技术引领世界 创新照耀未来</p>
      </swiper-slide>
-    <swiper-slide><div class="container-left"><p class="subtitle">公司概况</p></div>
+    <swiper-slide>
+    <div class="container-left"><p class="subtitle">公司概况</p></div>
     <div class="containers-right">
       <div class="container-top">
       <video autoplay="true" loop>
@@ -29,9 +32,10 @@
       </div>
       </div>
 		</swiper-slide>
-		<swiper-slide> <div class="homeCase">
+		<swiper-slide> 
+    <div class="homeCase">
     <div class="wrapper">
-      <h3 class="titbg">合作伙伴<span>partners</span></h3>
+      <h3 class="titbg">合作伙伴</h3>
       <div class="partnerBox">
         <span v-for="(partner, index) in partners" :key="index">
           <img :src="require('../' + partner)" />
@@ -68,27 +72,22 @@
 		data() {
 			return {
 				menus: [{
-						src: "assets/yq.png",
-						title: "智慧园区",
-            path: '/model/insect'
+						src: "assets/banner.jpg",
+						title: "智慧楼宇",
+            path: '/case'
 						
 					},
 					{
-						src: "assets/water.png",
+						src: "assets/banner2.jpg",
 						title: "智慧水利",
             path: '/model/water'
 						
 					},
 					{
-						src: "assets/ny.png",
+						src: "assets/banner3.jpg",
 						title: "智慧能源",
             path: '/model/granary'
 						
-					},
-					{
-						src: "assets/lc.png",
-						title: "智慧仓库",
-            path: '/model/factory'
 					}
 			
 				],
@@ -144,6 +143,9 @@
 	};
 </script>
 <style scoped>
+body{
+  overflow: hidden;
+}
 	.swiper {
 		width: 100%;
 		height: 100vh;
@@ -189,7 +191,7 @@
 		top: 0;
 		left: 50%;
 		transform: translateX(-50%);
-		height: 100vh;
+		min-height: 100%;
 		line-height: 625px;
 		font-size: 3rem;
 	}
@@ -200,14 +202,15 @@
     justify-content: center;
 		background-color: black;
 		width: 18%;
-		height: 100%;
+    min-height: 100%;
+		
 		transform: translate3d(0, 0, 0);
 
 	}
 
 	.container-right {
 		width: 82%;
-		height: 100%;
+		height: 100vh;
     display: flex;
     justify-content: space-between;
 	}
@@ -232,7 +235,7 @@
 	}
 
 	.subtitle {
-		font-size: 26px;
+		font-size: 35px;
 		/* line-height: 800px; */
 		text-align: left;
 		color: #dedede;
@@ -246,7 +249,7 @@
 
 	.caseItem {    
     overflow: hidden;    
-    width: 24.5%;
+    width: 32.8%;
     height: 100vh;
     white-space: nowrap;
 		
@@ -310,8 +313,10 @@
 		object-fit: fill;
 	}
   .homeCase {
-  height:30rem;
-  margin-top: 2.5rem;
+  width: 100%;
+  height: 100vh;
+  /* height:30rem;
+  margin-top: 2.5rem; */
 }
 h3.titbg {
   background: url(../assets/titbg.jpg) no-repeat bottom center;
@@ -337,14 +342,23 @@ h3.titbg span {
 }
 .partnerBox span {
   display: inline-block;
-  width: 6.4rem;
-  height: 3.5rem;
-  padding: 0.3rem;
+  height: 10%;
+  width: 10%;
+  padding: 0.1rem;  
 }
 .partnerBox span img {
   width: 100%;
   height: 100%;
   cursor: pointer;
+}
+.wrapper{
+  display: flex;
+  justify-content: space-between;
+  background-color: #000000;
+  width:100%;
+  min-height: 100vh;
+  align-items: center;
+  
 }
 .wrappers{
     background-color: #000000;
@@ -353,5 +367,30 @@ h3.titbg span {
     width: 100%;
     height: auto;
     padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+}
+.text{
+  font-family:"Microsoft YaHei";
+  color:#fff;
+  background-clip: text;
+}
+ h4,.p-text{
+  position: absolute;
+  top:24%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size:3rem;
+}
+ h4:last-of-type{
+  top:38%;
+}
+.p-text{
+  top:56%;
+  font-family:"Microsoft YaHei";
+  color:#fff;
+  font-size:1.5rem;
 }
 </style>
