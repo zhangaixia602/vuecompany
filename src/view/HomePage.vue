@@ -202,8 +202,7 @@ body{
     justify-content: center;
 		background-color: black;
 		width: 18%;
-    min-height: 100%;
-		
+    min-height: 100%;		
 		transform: translate3d(0, 0, 0);
 
 	}
