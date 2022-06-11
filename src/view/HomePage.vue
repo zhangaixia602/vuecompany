@@ -1,34 +1,45 @@
 <template>
 	<HeaderPage :isFullpage="true" />
-	<swiper :direction="'vertical'" :slidesPerView="1" :spaceBetween="30" :mousewheel="true" :pagination="{
+	<swiper :direction="'vertical'" :slidesPerView="1" :spaceBetween="1" :mousewheel="true" :pagination="{
       clickable: true,
     }"
     :modules="modules"
     class="mySwiper"
   >
-    <swiper-slide><img src="../assets/banner01.png">    
+    <swiper-slide>  
+  <img src="../assets/banner01.png" style="width:100%;height:100%">    
   <h4 class='text'>智慧城市 数字赋能</h4>
 	<h4 class='text'>产业变革 慧领未来</h4>
 	<p class='p-text'>技术引领世界 创新照耀未来</p>
-     </swiper-slide>
+ 
+  </swiper-slide>
     <swiper-slide>
+     <div class="homeCase">
     <div class="container-left"><p class="subtitle">公司概况</p></div>
     <div class="containers-right">
       <div class="container-top">
-      <video autoplay="true" loop>
+      <video autoplay loop controls muted>
       <source :src="require('../assets/water.mp4')" type="video/mp4" />
     </video>
     </div>
-    <div class="container-bottom">公司简介<p class="gk-content">成立于1996年，集工程研究、产品和软件开发、系统集成、产品销售和技术服务于一体的高新技术企业，始终致力于用最新的工艺、最新的技术为社会和企业发展提供及时、高效的服务和保障。公司荟萃了一批年富力强的高技术人才、锤炼成有一支勇于进取的实干队伍，建立了完整的管理体系和质量保证体系，始终以诚信、热情、双赢、创新而负责任的理念服务各行业用户。公司与西北工业大学、华南理工大学、深圳职业技术学院等高校建立了紧密的技术协作关系；与SIEMENS、ROCKWELL AUTOMATION、ABB、HONEYWELL、EMERSON等国外著名公司达成了系统集成商、技术合作伙伴或战略合作伙伴的业务联系。</p></div>
+    <div class="container-bottom">达英和自动化有限公司<p class="gk-content">成立于1996年，集工程研究、产品和软件开发、系统集成、产品销售和技术服务于一体的高新技术企业，始终致力于用最新的工艺、最新的技术为社会和企业发展提供及时、高效的服务和保障。公司荟萃了一批年富力强的高技术人才、锤炼成有一支勇于进取的实干队伍，建立了完整的管理体系和质量保证体系，始终以诚信、热情、双赢、创新而负责任的理念服务各行业用户。公司与西北工业大学、华南理工大学、深圳职业技术学院等高校建立了紧密的技术协作关系；与SIEMENS、ROCKWELL AUTOMATION、ABB、HONEYWELL、EMERSON等国外著名公司达成了系统集成商、技术合作伙伴或战略合作伙伴的业务联系。</p></div>
     </div>
-    </swiper-slide
-    ><swiper-slide><div class="container-left"><p class="subtitle">核心业务</p></div>
+    </div> 
+    </swiper-slide>
+    <swiper-slide>
+    <div class="homeCase">
+    <div class="container-left"><p class="subtitle">核心业务</p></div>
     <div class="container-right">
-      <div class="caseItem clear" v-for="(menu, index) in menus" :key="index">
+      <div class="hovertree-container">
+      <div class="gallery">
+      <div class="gallery-item" v-for="(menu, index) in menus" :key="index">
     	<router-link  :to="menu.path" target="_blank" >
-				<img :src="require('../' + menu.src)" />			
-				<p class="titles">{{ menu.title }}</p>
+				<img :src="require('../' + menu.src)"  class="gallery-item-image"/>			
+				<p class="gallery-item-description">{{ menu.title }}</p>
 		  </router-link>
+      </div>
+      </div>
+      </div>
       </div>
       </div>
 		</swiper-slide>
@@ -47,7 +58,7 @@
 	</swiper>
    <div class="wrappers">
    <span style="margin-right: 10px;">Copyright ©2019深圳市达英和自动化工程有限公司.版权所有</span>
-   <a href="http://beian.miit.gov.cn/" target="_blank" style="color:#FFFFFF">粤ICP备2022047319号</a>
+   <a href="http://beian.miit.gov.cn/" target="_blank" style="color:#000000">粤ICP备2022047319号</a>
    </div>
 </template>
 <script>
@@ -72,20 +83,20 @@
 		data() {
 			return {
 				menus: [{
-						src: "assets/banner.jpg",
-						title: "智慧楼宇",
-            path: '/case'
+						src: "assets/zhyq.jpg",
+						title: "智慧园区",
+            path: '/model/insect'
 						
 					},
 					{
 						src: "assets/banner2.jpg",
-						title: "智慧水利",
+						title: "智慧能源",
             path: '/model/water'
 						
 					},
 					{
 						src: "assets/banner3.jpg",
-						title: "智慧能源",
+						title: "智慧水利",
             path: '/model/granary'
 						
 					}
@@ -143,8 +154,9 @@
 	};
 </script>
 <style scoped>
-body{
+body{ 
   overflow: hidden;
+  
 }
 	.swiper {
 		width: 100%;
@@ -184,17 +196,7 @@ body{
 		align-items: center;
 	}
 
-	.zt {
-		position: absolute;
-		max-width: 100%;
-		max-height: 100%;
-		top: 0;
-		left: 50%;
-		transform: translateX(-50%);
-		min-height: 100%;
-		line-height: 625px;
-		font-size: 3rem;
-	}
+ 
 
 	.container-left {
     display:flex;
@@ -202,21 +204,23 @@ body{
     justify-content: center;
 		background-color: black;
 		width: 18%;
-    min-height: 100%;		
+    min-height: 100vh;	
 		transform: translate3d(0, 0, 0);
 
 	}
 
 	.container-right {
-		width: 82%;
-		height: 100vh;
-    display: flex;
-    justify-content: space-between;
+	  width: 82%;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 18%;
+    background-color: #000000;
 	}
   
 	.containers-right {
 		width: 82%;
-		height: 100%;
+    min-height: 100vh;
     
 	}
 
@@ -234,16 +238,18 @@ body{
 	}
 
 	.subtitle {
-		font-size: 35px;
+	 font-size: 1.875rem;
 		/* line-height: 800px; */
-		text-align: left;
+	  display: flex;
+    padding: 0 48%;
+    justify-content: center;
+    /* box-sizing: border-box; */
+    align-items: center;
 		color: #dedede;
 		padding: 0 48%;
     box-sizing: border-box;	
 		width: 100%;
-		font-weight: 100;
-		text-align: center;
-		vertical-align: middle;
+		font-weight: 100;		
 	}
 
 	.caseItem {    
@@ -251,44 +257,36 @@ body{
     width: 32.8%;
     height: 100vh;
     white-space: nowrap;
-		
-		/* height: 100vh;
-		width: 25%; */
-    animation: 1s ease 0.4s 1 normal backwards running fadeInUp2;
 
 	}
  
-  @keyframes fadeInUp2 {
-    0% {
-    opacity: 0;
-    -webkit-transform: translate3d(0,100%,0);
-    transform: translate3d(0,100%,0);
-}
-
-100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-}
-    
-  }
+  
   .gk-content{
      padding: 1rem 3.2rem; 
      color:white;  
-     font-size:16px;
+     font-size:0.3rem;
+     text-align: left;
      text-indent: 2em;
 
   }
- 
+.hovertree-container{border:0px solid red;}
+.container{background-color:white}
+a{color:red;}
 
 
 	.caseItem img {
 		width: 100%;
 		height: 90%;
     bottom: 0;
-    transition: all 0.36s ease;
+    z-index:20;
+   -webkit-transition:all .5s ease;
+   transition: all .5s ease;
+  
 
 	}
+  .caseItem:hover .caseItem img{
+  bottom: 80px;
+}
   .caseItem  p{
     bottom: -35%;
     height: 26vh;
@@ -310,20 +308,38 @@ body{
 		height: 100%;
 		width: 100%;
 		object-fit: fill;
+    animation-name: rotate2;
+    animation-duration: 15s;
+    /* animation: rotate2 3s linear 0s infinite ; */
 	}
-  .homeCase {
+  video:hover{ 
+   animation-play-state:'paused'
+}
+@keyframes rotate2{
+0% { margin-left:800px; }
+20% { margin-left:-800px; }
+35% { margin-left:0px; }
+100% { margin-left:0px; }
+}
+
+.homeCase {
   width: 100%;
-  height: 100vh;
-  /* height:30rem;
-  margin-top: 2.5rem; */
+  min-height: 100vh; 
+  display:flex;
 }
 h3.titbg {
-  background: url(../assets/titbg.jpg) no-repeat bottom center;
-  padding-bottom: 1rem;
-  margin: 0;
-  font-size: 1.3rem;
-  text-align: center;
-  color: #444444;
+  	color: #ffffff;
+    padding: 0 8%;
+    font-weight: 100;
+    text-align: center;
+    font-size: 1.875rem;
+    background-color: #000000;
+    height: 100vh;   
+    width: 18%;
+    text-align: center;
+    align-items: center;
+    display: flex;    
+    box-sizing: border-box;
 }
 h3.titbg span {
   font-size: 0.7rem;
@@ -339,11 +355,16 @@ h3.titbg span {
   justify-content: center;
   padding: 3rem 0;
 }
-.partnerBox span {
-  display: inline-block;
-  height: 10%;
-  width: 10%;
-  padding: 0.1rem;  
+.partnerBox span { 
+    width: 11%;
+    height: 5rem;
+    padding: 1px 8px;
+    /* background-color: rgba(77,77,77,.1); */
+    border-radius: 10px;
+    border: 1px solid hsla(0,0%,100%,.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .partnerBox span img {
   width: 100%;
@@ -353,15 +374,15 @@ h3.titbg span {
 .wrapper{
   display: flex;
   justify-content: space-between;
-  background-color: #000000;
+  background-color: #FFFFFF;
   width:100%;
   min-height: 100vh;
   align-items: center;
   
 }
 .wrappers{
-    background-color: #000000;
-    color: #ffffff;
+    background-color: rgb(255 255 255 / 50%);    
+    color: #000000;
     text-align: center;
     width: 100%;
     height: auto;
@@ -382,6 +403,8 @@ h3.titbg span {
   left: 50%;
   transform: translateX(-50%);
   font-size:3rem;
+  max-width: 100%;
+	max-height: 100%;
 }
  h4:last-of-type{
   top:38%;
@@ -392,4 +415,88 @@ h3.titbg span {
   color:#fff;
   font-size:1.5rem;
 }
+.container{
+  padding: 0rem;
+}
+.gallery{      
+    white-space: nowrap;   
+    font-size: 0;
+    min-width: 100%;
+    height: 100vh;
+    background-color: #000000;
+  /* width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  background-color: #000000;
+  margin: 1rem auto;  
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;  
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center; */
+}
+
+.gallery-item{    
+   
+    width: 35%;   
+    height: 100vh;    
+    text-align: center;   
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden; 
+ 
+}
+
+.gallery-item-image{
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: lightblue;
+  z-index:20;
+  -webkit-transition:all .5s ease;
+  transition: all .5s ease;
+  bottom:0;
+  overflow: hidden;
+}
+
+.gallery-item:hover .gallery-item-image{
+  bottom: 150px;
+}
+
+.gallery-item-description{
+  color:white;
+  font-size: 1.2rem;
+  width: 100%;
+  height: 150px;
+  padding: .5rem .8rem;
+  background: #1a39d1;
+  position: absolute;
+  bottom:0;
+}
+	@media(min-width:1920px){ 
+  .gk-content{
+    padding: 1rem 3.2rem;
+    color: white;
+    font-size: 16px;
+    text-align: left;
+    text-indent: 2em;
+    line-height: 35px;
+} 
+.container-bottom{
+    width: 100%;
+    height: 30%;
+    padding: 25px;
+    color: #ffffff;
+    background-color: #000000;
+}
+  } 
 </style>

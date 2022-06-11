@@ -673,7 +673,19 @@ export default {
       light.position.set(0, 50, 0)
       scene.add(light)
       this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-      this.controls.maxDistance=1700;
+       // 使动画循环使用时阻尼或自转 意思是否有惯性
+        this.controls.enableDamping = true; 
+      //是否可以缩放 
+        this.controls.enableZoom = true; 
+      //是否自动旋转 
+        this.controls.autoRotate = true; 
+      //设置相机距离原点的最远距离 
+        this.controls.minDistance = 100; 
+      //设置相机距离原点的最远距离 
+        this.controls.maxDistance = 1600; 
+      //是否开启右键拖拽 
+       this.controls.enablePan = false; 
+      // this.controls.maxDistance=1700;
       this.controls.maxPolarAngle=Math.PI * 0.48;    
       document.body.appendChild(this.renderer.domElement);
       labelRenderer = new CSS3DRenderer();
