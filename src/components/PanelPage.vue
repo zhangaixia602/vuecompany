@@ -31,7 +31,7 @@
     height:100%;
 }
 .panelBox{
-    font-size:0.7rem;
+    font-size:0.3rem;
     color:rgb(255, 251, 0);
 }
 .panelItem .iconfont{
@@ -40,7 +40,7 @@
     margin-right:0.5rem;
 }
 .panelItem label{
-    font-size: 0.9rem;
+    font-size: 0.3rem;
     text-align: center;
     color:white;
 	display:block;
