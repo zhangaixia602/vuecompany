@@ -33,7 +33,7 @@
 		CSS3DRenderer,
 		CSS3DObject
 	} from "three/examples/jsm/renderers/CSS3DRenderer"
-	let scene,
+	let scene,	    
 		labelRenderer,
 		plantArr = [],
 		iconObject = [];
@@ -52,10 +52,10 @@
 				canvasW: 0,
 				canvasH: 0,
 				cameraParam: {
-					fov: 30,
+					fov: 100,
 					aspect: 2,
 					near: .1,
-					far: 200
+					far: 1000
 				},
 				events: {
 					raycaster: new THREE.Raycaster(),
@@ -248,7 +248,6 @@
     //           })
     //           tw.start();  //开始执行
 
-
 				let cubeTextureLoader = new THREE.CubeTextureLoader();
 				cubeTextureLoader.setPath('/static/models/lc/');
 
@@ -278,8 +277,11 @@
 				// 创建透视摄像头
 				const cP = this.cameraParam;
 				this.camera = new THREE.PerspectiveCamera(cP.fov, cP.aspect, cP.near, cP.far);
-				this.camera.position.z = 30;
-				scene.add(this.camera);
+				this.camera.position.set(0,50,0)
+				// this.camera.position.z = 30;
+				scene.add(this.camera);	
+				
+               
 			},
 			initRenderer() {
 				// 渲染器
@@ -305,6 +307,8 @@
 				scene.add(light)
 			},
 			render() {
+				this.controls.update();
+				this.renderer.clear();
 				// 启动动画
 				this.renderer.render(scene, this.camera);
 				labelRenderer.render(scene, this.camera);
@@ -315,6 +319,14 @@
 					this.camera.updateProjectionMatrix();
 				}
 				TWEEN.update();
+				const timer = Date.now() * 0.0001;
+
+				this.camera.position.x = Math.cos( timer ) * 50;
+				this.camera.position.z = Math.sin( timer ) * 50;
+
+				
+				// this.camera.rotateY(0.01);
+                // if (this.camera.position.x > this.canvasW-1000) this.camera.position.x = 0;
 				requestAnimationFrame(this.render.bind(this))
 			},
 			resizeRendererToDisplaySize(renderer) {
@@ -330,17 +342,33 @@
 			},
 			getModel() {
 				this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-				this.controls.maxDistance = 1700;
-				this.controls.maxPolarAngle = Math.PI * 0.48;
+				this.controls.target = new THREE.Vector3(0, 0, 0);
+               // 使动画循环使用时阻尼或自转 意思是否有惯性
+               this.controls.enableDamping = true;
+			    // 动态阻尼系数 就是鼠标拖拽旋转灵敏度
+               this.controls.dampingFactor = 0.01;
+              // 是否可以旋转
+              this.controls.enableRotate = true;
+              // 是否可以缩放与速度
+              this.controls.enableZoom = true;
+            //   // 设置相机距离原点的最远距离
+            //   Controls.minDistance = 1;
+            //   // 设置相机距离原点的最远距离
+            //   Controls.maxDistance = 2000;
+            //   // 是否开启右键拖拽
+               this.controls.enablePan = false; 
 				//加载模型
 				let objLoader = new GLTFLoader();
 				let dracoLoader = new DRACOLoader();
 				dracoLoader.setDecoderPath('/draco/');
 				dracoLoader.preload();
 				objLoader.setDRACOLoader(dracoLoader);
+				let citys;
 				objLoader.load('/static/models/smartfactory-processed.glb', function(glb) {
-					glb.scene.scale.set(0.9, 0.8, 1);
-					glb.scene.rotateY(-80); //绕y轴旋转π/4        
+					console.log(glb)
+					citys=glb.scene;
+					// glb.scene.scale.set(0.9, 0.8, 1);
+					citys.rotateY(-80); //绕y轴旋转π/4        
 					scene.add(glb.scene);
 				})
 				//加载精灵

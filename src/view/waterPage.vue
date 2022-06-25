@@ -162,15 +162,18 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
-import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import {  Water } from 'three/examples/jsm/objects/Water';
+import { Sky} from 'three/examples/jsm/objects/Sky';
 import { defineComponent } from "vue";
 import BarPage from '@/components/BarPage';
 import PiePage from '@/components/PiePage';
 import CarouselTable from '@/components/CarouselTable';
 import progressBar from '@/components/progressBar';
-let envMap=null;
-let scene=null;
+let camera, scene, renderer;
+let controls, water, sun;
+
+
 export default defineComponent({
   name: 'waterPage',
   components: {
@@ -496,86 +499,95 @@ export default defineComponent({
       this.currentIndex=index
     },
     initThree () {
-      let width = window.innerWidth //窗口宽
-      let height = window.innerHeight
-      this.renderer = new THREE.WebGL1Renderer({antialias: true})
-      this.renderer.setSize(width, height)
-      document.body.appendChild(this.renderer.domElement);
-      document.body.style.overflow="hidden";
       
-      scene = new THREE.Scene();
-  	   let cubeTextureLoader = new THREE.CubeTextureLoader();
-			cubeTextureLoader.setPath( '/static/models/lc/' );
+				renderer = new THREE.WebGLRenderer();
+				renderer.setPixelRatio( window.devicePixelRatio );//设置像素值
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.toneMapping = THREE.ACESFilmicToneMapping;//电影色调映射
+				document.body.appendChild( renderer.domElement );
+        document.body.style.overflow="hidden";
+      
+        scene = new THREE.Scene();
+        
+  	    camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 1, 20000 );
+				camera.position.set( 30, 30, 100 );
+        camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
 
-			let textureCube = cubeTextureLoader.load( ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg',
-					'nz.jpg' ] );
-			textureCube.encoding = THREE.sRGBEncoding;
-      scene.background = textureCube;
-      //加载hdr
-      this.setEnvMap('015');
-      this.camera = new THREE.PerspectiveCamera(50, width / height, 1, 10000)
-      this.camera.position.set(0, 0, 400)
-      this.camera.lookAt(scene.position)
-      let light = new THREE.HemisphereLight(0xbbbbff, 0x444422, 1.5)
-      light.position.set(0, 50, 0)
-      scene.add(light)
-      this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-       // this.controls.maxDistance=1700;
-       
-     // 使动画循环使用时阻尼或自转 意思是否有惯性
-        this.controls.enableDamping = true; 
-      //是否可以缩放 
-        this.controls.enableZoom = true; 
-      //是否自动旋转 
-        this.controls.autoRotate = true; 
-      //设置相机距离原点的最远距离 
-        this.controls.minDistance = 100; 
-      //设置相机距离原点的最远距离 
-        this.controls.maxDistance = 1600; 
-      //是否开启右键拖拽 
-       this.controls.enablePan = false; 
+				renderer.setSize( window.innerWidth, window.innerHeight );
 
-      this.controls.maxPolarAngle=Math.PI * 0.48;
-     
-      // this.controls.minAzimuthAngle=Math.PI * (100/180);
+        sun = new THREE.Vector3();
+				// Water
+				const waterGeometry = new THREE.PlaneGeometry( 100000, 100000);//是二维平面几何体
+				water = new Water(
+					waterGeometry,
+					{
+						textureWidth: 512,
+						textureHeight: 512,
+						waterNormals: new THREE.TextureLoader().load( '/static/texture/waternormals.jpg', function ( texture ) {
+
+							texture.wrapS = texture.wrapT = THREE.RepeatWrapping;////纹理不重复时，纹理包裹方式为重复平铺
+
+						} ),
+						sunDirection: new THREE.Vector3(),
+						sunColor: 0xffffff,
+						waterColor: 0x001e0f,
+						distortionScale: 3.7,
+						fog: scene.fog !== undefined
+					}
+				);
+
+				water.rotation.x = - Math.PI / 2;
+				scene.add( water );
+				// Skybox
+				const sky = new Sky();
+				sky.scale.setScalar(4500000 );
+				scene.add( sky );
+				const skyUniforms = sky.material.uniforms;
+				skyUniforms[ 'turbidity' ].value = 10;//浑浊度,代表云层等对光纤的影响。
+				skyUniforms[ 'rayleigh' ].value = 2;//瑞利散射
+				skyUniforms[ 'mieCoefficient' ].value = 0.005;
+				skyUniforms[ 'mieDirectionalG' ].value = 0.8;
+			   const parameters = {
+					elevation: 2,//仰角
+					azimuth: 180//方位角180度方位角表示正南，270度方位角表示正西，360度方位角表示角度回归，依然是正北。
+				};
+
+          const pmremGenerator = new THREE.PMREMGenerator( renderer );
+        	const phi = THREE.MathUtils.degToRad( 90 - parameters.elevation );//角度弧度
+					const theta = THREE.MathUtils.degToRad( parameters.azimuth );
+
+					sun.setFromSphericalCoords( 1, phi, theta );
+
+					sky.material.uniforms[ 'sunPosition' ].value.copy( sun );
+					water.material.uniforms[ 'sunDirection' ].value.copy( sun ).normalize();
+
+					scene.environment = pmremGenerator.fromScene( sky ).texture;
+      
       let objLoader = new GLTFLoader();
       let dracoLoader=new DRACOLoader();
       dracoLoader.setDecoderPath('/draco/');
       dracoLoader.preload();
       objLoader.setDRACOLoader(dracoLoader);
-        objLoader.load('/static/models/dsh-processed.glb', function(glb) {
+      objLoader.load('/static/models/dsh-processed.glb', function(glb) {
         // glb.scene.position.set(80,-100,-800);
         // glb.scene.translateOnAxis( new THREE.Vector3( 0, 0, 0 ), 1);
-        glb.scene.scale.set(2, 1.5, 2);
+        glb.scene.scale.set(1.5, 1.5, 1.5);
         glb.scene.rotateY(0);
         scene.add(glb.scene);
       })
-      // objLoader.load('/static/models/3dcity.glb', function(gltf) {
-      //   gltf.scene.position.set(200, -600,-1200);
-      //   gltf.scene.scale.set(5, 5, 8);
-      //   gltf.scene.rotateY(-80);//绕x轴旋转π/4    
-      //   const scenes = gltf.scene.clone();
-      //   scenes.traverse((child) => {
-      //     if (child.isMesh) {
-      //       child.material.envMap =envMap
-      //       child.material.envMapIntensity = 1;
-      //     }
-      //   })
-      //   scene.add(scenes)
-      // })
-    },
-    setEnvMap(hdr) {
-      const pmremGenerator = new THREE.PMREMGenerator(this.renderer)
-      pmremGenerator.compileEquirectangularShader()
-      new RGBELoader().setPath("/static/gltf/").load(hdr + ".hdr", (texture) => {
-        envMap = pmremGenerator.fromEquirectangular(texture).texture
-        pmremGenerator.dispose()
-      })
-    },
+        controls = new OrbitControls( camera, renderer.domElement );
+				controls.maxPolarAngle = Math.PI * 0.495;
+				controls.target.set( 0, 10, 0 );
+				controls.minDistance = 800.0;
+				controls.maxDistance = 20000.0;
+				controls.update();
+     
+    },  
     animate () {
       requestAnimationFrame(this.animate)
-      this.renderer.render(scene, this.camera)
-    },
+      renderer.render(scene, camera)
+    },   
     echartsConfig (options){
       options.color= ['#207398','#ffFFff'];
       options.legend.itemWidth=7;
@@ -626,7 +638,7 @@ export default defineComponent({
     }
   },
   mounted () {
-    this.initThree()
+    this.initThree() 
     this.animate()
   }
 })
