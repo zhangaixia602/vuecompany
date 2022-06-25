@@ -324,7 +324,7 @@ a{color:red;}
 
 .homeCase {
   width: 100%;
-  min-height: 100vh; 
+  height: 100vh; 
   display:flex;
 }
 h3.titbg {
