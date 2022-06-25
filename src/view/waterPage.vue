@@ -569,10 +569,10 @@ export default defineComponent({
       dracoLoader.setDecoderPath('/draco/');
       dracoLoader.preload();
       objLoader.setDRACOLoader(dracoLoader);
-      objLoader.load('/static/models/dsh-processed.glb', function(glb) {
+      objLoader.load('/static/models/water-processed.glb', function(glb) {
         // glb.scene.position.set(80,-100,-800);
         // glb.scene.translateOnAxis( new THREE.Vector3( 0, 0, 0 ), 1);
-        glb.scene.scale.set(1.5, 1.5, 1.5);
+        glb.scene.scale.set(2.5, 2.5, 2.5);
         glb.scene.rotateY(0);
         scene.add(glb.scene);
       })
