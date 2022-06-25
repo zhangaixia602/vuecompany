@@ -784,6 +784,8 @@ export default {
 			//     },
 
 			animate() {
+        this.controls.update();
+				this.renderer.clear();
 				requestAnimationFrame(this.animate)
 				orbitControls.update();
 				labelRenderer.render(scene, this.camera);
