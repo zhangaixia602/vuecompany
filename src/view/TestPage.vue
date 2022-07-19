@@ -32,7 +32,17 @@
 	import {
 		CSS3DRenderer,
 		CSS3DObject
-	} from "three/examples/jsm/renderers/CSS3DRenderer"
+	} from "three/examples/jsm/renderers/CSS3DRenderer";
+    import { EffectComposer
+	 } from "three/examples/jsm/postprocessing/EffectComposer";
+    import { RenderPass 
+	} from "three/examples/jsm/postprocessing/RenderPass";
+    import { OutlinePass
+	 } from "three/examples/jsm/postprocessing/OutlinePass";
+    import { ShaderPass
+	 } from "three/examples/jsm/postprocessing/ShaderPass";
+    import { FXAAShader 
+	} from "three/examples/jsm/shaders/FXAAShader";
 	let scene,	    
 		labelRenderer,
 		plantArr = [],
@@ -51,6 +61,9 @@
 				canvas: null,
 				canvasW: 0,
 				canvasH: 0,
+				composer: null,
+                outlinePass: null,
+                renderPass: null,
 				cameraParam: {
 					fov: 100,
 					aspect: 2,
@@ -298,6 +311,8 @@
 				labelRenderer.domElement.style.top = '0px';
 				labelRenderer.domElement.style.pointerEvents = 'none';
 				document.body.appendChild(labelRenderer.domElement);
+				
+
 			},
 			addLight() {
 				// 环境光
@@ -312,6 +327,9 @@
 				// 启动动画
 				this.renderer.render(scene, this.camera);
 				labelRenderer.render(scene, this.camera);
+				if(this.composer){
+					this.composer.render()
+				}
 				// 动态监听窗⼝尺⼨变化
 				if (this.resizeRendererToDisplaySize(this.renderer)) {
 					const canvas = this.renderer.domElement;
@@ -319,16 +337,43 @@
 					this.camera.updateProjectionMatrix();
 				}
 				TWEEN.update();
-				const timer = Date.now() * 0.0001;
+				// const timer = Date.now() * 0.0001;
 
-				this.camera.position.x = Math.cos( timer ) * 50;
-				this.camera.position.z = Math.sin( timer ) * 50;
+				// this.camera.position.x = Math.cos( timer ) * 50;
+				// this.camera.position.z = Math.sin( timer ) * 50;
 
 				
 				// this.camera.rotateY(0.01);
                 // if (this.camera.position.x > this.canvasW-1000) this.camera.position.x = 0;
 				requestAnimationFrame(this.render.bind(this))
 			},
+			//高亮显示模型（呼吸灯）
+            outlineObj (selectedObjects) {
+           // 创建一个EffectComposer（效果组合器）对象，然后在该对象上添加后期处理通道。
+           this.composer = new EffectComposer(this.renderer)
+           // 新建一个场景通道  为了覆盖到原理来的场景上
+           this.renderPass = new RenderPass(scene, this.camera)
+           this.composer.addPass(this.renderPass);
+           // 物体边缘发光通道
+           this.outlinePass = new OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), scene, this.camera, selectedObjects)
+           this.outlinePass.selectedObjects = selectedObjects
+           this.outlinePass.edgeStrength = 10.0 // 边框的亮度
+           this.outlinePass.edgeGlow = 1// 光晕[0,1]
+           this.outlinePass.usePatternTexture = false // 是否使用父级的材质
+           this.outlinePass.edgeThickness = 1.0 // 边框宽度
+           this.outlinePass.downSampleRatio = 1 // 边框弯曲度
+           this.outlinePass.pulsePeriod = 5 // 呼吸闪烁的速度
+           this.outlinePass.visibleEdgeColor.set(parseInt(0x00ff00)) // 呼吸显示的颜色
+           this.outlinePass.hiddenEdgeColor = new THREE.Color(0, 0, 0) // 呼吸消失的颜色
+           this.outlinePass.clear = true
+           this.composer.addPass(this.outlinePass)
+           // 自定义的着色器通道 作为参数
+           var effectFXAA = new ShaderPass(FXAAShader)
+           effectFXAA.uniforms.resolution.value.set(1 / window.innerWidth, 1 / window.innerHeight)
+            effectFXAA.renderToScreen = true
+           this.composer.addPass(effectFXAA)
+           },
+
 			resizeRendererToDisplaySize(renderer) {
 				const canvas = renderer.domElement;
 				this.canvasW = window.innerWidth;
@@ -428,6 +473,24 @@
 				scene.add(cardCSS3DObject)
 			},
 			clickPickPosition(event) {
+				 let raycaster = new THREE.Raycaster();
+                 let mouse = new THREE.Vector2();
+                 //将鼠标点击位置的屏幕坐标转换成threejs中的标准坐标
+                 mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+                 mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+                // 通过鼠标点的位置和当前相机的矩阵计算出raycaster
+                 raycaster.setFromCamera(mouse, this.camera);
+                // 获取raycaster直线和所有模型相交的数组集合
+                //  var intersects = raycaster.intersectObjects(this.clickObjects);
+                var intersects = raycaster.intersectObjects(scene.children);
+               //console.log(intersects);
+               //将所有的相交的模型的颜色设置为红色
+               // for (var i = 0; i < intersects.length; i++) {
+               //   intersects[i].object.material.color.set(0xff0000);
+               // }
+              //if(intersects.length>0){
+               console.log('点击了对象：', intersects)
+              //}
 				this.pickEvents(this.events.pickPosition, scene, this.camera, obj => {
 					obj.userData.checked = !obj.userData.checked;
 					if (obj.type === "Icon") {

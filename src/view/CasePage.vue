@@ -83,7 +83,7 @@
 						group: 'draulic',
 						title: '智慧水利',
 						src: 'assets/water.png',
-						id: '05',
+						id: '04',
 						path: '/model/water'
 					},
 					{
@@ -95,10 +95,10 @@
 					},
 					{
 						group: 'draulic',
-						title: '测试',
+						title: '环保',
 						src: 'assets/cyq.png',
-						id: '05',
-						path: '/model/test'
+						id: '06',
+						path: '/model/login'
 					}
 				]
 			}

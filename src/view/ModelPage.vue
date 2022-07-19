@@ -8,6 +8,7 @@
 	import GranaryPage from '@/view/GranaryPage'
 	import EnvironmentPage from '@/view/EnvironmentPage'
 	import EarthPage from '@/view/EarthPage'
+	import LoginPage from '@/view/LoginPage'
 	import TestPage from '@/view/TestPage'
 	export default {
 		name: 'ModelPage',
@@ -18,6 +19,7 @@
 			'GranaryPage': GranaryPage,
 			'EnvironmentPage': EnvironmentPage,
 			'EarthPage': EarthPage,
+			'LoginPage': LoginPage,
 			'TestPage': TestPage
 		},
 		data() {
@@ -46,6 +48,10 @@
 					{
 						id: 'earth',
 						component: 'EarthPage'
+					},
+					{
+						id: 'login',
+						component: 'LoginPage'
 					},
 					{
 						id: 'test',

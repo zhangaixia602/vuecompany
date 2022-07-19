@@ -8,3 +8,5 @@ import './assets/css/common.css';
 import './assets/font/iconfont.css';
 import 'video.js/dist/video-js.css';
 createApp(App).use(Antd).use(router).use(setLanguage()).mount("#app");
+
+  
