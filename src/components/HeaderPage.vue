@@ -43,6 +43,11 @@ let that;
 						name: '关于我们'
 					},					
 					{
+						path: '/industry',
+						id: 'industry',
+						name: '行业资讯'
+					},					
+					{
 						path: '/contact',
 						id: 'contact',
 						name: '联系我们'

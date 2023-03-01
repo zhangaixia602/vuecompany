@@ -5,7 +5,8 @@ export default{
             business:"Business",
             case:"Dome",
             about:"AboutUs",
-            contact:"contactUS"
+            contact:"contactUS",
+            industry:"IndustryInformation"
         }
 
     },
@@ -15,7 +16,8 @@ export default{
             business:"产品服务",
             case:"案例演示",
             about:"关于我们",
-            contact:"联系我们"
+            contact:"联系我们",
+            industry:"行业资讯"
         }
     }
 }

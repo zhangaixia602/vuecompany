@@ -258,3 +258,17 @@ footer{
 	  width:1600px;
 	}
 }
+.industryModal{
+    overflow: hidden;
+    height:100%;
+}
+.industryModal .ant-modal{
+    top:0.6rem;
+}
+.industryModal .ant-modal-content{
+    height:100%
+}
+.industryModal .ant-modal-body{
+    height:100%;
+    box-sizing: border-box;
+}

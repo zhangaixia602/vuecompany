@@ -32,6 +32,11 @@ export default createRouter({
       path: '/model/:id',
       name: '示例',
       component: () => import('@/view/ModelPage')
+    },
+    {
+      path: '/industry',
+      name: '行业资讯',
+      component: () => import('@/view/IndustryPage')
     }
   ]
 })
