@@ -75,7 +75,7 @@
 			return {
 				position_NKYYGS: {
 					Name: '深圳市达英和自动化有限公司',
-					address: '深圳市龙华新区清祥路1号宝能科技园7栋A座11楼',
+					address: '深圳市龙华区龙华街道壹成环智中心2座13层B08、B09单位',
 					phoneNumber: '(028)84504011',
 					bdLNG: 114.070831,
 					bdLAT: 22.680181
@@ -83,7 +83,7 @@
 				menus: [{
 						src: "assets/icon-1.png",
 						title: "地址",
-						text: "深圳市龙华新区清祥路1号宝能科技园7栋A座11楼",
+						text: "深圳市龙华区龙华街道壹成环智中心2座13层B08、B09单位",
 					},
 					{
 						src: "assets/icon-2.png",

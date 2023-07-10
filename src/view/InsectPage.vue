@@ -10,6 +10,7 @@
         :options="{
         domSelector: 'pie1',
         title:this.categoryTitle,
+        color:this.categoryColor,
         data:this.categoryData
       }"
       />  
@@ -52,16 +53,6 @@
         data:this.repairData
       }"
       />    
-    </div>
-    <div class='card' :style="{ display: this.currentNav==='order' ? 'block' : 'none'}">
-     <BarPage 
-        :options="{
-        domSelector: 'orderStatis',
-        viewData: this.orderStatis,
-        smooth:true,
-        data:this.orderStatisData
-      }"
-      />
     </div>
     <div class='card' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none' }">      
     <PiePage
@@ -112,16 +103,14 @@
 						boundaryGap:true
 			}" />
 		</div>
- 	<div class='card' :style="{ display: this.currentNav==='environment' ? 'block' : 'none' }">
-			<BarPage :options="{
-		  domSelector: 'envir',
-		  viewData: this.envir,
-		  smooth:true,
-		  data:this.envirData,
-					boundaryGap:true
-		}" />
-			</div>
-		
+		<div class='card'	:style="{ display: this.currentNav==='environment' ? 'block' : 'none' }">
+				<BarPage :options="{
+			  domSelector: 'water',
+			  viewData: this.water,
+			  boundaryGap:true,
+			  data:this.waterData
+			}" />
+		</div>
   </section> 
  
   <section class='right'>
@@ -133,6 +122,17 @@
       }"
       />    
     </div>
+     <div class='card' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
+      <BarPage 
+        :options="{
+        domSelector: 'temDity',
+        viewData: this.temDity,
+        smooth:true,
+        data:this.temDityData,
+        //config:this.echartsConfig
+      }"
+      />     
+    </div>
     <div class='borderBg1' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
     <CarouselTable
         :options="{
@@ -141,18 +141,16 @@
           data:this.dataSource,
       }"
       />
-   
     </div>
-     <div class='card' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
-      <BarPage 
+    <div class='card' :style="{ display: this.currentNav==='order' ? 'block' : 'none'}">
+     <BarPage 
         :options="{
-        domSelector: 'temDity',
-        viewData: this.temDity,
+        domSelector: 'orderStatis',
+        viewData: this.orderStatis,
         smooth:true,
-        data:this.temDityData,
-        config:this.echartsConfig
+        data:this.orderStatisData
       }"
-      />     
+      />
     </div>
      <div class='card' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none'}">
      <BarPage 
@@ -183,6 +181,13 @@
 						boundaryGap:true
 			}" />		  
     </div>
+     <div class='card ' :style="{ display: this.currentNav==='alarms' ? 'block' : 'none' }">
+     <PiePage :options="{
+			  domSelector: 'alarmsPies',
+			  title:this.alarmsTitles,
+			  data:this.alarmsDatas
+			}" />
+    </div>
       <div class='borderBg1' :style="{ display: this.currentNav==='alarms' ? 'block' : 'none'}">
     <CarouselTable
         :options="{
@@ -191,8 +196,24 @@
           data:this.alarmsData,
       }"
       />
-   
     </div>
+    	<div class='card' :style="{ display: this.currentNav==='environment' ? 'block' : 'none' }">
+			<BarPage :options="{
+		  domSelector: 'envir',
+		  viewData: this.envir,
+		  smooth:true,
+		  data:this.envirData,
+					boundaryGap:true
+		}" />
+			</div>
+      <div class='card' :style="{ display: this.currentNav==='environment' ? 'block' : 'none' }">
+			<BarPage :options="{
+		  domSelector: 'air',
+		  viewData: this.air,
+		  data:this.airData,
+      boundaryGap:true
+		}" />
+			</div>
   </section>
  <div id="WebGL-output">      
 </div>
@@ -353,6 +374,7 @@ export default {
         }
       ],
       categoryTitle:"大型设备开机率",
+      categoryColor:["#73c0de","#546fc6"],
       categoryData:[
         {
           name:"开机率",
@@ -365,6 +387,7 @@ export default {
       ],
       temDity:{
         title:"综合能效",
+        color:['#5470c7',"#fac859"],
         xAxis:Array(24).fill(1).map(function(item,index){
           return index+':00'
         }),
@@ -438,6 +461,7 @@ export default {
 					}
 				],
       vehicle:{
+        color:['#73c0de','#fac859',"#ee6666"],
         title:"单台设备开机率",
         xAxis:[],
         legend:[{name:"冰水机",key:"b"},{name:"空压机",key:"k"},{name:"锅炉房",key:"g"}]
@@ -534,17 +558,17 @@ export default {
       panelTitle1:'设备总数统计',
       panelData1:[
         {
-          icon:'icon-zhihuiyuanqu',
+          icon:'icon-huizongshuju',
           label:'总数',
           value:parseInt(Math.random()*1000)
         },
         {
-          icon:'icon-zhihuiyuanqu',
+          icon:'icon-subsystem',
           label:'子系统',
           value:parseInt(Math.random()*1000)
         },
         {
-          icon:'icon-zhihuiyuanqu',
+          icon:'icon-jifang',
           label:'机房',
           value:parseInt(Math.random()*1000)
         }
@@ -552,17 +576,17 @@ export default {
       panelTitle:'设备状况统计',
       panelData:[
         {
-          icon:'icon-zhihuiyuanqu',
+          icon:'icon-shebeiweihu',
           label:'健康',
           value:parseInt(Math.random()*1000)
         },
         {
-          icon:'icon-zhihuiyuanqu',
+          icon:'icon-gaojingxinxi',
           label:'异常',
           value:parseInt(Math.random()*1000)
         },
         {
-          icon:'icon-zhihuiyuanqu',
+          icon:'icon-weihu',
           label:'维护中',
           value:parseInt(Math.random()*1000)
         }
@@ -581,8 +605,27 @@ export default {
 						value: parseInt(Math.random() * 100 + 600)
 					}
 				],
+        alarmsTitles: "事故分析",
+			  alarmsDatas: [{
+						name: "严重",
+						value: parseInt(Math.random() * 100)
+					},
+					{
+						name: "高危",
+						value: parseInt(Math.random() * 100 + 10)
+					},
+					{
+						name: "中危",
+						value: parseInt(Math.random() * 100 + 60)
+					},
+					{
+						name: "轻危",
+						value: parseInt(Math.random() * 100 + 60)
+					}
+				],
         design: {
 					title: "设计处理量(h)",
+          color:['#5470c7',"#fac859"],
 					xAxis: ['酸碱', '染色', '含磷', '含镍']
 				},
 				designData: [{
@@ -592,6 +635,7 @@ export default {
 				}],
         	envir: {
 					title: "废水日处理量",
+           color:['#73c0de',"#fac859"],
 					xAxis: ['酸碱', '染色', '含磷', '含镍']
 				},
 				envirData: [{
@@ -628,6 +672,50 @@ export default {
 						})
 					}
 				],
+        water:{
+        title:"水质监测",
+        color:['#5470c7',"#fac859"],
+        xAxis:["总磷","总氮","PH","COD","BOD","氧氮","浊度"],
+        legend:[{name:"进水",key:"tempe"},{name:"出水",key:"dity"}]
+      },
+      waterData:[
+        {
+          key:"tempe",
+          type:"line",
+          data:Array(7).fill(1).map(function(){
+            return parseInt(Math.random()*20)
+          })
+        },
+        {
+          key:"dity",
+          type:"line",
+          data:Array(7).fill(1).map(function(){
+            return parseInt(Math.random()*20)
+          })
+        }
+      ],
+       air:{
+        title:"空气质量监测",
+        color:['#73c0de',"#fac859"],
+        xAxis:["周一","周二","周三","周四","周五","周六","周日"],
+        legend:[{name:"上周",key:"tempe"},{name:"本周",key:"dity"}]
+      },
+      airData:[
+        {
+          key:"tempe",
+          type:"line",
+          data:Array(7).fill(1).map(function(){
+            return parseInt(Math.random()*50+20)
+          })
+        },
+        {
+          key:"dity",
+          type:"line",
+          data:Array(7).fill(1).map(function(){
+            return parseInt(Math.random()*50+30)
+          })
+        }
+      ],
     }
   },
   
@@ -678,7 +766,7 @@ export default {
       //是否可以缩放 
         this.controls.enableZoom = true; 
       //是否自动旋转 
-        this.controls.autoRotate = true; 
+        this.controls.autoRotate = false; 
       //设置相机距离原点的最远距离 
         this.controls.minDistance = 100; 
       //设置相机距离原点的最远距离 
@@ -738,9 +826,9 @@ export default {
 					cardContainer.style =
 						" background-color: MidnightBlue;background-color: rgba(0, 10, 40); border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;opacity: 0.5;font-size: 1px;color: aqua; padding: 10px 10px 10px;white-space: nowrap;"
 					cardContainer.className = "style1";
-					document.styleSheets[0].insertRule(
-						'.style1::after { content: "";border-style: solid;border-top: 18px solid rgba(0, 10, 40);border-right: 8px solid transparent;border-bottom: 18px solid transparent;border-left: 8px solid transparent;position: absolute;top: 100%;left:50%;top:80%;}',
-						0);
+					//document.styleSheets[0].insertRule(
+						//'.style1::after { content: "";border-style: solid;border-top: 18px solid rgba(0, 10, 40);border-right: 8px solid transparent;border-bottom: 18px solid transparent;border-left: 8px solid transparent;position: absolute;top: 100%;left:50%;top:80%;}',
+						//0);
 					cardContainer.innerHTML = item.text;
 					let cardCSS3DObject = new CSS3DObject(cardContainer);
 					cardCSS3DObject.position.x = item.x;
@@ -887,6 +975,7 @@ nav a.active{
 
 	.left,
 	.right {
+    z-index: 100000;
 		width: 22%;
 		height: calc(100% - 10rem);
 		display: flex;
@@ -972,7 +1061,7 @@ nav a.active{
 	#temDity,
 	#pie1,
 	#vehicle,
-	#dayStatis,#orderStatis,#monitor,#maindif,#alarmPie,#design,#envir,#orderdif,#orderStatis1{
+	#dayStatis,#orderStatis,#monitor,#maindif,#alarmPie,#design,#envir,#orderdif,#orderStatis1,#water,#air,#alarmsPies{
 		width: 15rem;
 		height: 8.2rem;
    
@@ -983,9 +1072,17 @@ nav a.active{
 	#temDity,
 	#pie1,
 	#vehicle,
-	#dayStatis,#orderStatis,#monitor,#maindif,#alarmPie,#design,#envir,#orderdif,#orderStatis1{
+	#dayStatis,#orderStatis,#monitor,#maindif,#alarmPie,#design,#envir,#orderdif,#orderStatis1,#water,#air,#alarmsPies{
 			width:21.2rem;
 			height:15rem;
 		}
+	#pie1,
+	#vehicle,
+  #orderStatis1{
+			height:12.3rem;
+		}
 	}
+  .panelItem .iconfont{
+    color:white !important;
+  }
 </style>

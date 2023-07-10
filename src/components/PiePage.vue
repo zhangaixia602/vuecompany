@@ -10,7 +10,8 @@
 			return {
 				domSelector: this.options.domSelector,
 				data: this.options.data,
-                titleText:this.options.title || ""
+                titleText:this.options.title || "",
+				color:this.options.color || []
 			}
 		},
 		methods: {
@@ -65,6 +66,9 @@
                     },
                     data: this.data
                 }];
+				if (this.color.length>0) {
+					options.color = this.color;
+				}
 				options.series = series;
 				if (echartsConfig) {
 					return echartsConfig(options);
