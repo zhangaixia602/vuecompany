@@ -5,35 +5,31 @@
       <div class="text-center avatar-box">
         <img src="../assets/logo.png" class="img-thumbnail avatar" alt="" />
       </div>
+ 
+      
+      <!-- 表单区域 -->  
 
-      <!-- 表单区域 -->
       <div class="form-login p-4">
         <!-- 登录名称 -->
         <div class="form-group form-inline">
           <!-- <label for="username">登录名称</label> -->
-          <input
-            type="text"
-            class="form-control ml-2"
-            id="username"
-            placeholder="请输入登录名称"
-            autocomplete="off"
-            v-model.trim="username"
-          />
+          <a-input class="form-control" v-model:value="username">
+        <template #prefix>
+          <UserOutlined class="site-form-item-icon" />
+        </template>
+      </a-input> 
         </div>
         <!-- 登录密码 -->
         <div class="form-group form-inline">
           <!-- <label for="password">登录密码</label> -->
-          <input
-            type="password"
-            class="form-control ml-2"
-            id="password"
-            placeholder="请输入登录密码"
-            v-model.trim="password"
-          />
+         <a-input-password class="form-control" v-model:value="password">
+        <template #prefix>
+          <LockOutlined class="site-form-item-icon" />
+        </template>
+       </a-input-password>
         </div>
         <!-- 登录和重置按钮 -->
         <div class="form-group form-inline d-flex justify-content-end">
-          <button type="button" class="btn btn-secondary mr-2" @click="reset">重置</button>
           <button type="button" class="btn btn-primary" @click="login">登录</button>
         </div>
       </div>
@@ -42,19 +38,21 @@
 </template>
 
 <script>
+import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
+import { Modal } from 'ant-design-vue';
 export default {
   name: 'MyLogin',
+   components: {
+    UserOutlined,
+    LockOutlined,
+  },
   data() {
     return {
       username: '',
       password: ''
     }
   },
-  methods: {
-    reset() {
-      this.username = ''
-      this.password = ''
-    },
+  methods: {    
     login() {
       if (this.username === 'admin' && this.password === '666666') {
         // 登录成功
@@ -62,14 +60,18 @@ export default {
         localStorage.setItem('token', 'Bearer xxxx')
         // 2. 跳转到后台主页
         
-         window.location = 'https://share.shanhaibi.com/62c6540009880/';
+         window.location = 'https://share.shanhaibi.com/62d669f63eac4/';
         // this.$router.push('/case')
-      } else if(this.username === 'admin001' && this.password === '123456'){
-         window.location = 'https://share.shanhaibi.com/62c6915ae2874/';
+      } else if(this.username === 'dyh' && this.password === '123456'){
+         window.location = 'https://share.shanhaibi.com/019bd1ed9c-NGMyNGEzZT/yubeigongyeyuan/';
 
       }else {
         // 登录失败
         localStorage.removeItem('token')
+        Modal.warning({
+        title: '提示',
+        content: '用户名输入错误，重新输入',
+      });
       }
     }
   }
@@ -98,7 +100,7 @@ export default {
 .form-control {
     width: 400px;
     border-radius: 5px;
-    margin: 5px 0px 5px 0px;
+    margin: 10px 0px 10px 0px;
 }
  .form-login {
       position: absolute;

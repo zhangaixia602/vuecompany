@@ -56,7 +56,12 @@
 					{
 						title: '智慧能源',
 						group: 'energy'
+					},
+					{
+						title: '智慧环保',
+						group: 'environment'
 					}
+
 				],
 				products: [{
 						group: 'park',
@@ -94,9 +99,9 @@
 						path: '/model/earth'
 					},
 					{
-						group: 'draulic',
-						title: '环保',
-						src: 'assets/cyq.png',
+						group: 'environment',
+						title: '智慧环保',
+						src: 'assets/huanbao.png',
 						id: '06',
 						path: '/model/login'
 					}
