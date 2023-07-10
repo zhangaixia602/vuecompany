@@ -2516,6 +2516,715 @@
 								className:""
 							}
 						]
+					},
+					{
+					    src: "assets/industry/news14/1.png",
+						title:"你不知道的“SQL Server安装与访问”步骤流程",
+						text: "SQL Server 是一个软件产品，在使用过程中会有一些未考虑到的问题。微软会定期将一段时间内收集到的问题来进行验证与修复，修复的软件发布为 Service Package（简称SP）。你可以找到对应 SQL Server 版本的一个最新SP（如SP1、SP2、SP3、SP4）安装修复。自SQL Server 2017 开始，SQL Server 不再使用 SP 修复问题，而是使用 Cumulative Updates（简称CU）。你可以下载对应 SQL Server版本的最新 CU来安装修复。",
+						data:[
+							{
+								imgIs:false,
+								text:"SQL Server 是一个软件产品，在使用过程中会有一些未考虑到的问题。微软会定期将一段时间内收集到的问题来进行验证与修复，修复的软件发布为 Service Package（简称SP）。你可以找到对应 SQL Server 版本的一个最新SP（如SP1、SP2、SP3、SP4）安装修复。自SQL Server 2017 开始，SQL Server 不再使用 SP 修复问题，而是使用 Cumulative Updates（简称CU）。你可以下载对应 SQL Server版本的最新 CU来安装修复。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"要访问和操作SQL Server 实例，我们需要一个客户端工具。微软官方提供了一个非常好的SQL Server专用管理工具——SQL Server Management Studio，简称SSMS。该工具可以单独下载和安装，只需安装这一个工具，就可以连接和管理不同版本的一个或多个 SQL Server 实例。在 SQL Server 2014 及以前版本，SSMS 是集成在 SQL Server 软件中的，选择是否安装。以下是安装SQL Server 2014新实例：",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"将下载好的安装包解压再把iso文件解压到指定目录下，比如D:\temp下，然后点击setup开始安装。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news14/1.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"点击左侧的安装选项，然后选择全新安装。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news14/2.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"输入产品密钥，然后点击下一步。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news14/3.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"选中接受条款，点击下一步。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news14/4.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"进入安装规则，点击下一步。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news14/5.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"进入设置角色项，选择要安装的SQL Server的类型。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news14/6.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"选择SQL Server的功能，勾选相关服务后，根据需要更改安装目录。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news14/7.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"设置实例ID的名称，这里一般选择默认值，如果在一台机器里安装两个实例，则需要新起个名字。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news14/8.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"进入服务器配置选项，这里账户可以按照指定的用户，也可以按照默认值。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news14/9.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"进入数据库引擎配置项，这里可以指定混合模式并设置SA密码，添加当前用户为SQL Server管理员。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news14/10.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"选择SSAS服务配置，这里一般选择”多维和数据挖掘模式”，同时指定当前用户是SSAS服务的管理员。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news14/11.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"SSRA服务配置，这里选择“安装和配置”。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news14/12.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"指定Distributed Replay的访问权限，这里选择的是当前用户。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news14/13.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"指定控制器的名称并指定相关目录。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news14/14.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"进入准备安装选项，点击安装。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news14/15.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"耐性等待直至安装完成，出现下图界面时点击关闭，完成安装。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news14/16.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"使用步骤",
+								className:"textCenter bold"
+							},
+							{
+								imgIs:false,
+								text:"首先，打开开始菜单。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news14/17.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"其次，点击要连接的数据库引擎，服务器名称为计算机名或者(local)或缩写成“ . ”，点击连接进入SSMS。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news14/18.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news14/19.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"登录成功，安装完成啦！是不是很简单，赶快试试吧！",
+								className:""
+							}
+						]
+					},
+					{
+					    src: "assets/industry/news15/1.png",
+						title:"干货|石化厂火炬用压缩机单板机控制系统改造",
+						text: "从石化生产实际来说，配置的火炬气回收装置，其作为环境保护装置以及节能增效装置，发挥着重要的作用，能够实现对多套化工装置运行排放气体的回收，比如炼油装置等，对回收的气体以燃料气的形式再利用。",
+						data:[
+							{
+								imgIs:false,
+								text:"前言及项目概况",
+								className:"textCenter bold textBlue"
+							},
+							{
+								imgIs:false,
+								text:"从石化生产实际来说，配置的火炬气回收装置，其作为环境保护装置以及节能增效装置，发挥着重要的作用，能够实现对多套化工装置运行排放气体的回收，比如炼油装置等，对回收的气体以燃料气的形式再利用。不仅减少了对环境的污染，而且能够节约能源和资源，推动石化企业持续发展。火炬气回收装置系统中，压缩机作为核心设备，发挥着重要的作用。在实际应用中，随着使用年限的不断增加，压缩机运行性能不断降低，为保证其可以高效安全的运行，需要进行检修和优化改造。针对其运行存在的缺陷，进行优化和改造，使其运行性能水平可以得到保障，实现装置运行的效益目标。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"某石化厂火炬回收压缩机系统选用WLVT 321/19350 (1335S)型螺杆式压缩机，配套德国GEA FES系统有限公司的控制系统。控制系统采用微处理器主板控制核心，配套MCP-94，S系列压缩机Micro III控制面板。本项目将其控制系统改造为SIEMENS公司S7-300系列PLC控制系统，上位机为SIEMENS公司WinCC人机界面监控软件。本项目的最大难点和技术风险是控制程序无法开源，仅根据系统项目移交的技术资料、控制面板存储的参数、仪控和工艺运行人员所掌握的一些生产过程数据和联锁条件等信息综合起来而自主开发专为该压缩机量身打造的控制系统程序。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news15/1.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news15/2.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"图1-控制箱外观和内部示意图",
+								className:"textCenter"
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news15/3.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"图2-改造后(控制箱利旧)内部示意图",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"压缩机介绍",
+								className:"textCenter textGreen"
+							},
+							{
+								imgIs:false,
+								text:"WLVT 321/19350 (1335S)型螺杆式压缩机是一种正排量、螺旋式轴向流压缩机，设计用于工艺气体和冷冻剂的压缩。压缩机由润滑系统、机油分离系统、机油冷却系统和液压系统等部分组成。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"压缩机润滑系统",
+								className:"textCenter bold"
+							},
+							{
+								imgIs:false,
+								text:"来自分离器的机油通过一台粗滤器转送至机油泵入口，由油泵经一台机油过滤器泵入主油箱再分配至压缩机各部位。机组使用一只差压调节器将过量的机油回馈至分离器而控制输送至压缩机的机油压力。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"压缩机机油分离系统",
+								className:"textCenter bold"
+							},
+							{
+								imgIs:false,
+								text:"因为螺杆式压缩机使用机油进行冷却、密封和润滑，所以机油会与工艺气体发生混合，必须在进入系统其他部位之前与工艺气体物流进行分离。FES采用一种高效的两级机油分离系统设计，实现机油中几乎所有工艺气体的分离。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"压缩机冷却系统",
+								className:"textCenter bold"
+							},
+							{
+								imgIs:false,
+								text:"压缩机机组配备了由用户提供和安装的机油水冷却器。系统采用一只三通温度调节控制阀(AMOT)将油冷却器的冷机油与来自机油分离器的热机油进行混合而实现对机油温度的控制。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"压缩机液压系统",
+								className:"textCenter bold"
+							},
+							{
+								imgIs:false,
+								text:"压缩机采用液压动力实现对负载控制系统的操作。压缩机在满负荷工作条件时，滑阀位于滑动停止位置。当滑阀从滑动停止位置移动时，卸载开始而打开了工艺气体回流至入口的旁通。机组采用高压机油实现对压缩机的加载和卸载，通过在液压活塞的一侧加压，另一侧卸压而实现滑阀的动作。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"控制系统功能",
+								className:"textCenter textGreen"
+							},
+							{
+								imgIs:false,
+								text:"1.系统工艺流程",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"压缩机控制系统工艺流程界面主要实现对分离罐液位开关上限、分离罐过滤器差压高、油分离器液位下限等报警开关状态监视；实现对工艺和设备相关的压力、压差、温度、滑阀阀位和电机电流等数据的监视；实现对压缩机、机油泵、加载阀、减载阀、氮气供应隔离阀、吹扫气体排放隔离阀、入口管线隔离阀和高温气体旁通隔离阀和喷油调节阀等设备运行状态监视和控制。其中喷油调节阀用于调节控制压缩机出口温度——手动模式进行手动阀门开度设定，自动模式进行PID调节参数设置。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"控制系统监控还包括开车就绪条件、开车/停车流程、联锁/紧急停车流程、联锁画面、量程/报警/联锁参数设置、系统工艺参数设置等界面（子画面可通过点击工艺流程监控界面中的画面按钮打开）。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news15/4.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"图3-某石化厂火炬用压缩机控制系统工艺流程界面",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"2.系统开车条件",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"系统开车前需确保“开车就绪”条件满足，即“开车就绪”背景呈绿色，如背景呈白色，点击其可弹出“开车就绪”条件明细（条件满足则背景呈绿色，反之为白色）。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news15/5.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"图4-某石化厂火炬用压缩机控制系统开车就绪条件弹窗",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"3.系统开车/正常停车",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"3.1．系统开车步骤",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"对新安装的设备，或维护或预防性维修停车后重新开车的设备完成预开车检查后，在压缩机开车过程中应当遵循以下步骤：",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"1) 检查机油分离器内的油位。在停车状态，油位应当位于上玻璃液位计的中间。在压缩机运行过程中，油位不应当低于下玻璃液位计。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"2) 按以下步骤检查所有的阀门的阀位：",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"a) 除非FES的压缩机机组管道仪表图上另有说明，所有非常压冷冻阀门应当全开。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"b) 主机油喷射计量阀应当全开。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"c) 为了维持足够的油压或降低由于机油流量过大而产生的噪音，可能需要对主机油喷射阀进行限制。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"d) 打开至压缩机接口的机油输送阀。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"e) 打开至压力变送器的所有阀门。但是要确保所有的放空和吹扫阀门处于关闭状态。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"f) 两台机油过滤器出口隔离阀门全部打开。备用机油过滤器的入口隔离阀应当处于关闭状态。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"g) 打开第二机油回流计量阀1。维护停止阀应当全开。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"h) 打开机油差压调节阀出口的隔离阀。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"3) 参照FES管道仪表图，并将其他所有阀门的阀位按正常操作设置。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"4) 向控制系统送电。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"5) 向机油分离器电源回路加电。应当在压缩机开车前24小时通电或根据将机油至少加热到95°F的需要提前通电。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"6) 保证压缩机电机断路器已经打开。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"7) 单独启动压缩机机组的机油泵，并让机油泵润滑压缩机轴承大约30秒钟。停止机油泵。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"8) 闭合压缩机电机断路器。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"按系统开车按钮。这样压缩机就会启动。至此，压缩机的开车顺序就会变成自动，接着就会出现以下情况：",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"1) 如果在反再循环延时范围内提前对压缩机进行开车，压缩机启动要等到反再循环延时期满后才能开始。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"2) 如果最近没有对压缩机进行开车，或者反再循环计时器已经到期，会同时出现以下情况：",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"a) 压缩机机油泵运行指示灯亮。机油泵启动并建立机油压力。机油压力必须在10秒钟内建立，否则开车顺序就会中断，压缩机不会启动。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"b) 滑阀会变动至卸载阀位(小于5%)。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"c) 压缩机滑阀阀位低于5%同时机油压力已经建立后，会出现以下情况：",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:" ●压缩机启动。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"●压缩机开始加载前有15秒钟延时。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"●压缩机一启动，累计开车时间计时器开始计时，显示压缩机的总运行时间。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"3) 此时，压缩机开始自动运行。FES控制面板将根据维持所需机组出口压力的需要使压缩机滑阀加载和卸载。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"3.2．系统正常停车步骤",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"建议压缩机停车前先卸载。按压缩机停车按钮启动正常的停车顺序，该按钮按下后可以引起以下动作。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"在压缩机运行的同时，氮气首先启动。在本“停车”延时阶段，会依次自动出现以下动作。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:" 1) 压缩机卸载到最低滑阀阀位。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"2) 3“氮气供应隔离阀打开。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"3) 3”吹扫气体排放隔离阀打开。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"4) 10”入口管线隔离阀关闭。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"5) 3”高温气体旁通隔离阀打开，投用后会保证正入口压力。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"压缩机继续运行数分钟，同时将绝大部分(如果做不到所有的话)“火炬气体”从压缩机和机油分离器中吹出。吹扫周期完成后，会自动依次出现以下动作。.",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"1) 压缩机滑阀继续保持最小阀位。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"2) 3”氮气供应隔离阀关闭。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"3) 3” 吹扫气体排放隔离阀关闭。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:" 4) 10”入口管线隔离阀继续保持关闭。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"5) 3” 高温气体旁通隔离阀关闭或继续保持关闭。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"压缩机会立即停机，压缩机运行指示灯熄灭。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"机油泵继续运行，直到滑阀阀位小于5%或继续运行至少5秒钟，然后停机，同时运行指示灯熄灭。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"注意：如果压缩机已经卸载，机油泵会直接停机。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"※注意：如果按控制室内控制箱上急停按钮或现场按扭箱上的急停按钮或工艺流程界面上紧急停车按钮或压缩机上的任何安全系统自动启动，软件逻辑就会旁通和终止吹扫程序。压缩机会立即停车。紧急停车后，压缩机机组必须人工吹扫。为此，“氮气供应”和“吹扫气体排放”隔离阀附近标有一只3”人工操作旁通阀。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"3.3．系统开车/正常停车流程图",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news15/6.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"  图5-某石化厂火炬用压缩机控制系统开车/正常停车流程图",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"4.系统联锁停车/紧急停车",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"4.1．系统联锁停车流程图",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"系统联锁停车逻辑画面中当联锁条件满足时对应背景呈红色，可通过功能按钮对任意联锁条件进行“旁路”和“投用”操作。联锁条件旁路状态下，显示红色背景“联锁切除”；联锁条件投用状态下，显示绿色背景“联锁投用”。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"当任意一个联锁条件满足且其联锁投用时，即会触发压缩机联锁停车动作。联锁停车动作触发后，需人工进行手动复位。如下图：",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news15/7.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"  图6-某石化厂火炬用压缩机控制系统联锁停车流程图",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"4.2．系统联锁停车/紧急停车流程图",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news15/8.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"  图7-某石化厂火炬用压缩机控制系统联锁停车/紧急停车流程图",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"5.系统参数设置",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"系统参数设置主要包括系统开车前油温自控控制的高限/低限值、机油泵启动油压建立判断的时间间隔和压力值（有倒计时显示）、压缩机停机后再次循环运行保护的时间间隔设定（有倒计时显示）、压缩机停车吹扫时间设定（有倒计时显示）、机油泵和压缩机累计运行时间显示/人工录入/清零功能等。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news15/9.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"   图8 某石化厂火炬用压缩机控制系统参数设置界面",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"6．系统量程/报警/联锁参数设定",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"主要包括所有过程仪表的量程设定（过程数据可根据实际情况进行二次修正）/高报警或高高报警或低报警或低低报警设定/相关联锁值得参数设定等。",
+								className:""
+							},
+							{
+								imgIs:true,
+								text:"assets/industry/news15/10.png",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"   图9 某石化厂火炬用压缩机控制系统量程/报警/联锁参数设定界面",
+								className:"textCenter"
+							},
+							{
+								imgIs:false,
+								text:"总结：",
+								className:"textCenter bold"
+							},
+							{
+								imgIs:false,
+								text:"压缩机控制系统改造项目实施过程中我们承担了很大的压力，调试过程中面对诸多得挑战，在所有参与人员共同努力下按期顺利地完成项目实施，我们也从中吸取了很多宝贵的技术经验，加以总结为今后的项目实施做了很好的指引。",
+								className:""
+							},
+							{
+								imgIs:false,
+								text:"压缩机控制系统改造后所有程序代码完全对客户开放，使用客户最为熟悉的应用软件，系统故障显示和诊断更为直观快捷，更便于系统日常的维护和优化，给系统运行和维护人员带来了极大的方便，提高了系统使用的效率，自主技术的实现也大大地缩短系统故障恢复的周期和节约了很多人力成本，给安全生产创造了不可估量的经济效益。",
+								className:""
+							},
+						]
 					}
 				]
 			};
@@ -2624,5 +3333,16 @@
 	}
 	.industryModal article p.textBlue{
 		color: blue;
+	}
+	.industryModal article p.textGreen{
+			text-indent: 0;
+	}
+	.industryModal article p.textGreen span{
+		display: inline-block;
+        color: #fefefe;
+        padding: 7px 25px;
+        border-radius: 20px;
+        background-color: #80b135;
+        text-align: center;
 	}
 </style>
