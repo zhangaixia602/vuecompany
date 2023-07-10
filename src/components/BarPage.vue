@@ -12,7 +12,7 @@
 				viewData: this.options.viewData,
 				data: this.options.data,
                 smooth:this.options.smooth || false,
-				boundaryGap:this.options.boundaryGap || false
+				boundaryGap:this.options.boundaryGap || false,
 			}
 		},
 		methods: {
@@ -26,6 +26,7 @@
 				const legend = this.viewData.legend || [];
 				const titleText = this.viewData.title || "";
 				const xAxis = this.viewData.xAxis || [];
+				const colors=this.viewData.color  || [];
 				const options = {
 					backgroundColor:'rgba(4,103,247,0.2)',
 					tooltip: {
@@ -102,8 +103,10 @@
 						series.push(currentItem)
 					})
 				}
-
-
+				if(colors.length>0){
+					console.log(colors);
+					options.color=colors;
+				}
 				options.series = series;
 				if (echartsConfig) {
 					return echartsConfig(options);
