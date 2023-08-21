@@ -8,7 +8,7 @@
                 </li>
            </ul>
            <div class='body-table-carousel-container'>
-                <ul class='body-table-carousel ' :class="{goCarousel:this.title!=='',goCarousel1:this.title==''}">
+                <ul class='body-table-carousel ' :class="{goCarousel:this.title!=='' && !this.isRun,goCarousel1:this.title=='' && !this.isRun}">
                     <li  v-for="(sources,index) in sources" :key='index'>
                         <div  v-for="(column,i) in columns" :style="{width:column.width+'px'}" :key="i">{{sources[column.dataIndex]}}</div>
                     </li>
@@ -25,7 +25,8 @@
 			return {
 				columns: this.options.viewData || [],
 				sources: this.options.data || [],
-                title:this.options.title || ""
+                title:this.options.title || "",
+                isRun:this.options.isRun || false
 			}
 		},
 		methods: {

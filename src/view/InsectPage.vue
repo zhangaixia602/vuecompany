@@ -766,7 +766,7 @@ export default {
       //是否可以缩放 
         this.controls.enableZoom = true; 
       //是否自动旋转 
-        this.controls.autoRotate = false; 
+        this.controls.autoRotate = true; 
       //设置相机距离原点的最远距离 
         this.controls.minDistance = 100; 
       //设置相机距离原点的最远距离 

@@ -56,6 +56,10 @@
 					{
 						title: '智慧能源',
 						group: 'energy'
+					},
+					{
+						title: '实训装置',
+						group: 'traine'
 					}
 				],
 				products: [{
@@ -99,6 +103,14 @@
 						src: 'assets/cyq.png',
 						id: '06',
 						path: '/model/login'
+					}
+					,
+					{
+						group: 'traine',
+						title: '实训装置',
+						src: 'assets/cyq.png',
+						id: '06',
+						path: '/model/traine'
 					}
 				]
 			}

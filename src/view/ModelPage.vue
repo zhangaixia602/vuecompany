@@ -10,6 +10,7 @@
 	import EarthPage from '@/view/EarthPage'
 	import LoginPage from '@/view/LoginPage'
 	import TestPage from '@/view/TestPage'
+	import PracticalTraine from '@/view/PracticalTraine'
 	export default {
 		name: 'ModelPage',
 		components: {
@@ -20,7 +21,8 @@
 			'EnvironmentPage': EnvironmentPage,
 			'EarthPage': EarthPage,
 			'LoginPage': LoginPage,
-			'TestPage': TestPage
+			'TestPage': TestPage,
+			"PracticalTraine":PracticalTraine
 		},
 		data() {
 			return {
@@ -56,6 +58,10 @@
 					{
 						id: 'test',
 						component: 'TestPage'
+					},
+					{
+						id:'traine',
+						component:"PracticalTraine"
 					}
 				]
 			}

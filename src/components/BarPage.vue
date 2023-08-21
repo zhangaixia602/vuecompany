@@ -8,19 +8,21 @@
 		props: ['options'],
 		data() {
 			return {
+				myChart:null,
 				domSelector: this.options.domSelector,
 				viewData: this.options.viewData,
 				data: this.options.data,
                 smooth:this.options.smooth || false,
 				boundaryGap:this.options.boundaryGap || false,
+				isLegend:this.options.isLegend || false
 			}
 		},
 		methods: {
 			initChart() {
-				const myChart = echarts.init(document.getElementById(this.domSelector));
+				this.myChart = echarts.init(document.getElementById(this.domSelector));
 				const options = this.translateData();
 				// 绘制图表
-				myChart.setOption(options);
+				this.myChart.setOption(options);
 			},
 			translateData() {
 				const legend = this.viewData.legend || [];
@@ -40,7 +42,7 @@
                 },
 				};
 				const echartsConfig = this.options.config;
-				if (legend.length > 0) {
+				if (legend.length > 0 && !this.isLegend) {
 					let newLegend = legend.map(item => item.name);
 					options.legend = {
 						x: 'right',
@@ -104,7 +106,6 @@
 					})
 				}
 				if(colors.length>0){
-					console.log(colors);
 					options.color=colors;
 				}
 				options.series = series;
