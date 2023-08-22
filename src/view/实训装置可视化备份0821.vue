@@ -339,16 +339,24 @@ export default {
               child.visible = false
            }
             if(child.name==="组002"){
+             let textureLoder=new THREE.TextureLoader();
+             let texture=textureLoder.load('/static/dif.png');
               const sphereModel=new THREE.Mesh(
-                new THREE.BoxGeometry(6,6,6),
+                new THREE.BoxGeometry(2,2,2),
                 new THREE.MeshBasicMaterial({
-                  color:0x00ff00,
+                  map:texture
                 })
               );
-              sphereModel.name='球';
-              child.add(sphereModel);
-              console.log(child);
-              child.position.set(-23,child.position.y,child.position.z);
+               sphereModel.name='球';
+               sphereModel.position.set(0,0,5.3);
+               let tweenSphere=new TWEEN.Tween(sphereModel.position).to({"x":0,"y":0,"z":-5},3000).onUpdate(()=>{
+                that.currentY=sphereModel.position.z;
+               });
+               tweenSphere.repeat(Infinity);
+               tweenSphere.yoyo(true);
+               tweenSphere.start();
+               child.add(sphereModel);
+               child.position.set(-23,child.position.y,child.position.z);
                let tween=new TWEEN.Tween(child.position).to({"x":-10,"y":child.position.y,"z":child.position.z},3000).onUpdate(()=>{
                 progress=child.position.x;
                 that.currentX=child.position.x;
@@ -403,7 +411,7 @@ export default {
             return;
         }
         this.intervalId=setInterval(()=>{
-            this.currentY=this.currentY+0.1;
+           // this.currentY=this.currentY+0.1;
             //更新电压电流X轴数据
             let axisData = new Date().toLocaleTimeString().replace(/^\D*/, '');
             categories.shift();

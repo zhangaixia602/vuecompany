@@ -53,12 +53,14 @@
     </div> 
     <div class='card'>
       <BarPage 
+        ref="runTime"
         :options="{
         domSelector: 'devicesTimes',
         viewData: this.devicesTimes,
         smooth:true,
         data:this.devicesTimesData,
-        boundaryGap:true
+        boundaryGap:true,
+        isLegend:true
       }"
       />
     </div> 
@@ -185,11 +187,43 @@ export default {
       ],
       devicesTimes:{
         color:['#73c0de','#fac859',"#ee6666","#546fc6"],
-        title:"设备使用时长",
-        xAxis:[],
-        legend:[{name:"变频器",key:"tempe"},{name:"伺服系统",key:"dity"},{name:"电机",key:"tempe1"},{name:"直线模组",key:"dity1"}]
+        title:"实训装置运行时长",
+        xAxis:Array(8).fill(1).map(function(item,index){
+        return (index+1)+'号'
+      }),
+        legend:[{name:"变频器",key:"tempe"}]
       },
        devicesTimesData:[
+         {
+          key:"tempe",
+          type:"bar",
+          data:Array(8).fill(1).map(function(item,index){
+            return parseInt(Math.random()*100)+20
+         })
+        }
+      ],
+      temDity:{
+        title:"伺服电机减速比",
+        color:["#f77f04"],
+        xAxis:categories,
+        legend:[{name:"电压",key:"dity"}]
+      },
+      temDityData:[
+        {
+          key:"dity",
+          type:"line",
+          data:Array(10).fill(1).map(function(item,index){
+          return 1/(parseInt(Math.random()*10)+10)
+        })
+        }
+      ],
+      orderdif: {
+      color:['#73c0de','#fac859',"#ee6666","#546fc6"],
+			title: "设备报警分析",
+			xAxis: [],
+			legend:[{name:"变频器",key:"tempe"},{name:"伺服系统",key:"dity"},{name:"电机",key:"tempe1"},{name:"直线模组",key:"dity1"}]
+      },
+		  orderdifData: [
          {
           key:"tempe",
           type:"bar",
@@ -211,48 +245,6 @@ export default {
           data:[parseInt(Math.random() * 4+1)]
         }
       ],
-      temDity:{
-        title:"设备电耗",
-        color:["#f77f04"],
-        xAxis:categories,
-        legend:[{name:"电压",key:"dity"}]
-      },
-      temDityData:[
-        {
-          key:"dity",
-          type:"line",
-          data:Array(10).fill(1).map(function(item,index){
-          return parseInt(Math.random()*10)+10
-        })
-        }
-      ],
-      orderdif: {
-      color:["#efc807","#91cc75"],
-			title: "设备报警环比",
-			xAxis: ["变频器","电机","直线模组","伺服系统"],
-			legend: [{
-				name: "今天",
-				key: "tempe"
-				}, {
-				name: "昨天",
-				key: "dity"
-				}]
-			},
-		orderdifData: [{
-			key: "tempe",
-			type: "bar",
-			data: Array(4).fill(1).map(function() {
-				return parseInt(Math.random() * 20 + 20)
-			    })
-			},
-			{
-			key: "dity",
-			type: "bar",
-			data: Array(4).fill(1).map(function() {
-				return parseInt(Math.random() * 30 + 30)
-			})
-			}
-		],
      monitoringColumns: [
         {
           title:'设备名称',
@@ -322,7 +314,7 @@ export default {
             //更新电流
             let chartInstance=this.$refs.motion.myChart;
             let currentChartData=this.$refs.motion.translateData().series[0].data;
-            currentChartData.push(currentChartData.shift());
+            currentChartData.push(1/(parseInt(Math.random()*10)+10));
             chartInstance.setOption({
                 xAxis:[{data:categories}],
                 series:[
@@ -336,14 +328,27 @@ export default {
             biaxialChart.setOption({
                 series:[
                     {
-                        data:Array(4).fill(1).map(function() {
-				                  return parseInt(Math.random() * 20 + 20)
-			                  })
+                        data:[parseInt(Math.random() * 20 + 20)]
                     },
                     {
-                        data:Array(4).fill(1).map(function() {
-				                  return parseInt(Math.random() * 20 + 20)
-			                  })
+                        data:[parseInt(Math.random() * 20 + 20)]
+                    },
+                     {
+                        data:[parseInt(Math.random() * 20 + 20)]
+                    },
+                    {
+                        data:[parseInt(Math.random() * 20 + 20)]
+                    }
+                ]
+            })
+            //实训装置运行时长
+            let runTimeChart=this.$refs.runTime.myChart;
+             runTimeChart.setOption({
+                series:[
+                    {
+                      data:Array(8).fill(1).map(function(item,index){
+                        return parseInt(Math.random()*100)+20
+                      })
                     }
                 ]
             })
