@@ -108,7 +108,7 @@
 					{
 						group: 'traine',
 						title: '实训装置',
-						src: 'assets/cyq.png',
+						src: 'assets/jysx.jpg',
 						id: '06',
 						path: '/model/traine'
 					}
