@@ -78,11 +78,10 @@ header .wrapper{
     display: flex;
     align-items: center;
     justify-content: space-around;
+    height:100%;
 }
 .logo{
     display: inline-block;
-    width:3.5rem;
-    height:3.5rem;
     margin-right: 6rem;
 }
 nav{

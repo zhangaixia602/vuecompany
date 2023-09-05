@@ -65,14 +65,14 @@
 				products: [{
 						group: 'park',
 						title: '智慧工厂',
-						src: 'assets/yq.png',
+						src: 'assets/yq.jpg',
 						id: '01',
 						path: '/model/insect'
 					},
 					{
 						group: 'energy',
 						title: '智慧能源',
-						src: 'assets/ny.png',
+						src: 'assets/ny.jpg',
 						id: '02',
 						path: '/model/granary'
 					},
@@ -97,14 +97,6 @@
 						id: '05',
 						path: '/model/earth'
 					},
-					{
-						group: 'draulic',
-						title: '环保',
-						src: 'assets/cyq.png',
-						id: '06',
-						path: '/model/login'
-					}
-					,
 					{
 						group: 'traine',
 						title: '实训装置',

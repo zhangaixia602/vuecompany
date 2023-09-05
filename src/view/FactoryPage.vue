@@ -4,7 +4,8 @@
 		<div class='borderBg'>
 			<PanelPage :options="{
         title:this.panelTitle,
-        data:this.panelData
+        data:this.panelData,
+		isLetterFont:true
       }" />
 		</div>
 		<div class='category borderBg'>
@@ -15,11 +16,14 @@
       }" />
 		</div>
 		<div class='borderBg'>
-			<BarPage :options="{
+			<BarPage 
+			 ref="vehicle"
+			:options="{
         domSelector: 'vehicle',
         viewData: this.vehicle,
         smooth:true,
-        data:this.vehicleData
+        data:this.vehicleData,
+		boundaryGap:true
       }" />
 		</div>
 	</section>
@@ -49,7 +53,9 @@
 	</section>
 	<section class='right'>
 		<div class='temDity borderBg'>
-			<BarPage :options="{
+			<BarPage 
+			ref="temDity"
+			:options="{
         domSelector: 'temDity',
         viewData: this.temDity,
         smooth:true,
@@ -112,6 +118,7 @@
 		},
 		data() {
 			return {
+				intervalId:null,
 				carouselTitle: '实时报警情况',
 				dataSource: Array(24).fill(1).map(function(item, index) {
 					return {
@@ -122,14 +129,14 @@
 					}
 				}),
 				columns: [{
-						title: '姓名',
-						width: 80,
+						title: '报警类型',
+						width: 120,
 						dataIndex: 'name',
 						key: 'name'
 					},
 					{
-						title: '年龄',
-						width: 60,
+						title: '报警时间',
+						width: 150,
 						dataIndex: 'age',
 						key: 'age'
 					},
@@ -183,15 +190,15 @@
 					}
 				],
 				vehicle: {
-					title: "进出库存情况",
+					title: "出入库统计",
 					xAxis: Array(7).fill(1).map(function(item, index) {
 						return index++
 					}),
 					legend: [{
-						name: "上周",
+						name: "出库",
 						key: "tempe"
 					}, {
-						name: "本周",
+						name: "入库",
 						key: "dity"
 					}]
 				},
@@ -210,20 +217,20 @@
 						})
 					}
 				],
-				panelTitle: '仓库设备状况',
+				panelTitle: '货位统计',
 				panelData: [{
 						icon: 'icon-zhihuiyuanqu',
-						label: '健康',
+						label: '已用货位',
 						value: parseInt(Math.random() * 1000)
 					},
 					{
 						icon: 'icon-zhihuiyuanqu',
-						label: '异常',
+						label: '可用货位',
 						value: parseInt(Math.random() * 1000)
 					},
 					{
 						icon: 'icon-zhihuiyuanqu',
-						label: '维护中',
+						label: '可用拖车',
 						value: parseInt(Math.random() * 1000)
 					}
 				],
@@ -280,6 +287,9 @@
 				title: ""
 			}
 		},
+		created(){
+            this.dataRefreh();
+        },
 		methods: {
 			handleOk() {
 				this.visible = false
@@ -319,8 +329,8 @@
 				dracoLoader.preload();
 				objLoader.setDRACOLoader(dracoLoader);
 				objLoader.load('/static/models/ck-processed.glb', function(glb) {
-					// glb.scene.position.set(-1000, -600, -1200);
-					glb.scene.scale.set(3, 5, 8);
+					glb.scene.position.set(0, -100, 0);
+					glb.scene.scale.set(25, 25, 25);
 					glb.scene.rotateY(0); //绕y轴旋转
 					scene.add(glb.scene);
 				})
@@ -385,12 +395,63 @@
 					])
 				};
 				return options;
-			}
+			},
+			dataRefreh(){
+				if(this.intervalId !=null){
+					return;
+                }
+                this.intervalId=setInterval(()=>{
+                    //更新双轴运动数据
+                    let vehicleChart=this.$refs.vehicle.myChart;
+                    vehicleChart.setOption({
+						yAxis:{
+                            max:60
+                        },
+                        series:[
+                            {
+								data:Array(7).fill(1).map(function() {
+							        return parseInt(Math.random() * 20 + 20)
+						        })
+                            },
+                            {
+                                data:Array(7).fill(1).map(function() {
+							        return parseInt(Math.random() * 30 + 30)
+						        })
+                            }
+                        ]
+                    })
+					let temDityChart=this.$refs.temDity.myChart;
+                    temDityChart.setOption({
+						yAxis:{
+                            max:60
+                        },
+                        series:[
+                            {
+								data:Array(24).fill(1).map(function() {
+							        return parseInt(Math.random() * 20 + 20)
+						        })
+                            },
+                            {
+                                data:Array(24).fill(1).map(function() {
+							        return parseInt(Math.random() * 30 + 30)
+						        })
+                            }
+                        ]
+                    })
+                },3000)
+			},
+			clearRefreh(){//清楚定时器
+			    slearInterval(this.intervalId);
+			    this.intervalId=null;
+            }
 		},
 		mounted() {
 			this.initThree()
 			this.animate()
-		}
+		},
+		onUnmounted(){
+            this.clearRefreh();
+        }
 	})
 </script>
 <style scoped>
@@ -478,6 +539,12 @@
 			height: 15rem;
 		}
 	}
+	@media (height:947px) {
+		#temDity,
+		#vehicle {
+			height:13rem;
+		}
+    }
 
 	.orderBox {
 		display: flex;
@@ -587,4 +654,9 @@
 		position: absolute;
 		left: 50%;
 	}
+	@media (min-width:1920px) {
+		.panelItem label{
+			font-size:1rem  !important;
+	    }
+    }
 </style>

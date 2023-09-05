@@ -367,8 +367,8 @@ h3.titbg span {
     align-items: center;
 }
 .partnerBox span img {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   cursor: pointer;
 }
 .wrapper{

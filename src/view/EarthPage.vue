@@ -813,4 +813,20 @@
 			height:15rem;
 		}
 	}
+	@media (height:947px) {
+		#category,
+		#temDity,
+		#pie,
+		#monitorPie,
+		#vehicle,
+		#envir,
+		#WebGL-outputn,
+		#design,
+		#alarm,
+		#water,
+		#electric,
+		#natural {
+			height:13rem;
+		}
+	}
 </style>

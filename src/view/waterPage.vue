@@ -7,6 +7,7 @@
     <div class='card' :style="{ display: this.currentNav==='home' ? 'block' : 'none' }">
       <h3 class='cardTitle'>厂区进出水变化趋势</h3>
       <BarPage 
+        ref="dayStatis"
         :options="{
         domSelector: 'dayStatis',
         viewData: this.dayStatis,
@@ -97,6 +98,7 @@
     <div class='card' :style="{ display: this.currentNav==='monitor' ? 'block' : 'none' }">
       <h3 class='cardTitle'>当天报警统计</h3>
       <BarPage 
+        ref="alarmChart"
         :options="{
         domSelector: 'alarm',
         viewData: this.alarm,
@@ -118,6 +120,7 @@
     <div class='card' :style="{ display: this.currentNav==='order' ? 'block' : 'none' }">
       <h3 class='cardTitle'>工单对比</h3>
       <BarPage 
+        ref="weeklyOrder"
         :options="{
         domSelector: 'weeklyOrder',
         viewData: this.weeklyOrder,
@@ -184,6 +187,7 @@ export default defineComponent({
   },
   data () {
     return {
+      intervalId:null,
       navs:[
         {
           id:'home',
@@ -419,7 +423,7 @@ export default defineComponent({
       weeklyOrder:{
         title:'周对比',
         xAxis:Array(7).fill(1).map(function(item,index){
-          return index+":00"
+          return index+1
         }),
         legend:[{name:"上周",key:"inlet"},{name:"本周",key:"effluent"}]
       },
@@ -492,6 +496,9 @@ export default defineComponent({
         }
       }),
     }
+  },
+  created(){
+    this.dataRefreh();
   },
   methods: {
     showNav (nav,index) {
@@ -635,11 +642,62 @@ export default defineComponent({
         color: '#fff' 
       };
       return options
+    },
+    dataRefreh(){
+      if(this.intervalId !=null){
+        return;
+      }
+      this.intervalId=setInterval(()=>{
+        //更新双轴运动数据
+        let dayStatisChart=this.$refs.dayStatis.myChart;
+        dayStatisChart.setOption({
+          series:[
+            {
+              data:Array(24).fill(1).map(function(){
+                return parseInt(Math.random()*20+40)
+              })
+            },
+            {
+              data:Array(24).fill(1).map(function(){
+                return parseInt(Math.random()*20+40)
+              })
+            }
+          ]
+        })
+        let weeklyOrderChart=this.$refs.weeklyOrder.myChart;
+        weeklyOrderChart.setOption({
+          series:[{
+            data:Array(7).fill(1).map(function(){
+              return parseInt(Math.random()*20+40)
+            })
+          },
+          {
+            data:Array(7).fill(1).map(function(){
+              return parseInt(Math.random()*30+20)
+            })
+          }]
+        })
+        let alarmCharts=this.$refs.alarmChart.myChart;
+        alarmCharts.setOption({
+          series:[{
+              data:Array(4).fill(1).map(function(){
+                return parseInt(Math.random()*200+400)
+              })
+          }]
+        })
+      },3000)
+    },
+    clearRefreh(){
+      slearInterval(this.intervalId);
+			this.intervalId=null;
     }
   },
   mounted () {
     this.initThree() 
     this.animate()
+  },
+  onUnmounted(){
+    this.clearRefreh();
   }
 })
 </script>
@@ -657,6 +715,7 @@ header{
   color: white;
   font-size: 1.3rem;
   line-height: 3.5rem;
+  padding-left:1rem;
 }
 nav{
   position: absolute;
@@ -727,6 +786,11 @@ nav a.active{
 	}
 	video{
 	  margin-top:2rem;
+	}
+}
+@media (height:947px) {
+	#weekly,#dayStatis,#workHours,#maintenance,#repair,#patrol{
+	  height:13rem;
 	}
 }
 .CarouselTable{

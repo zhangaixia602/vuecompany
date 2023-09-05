@@ -5,7 +5,7 @@
             <div class='panelItem textCenter' v-for="(panel, index) in panels" :key="index">
                 <i class="icon iconfont" :class="panel.icon"></i>
                 <p>
-                    <label>{{panel.label}}</label>
+                    <label :class="{letterFont:this.isLetterFont}">{{panel.label}}</label>
                     <span>{{panel.value}}</span>
                 </p>
             </div>
@@ -19,7 +19,8 @@
 		data() {
 			return {
 				panels: this.options.data,
-                titleText:this.options.title || ""
+                titleText:this.options.title || "",
+                isLetterFont:this.options.isLetterFont || false
 			}
 		}
 	}
@@ -58,5 +59,8 @@
 	.panelItem label{
 	    font-size: 1.5rem;
 	}
+    .letterFont{
+        font-size:1rem !important;
+    }
 }
 </style>

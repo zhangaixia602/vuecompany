@@ -1,7 +1,7 @@
 <template>
 	<header :class="{shadow: this.scrollTop >=500}">
 		<div class='wrapper'>
-			<img class="logo" src="../assets/logo.png">
+			<img class="logo" src="../assets/logoN.png">
 			<nav>
 				<router-link v-for="(route,index) in routes" :to="route.path" :key="index">{{t('header.'+route.id)}}</router-link>
 			</nav>

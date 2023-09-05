@@ -17,6 +17,7 @@
       </div>
       <div class='card' :style="{ display: this.currentNav==='home' ? 'block' : 'none'}">
       <BarPage 
+       ref="vehicle"
         :options="{
         domSelector: 'vehicle',
         viewData: this.vehicle,
@@ -269,6 +270,7 @@ export default {
   },
   data (){ 
     return {
+      intervalId:null,
       alarmsTitle: 'SEO报警情况',
       carouselTitle: 'SEO报警情况',
       dataSource:Array(24).fill(1).map(function(item,index){
@@ -320,7 +322,7 @@ export default {
         },
         {
           title:'变量',
-          width:100,
+          width:150,
           dataIndex:'age',
           key:'age'
         },
@@ -340,7 +342,7 @@ export default {
         },
         {
           title:'变量',
-          width:100,
+          width:150,
           dataIndex:'age',
           key:'age'
         },
@@ -718,7 +720,9 @@ export default {
       ],
     }
   },
-  
+  created(){
+    this.dataRefreh();
+  },
    methods: { 
     orderConfig (options){
       options.backgroundColor="transparent";
@@ -914,12 +918,44 @@ export default {
 					])
 				};
 				return options;
-			}
+			},
+      dataRefreh(){
+        if(this.intervalId !=null){
+            return;
+        }
+        this.intervalId=setInterval(()=>{
+            //更新双轴运动数据
+            let vehicleChart=this.$refs.vehicle.myChart;
+            vehicleChart.setOption({
+                yAxis:{
+                  max:20
+                },
+                series:[
+                    {
+                        data:[parseInt(Math.random()*10+9)]
+                    },
+                     {
+                        data:[parseInt(Math.random()*10+6)]
+                    },
+                     {
+                        data:[parseInt(Math.random()*10+2)]
+                    }
+                ]
+            })
+        },3000)
+    },
+    clearRefreh(){//清楚定时器
+        slearInterval(this.intervalId);
+        this.intervalId=null;
+    }
 		},
 		mounted() {
 			this.initThree()
 			this.animate()
-		}
+		},
+     onUnmounted(){
+        this.clearRefreh();
+    }
 	};
 </script>
 

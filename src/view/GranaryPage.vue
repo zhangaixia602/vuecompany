@@ -20,6 +20,7 @@
     </div>
      <div class='borderBg'>
       <BarPage 
+        ref="dayStatis"
         :options="{
         domSelector: 'dayStatis',
         viewData: this.dayStatis,
@@ -31,7 +32,8 @@
   </section>  
   <section class='right'>
     <div class='temDity borderBg'>
-      <BarPage 
+      <BarPage
+        ref="temDity" 
         :options="{
         domSelector: 'temDity',
         viewData: this.temDity,
@@ -85,6 +87,7 @@ export default defineComponent({
   },
   data (){
     return {
+      intervalId:null,
       carouselTitle: '实时报警情况',
       dataSource:Array(24).fill(1).map(function(item,index){
         return {
@@ -236,6 +239,9 @@ export default defineComponent({
       }),
     }
   },
+  created(){
+    this.dataRefreh();
+  },
   methods: {
     initThree () {
       let width = window.innerWidth //窗口宽
@@ -307,11 +313,59 @@ export default defineComponent({
         ])
       };
       return options;
+    },
+    dataRefreh(){
+      if(this.intervalId !=null){
+        return;
+      }
+      this.intervalId=setInterval(()=>{
+        let dayStatisChart=this.$refs.dayStatis.myChart;
+        dayStatisChart.setOption({
+          yAxis:{
+            max:60
+          },
+          series:[
+            {
+              data:Array(24).fill(1).map(function(){
+                return parseInt(Math.random()*20+40)
+              })
+            },
+            {
+              data:Array(24).fill(1).map(function(){
+                return parseInt(Math.random()*30+20)
+              })
+            }
+          ]
+        })
+        let weeklyOrderChart=this.$refs.temDity.myChart;
+        weeklyOrderChart.setOption({
+          yAxis:{
+            max:60
+          },
+          series:[{
+            data:Array(7).fill(1).map(function(){
+              return parseInt(Math.random()*20+20)
+            })
+          },
+          {
+            data:Array(7).fill(1).map(function(){
+              return parseInt(Math.random()*30+30)
+            })
+          }]
+        })
+      },3000)
+    },
+    clearRefreh(){
+      slearInterval(this.intervalId);
+			this.intervalId=null;
     }
   },
   mounted () {
     this.initThree()
     this.render()
+  },
+  onUnmounted(){
+    this.clearRefreh();
   }
 })
 </script>
@@ -383,4 +437,9 @@ header{
 			height: 15rem;
 		}
 	}
+@media (height:947px) {
+		#category,#temDity,#pie,#vehicle,#dayStatis,#resource {
+			height:13rem;
+		}
+}
 </style>
